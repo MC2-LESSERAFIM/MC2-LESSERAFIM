@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_2App.swift */; };
+		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */; };
 		A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E602A02562000A56E4C /* ContentView.swift */; };
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
 		A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */; };
-		A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_2Tests.swift */; };
-		A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_2UITests.swift */; };
-		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_2UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_2UITestsLaunchTests.swift */; };
+		A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */; };
+		A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */; };
+		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,16 +34,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM 2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM 2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_2App.swift; sourceTree = "<group>"; };
+		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_App.swift; sourceTree = "<group>"; };
 		A1EF9E602A02562000A56E4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1EF9E622A02562100A56E4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIM 2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIM 2Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_2Tests.swift; sourceTree = "<group>"; };
-		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIM 2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIM 2UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_2UITests.swift; sourceTree = "<group>"; };
-		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_2UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_2UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_Tests.swift; sourceTree = "<group>"; };
+		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITests.swift; sourceTree = "<group>"; };
+		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +74,9 @@
 		A1EF9E522A02562000A56E4C = {
 			isa = PBXGroup;
 			children = (
-				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM 2 */,
-				A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM 2Tests */,
-				A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM 2UITests */,
+				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */,
+				A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM Tests */,
+				A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM UITests */,
 				A1EF9E5C2A02562000A56E4C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,22 +84,22 @@
 		A1EF9E5C2A02562000A56E4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM 2.app */,
-				A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIM 2Tests.xctest */,
-				A1EF9E752A02562100A56E4C /* MC2-LESSERAFIM 2UITests.xctest */,
+				A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */,
+				A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */,
+				A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM 2 */ = {
+		A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */ = {
 			isa = PBXGroup;
 			children = (
-				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_2App.swift */,
+				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
 			);
-			path = "MC2-LESSERAFIM 2";
+			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
 		};
 		A1EF9E642A02562100A56E4C /* Preview Content */ = {
@@ -110,29 +110,29 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM 2Tests */ = {
+		A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM Tests */ = {
 			isa = PBXGroup;
 			children = (
-				A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_2Tests.swift */,
+				A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */,
 			);
-			path = "MC2-LESSERAFIM 2Tests";
+			path = "MC2-LESSERAFIM Tests";
 			sourceTree = "<group>";
 		};
-		A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM 2UITests */ = {
+		A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM UITests */ = {
 			isa = PBXGroup;
 			children = (
-				A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_2UITests.swift */,
-				A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_2UITestsLaunchTests.swift */,
+				A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */,
+				A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */,
 			);
-			path = "MC2-LESSERAFIM 2UITests";
+			path = "MC2-LESSERAFIM UITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM 2 */ = {
+		A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1EF9E7F2A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2" */;
+			buildConfigurationList = A1EF9E7F2A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM" */;
 			buildPhases = (
 				A1EF9E572A02562000A56E4C /* Sources */,
 				A1EF9E582A02562000A56E4C /* Frameworks */,
@@ -142,14 +142,14 @@
 			);
 			dependencies = (
 			);
-			name = "MC2-LESSERAFIM 2";
+			name = "MC2-LESSERAFIM";
 			productName = "MC2-LESSERAFIM 2";
-			productReference = A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM 2.app */;
+			productReference = A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A1EF9E6A2A02562100A56E4C /* MC2-LESSERAFIM 2Tests */ = {
+		A1EF9E6A2A02562100A56E4C /* MC2-LESSERAFIMTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1EF9E822A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2Tests" */;
+			buildConfigurationList = A1EF9E822A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIMTests" */;
 			buildPhases = (
 				A1EF9E672A02562100A56E4C /* Sources */,
 				A1EF9E682A02562100A56E4C /* Frameworks */,
@@ -160,14 +160,14 @@
 			dependencies = (
 				A1EF9E6D2A02562100A56E4C /* PBXTargetDependency */,
 			);
-			name = "MC2-LESSERAFIM 2Tests";
+			name = "MC2-LESSERAFIMTests";
 			productName = "MC2-LESSERAFIM 2Tests";
-			productReference = A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIM 2Tests.xctest */;
+			productReference = A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		A1EF9E742A02562100A56E4C /* MC2-LESSERAFIM 2UITests */ = {
+		A1EF9E742A02562100A56E4C /* MC2-LESSERAFIMUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A1EF9E852A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2UITests" */;
+			buildConfigurationList = A1EF9E852A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIMUITests" */;
 			buildPhases = (
 				A1EF9E712A02562100A56E4C /* Sources */,
 				A1EF9E722A02562100A56E4C /* Frameworks */,
@@ -178,9 +178,9 @@
 			dependencies = (
 				A1EF9E772A02562100A56E4C /* PBXTargetDependency */,
 			);
-			name = "MC2-LESSERAFIM 2UITests";
+			name = "MC2-LESSERAFIMUITests";
 			productName = "MC2-LESSERAFIM 2UITests";
-			productReference = A1EF9E752A02562100A56E4C /* MC2-LESSERAFIM 2UITests.xctest */;
+			productReference = A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +206,7 @@
 					};
 				};
 			};
-			buildConfigurationList = A1EF9E562A02562000A56E4C /* Build configuration list for PBXProject "MC2-LESSERAFIM 2" */;
+			buildConfigurationList = A1EF9E562A02562000A56E4C /* Build configuration list for PBXProject "MC2-LESSERAFIM" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,9 +219,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM 2 */,
-				A1EF9E6A2A02562100A56E4C /* MC2-LESSERAFIM 2Tests */,
-				A1EF9E742A02562100A56E4C /* MC2-LESSERAFIM 2UITests */,
+				A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM */,
+				A1EF9E6A2A02562100A56E4C /* MC2-LESSERAFIMTests */,
+				A1EF9E742A02562100A56E4C /* MC2-LESSERAFIMUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -258,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
-				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_2App.swift in Sources */,
+				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_2Tests.swift in Sources */,
+				A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,8 +274,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_2UITests.swift in Sources */,
-				A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_2UITestsLaunchTests.swift in Sources */,
+				A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */,
+				A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,12 +284,12 @@
 /* Begin PBXTargetDependency section */
 		A1EF9E6D2A02562100A56E4C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM 2 */;
+			target = A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM */;
 			targetProxy = A1EF9E6C2A02562100A56E4C /* PBXContainerItemProxy */;
 		};
 		A1EF9E772A02562100A56E4C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM 2 */;
+			target = A1EF9E5A2A02562000A56E4C /* MC2-LESSERAFIM */;
 			targetProxy = A1EF9E762A02562100A56E4C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -416,7 +416,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM 2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
 				DEVELOPMENT_TEAM = F5LF3NUCU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -445,7 +445,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM 2/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
 				DEVELOPMENT_TEAM = F5LF3NUCU2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -483,7 +483,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MC2-LESSERAFIM 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MC2-LESSERAFIM 2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MC2-LESSERAFIM.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MC2-LESSERAFIM";
 			};
 			name = Debug;
 		};
@@ -503,7 +503,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MC2-LESSERAFIM 2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MC2-LESSERAFIM 2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MC2-LESSERAFIM.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MC2-LESSERAFIM";
 			};
 			name = Release;
 		};
@@ -546,7 +546,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1EF9E562A02562000A56E4C /* Build configuration list for PBXProject "MC2-LESSERAFIM 2" */ = {
+		A1EF9E562A02562000A56E4C /* Build configuration list for PBXProject "MC2-LESSERAFIM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1EF9E7D2A02562100A56E4C /* Debug */,
@@ -555,7 +555,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1EF9E7F2A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2" */ = {
+		A1EF9E7F2A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1EF9E802A02562100A56E4C /* Debug */,
@@ -564,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1EF9E822A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2Tests" */ = {
+		A1EF9E822A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIMTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1EF9E832A02562100A56E4C /* Debug */,
@@ -573,7 +573,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A1EF9E852A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIM 2UITests" */ = {
+		A1EF9E852A02562100A56E4C /* Build configuration list for PBXNativeTarget "MC2-LESSERAFIMUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A1EF9E862A02562100A56E4C /* Debug */,
