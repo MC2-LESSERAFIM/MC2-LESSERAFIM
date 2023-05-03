@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import MC2_LESSERAFIM_2
+@testable import MC2_LESSERAFIM
 
 final class MC2_LESSERAFIM_2Tests: XCTestCase {
 
