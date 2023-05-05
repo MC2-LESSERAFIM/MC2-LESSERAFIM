@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
+		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
+		A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */; };
 		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */; };
 		A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E602A02562000A56E4C /* ContentView.swift */; };
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
+		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
+		A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorPickerView.swift; sourceTree = "<group>"; };
 		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_App.swift; sourceTree = "<group>"; };
 		A1EF9E602A02562000A56E4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -74,6 +80,8 @@
 		A1EF9E522A02562000A56E4C = {
 			isa = PBXGroup;
 			children = (
+				A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */,
+				A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */,
 				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */,
 				A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM Tests */,
 				A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM UITests */,
@@ -98,6 +106,7 @@
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
+				A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -257,7 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
+				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
+				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
