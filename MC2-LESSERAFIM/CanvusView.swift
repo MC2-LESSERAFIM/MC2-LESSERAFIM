@@ -58,6 +58,7 @@ struct CanvusView: View {
             )
     }
     
+    //View에 사용될 drawingTools View 정의
     var drawingTools : some View {
         HStack{
             Image(systemName: "pencil.tip")
@@ -120,8 +121,10 @@ struct CanvusView: View {
             ZStack {
                 VStack{
                     
+                    //캔버스 호출
                     canvus
                     
+                    //툴바 호출
                     drawingTools
                     
                     TextField("이번 챌린지 사진에 제목을 붙여볼까요?", text: $challengeTitle)
@@ -136,7 +139,7 @@ struct CanvusView: View {
                     
                     }
                     .toolbar{
-                        //Tool bar에 체크 버튼 생성
+                        //Tool bar 상단에 체크 버튼 생성
                         Button {
                             //체크 버튼 엑션
                             print("Button Clicked")
@@ -145,6 +148,7 @@ struct CanvusView: View {
                         }
                 }
                 
+                //필요시 나타나는 View
                 VStack{ //case문 좀 치겠는데?
                     Spacer()
                         .frame(width: 325, height: 523)
