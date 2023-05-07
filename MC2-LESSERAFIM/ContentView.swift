@@ -7,15 +7,39 @@
 
 import SwiftUI
 
+struct Post : Identifiable {
+    var id = UUID()
+    var image: UIImage
+    var title: String
+    var content: String
+}
+
 struct ContentView: View {
+    @ObservedObject var postData = UserData()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView {
+            RecordCollectionView()
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("기록모음")
+                }
+                .environmentObject(postData)
+            
+            ChallengeView()
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("챌린지")
+                }
+                .environmentObject(postData)
+            
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "star")
+                    Text("프로필")
+                }
+                .environmentObject(postData)
         }
-        .padding()
     }
 }
 

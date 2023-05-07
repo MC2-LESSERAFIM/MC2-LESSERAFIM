@@ -1,19 +1,32 @@
 //
-//  RecordsView.swift
+//  RecordCollectionView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by Gucci on 2023/05/07.
-//
 
 import SwiftUI
 
 //MARK: - TabView에 포함 시킬 "기록모음" 뷰
 struct RecordCollectionView: View {
+    @EnvironmentObject var postData: UserData
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
         case category = "주제"
         var id: Self { self }
     }
+    
+    /*
+     if postData.posts.isEmpty == false {
+     List{
+     ForEach(postData.posts) { datum in
+     Text(datum.title)
+     }
+     }
+     }
+     else{
+     Text("No Data")
+     }
+     */
     
     @State private var selectedSort: SortBy = .category
     
@@ -43,7 +56,7 @@ struct RecordCollectionView: View {
                                 }
                             }
                         }
-                    // MARK: - sorting by .category
+                        // MARK: - sorting by .category
                     } else if selectedSort == .category {
                         LazyVGrid(columns: numberColumns, spacing: 20) {
                             ForEach(categories) { category in
@@ -79,14 +92,8 @@ struct RecordCollectionView: View {
             }
         }
     }
+    
 }
-
-struct RecordsView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordCollectionView()
-    }
-}
-
 
 enum Category: String, CaseIterable, Codable, Identifiable {
     case favorites = "좋아하는 것"
@@ -139,7 +146,7 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-struct RecordView: View {
+struct RecordCollectionView: View {
     @Environment(\.dismiss) private var dismiss
     let record: Record
     
@@ -173,7 +180,8 @@ struct RecordView_Preview: PreviewProvider {
     
     static var previews: some View {
         NavigationStack {
-            RecordView(record: record)
+            RecordCollectionView(record: record)
         }
     }
 }
+
