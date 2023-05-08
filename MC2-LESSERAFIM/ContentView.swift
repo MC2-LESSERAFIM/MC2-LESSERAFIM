@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var userData = UserData()
     var body: some View {
-        ChallengeScreen()
-            .environmentObject(userData)
+        VStack {
+            Image(systemName: "globe")
+                .imageScale(.large)
+                .foregroundColor(.accentColor)
+            Text("Hello, world!")
+        }
+        .padding()
     }
 }
 
