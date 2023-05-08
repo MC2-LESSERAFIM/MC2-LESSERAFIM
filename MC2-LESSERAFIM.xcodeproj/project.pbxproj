@@ -16,6 +16,7 @@
 		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
+		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
 		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				A1EF9E642A02562100A56E4C /* Preview Content */,
 				D22690122A06A50B00BCF668 /* ChallengeScreen.swift */,
 				D22690142A06A51800BCF668 /* ProfileScreen.swift */,
+				D2A4776D2A0890EE0055B95E /* DataModel.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
