@@ -11,7 +11,8 @@ import SwiftUI
 struct MC2_LESSERAFIM_2App: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            ContentView()
+            OnBoardingScreen()
         }
     }
 }

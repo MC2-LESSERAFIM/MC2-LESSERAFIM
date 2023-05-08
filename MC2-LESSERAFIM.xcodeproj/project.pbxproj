@@ -14,6 +14,10 @@
 		A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */; };
 		A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */; };
 		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */; };
+		F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */; };
+		F41534D12A0875370006AAA7 /* OnBoardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */; };
+		F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D22A08754F0006AAA7 /* OnBoardingData.swift */; };
+		F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D42A08759D0006AAA7 /* CheckInScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITests.swift; sourceTree = "<group>"; };
 		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
+		F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTabView.swift; sourceTree = "<group>"; };
+		F41534D22A08754F0006AAA7 /* OnBoardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingData.swift; sourceTree = "<group>"; };
+		F41534D42A08759D0006AAA7 /* CheckInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +106,10 @@
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
+				F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */,
+				F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */,
+				F41534D22A08754F0006AAA7 /* OnBoardingData.swift */,
+				F41534D42A08759D0006AAA7 /* CheckInScreen.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -257,8 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */,
+				F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */,
+				F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
+				F41534D12A0875370006AAA7 /* OnBoardingTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
