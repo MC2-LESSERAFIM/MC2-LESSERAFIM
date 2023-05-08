@@ -13,13 +13,14 @@ struct ProfileScreen: View {
     @State private var isLockEnabled: Bool = true
     
     var body: some View {
-            VStack {
+        VStack(spacing: 0) {
                 Rectangle()
                     .frame(width: 140, height: 140)
                     .cornerRadius(70)
                 
                 Text("김지민")
                     .font(.system(size: 32, weight: .bold))
+                    .padding(.top, 8)
                 
                 Text("아직 기록되지 않았어요.")
                     .font(.system(size: 13, weight: .regular))
@@ -27,6 +28,7 @@ struct ProfileScreen: View {
                     .frame(width: 140, height: 28)
                     .background(.thinMaterial)
                     .cornerRadius(5)
+                    .padding(.top, 4)
                 
                 HStack(alignment: .center) {
                     Button(action: {
