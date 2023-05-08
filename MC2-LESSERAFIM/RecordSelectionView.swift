@@ -21,24 +21,24 @@ struct RecordSelectionView: View {
                 HStack {
                     // 사진 버튼
                     RecordButton(
+                        viewDestination: ContentView(),
                         labelTitle: "사진 + 글",
-                        labelImage: "camera.fill@5x",
-                        destination: ContentView()
+                        labelImage: "camera.fill@5x"
                     )
                     
                     // 글 버튼
                     RecordButton(
+                        viewDestination: RecordWritingView(),
                         labelTitle: "글",
-                        labelImage: "square.and.pencil@5x",
-                        destination: ContentView()
+                        labelImage: "square.and.pencil@5x"
                     )
                     .padding(.horizontal, 12)   // 버튼 간의 갭
                     
                     // 그림 버튼
                     RecordButton(
+                        viewDestination: ContentView(),
                         labelTitle: "그림",
-                        labelImage: "paintpalette.fill@5x",
-                        destination: ContentView()
+                        labelImage: "paintpalette.fill@5x"
                     )
                 }
                 .padding(.top, 48)  // 타이틀과의 갭 영역

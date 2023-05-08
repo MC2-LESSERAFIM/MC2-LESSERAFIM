@@ -11,12 +11,22 @@ struct RecordButton<Destination: View>: View {
     var radiusButton: Double = 12   // 버튼 곡률 값
     let colorDefaultButton = Color(red: 153/255, green: 153/255, blue: 153/255) // 버튼 색상
     
+    var viewDestination: Destination    // 동작 시 전환할 화면
     var labelTitle: String = "" // 버튼 라벨
     var labelImage: String = "" // 버튼 아이콘 이미지
-    let destination: Destination    // 동작 시 전환할 화면
+    
+    init(viewDestination: Destination, labelTitle: String = "", labelImage: String = "") {  // 생성자
+        self.viewDestination = viewDestination
+        self.labelTitle = labelTitle
+        self.labelImage = labelImage
+    }
     
     var body: some View {
-        NavigationLink(destination: destination) {
+        Button(action: {
+            NavigationLink(destination: viewDestination) {
+                    EmptyView()
+                }
+        }, label: {
             VStack {
                 // 버튼 아이콘
                 Image(labelImage)
@@ -34,12 +44,12 @@ struct RecordButton<Destination: View>: View {
             .frame(width: 107, height: 96)  // 버튼 크기
             .background(colorDefaultButton) // 버튼 색상
             .cornerRadius(radiusButton) // 버튼 곡률
-        }
+        })
     }
 }
 
-//struct RecordButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RecordButton()
-//    }
-//}
+struct RecordButton_Previews: PreviewProvider {
+    static var previews: some View {
+        RecordButton(viewDestination: Text("Hello, World!"), labelTitle: "Button", labelImage: "myImage")
+    }
+}
