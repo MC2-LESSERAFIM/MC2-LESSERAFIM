@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */; };
+		8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */; };
+		8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CC2A087F67003C7D3F /* RecordButton.swift */; };
 		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */; };
 		A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E602A02562000A56E4C /* ContentView.swift */; };
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
@@ -34,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSelectionView.swift; sourceTree = "<group>"; };
+		8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitle.swift; sourceTree = "<group>"; };
+		8E15E4CC2A087F67003C7D3F /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_App.swift; sourceTree = "<group>"; };
 		A1EF9E602A02562000A56E4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +104,9 @@
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
+				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
+				8E15E4CC2A087F67003C7D3F /* RecordButton.swift */,
+				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -258,7 +267,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
+				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
+				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
+				8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
