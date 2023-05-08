@@ -32,6 +32,11 @@
 		F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D42A08759D0006AAA7 /* CheckInScreen.swift */; };
 		BE5590C82A08821600D765F6 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BE5590C72A08821600D765F6 /* landmarkData.json */; };
 		BE7659B92A078F2A00AA5835 /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */; };
+		BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF464E2A078C9500BBDFDB /* RecordView.swift */; };
+		BFCF46512A078DE100BBDFDB /* ChallengeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46502A078DE100BBDFDB /* ChallengeView.swift */; };
+		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
+		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
+		BFCF46572A07D46E00BBDFDB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46562A07D46E00BBDFDB /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +85,12 @@
 		F41534D42A08759D0006AAA7 /* CheckInScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInScreen.swift; sourceTree = "<group>"; };
 		BE5590C72A08821600D765F6 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
 		BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
+		BFCF464E2A078C9500BBDFDB /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		BFCF46502A078DE100BBDFDB /* ChallengeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeView.swift; sourceTree = "<group>"; };
+		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
+		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
+		BFCF46562A07D46E00BBDFDB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				D2A477702A089EEE0055B95E /* UserDataView.swift */,
+				BFCF46582A08A10500BBDFDB /* Info.plist */,
 				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */,
@@ -150,6 +162,11 @@
 				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
 				8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */,
 				A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */,
+				BFCF464E2A078C9500BBDFDB /* RecordView.swift */,
+				BFCF46502A078DE100BBDFDB /* ChallengeView.swift */,
+				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
+				BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */,
+				BFCF46562A07D46E00BBDFDB /* ProfileView.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -306,6 +323,12 @@
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
+				BFCF46512A078DE100BBDFDB /* ChallengeView.swift in Sources */,
+				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
+				BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */,
+				BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */,
+				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
+				BFCF46572A07D46E00BBDFDB /* ProfileView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
 				D2A477712A089EEE0055B95E /* UserDataView.swift in Sources */,
@@ -467,9 +490,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = D7F6ZDDCV9;
+				DEVELOPMENT_TEAM = M6KTL34CVP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MC2-LESSERAFIM/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -497,9 +524,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = D7F6ZDDCV9;
+				DEVELOPMENT_TEAM = M6KTL34CVP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MC2-LESSERAFIM/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

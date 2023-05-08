@@ -8,6 +8,7 @@
 import Foundation
 
 class UserData: ObservableObject {
+    @Published var posts: [Post] = []
     @Published var challenges = [
     "랜덤 챌린지1",
     "랜덤 챌린지2",
