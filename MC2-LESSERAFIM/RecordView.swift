@@ -26,7 +26,7 @@ struct RecordView: View {
                 }
             }
         }
-        .navigationBarTitle(challenge)
-        .navigationTitle("")
+        .navigationBarTitle("", displayMode: .inline)
+//        .navigationBarTitle(challenge, displayMode: .inline)
     }
 }

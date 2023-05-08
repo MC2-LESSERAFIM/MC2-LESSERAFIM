@@ -6,20 +6,71 @@
 //
 
 import SwiftUI
+import Photos
+import UserNotifications
+
+struct Notification {
+    var id: String
+    var title: String
+}
+
+class LocalNotificationManager {
+    var notifications = [Notification]()
+    
+    func addNotification(title: String) -> Void {
+        notifications.append(Notification(id : UUID().uuidString, title: title))
+    }
+}
+
+class PermissionManager : ObservableObject {
+    @Published var permissionGranted = false
+    
+    func requestAlbumPermission() {
+        PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: { status in
+            switch status{
+            case .authorized:
+                print("Album: 권한 허용")
+            case .denied:
+                print("Album: 권한 거부")
+            case .restricted, .notDetermined:
+                print("Album: 선택하지 않음")
+            default:
+                break
+            }
+        })
+    }
+    
+    func requestAlramPermission() {
+        UNUserNotificationCenter
+            .current()
+            .requestAuthorization(options: [.alert, .badge, .sound]) { status, error in
+                if status == true && error == nil {
+                    print("Alram: 권한 허용")
+                }
+                else{
+                    print("Alram: 권한 거부")
+                }
+            }
+    }
+}
 
 struct Post : Identifiable {
     var id = UUID()
-    var image: UIImage
+    var type: String
+    var image: Image
     var title: String
     var content: String
 }
 
 struct ContentView: View {
+    @StateObject var permissionManager = PermissionManager()
     @ObservedObject var postData = UserData()
     
+    static let record = Record(id: 1, category: .favorites, imageName: "stmarylake")
+    
     var body: some View {
-        TabView {
-            RecordCollectionView()
+        TabView(){
+            RecordCollectionView(record:record)
                 .tabItem {
                     Image(systemName: "star")
                     Text("기록모음")
@@ -39,8 +90,12 @@ struct ContentView: View {
                     Text("프로필")
                 }
                 .environmentObject(postData)
+        } .onAppear {
+            permissionManager.requestAlbumPermission()
+            permissionManager.requestAlramPermission()
         }
     }
+       
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -48,3 +103,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

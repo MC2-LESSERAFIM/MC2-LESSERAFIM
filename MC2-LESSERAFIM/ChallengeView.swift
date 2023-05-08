@@ -11,12 +11,10 @@ struct ChallengeView: View {
     
     @EnvironmentObject var postData: UserData
     
-    @State var challenges  = ["거울보고 웃기", "파인애플 피자 선물하기", "장점 칭찬하기"]
-    
     var body: some View {
         NavigationView {
             VStack{
-                ForEach(challenges, id: \.self) { challenge in
+                ForEach(postData.challenges, id: \.self) { challenge in
                     NavigationLink{
                         RecordView(challenge: challenge)
                             .environmentObject(postData)
@@ -24,7 +22,6 @@ struct ChallengeView: View {
                         Label("\(challenge)", systemImage: "folder")
                     }
                     .navigationBarTitle("")
-                    .navigationTitle("")
                 }
             }
         }

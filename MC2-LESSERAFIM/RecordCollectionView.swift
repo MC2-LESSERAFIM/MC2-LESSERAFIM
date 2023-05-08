@@ -77,6 +77,19 @@ struct RecordCollectionView: View {
                                     }
                                 }
                             }
+        VStack {
+            Text("RecordCollectionView")
+            if postData.posts.isEmpty == false {
+                List{
+                    ForEach(postData.posts) { item in
+                        Section(item.type){
+                            item.image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 300, height: 100, alignment: .center)
+                                .clipped()
+                            Text(item.title)
+                            Text(item.content)
                         }
                     }
                 }
