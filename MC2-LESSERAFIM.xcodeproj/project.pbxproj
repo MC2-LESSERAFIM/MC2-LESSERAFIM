@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */; };
+		8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */; };
+		8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CC2A087F67003C7D3F /* RecordButton.swift */; };
+		8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */; };
 		A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */; };
 		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
 		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
@@ -37,6 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSelectionView.swift; sourceTree = "<group>"; };
+		8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitle.swift; sourceTree = "<group>"; };
+		8E15E4CC2A087F67003C7D3F /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
+		8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWritingView.swift; sourceTree = "<group>"; };
 		A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusThicknessSlider.swift; sourceTree = "<group>"; };
 		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
 		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
@@ -107,6 +115,10 @@
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				BE5590C72A08821600D765F6 /* landmarkData.json */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
+				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
+				8E15E4CC2A087F67003C7D3F /* RecordButton.swift */,
+				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
+				8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */,
 				A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */,
 			);
 			path = "MC2-LESSERAFIM";
@@ -251,12 +263,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
 				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
 				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
 				BE7659B92A078F2A00AA5835 /* RecordCollectionView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
+				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
+				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
+				8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */,
 				A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
