@@ -9,24 +9,12 @@ import SwiftUI
 //MARK: - TabView에 포함 시킬 "기록모음" 뷰
 struct RecordCollectionView: View {
     @EnvironmentObject var postData: UserData
+    
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
         case category = "주제"
         var id: Self { self }
     }
-    
-    /*
-     if postData.posts.isEmpty == false {
-     List{
-     ForEach(postData.posts) { datum in
-     Text(datum.title)
-     }
-     }
-     }
-     else{
-     Text("No Data")
-     }
-     */
     
     @State private var selectedSort: SortBy = .category
     
@@ -59,6 +47,34 @@ struct RecordCollectionView: View {
                         // MARK: - sorting by .category
                     } else if selectedSort == .category {
                         LazyVGrid(columns: numberColumns, spacing: 20) {
+                            
+                            VStack {
+                                Text("RecordCollectionView")
+                                if postData.posts.isEmpty == false {
+                                    List{
+                                        ForEach(postData.posts) { item in
+                                            Section(item.type){
+                                                item.image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 300, height: 100, alignment: .center)
+                                                    .clipped()
+                                                Text(item.title)
+                                                Text(item.content)
+                                            }
+                                        }
+                                    }
+                                    .navigationTitle("나의 기록")
+                                    .toolbar {
+                                        Picker("", selection: $selectedSort) {
+                                            ForEach(SortBy.allCases) { sort in
+                                                Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                                    .labelStyle(.titleAndIcon)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                             ForEach(categories) { category in
                                 
                                 NavigationLink {
@@ -77,29 +93,7 @@ struct RecordCollectionView: View {
                                     }
                                 }
                             }
-        VStack {
-            Text("RecordCollectionView")
-            if postData.posts.isEmpty == false {
-                List{
-                    ForEach(postData.posts) { item in
-                        Section(item.type){
-                            item.image
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 300, height: 100, alignment: .center)
-                                .clipped()
-                            Text(item.title)
-                            Text(item.content)
                         }
-                    }
-                }
-            }
-            .navigationTitle("나의 기록")
-            .toolbar {
-                Picker("", selection: $selectedSort) {
-                    ForEach(SortBy.allCases) { sort in
-                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                            .labelStyle(.titleAndIcon)
                     }
                 }
             }
@@ -159,41 +153,12 @@ func load<T: Decodable>(_ filename: String) -> T {
     }
 }
 
-struct RecordCollectionView: View {
-    @Environment(\.dismiss) private var dismiss
-    let record: Record
-    
-    var body: some View {
-        ZStack {
-            record.image
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-            
-            
-        }
-        .toolbar {
-            ToolbarItem(placement: .cancellationAction) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark.circle")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 25, height: 25)
-                        .foregroundColor(Color(.white))
-                }
-            }
-        }
-    }
-}
-
 struct RecordView_Preview: PreviewProvider {
-    static let record = Record(id: 1, category: .favorites, imageName: "stmarylake")
+    var record = Record(id: 1, category: .favorites, imageName: "stmarylake")
     
     static var previews: some View {
         NavigationStack {
-            RecordCollectionView(record: record)
+            RecordCollectionView()
         }
     }
 }

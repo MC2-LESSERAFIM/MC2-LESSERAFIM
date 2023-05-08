@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecordView: View {
-    @EnvironmentObject var postData: UserData
+    @EnvironmentObject var userData: UserData
     var challenge: String
     
     var body: some View {
@@ -19,7 +19,7 @@ struct RecordView: View {
                 ForEach(item, id: \.self) { type in
                     NavigationLink{
                         WritingView(type: type)
-                            .environmentObject(postData)
+                            .environmentObject(userData)
                     } label: {
                         Label(type, systemImage: "square.and.pencil")
                     }

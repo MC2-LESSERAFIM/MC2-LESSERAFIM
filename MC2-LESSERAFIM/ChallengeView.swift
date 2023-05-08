@@ -9,15 +9,15 @@ import SwiftUI
 
 struct ChallengeView: View {
     
-    @EnvironmentObject var postData: UserData
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         NavigationView {
             VStack{
-                ForEach(postData.challenges, id: \.self) { challenge in
+                ForEach(userData.challenges, id: \.self) { challenge in
                     NavigationLink{
                         RecordView(challenge: challenge)
-                            .environmentObject(postData)
+                            .environmentObject(userData)
                     } label: {
                         Label("\(challenge)", systemImage: "folder")
                     }

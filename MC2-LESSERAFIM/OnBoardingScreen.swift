@@ -12,6 +12,7 @@ struct OnBoardingScreen: View {
     @State var pageTag:Int? = nil
     @State var tag:Int? = nil
     @State private var currentTab = 0
+    @Binding var isOnBoarding: Bool
     
     var body: some View {
         NavigationView{
@@ -90,7 +91,11 @@ struct OnBoardingScreen: View {
                         
                     }) .padding(.bottom, 30) //대충 30으로 두긴 했지만 여기 버튼에서 화면 맨 아래까지 간격 어떻게 확인해요?
                 } else {
-                    NavigationLink(destination: CheckInScreen()) {
+                    Button(action: {
+                        withAnimation(.easeInOut(duration: 1.0)){
+                            isOnBoarding = false
+                        }
+                    }, label: {
                         Text("나와의 연애 시작하기")
                             .font(.custom("ButtonStyle", size: 18))
                             .foregroundColor(.white)
@@ -99,17 +104,10 @@ struct OnBoardingScreen: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .foregroundColor(.blue)
                             )
-                    }
-                    .padding(.bottom, 30) //대충 30으로 두긴 했지만 여기 버튼에서 화면 맨 아래까지 간격 어떻게 확인해요?
+                    }) .padding(.bottom, 30)
                 }
                 
             }
         }
-    }
-}
-
-struct OnBoardingScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        OnBoardingScreen()
     }
 }
