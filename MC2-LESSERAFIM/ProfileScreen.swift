@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileScreen: View {
-    
+    @EnvironmentObject var postData: UserData
     @State private var isNotificationEnabled: Bool = true
     @State private var isLockEnabled: Bool = true
     

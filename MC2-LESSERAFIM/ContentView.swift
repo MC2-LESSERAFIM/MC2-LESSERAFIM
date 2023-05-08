@@ -64,35 +64,39 @@ struct Post : Identifiable {
 
 struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
-    @ObservedObject var postData = UserData()
-    
-    static let record = Record(id: 1, category: .favorites, imageName: "stmarylake")
+    @ObservedObject var userData = UserData()
+    @State var isOnBoarding: Bool = true
     
     var body: some View {
-        TabView(){
-            RecordCollectionView(record:record)
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("기록모음")
-                }
-                .environmentObject(postData)
-            
-            ChallengeView()
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("챌린지")
-                }
-                .environmentObject(postData)
-            
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "star")
-                    Text("프로필")
-                }
-                .environmentObject(postData)
-        } .onAppear {
-            permissionManager.requestAlbumPermission()
-            permissionManager.requestAlramPermission()
+        if isOnBoarding {
+            OnBoardingScreen(isOnBoarding: $isOnBoarding)
+        }
+        else{
+            TabView(){
+                RecordCollectionView()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("기록모음")
+                    }
+                    .environmentObject(userData)
+                
+                ChallengeScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("챌린지")
+                    }
+                    .environmentObject(userData)
+                
+                ProfileScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("프로필")
+                    }
+                    .environmentObject(userData)
+            } .onAppear {
+                permissionManager.requestAlbumPermission()
+                permissionManager.requestAlramPermission()
+            }
         }
     }
        
