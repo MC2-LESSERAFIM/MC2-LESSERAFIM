@@ -14,13 +14,13 @@ struct PaintingLine {
     var lineWidth : Double = 1.0
 }
 
-
 struct CanvusView: View {
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
     @State private var lines : [PaintingLine] = [] //다수의 라인을 저장하는 Arr
     @State private var selectedColor : Color = .black //기본 색상은 Black으로 지정
+    @State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 1.0 //기본 팬 굵기
     
     //Zstack visible Bool & kind
@@ -100,15 +100,7 @@ struct CanvusView: View {
                     whatTool = 4
                 }))
             Spacer()
-            
-            Image(systemName: "circle.fill")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 30)
-                .gesture(TapGesture(count: 1).onEnded({
-                    toolClicked.toggle()
-                    whatTool = 5
-                }))
+            ColorPicker("", selection: $selectedColor)
             
         }
         .frame(width: 345, height: 44)
@@ -156,19 +148,20 @@ struct CanvusView: View {
                     if toolClicked {
                         switch whatTool {
                         case 1:
-                            Slider(value: $thickness, in: 1...30)
+                            CanvusThicknessSlider(panThickness: $thickness)
                         
                         case 2:
                             Slider(value: $thickness, in: 1...30)
                             
                         case 3:
-                            CanvusColorPickerView(selectedColor: $selectedColor)
-                                .onChange(of: selectedColor){ changeColor in
-                                    currentLine.color = changeColor
-                                }
+//                            CanvusColorPickerView(selectedColor: $selectedColor, colorOpacity: $colorOpacity)
+//                                .onChange(of: selectedColor){ changeColor in
+//                                    currentLine.color = changeColor
+//                                }
+                            ColorPicker("test", selection: $selectedColor)
                         case 4:
                             Slider(value: $thickness, in: 1...30)
-                            
+                           
                         case 5:
                             Slider(value: $thickness, in: 1...30)
                             
@@ -177,7 +170,6 @@ struct CanvusView: View {
                             
                         }
                     }
-                    
                 }
             }
         }

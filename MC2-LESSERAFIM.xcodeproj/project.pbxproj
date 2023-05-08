@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */; };
 		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
 		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
 		A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusThicknessSlider.swift; sourceTree = "<group>"; };
 		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
 		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
 		A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorPickerView.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 		A1EF9E522A02562000A56E4C = {
 			isa = PBXGroup;
 			children = (
+				A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */,
 				A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */,
 				A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */,
 				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */,
@@ -271,6 +274,7 @@
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
+				A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
