@@ -17,6 +17,7 @@
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
 		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
+		D2A477712A089EEE0055B95E /* UserDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A477702A089EEE0055B95E /* UserDataView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
 		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		D2A477702A089EEE0055B95E /* UserDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 		A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */ = {
 			isa = PBXGroup;
 			children = (
+				D2A477702A089EEE0055B95E /* UserDataView.swift */,
 				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
@@ -271,6 +274,7 @@
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
+				D2A477712A089EEE0055B95E /* UserDataView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
