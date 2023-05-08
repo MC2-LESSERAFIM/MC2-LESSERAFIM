@@ -8,31 +8,43 @@
 import SwiftUI
 
 struct ChallengeScreen: View {
-    
+    @EnvironmentObject var userData: UserData
     // tables swipe action
     @State private var action = ""
     
     // user picked challenge
     @State private var isPickedChallenge: Bool = false
     
-    // challenge
-    let challenges = [
-    "랜덤 챌린지1",
-    "랜덤 챌린지2",
-    "랜덤 챌린지3",
-    "랜덤 챌린지4",
-    "랜덤 챌린지5",
-    "랜덤 챌린지6",
-    "랜덤 챌린지7",
-    "랜덤 챌린지8",
-    "랜덤 챌린지9",
-    "랜덤 챌린지10"
-    ]
-    var todayRandomChallenges: String {
-        return challenges[Int.random(in: 0 ..< challenges.count)]
+    private let challengeNumber: Int = 3
+    @State private var numberOfTimeLeft: Int = 3
+    
+    @State private var showingAlert: Bool = false
+    
+    func initChallenges(number: Int) {
+        
+        func addChallenge() {
+            var num = Int.random(in: 0 ..< userData.challenges.count)
+            while (userData.todayRemovedChallenges.contains(num)) {
+                num = Int.random(in: 0 ..< userData.challenges.count)
+            }
+            userData.todayRemovedChallenges.append(num)
+            userData.todayChallenges.append(userData.challenges[num])
+        }
+        
+        for _ in 0..<number {
+            addChallenge()
+        }
     }
-    @State private var retryChallenges: String = ""
-
+    
+    func modifyChallenge(index: Int) {
+        var num = Int.random(in: 0 ..< userData.challenges.count)
+        while (userData.todayRemovedChallenges.contains(num)) {
+            num = Int.random(in: 0 ..< userData.challenges.count)
+        }
+        userData.todayRemovedChallenges.append(num)
+        userData.todayChallenges[index] = userData.challenges[num]
+    }
+    
     var body: some View {
         VStack {
             VStack {
@@ -69,19 +81,24 @@ struct ChallengeScreen: View {
                         
                         Spacer()
                         
-                        Text("다시 뽑기 3회")
+                        Text("다시 뽑기 \(numberOfTimeLeft)회")
                             .font(.system(size: 14, weight: .regular))
                             .foregroundColor(.gray)
                     }
                     .padding(.horizontal, 24)
                     
                     List {
-                        ForEach(1..<4) { i in
-                            Text("\(todayRandomChallenges)")
+                        ForEach(0..<3) { i in
+                            Text(userData.todayChallenges[i])
                                 .swipeActions(edge: .trailing) {
                                     Button {
-                                        retryChallenges = challenges.randomElement() ?? ""
-                                        print("retry")
+                                        if numberOfTimeLeft > 0 {
+                                            modifyChallenge(index: i)
+                                            self.numberOfTimeLeft -= 1
+                                            print("retry")
+                                        } else {
+                                            self.showingAlert = true
+                                        }
                                     } label: {
                                         Label("다시 뽑기", systemImage: "arrow.counterclockwise")
                                     }
@@ -121,6 +138,14 @@ struct ChallengeScreen: View {
                 .ignoresSafeArea()
                 .frame(width: 393, height: 41)
                 .background(.red)
+        }
+        .onAppear(perform: {
+            initChallenges(number: challengeNumber)
+        })
+        .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
+            Button("알겠어요", role: .cancel){
+                self.showingAlert = false
+            }
         }
     }
 }
