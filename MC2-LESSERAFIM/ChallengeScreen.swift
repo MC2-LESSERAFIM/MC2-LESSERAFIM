@@ -104,7 +104,7 @@ struct ChallengeScreen: View {
             } else {
                 // 뽑기 버튼
                 Button {
-                    self.isPickedChallenge = true
+                    self.isPickedChallenge = !self.isPickedChallenge // true 대신에 !self.isPickedChallenge로 사용 가능함.
                     print("뽑기")
                 } label: {
                     Text("오늘의 챌린지 뽑기")
