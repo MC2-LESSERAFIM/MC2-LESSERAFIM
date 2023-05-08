@@ -11,13 +11,16 @@
 		8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */; };
 		8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CC2A087F67003C7D3F /* RecordButton.swift */; };
 		8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */; };
+		A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */; };
+		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
+		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
+		A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */; };
 		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */; };
 		A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E602A02562000A56E4C /* ContentView.swift */; };
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
 		A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */; };
-		A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */; };
-		A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */; };
-		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */; };
+		BE5590C82A08821600D765F6 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BE5590C72A08821600D765F6 /* landmarkData.json */; };
+		BE7659B92A078F2A00AA5835 /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,16 +45,19 @@
 		8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitle.swift; sourceTree = "<group>"; };
 		8E15E4CC2A087F67003C7D3F /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWritingView.swift; sourceTree = "<group>"; };
+		A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusThicknessSlider.swift; sourceTree = "<group>"; };
+		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
+		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
+		A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorPickerView.swift; sourceTree = "<group>"; };
 		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_App.swift; sourceTree = "<group>"; };
 		A1EF9E602A02562000A56E4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1EF9E622A02562100A56E4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_Tests.swift; sourceTree = "<group>"; };
 		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITests.swift; sourceTree = "<group>"; };
-		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BE5590C72A08821600D765F6 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +88,10 @@
 		A1EF9E522A02562000A56E4C = {
 			isa = PBXGroup;
 			children = (
+				A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */,
+				A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */,
+				A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */,
 				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */,
-				A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM Tests */,
-				A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM UITests */,
 				A1EF9E5C2A02562000A56E4C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -104,12 +111,15 @@
 			children = (
 				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
+				BE7659B82A078F2A00AA5835 /* RecordCollectionView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
+				BE5590C72A08821600D765F6 /* landmarkData.json */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
 				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
 				8E15E4CC2A087F67003C7D3F /* RecordButton.swift */,
 				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
 				8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */,
+				A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -120,23 +130,6 @@
 				A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		A1EF9E6E2A02562100A56E4C /* MC2-LESSERAFIM Tests */ = {
-			isa = PBXGroup;
-			children = (
-				A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */,
-			);
-			path = "MC2-LESSERAFIM Tests";
-			sourceTree = "<group>";
-		};
-		A1EF9E782A02562100A56E4C /* MC2-LESSERAFIM UITests */ = {
-			isa = PBXGroup;
-			children = (
-				A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */,
-				A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */,
-			);
-			path = "MC2-LESSERAFIM UITests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +238,7 @@
 			files = (
 				A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */,
 				A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */,
+				BE5590C82A08821600D765F6 /* landmarkData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,11 +264,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
+				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
+				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
+				BE7659B92A078F2A00AA5835 /* RecordCollectionView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
+				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */,
+				A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,7 +281,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,8 +288,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */,
-				A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +429,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = F5LF3NUCU2;
+				DEVELOPMENT_TEAM = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -441,6 +437,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -462,7 +459,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = F5LF3NUCU2;
+				DEVELOPMENT_TEAM = D7F6ZDDCV9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -470,6 +467,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
