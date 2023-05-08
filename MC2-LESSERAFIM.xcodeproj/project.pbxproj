@@ -14,6 +14,8 @@
 		A1EF9E702A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E6F2A02562100A56E4C /* MC2_LESSERAFIM_Tests.swift */; };
 		A1EF9E7A2A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */; };
 		A1EF9E7C2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */; };
+		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
+		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,8 @@
 		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E792A02562100A56E4C /* MC2_LESSERAFIM_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITests.swift; sourceTree = "<group>"; };
 		A1EF9E7B2A02562100A56E4C /* MC2_LESSERAFIM_UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
+		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
+				D22690122A06A50B00BCF668 /* ChallengeScreen.swift */,
+				D22690142A06A51800BCF668 /* ProfileScreen.swift */,
 			);
 			path = "MC2-LESSERAFIM";
 			sourceTree = "<group>";
@@ -258,7 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
+				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
+				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
