@@ -8,6 +8,7 @@
 import Foundation
 
 class UserData: ObservableObject {
+    @Published var isOnBoarding: Bool = true
     @Published var posts: [Post] = []
     @Published var challenges = [
     "랜덤 챌린지1",
