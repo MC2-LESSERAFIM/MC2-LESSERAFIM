@@ -10,9 +10,9 @@ import SwiftUI
 struct RecordView: View {
     @EnvironmentObject var userData: UserData
     var challenge: String
+    let item = ["사진+글", "글", "그림"]
     
     var body: some View {
-        @State var item = ["사진+글", "글", "그림"]
         
         VStack {
             List{
