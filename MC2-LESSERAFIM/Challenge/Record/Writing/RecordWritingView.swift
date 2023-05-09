@@ -17,11 +17,11 @@ struct RecordWritingView: View {
                 // 챌린지 타이틀 입력란
                 ZStack {
                     // 챌린지 타이틀 플레이스홀더
-                    Text(title.isEmpty ? "이번 챌린지에 제목을 붙여볼까요?" : " ")
+                    Text(title.isEmpty ? "이번 챌린지에 제목을 붙여볼까요?" : " ")    // 빈칸 없을 경우 텍스트 입력 시 위치 변화 생김
                         .font(.system(size: 13))
                         .frame(width: 345, alignment: .topLeading)
                         .foregroundColor(Color(.systemGray4))
-                        .offset(x: 5)    // 위치 조정
+                        .offset(x: 5)    // Rectangle에서 떨어지게끔 위치 조정
                         .animation(.easeInOut(duration: 0.05))
                     
                     // 챌린지 타이틀
@@ -42,11 +42,11 @@ struct RecordWritingView: View {
                 // 챌린지 내용
                 ZStack {
                     // 챌린지 내용 플레이스홀더
-                    Text(story.isEmpty ? "어떤 이야기가 담겨있나요?" : " ")
+                    Text(story.isEmpty ? "어떤 이야기가 담겨있나요?" : " ")    // 빈칸 없을 경우 텍스트 입력 시 위치 변화 생김
                         .font(.system(size: 13))
                         .frame(width: 345, height: 561, alignment: .topLeading)
                         .foregroundColor(Color(.systemGray4))
-                        .offset(x: 5, y: 11)    // 위치 조정
+                        .offset(x: 5, y: 11)    // Rectangle에서 떨어지게끔 위치 조정
                         .animation(.easeInOut(duration: 0.05))
                     
                     // 챌린지 내용
