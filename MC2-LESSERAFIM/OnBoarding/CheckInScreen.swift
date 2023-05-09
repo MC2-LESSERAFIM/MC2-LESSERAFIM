@@ -45,6 +45,8 @@ struct CheckInScreen: View {
                     .padding(.top, 24)
                     .font(.system(size: 15, weight: .regular, design: .default))
                     .accentColor(.blue)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
                     .onSubmit {
                         if !username.isEmpty {
                             self.isLinkActive = true
