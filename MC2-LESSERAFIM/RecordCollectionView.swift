@@ -32,51 +32,69 @@ struct RecordCollectionView: View {
                 ScrollView {
                     // MARK: - sorting by .day
                     if selectedSort == .day {
-                        VStack {
-                            ForEach(0..<5) { _ in
-                                HStack {
-                                    ForEach(0..<3) { _ in
-                                        Rectangle()
-                                            .frame(width: (geo.size.width - 8) / 3, // h / w = 1.33
-                                                   height: geo.size.width / 2.2)
-                                            .foregroundColor(Color(.systemGray5))
+                        
+                        if postData.posts.isEmpty == false {
+                            
+                            VStack(alignment: .leading) {
+                                ForEach(0..<5) { i in
+                                    HStack {
+                                        ForEach(0..<3) { j in
+                                            if (i*3 + j) < postData.posts.count {
+                                                postData.posts[i*3 + j].image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
+                                                    .clipped()
+                                                /*
+                                                Section(postData.posts[i*5 + j].type){
+                                                    postData.posts[i*5 + j].image
+                                                        .resizable()
+                                                        .scaledToFill()
+                                                        .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
+                                                        .clipped()
+                                                    Text(postData.posts[i*5 + j].title)
+                                                    Text(postData.posts[i*5 + j].content)
+                                                }
+                                                 */
+                                                /*
+                                                 postData.posts[i*5 + j]
+                                                 Rectangle()
+                                                 .frame(width: (geo.size.width - 8) / 3, // h / w = 1.33
+                                                 height: geo.size.width / 2.2)
+                                                 .foregroundColor(Color(.systemGray5))
+                                                 */
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .toolbar {
+                                Picker("", selection: $selectedSort) {
+                                    ForEach(SortBy.allCases) { sort in
+                                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                            .labelStyle(.titleAndIcon)
+                                    }
+                                }
+                            }
+                        } else {
+                            Text("No Data").toolbar {
+                                Picker("", selection: $selectedSort) {
+                                    ForEach(SortBy.allCases) { sort in
+                                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                            .labelStyle(.titleAndIcon)
                                     }
                                 }
                             }
                         }
+                        
                         // MARK: - sorting by .category
                     } else if selectedSort == .category {
                         LazyVGrid(columns: numberColumns, spacing: 20) {
                             
                             VStack {
                                 Text("RecordCollectionView")
-                                if postData.posts.isEmpty == false {
-                                    List{
-                                        ForEach(postData.posts) { item in
-                                            Section(item.type){
-                                                item.image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(width: 300, height: 100, alignment: .center)
-                                                    .clipped()
-                                                Text(item.title)
-                                                Text(item.content)
-                                            }
-                                        }
-                                    }
-                                    .navigationTitle("나의 기록")
-                                    .toolbar {
-                                        Picker("", selection: $selectedSort) {
-                                            ForEach(SortBy.allCases) { sort in
-                                                Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                                    .labelStyle(.titleAndIcon)
-                                            }
-                                        }
-                                    }
-                                }
                             }
                             ForEach(categories) { category in
-                                
                                 NavigationLink {
                                     Text(category.rawValue)
                                 } label: {
@@ -93,8 +111,17 @@ struct RecordCollectionView: View {
                                     }
                                 }
                             }
+                        }.toolbar {
+                            Picker("", selection: $selectedSort) {
+                                ForEach(SortBy.allCases) { sort in
+                                    Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                        .labelStyle(.titleAndIcon)
+                                }
+                            }
                         }
+
                     }
+                    
                 }
             }
         }
