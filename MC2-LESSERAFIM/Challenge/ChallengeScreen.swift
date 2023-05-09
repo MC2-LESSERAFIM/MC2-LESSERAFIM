@@ -163,5 +163,6 @@ struct ChallengeScreen: View {
 struct ChallengeScreen_Previews: PreviewProvider {
     static var previews: some View {
         ChallengeScreen()
+            .environmentObject(UserData())
     }
 }
