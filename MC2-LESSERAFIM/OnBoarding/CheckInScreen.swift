@@ -86,10 +86,10 @@ struct CheckInComplete: View {
         VStack(alignment: .leading, spacing: 0){
             Text("이제부터 당신의 짝꿍은")
                 .font(.system(size: 32, weight: .bold))
-            + Text(username)
+            Text(username)
                 .foregroundColor(.blue)
                 .font(.system(size: 32, weight: .bold))
-            + Text(" 입니다.")
+            + Text("입니다.")
                 .font(.system(size: 32, weight: .bold))
             
             Image("Rectangle")
