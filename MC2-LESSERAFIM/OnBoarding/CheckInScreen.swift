@@ -82,7 +82,7 @@ struct CheckInComplete: View {
     @Binding var username: String
     
     var body: some View {
-        
+        Spacer()
         VStack(alignment: .leading, spacing: 0){
             Text("이제부터 당신의 짝꿍은")
                 .font(.system(size: 32, weight: .bold))
@@ -92,18 +92,14 @@ struct CheckInComplete: View {
             + Text(" 입니다.")
                 .font(.system(size: 32, weight: .bold))
             
-            Spacer()
-                .frame(height: 48)
-            
             Image("Rectangle")
                 .resizable()
                 .frame(width: 345.0, height: 345.0)
-            Spacer()
+                .padding(.top, 48)
+                .padding(.bottom, 164)
+            
             
             Button(action: {
-                withAnimation(.easeInOut(duration: 1.0), {
-                    userData.isOnBoarding = false
-                })
             }, label: {
                 Text("시작하기")
                     .font(.custom("ButtonStyle", size: 18))
@@ -118,8 +114,6 @@ struct CheckInComplete: View {
             })
             
         }
-        .padding(24)
-        .padding(.top, 48)
     }
 }
 
