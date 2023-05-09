@@ -21,8 +21,6 @@ struct CheckInScreen: View {
     @EnvironmentObject var userData: UserData
     @State private var username = ""
     @State private var isLinkActive = false
-//    @State var fieldFocus = [false]
-//    @FocusState private var focusField: Field?
     
     var body: some View {
         NavigationView{
@@ -43,7 +41,6 @@ struct CheckInScreen: View {
                 
                 
                 TextField("당신의 호칭을 알려주세요", text: $username)
-//                    .focused($focusField, equals: .username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.top, 24)
                     .font(.system(size: 15, weight: .regular, design: .default))
@@ -53,14 +50,6 @@ struct CheckInScreen: View {
                             self.isLinkActive = true
                         }
                     }
-//                    .toolbar {
-//                        ToolbarItem(placement: .keyboard) {
-//                            Button("NEXT") {
-//                                focusField = nil
-//                            }
-//                            .foregroundColor(.blue)
-//                        }
-//                    }
             
                 NavigationLink(destination:
                                 CheckInComplete(username: $username)
