@@ -45,24 +45,6 @@ struct RecordCollectionView: View {
                                                     .scaledToFill()
                                                     .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
                                                     .clipped()
-                                                /*
-                                                Section(postData.posts[i*5 + j].type){
-                                                    postData.posts[i*5 + j].image
-                                                        .resizable()
-                                                        .scaledToFill()
-                                                        .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
-                                                        .clipped()
-                                                    Text(postData.posts[i*5 + j].title)
-                                                    Text(postData.posts[i*5 + j].content)
-                                                }
-                                                 */
-                                                /*
-                                                 postData.posts[i*5 + j]
-                                                 Rectangle()
-                                                 .frame(width: (geo.size.width - 8) / 3, // h / w = 1.33
-                                                 height: geo.size.width / 2.2)
-                                                 .foregroundColor(Color(.systemGray5))
-                                                 */
                                             }
                                         }
                                     }
@@ -90,10 +72,6 @@ struct RecordCollectionView: View {
                         // MARK: - sorting by .category
                     } else if selectedSort == .category {
                         LazyVGrid(columns: numberColumns, spacing: 20) {
-                            
-                            VStack {
-                                Text("RecordCollectionView")
-                            }
                             ForEach(categories) { category in
                                 NavigationLink {
                                     Text(category.rawValue)
