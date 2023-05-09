@@ -45,15 +45,17 @@ struct ChallengeScreen: View {
         userData.todayChallenges[index] = userData.challenges[num]
     }
     @State var nextView = false
+    @State var pageNumber = 0
     
     var body: some View {
         NavigationView {
             VStack {
                 VStack {
-                    Text("Day1")
-                        .font(.system(size: 32, weight: .bold))
+                    PageTitle(titlePage: "Day1")
+                    //                    Text("Day1")
+                    //                        .font(.system(size: 32, weight: .bold))
                 }
-                .frame(width: UIScreen.main.bounds.width - 48, alignment: .leading)
+                //                .frame(width: UIScreen.main.bounds.width - 48, alignment: .leading)
                 .padding(.top, 47)
                 
                 VStack {
@@ -65,12 +67,11 @@ struct ChallengeScreen: View {
                             .font(.system(size: 20, weight: .semibold))
                             .padding(.bottom, 15)
                     }
+                    .padding(.top, 24)
                     .frame(width: UIScreen.main.bounds.width - 48, height: 346)
                     .frame(alignment: .bottom)
                     .background(.cyan)
                 }
-                
-                .padding(.top, 24)
                 .padding(.bottom, 48)
                 
                 Spacer()
@@ -89,6 +90,14 @@ struct ChallengeScreen: View {
                         }
                         .padding(.horizontal, 24)
                         
+                        NavigationLink(destination:
+                                        RecordView(challenge: userData.todayChallenges[pageNumber])
+                            .environmentObject(userData),
+                                       isActive: $nextView
+                        ) {
+                            EmptyView()
+                        }
+                        .navigationBarTitle("")
                         
                         List {
                             ForEach(0..<3) { i in
@@ -108,23 +117,13 @@ struct ChallengeScreen: View {
                                         .tint(.purple)
                                     }
                                     .swipeActions(edge: .leading) {
-                                    
-                                        NavigationLink {
-                                            RecordView(challenge: userData.todayChallenges[i])
-                                                .environmentObject(userData)
+                                        Button {
+                                            pageNumber = pageNumber
+                                            nextView = true
                                         } label: {
                                             Label("기록하기", systemImage: "square.and.pencil")
                                         }
-                                        /*
-                                         
-                         Button {
-                             nextView = true
-                         } label: {
-                             Label("기록하기", systemImage: "square.and.pencil")
-                         }
-                         .navigationBarTitle("")
-                         .tint(.blue)
-                                         */
+                                        .tint(.blue)
                                     }
                             }
                         }
@@ -148,7 +147,9 @@ struct ChallengeScreen: View {
                 Spacer()
             }
             .onAppear(perform: {
-                initChallenges(number: challengeNumber)
+                if userData.todayChallenges.isEmpty {
+                    initChallenges(number: challengeNumber)
+                }
             })
             .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
                 Button("알겠어요", role: .cancel){
