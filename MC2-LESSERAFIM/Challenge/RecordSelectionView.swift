@@ -75,6 +75,7 @@ struct RecordSelectionView: View {
                 // 위로 밀기
                 Spacer()
             }
+            .navigationTitle("")
         }
         .ignoresSafeArea()
     }
