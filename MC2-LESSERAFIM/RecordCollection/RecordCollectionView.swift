@@ -123,6 +123,12 @@ struct Record: Codable {
         self.category = category
         self.imageName = imageName
     }
+    
+    enum CodingKeys : String, CodingKey {
+        case imageName
+        case category
+        case id
+    }
 }
 
 var records: [Record] = load("landmarkData.json")
