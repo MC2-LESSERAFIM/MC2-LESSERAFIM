@@ -16,9 +16,7 @@ struct RecordCollectionView: View {
         var id: Self { self }
     }
     
-    @State private var selectedSort: SortBy = .category
-    
-    private let categories = Category.allCases
+    @State private var selectedSort: SortBy = .day
     
     private let numberColumns = [
         GridItem(.flexible()),
