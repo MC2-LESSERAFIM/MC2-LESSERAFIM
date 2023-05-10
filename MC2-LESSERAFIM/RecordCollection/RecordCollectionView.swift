@@ -24,86 +24,79 @@ struct RecordCollectionView: View {
     ]
     
     var body: some View {
-        //TODO: - 들여쓰기 레벨 줄이기
         GeometryReader { geo in
-            ScrollView {
-                // MARK: - sorting by .day
-                if selectedSort == .day {
-                    
-                    if postData.posts.isEmpty == false {
-                        
-                        VStack(alignment: .leading) {
-                            ForEach(0..<5) { i in
-                                HStack {
-                                    ForEach(0..<3) { j in
-                                        if (i*3 + j) < postData.posts.count {
-                                            postData.posts[i*3 + j].image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
-                                                .clipped()
+            NavigationView {
+                ScrollView {
+                    // MARK: - sorting by .day
+                    if selectedSort == .day {
+                        //TODO: - 이 뷰 따로 만들어서 재활용할 수 있다면! ㄱㄱ
+                        if postData.records.isEmpty == false {
+                            VStack(alignment: .leading) {
+                                ForEach(0..<5) { i in
+                                    HStack {
+                                        ForEach(0..<3) { j in
+                                            if (i*3 + j) < postData.records.count {
+                                                postData.records[i*3 + j].image
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
+                                                    .clipped()
+                                            }
                                         }
                                     }
                                 }
                             }
+                        } else {
+                            Text("No Data")
                         }
-                        .toolbar {
-                            Picker("", selection: $selectedSort) {
-                                ForEach(SortBy.allCases) { sort in
-                                    Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                        .labelStyle(.titleAndIcon)
-                                }
-                            }
-                        }
-                    } else {
-                        Text("No Data").toolbar {
-                            Picker("", selection: $selectedSort) {
-                                ForEach(SortBy.allCases) { sort in
-                                    Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                        .labelStyle(.titleAndIcon)
+                        // MARK: - sorting by .category
+                    }
+                    else if selectedSort == .category {
+                        LazyVGrid(columns: numberColumns, spacing: 20) {
+                            ForEach(postData.categories.keys.sorted(), id: \.self) { key in
+                                NavigationLink {
+                                    Text(key)
+                                } label: {
+                                    VStack(alignment: .leading) {
+                                        let records = postData.categories[key] ?? []
+
+                                        records.first?.image
+                                            .frame(width: 170, height: 170)
+                                            .foregroundColor(Color(.systemGray5))
+                                            .cornerRadius(30)
+
+                                        Text(key)
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 17, weight: .medium, design: .rounded))
+                                            .padding(.leading)
+                                    }
                                 }
                             }
                         }
                     }
-                    
-                    // MARK: - sorting by .category
-                } else if selectedSort == .category {
-                    LazyVGrid(columns: numberColumns, spacing: 20) {
-                        ForEach(categories) { category in
-                            NavigationLink {
-                                Text(category.rawValue)
-                            } label: {
-                                VStack(alignment: .leading) {
-                                    Rectangle()
-                                        .frame(width: 170, height: 170)
-                                        .foregroundColor(Color(.systemGray5))
-                                        .cornerRadius(30)
-                                    
-                                    Text(category.rawValue)
-                                        .foregroundColor(.black)
-                                        .font(.system(size: 17, weight: .medium, design: .rounded))
-                                        .padding(.leading)
-                                }
-                            }
-                        }
-                    }
-                    
                 }
-                
-            }
-            .navigationTitle("나의 기록")
-            .navigationBarTitleDisplayMode(.large)
-            .toolbar {
-                Picker("", selection: $selectedSort) {
-                    ForEach(SortBy.allCases) { sort in
-                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                            .labelStyle(.titleAndIcon)
+                .navigationTitle("나의 기록")
+                .navigationBarTitleDisplayMode(.large)
+                .toolbar {
+                    Picker("", selection: $selectedSort) {
+                        ForEach(SortBy.allCases) { sort in
+                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                .labelStyle(.titleAndIcon)
+                        }
                     }
                 }
             }
         }
     }
-    
+}
+
+struct RecordCollectionView_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            RecordCollectionView()
+                .environmentObject(ModelData())
+        }
+    }
 }
 
 enum Category: String, CaseIterable, Codable, Identifiable {
