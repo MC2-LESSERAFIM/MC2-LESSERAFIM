@@ -154,14 +154,3 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
-
-struct RecordView_Preview: PreviewProvider {
-    var record = Record(id: 1, category: .favorites, imageName: "stmarylake")
-    
-    static var previews: some View {
-        NavigationStack {
-            RecordCollectionView()
-        }
-    }
-}
-
