@@ -188,3 +188,38 @@ struct GalleryView: View {
     }
 }
 
+struct CategoryView: View {
+    let categoryKeys: [Category] = Category.allCases
+    let categories: [String: [Record]]
+    
+    private let numberColumns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    var body: some View {
+        LazyVGrid(columns: numberColumns, spacing: 20) {
+            ForEach(categoryKeys, id: \.self) { category in
+                let category = category.rawValue
+                let records = categories[category] ?? []
+                
+                NavigationLink {
+                    GalleryView(records: records)
+                        .navigationTitle(category)
+                } label: {
+                    VStack(alignment: .leading) {
+                        records.first?.image
+                            .frame(width: 170, height: 170)
+                            .foregroundColor(Color(.systemGray5))
+                            .cornerRadius(30)
+                        
+                        Text(category)
+                            .foregroundColor(.black)
+                            .font(.system(size: 17, weight: .medium, design: .rounded))
+                            .padding(.leading)
+                    }
+                }
+            }
+        }
+    }
+}
