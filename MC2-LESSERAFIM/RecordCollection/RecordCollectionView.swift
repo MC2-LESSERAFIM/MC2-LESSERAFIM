@@ -167,7 +167,7 @@ struct CategoryView: View {
                         records.first?.image
                             .frame(width: 170, height: 170)
                             .foregroundColor(Color(.systemGray5))
-                            .cornerRadius(30)
+                            .cornerRadius(12)
                         
                         Text(category)
                             .foregroundColor(.black)
