@@ -110,7 +110,7 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     var id: Self { self }
 }
 
-struct Record: Codable {
+struct Record: Hashable, Codable {
     var id: Int
     var category: Category
     var imageName: String
