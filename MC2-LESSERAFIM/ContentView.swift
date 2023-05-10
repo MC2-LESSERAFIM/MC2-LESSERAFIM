@@ -65,11 +65,11 @@ struct Post : Identifiable {
 struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
     @ObservedObject var userData = UserData()
-    @State var isOnBoarding: Bool = true
     
     var body: some View {
-        if isOnBoarding {
-            OnBoardingScreen(isOnBoarding: $isOnBoarding)
+        if userData.isOnBoarding {
+            OnBoardingScreen()
+                .environmentObject(userData)
         }
         else{
             TabView(){
