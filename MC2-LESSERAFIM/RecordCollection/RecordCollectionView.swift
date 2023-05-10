@@ -49,8 +49,8 @@ struct RecordCollectionView: View {
                         } else {
                             Text("No Data")
                         }
-                        // MARK: - sorting by .category
                     }
+                    // MARK: - sorting by .category
                     else if selectedSort == .category {
                         LazyVGrid(columns: numberColumns, spacing: 20) {
                             ForEach(postData.categories.keys.sorted(), id: \.self) { key in
