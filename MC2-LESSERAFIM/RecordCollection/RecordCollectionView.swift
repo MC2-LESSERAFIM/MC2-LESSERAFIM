@@ -113,7 +113,7 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     case weaknesses = "약점"
     case comfortZone = "안전지대"
     case valuesAndAim = "가치 및 목표"
-
+    
     var id: Self { self }
 }
 
