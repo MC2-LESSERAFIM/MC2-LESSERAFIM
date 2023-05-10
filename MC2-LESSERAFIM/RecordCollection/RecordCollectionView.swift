@@ -18,61 +18,17 @@ struct RecordCollectionView: View {
     
     @State private var selectedSort: SortBy = .day
     
-    private let numberColumns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
-    
     var body: some View {
         GeometryReader { geo in
             NavigationView {
                 ScrollView {
                     // MARK: - sorting by .day
                     if selectedSort == .day {
-                        //TODO: - 이 뷰 따로 만들어서 재활용할 수 있다면! ㄱㄱ
-                        if postData.records.isEmpty == false {
-                            VStack(alignment: .leading) {
-                                ForEach(0..<5) { i in
-                                    HStack {
-                                        ForEach(0..<3) { j in
-                                            if (i*3 + j) < postData.records.count {
-                                                postData.records[i*3 + j].image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
-                                                    .clipped()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            Text("No Data")
-                        }
+                        GalleryView(records: postData.records)
                     }
                     // MARK: - sorting by .category
                     else if selectedSort == .category {
-                        LazyVGrid(columns: numberColumns, spacing: 20) {
-                            ForEach(postData.categories.keys.sorted(), id: \.self) { key in
-                                NavigationLink {
-                                    Text(key)
-                                } label: {
-                                    VStack(alignment: .leading) {
-                                        let records = postData.categories[key] ?? []
-
-                                        records.first?.image
-                                            .frame(width: 170, height: 170)
-                                            .foregroundColor(Color(.systemGray5))
-                                            .cornerRadius(30)
-
-                                        Text(key)
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 17, weight: .medium, design: .rounded))
-                                            .padding(.leading)
-                                    }
-                                }
-                            }
-                        }
+                        CategoryView(categories: postData.categories)
                     }
                 }
                 .navigationTitle("나의 기록")
