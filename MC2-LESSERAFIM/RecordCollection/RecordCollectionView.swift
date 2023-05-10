@@ -163,3 +163,28 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
+
+struct GalleryView: View {
+    let records: [Record]
+    
+    private let numberColumns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
+    var body: some View {
+        VStack {
+            LazyVGrid(columns: numberColumns) {
+                ForEach(records, id: \.self) { record in
+                    record.image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(minHeight: 130)
+                }
+            }
+            Spacer()
+        }
+    }
+}
+
