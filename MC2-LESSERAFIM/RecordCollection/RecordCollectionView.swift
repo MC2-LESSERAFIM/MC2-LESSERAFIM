@@ -110,10 +110,9 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     var id: Self { self }
 }
 
-struct Record: Identifiable, Codable {
+struct Record: Codable {
     var id: Int
     var category: Category
-    //    var postedAt: Date
     var imageName: String
     var image: Image {
         Image(imageName)
