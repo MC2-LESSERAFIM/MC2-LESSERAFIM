@@ -131,7 +131,16 @@ struct Record: Codable {
     }
 }
 
-var records: [Record] = load("landmarkData.json")
+class ModelData: ObservableObject {
+    @Published var records: [Record] = load("landmarkData.json")
+    
+    var categories: [String: [Record]] {
+        Dictionary(
+            grouping: records,
+            by: { $0.category.rawValue }
+        )
+    }
+}
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
