@@ -133,7 +133,7 @@ struct GalleryView: View {
             LazyVGrid(columns: items, spacing: 3) {
                 ForEach(records, id: \.self) { record in
                     NavigationLink {
-                        Text(record.imageName)
+                        PostDetailView(post: record)
                     } label: {
                         record.image
                             .resizable()
