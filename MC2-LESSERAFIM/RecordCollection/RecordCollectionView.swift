@@ -6,7 +6,6 @@
 
 import SwiftUI
 
-//MARK: - TabView에 포함 시킬 "기록모음" 뷰
 struct RecordCollectionView: View {
     @EnvironmentObject var postData: UserData
     
