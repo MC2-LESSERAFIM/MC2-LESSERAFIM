@@ -65,6 +65,7 @@ struct Post : Identifiable {
 struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
     @ObservedObject var userData = UserData()
+    @ObservedObject var appLock  = BiometricLock()
     
     var body: some View {
         if userData.isOnBoarding {
@@ -93,6 +94,7 @@ struct ContentView: View {
                         Text("프로필")
                     }
                     .environmentObject(userData)
+                    .environmentObject(appLock)
             } .onAppear {
                 permissionManager.requestAlbumPermission()
                 permissionManager.requestAlramPermission()
