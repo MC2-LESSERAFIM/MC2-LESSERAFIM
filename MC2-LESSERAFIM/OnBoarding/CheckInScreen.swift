@@ -21,8 +21,6 @@ struct CheckInScreen: View {
     @EnvironmentObject var userData: UserData
     @State private var username = ""
     @State private var isLinkActive = false
-//    @State var fieldFocus = [false]
-//    @FocusState private var focusField: Field?
     
     var body: some View {
         NavigationView{
@@ -43,24 +41,17 @@ struct CheckInScreen: View {
                 
                 
                 TextField("당신의 호칭을 알려주세요", text: $username)
-//                    .focused($focusField, equals: .username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding(.top, 24)
                     .font(.system(size: 15, weight: .regular, design: .default))
                     .accentColor(.blue)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
                     .onSubmit {
                         if !username.isEmpty {
                             self.isLinkActive = true
                         }
                     }
-//                    .toolbar {
-//                        ToolbarItem(placement: .keyboard) {
-//                            Button("NEXT") {
-//                                focusField = nil
-//                            }
-//                            .foregroundColor(.blue)
-//                        }
-//                    }
             
                 NavigationLink(destination:
                                 CheckInComplete(username: $username)
@@ -91,28 +82,24 @@ struct CheckInComplete: View {
     @Binding var username: String
     
     var body: some View {
-        
+        Spacer()
         VStack(alignment: .leading, spacing: 0){
             Text("이제부터 당신의 짝꿍은")
                 .font(.system(size: 32, weight: .bold))
-            + Text(username)
+            Text(username)
                 .foregroundColor(.blue)
                 .font(.system(size: 32, weight: .bold))
-            + Text(" 입니다.")
+            + Text("입니다.")
                 .font(.system(size: 32, weight: .bold))
-            
-            Spacer()
-                .frame(height: 48)
             
             Image("Rectangle")
                 .resizable()
                 .frame(width: 345.0, height: 345.0)
-            Spacer()
+                .padding(.top, 48)
+                .padding(.bottom, 164)
+            
             
             Button(action: {
-                withAnimation(.easeInOut(duration: 1.0), {
-                    userData.isOnBoarding = false
-                })
             }, label: {
                 Text("시작하기")
                     .font(.custom("ButtonStyle", size: 18))
@@ -127,8 +114,6 @@ struct CheckInComplete: View {
             })
             
         }
-        .padding(24)
-        .padding(.top, 48)
     }
 }
 

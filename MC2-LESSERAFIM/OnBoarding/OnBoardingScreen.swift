@@ -89,7 +89,7 @@ struct OnBoardingScreen: View {
                                 
                             )
                         
-                    }) .padding(.bottom, 30) //대충 30으로 두긴 했지만 여기 버튼에서 화면 맨 아래까지 간격 어떻게 확인해요?
+                    }) .padding(.bottom, 30)
                 } else {
                     NavigationLink(destination:
                         CheckInScreen()
