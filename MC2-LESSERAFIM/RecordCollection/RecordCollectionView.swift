@@ -21,7 +21,7 @@ struct RecordCollectionView: View {
     var body: some View {
         GeometryReader { geo in
             NavigationView {
-                ScrollView {
+                ScrollView(showsIndicators: false) {
                     // MARK: - sorting by .day
                     if selectedSort == .day {
                         GalleryView(records: postData.records)
