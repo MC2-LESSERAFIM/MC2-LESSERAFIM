@@ -121,6 +121,22 @@ struct ChallengeScreen: View {
                 Spacer()
             }
             .onAppear(perform: {
+                // [ocean ~] 날짜 바뀔 경우 '오늘의 챌린지 뽑기'로 리프레시
+                // isPickedChallenge를 false로 변경
+                let savedDate = UserDefaults.standard.object(forKey: "lastDate") as? Date ?? Date.distantPast   // 저장된 날짜 = 이전 날짜
+                let currentDate = Date()    // 현재 날짜
+                let calendar = Calendar.current
+                let components = calendar.dateComponents([.day], from: savedDate, to: currentDate)  // 현재 날짜와 저장된 날짜 간의 차이 = 날짜 바뀜(Bool)
+                
+                // 날짜가 바뀌었을 경우
+                if let day = components.day, day >= 1 {
+//                    // 오늘 챌린지와 삭제된 챌린지 초기화
+//                    userData.todayChallenges.removeAll()
+//                    userData.todayRemovedChallenges.removeAll()
+                    isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
+                    UserDefaults.standard.set(currentDate, forKey: "lastDate")  // 현재 날짜로 저장된 날짜 변경 = 날짜 바뀜 없음
+                }
+                // [~ ocean]
                 if userData.todayChallenges.isEmpty {
                     initChallenges(number: challengeNumber)
                 }
