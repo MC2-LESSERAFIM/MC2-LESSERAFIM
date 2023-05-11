@@ -133,10 +133,19 @@ struct GalleryView: View {
         VStack {
             LazyVGrid(columns: items, spacing: 3) {
                 ForEach(records, id: \.self) { record in
-                    record.image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(minHeight: 130)
+                    NavigationLink {
+                        Text(record.imageName)
+                    } label: {
+                        record.image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(minHeight: 172)
+                            .background(
+                                LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
+                                               startPoint: .top, endPoint: .bottom)
+                            )
+                            .clipped()
+                    }
                 }
             }
             Spacer()
