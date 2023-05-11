@@ -185,5 +185,39 @@ struct CategoryView: View {
                 }
             }
         }
+struct PostDetailView: View {
+    @Environment(\.dismiss) var dismiss
+        
+    let post: Record
+    
+    var body: some View {
+        post.image
+            .resizable()
+            .scaledToFill()
+            .ignoresSafeArea()
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "x.circle")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 36)
+                            .foregroundColor(.black)
+                    }
+                }
+            }
+            .toolbar(.hidden, for: .tabBar)
+            .navigationBarBackButtonHidden()
+        
+    }
+}
+
+struct PostDetailView_Preview: PreviewProvider {
+    @StateObject static var userData = ModelData()
+    
+    static var previews: some View {
+        PostDetailView(post: userData.records.last!)
     }
 }
