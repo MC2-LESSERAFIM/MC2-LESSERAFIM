@@ -24,7 +24,6 @@ struct ChallengeScreen: View {
     private let challengeNumber: Int = 3
     
     var body: some View {
-        NavigationView {
             VStack {
                 VStack {
                     PageTitle(titlePage: "Day1")
@@ -32,14 +31,14 @@ struct ChallengeScreen: View {
                     //                        .font(.system(size: 32, weight: .bold))
                 }
                 //                .frame(width: UIScreen.main.bounds.width - 48, alignment: .leading)
-                .padding(.top, 47)
+                .padding(.top, 48)
                 
                 VStack {
                     VStack {
                         Image(tappedImageName)
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 300)
+                            .frame(height: 320)
                         
                         Text(username)
                             .font(.system(size: 20, weight: .semibold))
@@ -50,6 +49,7 @@ struct ChallengeScreen: View {
                     .frame(alignment: .bottom)
 //                    .background(.cyan)
                 }
+                .padding(.top, 24)
                 .padding(.bottom, 24)
                 
                 Spacer()
@@ -122,7 +122,6 @@ struct ChallengeScreen: View {
                     .background(.blue)
                     .cornerRadius(12)
                 }
-                
                 Spacer()
             }
             .onAppear(perform: {
@@ -135,16 +134,16 @@ struct ChallengeScreen: View {
                     self.showingAlert = false
                 }
             }
-        }
+            .toolbar(.hidden, for: .navigationBar)
     }
 }
 
-//struct ChallengeScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChallengeScreen(username: $username, tappedImageName: $tappedImageName)
-//            .environmentObject(UserData())
-//    }
-//}
+struct ChallengeScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        ChallengeScreen(tappedImageName: "girl1", username: .constant("베리"))
+            .environmentObject(UserData())
+    }
+}
 
 fileprivate extension ChallengeScreen {
     func initChallenges(number: Int) {
