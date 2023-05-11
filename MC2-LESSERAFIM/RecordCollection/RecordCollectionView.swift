@@ -185,6 +185,10 @@ struct CategoryView: View {
                 }
             }
         }
+        .toolbar(.hidden, for: .tabBar)
+    }
+}
+
 struct PostDetailView: View {
     @Environment(\.dismiss) var dismiss
         
