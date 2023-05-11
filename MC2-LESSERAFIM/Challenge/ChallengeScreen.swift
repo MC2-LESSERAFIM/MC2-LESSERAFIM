@@ -11,41 +11,14 @@ struct ChallengeScreen: View {
     @EnvironmentObject var userData: UserData
     // tables swipe action
     @State private var action = ""
-    
     // user picked challenge
     @State private var isPickedChallenge: Bool = false
-    
-    private let challengeNumber: Int = 3
     @State private var numberOfTimeLeft: Int = 3
-    
     @State private var showingAlert: Bool = false
-    
-    func initChallenges(number: Int) {
-        
-        func addChallenge() {
-            var num = Int.random(in: 0 ..< userData.challenges.count)
-            while (userData.todayRemovedChallenges.contains(num)) {
-                num = Int.random(in: 0 ..< userData.challenges.count)
-            }
-            userData.todayRemovedChallenges.append(num)
-            userData.todayChallenges.append(userData.challenges[num])
-        }
-        
-        for _ in 0..<number {
-            addChallenge()
-        }
-    }
-    
-    func modifyChallenge(index: Int) {
-        var num = Int.random(in: 0 ..< userData.challenges.count)
-        while (userData.todayRemovedChallenges.contains(num)) {
-            num = Int.random(in: 0 ..< userData.challenges.count)
-        }
-        userData.todayRemovedChallenges.append(num)
-        userData.todayChallenges[index] = userData.challenges[num]
-    }
     @State var nextView = false
     @State var pageNumber = 0
+    
+    private let challengeNumber: Int = 3
     
     var body: some View {
         NavigationView {
@@ -72,7 +45,7 @@ struct ChallengeScreen: View {
                     .frame(alignment: .bottom)
                     .background(.cyan)
                 }
-                .padding(.bottom, 48)
+                .padding(.bottom, 24)
                 
                 Spacer()
                 
@@ -128,6 +101,7 @@ struct ChallengeScreen: View {
                             }
                         }
                         .listStyle(.inset)
+                        .padding(.top, 12)
                     }
                     //            .padding(.top, 24)
                 } else {
@@ -164,5 +138,32 @@ struct ChallengeScreen_Previews: PreviewProvider {
     static var previews: some View {
         ChallengeScreen()
             .environmentObject(UserData())
+    }
+}
+
+fileprivate extension ChallengeScreen {
+    func initChallenges(number: Int) {
+        
+        func addChallenge() {
+            var num = Int.random(in: 0 ..< userData.challenges.count)
+            while (userData.todayRemovedChallenges.contains(num)) {
+                num = Int.random(in: 0 ..< userData.challenges.count)
+            }
+            userData.todayRemovedChallenges.append(num)
+            userData.todayChallenges.append(userData.challenges[num])
+        }
+        
+        for _ in 0..<number {
+            addChallenge()
+        }
+    }
+    
+    func modifyChallenge(index: Int) {
+        var num = Int.random(in: 0 ..< userData.challenges.count)
+        while (userData.todayRemovedChallenges.contains(num)) {
+            num = Int.random(in: 0 ..< userData.challenges.count)
+        }
+        userData.todayRemovedChallenges.append(num)
+        userData.todayChallenges[index] = userData.challenges[num]
     }
 }
