@@ -17,6 +17,9 @@ struct ChallengeScreen: View {
     @State private var showingAlert: Bool = false
     @State var nextView = false
     @State var pageNumber = 0
+    @State var tappedImageName: String
+    @Binding var username: String
+//    @Binding var tappedImageName: String
     
     private let challengeNumber: Int = 3
     
@@ -33,17 +36,19 @@ struct ChallengeScreen: View {
                 
                 VStack {
                     VStack {
-                        Rectangle()
-                            .foregroundColor(.mint)
+                        Image(tappedImageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 300)
                         
-                        Text("베리")
+                        Text(username)
                             .font(.system(size: 20, weight: .semibold))
                             .padding(.bottom, 15)
                     }
                     .padding(.top, 24)
                     .frame(width: UIScreen.main.bounds.width - 48, height: 346)
                     .frame(alignment: .bottom)
-                    .background(.cyan)
+//                    .background(.cyan)
                 }
                 .padding(.bottom, 24)
                 
@@ -134,12 +139,12 @@ struct ChallengeScreen: View {
     }
 }
 
-struct ChallengeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ChallengeScreen()
-            .environmentObject(UserData())
-    }
-}
+//struct ChallengeScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChallengeScreen(username: $username, tappedImageName: $tappedImageName)
+//            .environmentObject(UserData())
+//    }
+//}
 
 fileprivate extension ChallengeScreen {
     func initChallenges(number: Int) {
