@@ -63,6 +63,10 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     case valuesAndAim = "가치 및 목표"
     
     var id: Self { self }
+    
+    static func random() -> Self {
+        return Category.allCases.randomElement() ?? .comfortZone
+    }
 }
 
 struct Record: Hashable, Codable {
