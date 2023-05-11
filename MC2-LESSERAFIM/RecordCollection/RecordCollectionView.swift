@@ -23,7 +23,7 @@ struct RecordCollectionView: View {
                 ScrollView(showsIndicators: false) {
                     // MARK: - sorting by .day
                     if selectedSort == .day {
-                        GalleryView(records: postData.records)
+                        GalleryView(posts: postData.posts)
                     }
                     // MARK: - sorting by .category
                     else if selectedSort == .category {
@@ -124,7 +124,7 @@ func load<T: Decodable>(_ filename: String) -> T {
 }
 
 struct GalleryView: View {
-    let records: [Record]
+    let posts: [Post]
     
     private var items: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
@@ -134,11 +134,11 @@ struct GalleryView: View {
     var body: some View {
         VStack {
             LazyVGrid(columns: items, spacing: 3) {
-                ForEach(records, id: \.self) { record in
+                ForEach(posts, id: \.self.id) { post in
                     NavigationLink {
-                        PostDetailView(post: record)
+                        PostDetailView(post: post)
                     } label: {
-                        record.image
+                        post.image
                             .resizable()
                             .scaledToFit()
                             .frame(minHeight: 172)
@@ -157,7 +157,7 @@ struct GalleryView: View {
 
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
-    let categories: [String: [Record]]
+    let categories: [String: [Post]]
     
     private let numberColumns = [
         GridItem(.adaptive(minimum: 164)),
@@ -168,14 +168,14 @@ struct CategoryView: View {
         LazyVGrid(columns: numberColumns, spacing: 20) {
             ForEach(categoryKeys, id: \.self) { category in
                 let category = category.rawValue
-                let records = categories[category] ?? []
+                let posts = categories[category] ?? []
                 
                 NavigationLink {
-                    GalleryView(records: records)
+                    GalleryView(posts: posts)
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
-                        records.first?.image
+                        posts.first?.image
                             .frame(width: 170, height: 170)
                             .foregroundColor(Color(.systemGray5))
                             .cornerRadius(12)
@@ -195,7 +195,7 @@ struct CategoryView: View {
 struct PostDetailView: View {
     @Environment(\.dismiss) var dismiss
         
-    let post: Record
+    let post: Post
     
     var body: some View {
         post.image
@@ -222,9 +222,17 @@ struct PostDetailView: View {
 }
 
 struct PostDetailView_Preview: PreviewProvider {
-    @StateObject static var userData = ModelData()
+    @StateObject static var userData = UserData()
     
     static var previews: some View {
-        PostDetailView(post: userData.records.last!)
+        PostDetailView(post: userData.posts.last
+                       ?? Post(type: "글 + 사진",
+                               imageData: nil,
+                               title: "행복로",
+                               content: "사랑시",
+                               category: .comfortZone))
+    }
+}
+
     }
 }
