@@ -234,5 +234,11 @@ struct PostDetailView_Preview: PreviewProvider {
     }
 }
 
+extension Image {
+    static func fromData(_ data: Data) -> Image? {
+        guard let uiImage = UIImage(data: data) else {
+            return nil
+        }
+        return Image(uiImage: uiImage)
     }
 }
