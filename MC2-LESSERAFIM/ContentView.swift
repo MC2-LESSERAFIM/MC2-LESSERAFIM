@@ -64,8 +64,9 @@ struct Post : Identifiable {
 
 struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
-    @ObservedObject var userData = UserData()
+    @StateObject var userData = UserData()
     @ObservedObject var appLock  = BiometricLock()
+    @State var isOnBoarding: Bool = true
     
     var body: some View {
         if userData.isOnBoarding {
