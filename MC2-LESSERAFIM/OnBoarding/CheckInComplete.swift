@@ -10,7 +10,7 @@ import SwiftUI
 struct CheckInComplete: View {
     @EnvironmentObject var userData: UserData
     @State var tappedImageName: String
-    @State var isStartButtonEnabled: Bool = true
+    @State var isStartButtonEnabled: Bool = false
     @Binding var username: String
     
     var body: some View {
@@ -38,7 +38,7 @@ struct CheckInComplete: View {
                     .environmentObject(userData),
                 isActive: $isStartButtonEnabled,
                 label: {
-                    Text("시작하기")
+                    Button("시작하기", action: finishOnboarding)
                         .font(.custom("ButtonStyle", size: 18))
                         .foregroundColor(.white)
                         .frame(width: 345,height: 50)
@@ -56,5 +56,14 @@ struct CheckInComplete_Previews: PreviewProvider {
     static var previews: some View {
         CheckInScreen()
             .environmentObject(UserData())
+    }
+}
+
+fileprivate extension CheckInComplete {
+    func finishOnboarding() {
+        isStartButtonEnabled = true
+        userData.isOnBoarding = false
+        userData.userName = username
+        userData.selectedImageName = tappedImageName
     }
 }
