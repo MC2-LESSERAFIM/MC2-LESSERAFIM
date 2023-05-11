@@ -54,12 +54,12 @@ struct ProfileScreen: View {
                             .cornerRadius(15)
                             .onTapGesture {
                                 isLockEnabled.toggle()
-                                if isLockEnabled {
-                                    appLock.isAppLockEnabled = true
-                                }else {
-                                    appLock.isAppLockEnabled = false
+                                if isLockEnabled{
+                                    appLock.appLockStateChange(appLockState: isLockEnabled)
                                 }
+                                
                             }
+                    
                     
                 }
                 .padding(.top, 12)
@@ -71,8 +71,4 @@ struct ProfileScreen: View {
         }
 }
 
-struct ProfileScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileScreen()
-    }
-}
+
