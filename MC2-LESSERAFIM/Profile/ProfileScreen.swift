@@ -6,9 +6,13 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct ProfileScreen: View {
+    
     @EnvironmentObject var postData: UserData
+    @EnvironmentObject var appLock : BiometricLock
+    
     @State private var isNotificationEnabled: Bool = true
     @State private var isLockEnabled: Bool = true
     
@@ -31,12 +35,6 @@ struct ProfileScreen: View {
                     .padding(.top, 4)
                 
                 HStack(alignment: .center) {
-                    Button(action: {
-                        if self.isNotificationEnabled {
-                            // 알림 울리지 않도록
-                        }
-                        self.isNotificationEnabled.toggle()
-                    }) {
                         Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
                             .font(.system(size: 20))
                             .foregroundColor(.black)
@@ -44,21 +42,25 @@ struct ProfileScreen: View {
                             .background(.ultraThinMaterial)
                             .cornerRadius(15)
                             .padding(.trailing, 24)
-                    }
-                    
-                    Button(action: {
-                        if self.isLockEnabled {
-                            // 잠금 안 하기
-                        }
-                        self.isLockEnabled.toggle()
-                    }) {
+                            .onTapGesture {
+                                isNotificationEnabled.toggle()
+                            }
+                   
                         Image(systemName: isLockEnabled ? "lock" : "lock.slash")
                             .font(.system(size: 20))
                             .foregroundColor(.black)
                             .frame(width: 30, height: 30)
                             .background(.ultraThinMaterial)
                             .cornerRadius(15)
-                    }
+                            .onTapGesture {
+                                isLockEnabled.toggle()
+                                if isLockEnabled {
+                                    appLock.isAppLockEnabled = true
+                                }else {
+                                    appLock.isAppLockEnabled = false
+                                }
+                            }
+                    
                 }
                 .padding(.top, 12)
                 
