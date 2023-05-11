@@ -15,6 +15,7 @@
 		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
 		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
 		A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */; };
+		A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A17E6E2A0C7F88009D4136 /* BiometricLock.swift */; };
 		A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */; };
 		A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EF9E602A02562000A56E4C /* ContentView.swift */; };
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
 		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
 		A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorPickerView.swift; sourceTree = "<group>"; };
+		A1A17E6E2A0C7F88009D4136 /* BiometricLock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricLock.swift; sourceTree = "<group>"; };
 		A1EF9E5B2A02562000A56E4C /* MC2-LESSERAFIM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MC2-LESSERAFIM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_LESSERAFIM_App.swift; sourceTree = "<group>"; };
 		A1EF9E602A02562000A56E4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */,
 				A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */,
 				A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */,
+				A1A17E6E2A0C7F88009D4136 /* BiometricLock.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
+				A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */,
