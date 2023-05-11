@@ -124,8 +124,7 @@ struct GalleryView: View {
     let records: [Record]
     
     private var items: [GridItem] {
-        Array(repeating: .init(.adaptive(minimum: 129),
-                               spacing: 3),
+        Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
               count: 3)
     }
     
