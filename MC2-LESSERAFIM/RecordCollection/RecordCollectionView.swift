@@ -158,8 +158,8 @@ struct CategoryView: View {
     let categories: [String: [Record]]
     
     private let numberColumns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.adaptive(minimum: 164)),
+        GridItem(.adaptive(minimum: 164))
     ]
     
     var body: some View {
