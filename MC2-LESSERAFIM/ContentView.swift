@@ -124,14 +124,14 @@ struct ContentView: View {
                     }
                     .environmentObject(userData)
                 
-                ChallengeScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
+                ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("챌린지")
                     }
                     .environmentObject(userData)
                 
-                ProfileScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
+                ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("프로필")

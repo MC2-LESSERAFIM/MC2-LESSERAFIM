@@ -15,9 +15,9 @@ struct ProfileScreen: View {
     
     @State private var isNotificationEnabled: Bool = true
     @State private var isLockEnabled: Bool = true
-    @State var tappedImageName: String
     @State var showImageModal: Bool = false
     @State var showNameModal: Bool = false
+    @Binding var tappedImageName: String
     @Binding var username: String
     
     var body: some View {
@@ -47,7 +47,7 @@ struct ProfileScreen: View {
                                     showImageModal = true
                                 }
                                 .sheet(isPresented: $showImageModal) {
-                                    ImageModalScreen()
+                                    ImageModalScreen(selectedImageName: $tappedImageName)
                                 }
                         }.padding(.horizontal, 24)
                         Spacer()
@@ -66,7 +66,7 @@ struct ProfileScreen: View {
                             showNameModal = true
                         }
                         .sheet(isPresented: $showNameModal) {
-                            NameModalScreen()
+                            NameModalScreen(userName: $username)
                         }
                 }
                 .padding(.top, 12)
