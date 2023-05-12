@@ -115,8 +115,7 @@ struct ContentView: View {
         if userData.isOnBoarding {
             OnBoardingScreen()
                 .environmentObject(userData)
-        }
-        else{
+        } else {
             TabView(){
                 RecordCollectionView()
                     .tabItem {
@@ -125,14 +124,14 @@ struct ContentView: View {
                     }
                     .environmentObject(userData)
                 
-                ChallengeScreen()
+                ChallengeScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("챌린지")
                     }
                     .environmentObject(userData)
                 
-                ProfileScreen()
+                ProfileScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("프로필")
