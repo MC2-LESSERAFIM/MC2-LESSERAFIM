@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ImageModalScreen: View {
+    @Environment(\.presentationMode) var presentation
     @EnvironmentObject var userData: UserData
     @State private var isLinkActive = false
     @State var username = ""
@@ -41,7 +42,10 @@ struct ImageModalScreen: View {
             
             if tappedImageName.isEmpty != true {
                 Button(action: {
+                    tappedImageName = tappedImageName
 //                    tappedImageName: tappedImageName
+                    presentation.wrappedValue.dismiss()
+                    
                 }, label: {
                     Text("확인")
                         .bold()
@@ -62,9 +66,9 @@ struct ImageModalScreen: View {
             }
         }
         .padding(.horizontal, 24)
-        .padding(.top, 100)
+        .padding(.top, 24)
         .padding(.bottom, 24)
-        .ignoresSafeArea()
+//        .ignoresSafeArea()
         
 //        Spacer()
 //
