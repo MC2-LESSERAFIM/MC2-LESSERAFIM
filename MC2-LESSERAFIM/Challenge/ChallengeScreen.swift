@@ -62,7 +62,7 @@ struct ChallengeScreen: View {
                             
                             Text("다시 뽑기 \(numberOfTimeLeft)회")
                                 .font(.system(size: 14, weight: .regular))
-                                .foregroundColor(.gray)
+                                .foregroundColor(.mainGray)
                         }
                         .padding(.horizontal, 24)
                         
@@ -83,7 +83,7 @@ struct ChallengeScreen: View {
                                             } label: {
                                                 Label("다시 뽑기", systemImage: "arrow.counterclockwise")
                                             }
-                                            .tint(.purple)
+                                            .tint(.mainPink)
                                         }
                                 }
                             }
@@ -103,8 +103,8 @@ struct ChallengeScreen: View {
                             .foregroundColor(.white)
                             .font(.system(.headline))
                     }
-                    .frame(width: UIScreen.main.bounds.width - 48, height: 120)
-                    .background(.blue)
+                    .frame(width: UIScreen.main.bounds.width - 48, height: 50)
+                    .background(Color.mainPink)
                     .cornerRadius(12)
                 }
                 Spacer()
