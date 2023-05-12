@@ -16,7 +16,7 @@ struct ChallengeScreen: View {
     @State private var numberOfTimeLeft: Int = 3
     @State private var showingAlert: Bool = false
     @State var nextView = false
-    @State var tappedImageName: String
+    @Binding var tappedImageName: String
     @Binding var username: String
     
     private let challengeNumber: Int = 3
@@ -133,12 +133,12 @@ struct ChallengeScreen: View {
     }
 }
 
-struct ChallengeScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ChallengeScreen(tappedImageName: "girl1", username: .constant("베리"))
-            .environmentObject(UserData())
-    }
-}
+//struct ChallengeScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChallengeScreen(tappedImageName: , username: <#T##Binding<String>#>)
+//            .environmentObject(UserData())
+//    }
+//}
 
 fileprivate extension ChallengeScreen {
     func initChallenges(number: Int) {
