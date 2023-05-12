@@ -23,7 +23,7 @@ struct CheckInComplete: View {
                 PageTitle(titlePage: "입니다.")
                 Spacer()
             }
-   
+            
             Image(tappedImageName)
                 .resizable()
                 .scaledToFit()
@@ -46,7 +46,9 @@ struct CheckInComplete: View {
                         )
                 }
             )
-
+        }
+    }
+}
 struct CheckInComplete_Previews: PreviewProvider {
     static var previews: some View {
         CheckInScreen()
