@@ -117,8 +117,9 @@ struct ChallengeScreen: View {
                     } label: {
                         Text("오늘의 챌린지 뽑기")
                             .foregroundColor(.white)
+                            .font(.system(.headline))
                     }
-                    .frame(width: UIScreen.main.bounds.width - 48, height: 50)
+                    .frame(width: UIScreen.main.bounds.width - 48, height: 120)
                     .background(.blue)
                     .cornerRadius(12)
                 }
