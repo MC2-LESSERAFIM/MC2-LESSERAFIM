@@ -22,7 +22,7 @@ struct RecordCollectionView: View {
     var body: some View {
         NavigationView {
             ZStack{
-                background2View(width: width, height: height)
+                backgroundView(width: width, height: height)
                     .environmentObject(userData)
                 
                 ScrollView(showsIndicators: false) {

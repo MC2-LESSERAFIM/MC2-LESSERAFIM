@@ -29,7 +29,7 @@ struct ChallengeScreen: View {
     var body: some View {
         NavigationView {
             ZStack {
-                background2View(width: width, height: height)
+                backgroundView(width: width, height: height)
                     .environmentObject(userData)
                 VStack {
                     VStack {

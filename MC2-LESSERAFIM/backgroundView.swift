@@ -16,52 +16,8 @@ let circleColors = [Color(red:248/255, green: 149/255, blue: 203/255),
 ]
 
 
+
 struct backgroundView: View {
-    
-    struct offset {
-        var x: CGFloat
-        var y: CGFloat
-    }
-
-    @State var offsets = [offset(x:(80 - 393)/4, y:(-67 - 852)/4),
-                          offset(x:(139.63 - 393)/4, y:(-67 - 852)/4),
-                          offset(x:(-33.33 - 393)/4, y:(307.24)/4),
-                          offset(x:(199.83 - 393)/4, y:(238.78)/4),
-                          offset(x:(-80 - 393)/4, y:(578.94)/4),
-                          offset(x:(139.63 - 393)/4, y:(524.26 - 852)/4)
-    ]
-    
-    var body: some View {
-        ZStack{
-            RoundedRectangle(cornerRadius: 5.0)
-                .frame(width: UIScreen.main.bounds.width - 48, height: 346)
-                .shadow(radius: 5.0)
-                .foregroundColor(Color.white)
-            ForEach(0..<6) { i in
-                Ellipse()
-                    .fill(circleColors[i])
-                    .offset(x:offsets[i].x, y:offsets[i].y)
-                    .frame(width: 270, height: 346)
-                    .blur(radius: 50.0)
-                    .opacity(1.0)
-                    .mask{
-                        RoundedRectangle(cornerRadius: 5.0)
-                            .frame(width: UIScreen.main.bounds.width - 48, height: 346)
-                            .shadow(radius: 5.0)
-                            .foregroundColor(Color.white)
-                    }
-            }
-        }
-    }
-}
-
-struct backgroundView_Previews: PreviewProvider {
-    static var previews: some View {
-        backgroundView()
-    }
-}
-
-struct background2View: View {
     @EnvironmentObject var userData: UserData
     
     var width: CGFloat
@@ -71,8 +27,20 @@ struct background2View: View {
         var x: CGFloat
         var y: CGFloat
     }
-    // 59.96 // 255.9
-    @State var offsets: [Offset] = []
+    
+    @State var offsets: [Offset]
+    
+    init(width: CGFloat, height: CGFloat) {
+        self.width = width
+        self.height = height
+        self._offsets = State(initialValue: [Offset(x:(-58.04 - 59.96) * (width / 393), y:(10 - 255.9) * (height / 852)),
+                          Offset(x:(139.63 - 59.96) * (width / 393), y:(-67 - 255.9) * (height / 852)),
+                          Offset(x:(-33.33 - 59.96) * (width / 393), y:(307.24 - 255.9) * (height / 852)),
+                          Offset(x:(199.83 - 59.96) * (width / 393), y:(238.78 - 255.9) * (height / 852)),
+                          Offset(x:(-80 - 59.96) * (width / 393), y:(578.94 - 255.9) * (height / 852)),
+                          Offset(x:(139.63 - 59.96) * (width / 393), y:(524.26 - 255.9) * (height / 852))])
+    }
+    
     
     var body: some View {
         ZStack{
@@ -87,14 +55,13 @@ struct background2View: View {
                         .opacity(1.0)
                 }
             }
-        }.onAppear{
-            offsets = [
-                Offset(x:(-58.04 - 59.96) * (width / 393), y:(10 - 255.9) * (height / 852)),
-                Offset(x:(139.63 - 59.96) * (width / 393), y:(-67 - 255.9) * (height / 852)),
-                Offset(x:(-33.33 - 59.96) * (width / 393), y:(307.24 - 255.9) * (height / 852)),
-                Offset(x:(199.83 - 59.96) * (width / 393), y:(238.78 - 255.9) * (height / 852)),
-                Offset(x:(-80 - 59.96) * (width / 393), y:(578.94 - 255.9) * (height / 852)),
-                Offset(x:(139.63 - 59.96) * (width / 393), y:(524.26 - 255.9) * (height / 852))]
         }
+    }
+}
+
+
+struct backgroundView_Previews: PreviewProvider {
+    static var previews: some View {
+        backgroundView(width: CGFloat(393), height: CGFloat(852))
     }
 }
