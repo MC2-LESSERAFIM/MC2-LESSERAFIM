@@ -116,7 +116,7 @@ struct ContentView: View {
             OnBoardingScreen()
                 .environmentObject(userData)
         } else {
-            TabView(){
+            TabView {
                 RecordCollectionView()
                     .tabItem {
                         Image(systemName: "star")
