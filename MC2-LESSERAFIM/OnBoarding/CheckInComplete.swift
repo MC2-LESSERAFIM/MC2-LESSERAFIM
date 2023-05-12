@@ -34,7 +34,7 @@ struct CheckInComplete: View {
             //                    .padding(.bottom, 164)
             
             NavigationLink(
-                destination: ChallengeScreen(tappedImageName: tappedImageName, username: $username)
+                destination: ChallengeScreen(tappedImageName: $tappedImageName, username: $username)
                     .environmentObject(userData),
                 isActive: $isStartButtonEnabled,
                 label: {
