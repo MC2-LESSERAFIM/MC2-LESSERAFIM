@@ -29,6 +29,9 @@
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
 		D22AEBF72A0DC646000FCAED /* ImageModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */; };
 		D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */; };
+		D24371DA2A0E9776007DC1A6 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371D92A0E9776007DC1A6 /* ColorExtension.swift */; };
+		D24371DC2A0E9CA7007DC1A6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371DB2A0E9CA7007DC1A6 /* ViewExtension.swift */; };
+		D24371DE2A0E9CD1007DC1A6 /* UserNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */; };
 		D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */; };
 		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
 		D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */; };
@@ -83,6 +86,9 @@
 		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalScreen.swift; sourceTree = "<group>"; };
 		D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModalScreen.swift; sourceTree = "<group>"; };
+		D24371D92A0E9776007DC1A6 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		D24371DB2A0E9CA7007DC1A6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameTextField.swift; sourceTree = "<group>"; };
 		D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOnBoarding.swift; sourceTree = "<group>"; };
 		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUserCharacterScreen.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 		A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */ = {
 			isa = PBXGroup;
 			children = (
+				D24371D82A0E975B007DC1A6 /* Extensions */,
 				BFCF46582A08A10500BBDFDB /* Info.plist */,
 				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
@@ -194,6 +201,7 @@
 			children = (
 				8E15E4CC2A087F67003C7D3F /* RecordButton.swift */,
 				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
+				D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -275,6 +283,15 @@
 				D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		D24371D82A0E975B007DC1A6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D24371D92A0E9776007DC1A6 /* ColorExtension.swift */,
+				D24371DB2A0E9CA7007DC1A6 /* ViewExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D2D82FE12A0CE0B3004D91B7 /* UserCharacter */ = {
@@ -428,8 +445,10 @@
 				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
 				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
 				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
+				D24371DA2A0E9776007DC1A6 /* ColorExtension.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
+				D24371DE2A0E9CD1007DC1A6 /* UserNameTextField.swift in Sources */,
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */,
@@ -440,6 +459,7 @@
 				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
+				D24371DC2A0E9CA7007DC1A6 /* ViewExtension.swift in Sources */,
 				D22AEBF72A0DC646000FCAED /* ImageModalScreen.swift in Sources */,
 				F41534D12A0875370006AAA7 /* OnBoardingTabView.swift in Sources */,
 				8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */,
