@@ -124,7 +124,6 @@ struct ContentView: View {
                             Text("기록모음")
                         }
                         .environmentObject(userData)
-                    
                     ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName, width: geo.size.width, height: geo.size.height)
                         .tabItem {
                             Image(systemName: "star")

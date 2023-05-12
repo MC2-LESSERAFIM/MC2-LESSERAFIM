@@ -16,7 +16,6 @@ let circleColors = [Color(red:248/255, green: 149/255, blue: 203/255),
 ]
 
 
-
 struct backgroundView: View {
     @EnvironmentObject var userData: UserData
     
@@ -40,7 +39,6 @@ struct backgroundView: View {
                           Offset(x:(-80 - 59.96) * (width / 393), y:(578.94 - 255.9) * (height / 852)),
                           Offset(x:(139.63 - 59.96) * (width / 393), y:(524.26 - 255.9) * (height / 852))])
     }
-    
     
     var body: some View {
         ZStack{
