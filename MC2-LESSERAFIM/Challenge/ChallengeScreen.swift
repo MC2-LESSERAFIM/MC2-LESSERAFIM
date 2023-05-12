@@ -20,6 +20,12 @@ struct ChallengeScreen: View {
     
     private let challengeNumber: Int = 3
     
+    // [ocean ~] 앱 당일 처음 실행 여부 판독기
+    // 참고: https://paulyoungsuklee.com/2021/11/09/how-to-detect-first-time-app-launch-in-swiftui/
+    @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // '오늘의 챌린지 뽑기'-> true, 기록 남기기-> false
+    // print(UserDefaults.standard.bool(forKey: "dailyFirstUse"))  // 사용방법
+    // [~ ocean]
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -109,6 +115,18 @@ struct ChallengeScreen: View {
                     Button {
                         self.isPickedChallenge = !self.isPickedChallenge // true 대신에 !self.isPickedChallenge로 사용 가능함.
                         print("뽑기")
+                        
+                        // [ocean ~]
+                        dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
+                        /*
+                         기록 뷰에서 기록을 저장할 때 firstCheck: Bool 값을 생성
+                         firstCheck = dailyFirstUse로 그날의 처음 여부 확인
+                         기록 뷰에서 체크 버튼을 누를 경우 false로 변경(토글 아님)
+                         false로 변경되었기 때문에 당일 다른 기록을 남길 경우 firstCheck = false인 상태
+                         (firstCheck = true)인 기록의 수 + 1 = 다음날 Day 값
+                         Today's First Launch 주석 아래 부분에 Day 값 변경 부분 작성
+                        */
+                        // [~ ocean]
                     } label: {
                         Text("오늘의 챌린지 뽑기")
                             .foregroundColor(.white)
@@ -207,7 +225,7 @@ extension NSDate {
     var formatted: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
-        return  formatter.string(from: self as Date as Date)
+        return formatter.string(from: self as Date as Date)
     }
 }
 
