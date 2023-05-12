@@ -46,6 +46,9 @@ struct SmallOnBoarding: View {
                     }
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .frame(height: 450)
+                
+                Spacer()
                 
                 HStack {
                     ForEach(0..<UserCharacterDataSteps.count) { it in

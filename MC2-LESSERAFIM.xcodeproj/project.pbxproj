@@ -221,8 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				D22690142A06A51800BCF668 /* ProfileScreen.swift */,
-				D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */,
-				D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */,
+				D24371D72A0DFC92007DC1A6 /* Modal */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -267,6 +266,15 @@
 				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
 			);
 			path = Picture;
+			sourceTree = "<group>";
+		};
+		D24371D72A0DFC92007DC1A6 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */,
+				D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */,
+			);
+			path = Modal;
 			sourceTree = "<group>";
 		};
 		D2D82FE12A0CE0B3004D91B7 /* UserCharacter */ = {
