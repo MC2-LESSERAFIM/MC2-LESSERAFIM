@@ -29,7 +29,7 @@ struct CheckInScreen: View {
                     .font(.system(size: 32, weight: .bold))
                     .multilineTextAlignment(.leading)
                 
-                Text("당신의 호칭을 알려주세요.\n설정 탭에서 언제든 수정할 수 있습니다.")
+                Text("당신의 호칭을 알려주세요.\n프로필에서 언제든 수정할 수 있습니다.")
                     .font(.system(size: 15))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.gray)
@@ -55,9 +55,8 @@ struct CheckInScreen: View {
                 Spacer()
             }
             .padding(24)
-            .padding(.top, 48)
-//        }
-        //        .navigationViewStyle(.stack)
+            .padding(.top, 100)
+            .ignoresSafeArea()
     }
 }
 
