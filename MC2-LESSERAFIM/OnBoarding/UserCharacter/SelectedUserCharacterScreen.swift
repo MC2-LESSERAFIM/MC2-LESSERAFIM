@@ -67,6 +67,7 @@ struct SelectedUserCharacterScreen: View {
         .padding(.top, 100)
         .padding(.bottom, 24)
         .ignoresSafeArea()
+        .navigationTitle("")
         
 //        Spacer()
 //

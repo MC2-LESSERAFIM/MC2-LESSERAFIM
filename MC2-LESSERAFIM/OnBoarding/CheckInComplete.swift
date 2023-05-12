@@ -14,18 +14,16 @@ struct CheckInComplete: View {
     @Binding var username: String
     
     var body: some View {
-        Spacer()
-        VStack {
-            VStack(alignment: .leading, spacing: 0){
-                Text("이제부터 당신의 짝꿍은")
-                    .font(.system(size: 32, weight: .bold))
+        VStack(alignment: .leading, spacing: 0){
+            PageTitle(titlePage: "이제부터 당신의 짝꿍은")
+            HStack {
                 Text(username)
                     .foregroundColor(.blue)
                     .font(.system(size: 32, weight: .bold))
-                + Text("입니다.")
-                    .font(.system(size: 32, weight: .bold))
+                PageTitle(titlePage: "입니다.")
+                Spacer()
             }
-            
+   
             Image(tappedImageName)
                 .resizable()
                 .scaledToFit()
@@ -48,11 +46,6 @@ struct CheckInComplete: View {
                         )
                 }
             )
-        }
-        .padding(.top, 100)
-        .ignoresSafeArea()
-    }
-}
 
 struct CheckInComplete_Previews: PreviewProvider {
     static var previews: some View {

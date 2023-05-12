@@ -30,6 +30,7 @@ struct ChallengeScreen: View {
                     PageTitle(titlePage: "Day1")
                 }
                 .padding(.top, 48)
+                .padding(.horizontal, 24)
                 
                 VStack {
                     VStack {

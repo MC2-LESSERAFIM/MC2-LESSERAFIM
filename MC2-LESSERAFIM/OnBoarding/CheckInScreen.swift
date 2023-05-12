@@ -25,9 +25,7 @@ struct CheckInScreen: View {
     var body: some View {
 //        NavigationView{
             VStack(alignment: .leading, spacing: 0){
-                Text("우리가 당신을 어떻게 부르면 좋을까요?")
-                    .font(.system(size: 32, weight: .bold))
-                    .multilineTextAlignment(.leading)
+                PageTitle(titlePage: "우리가 당신을 어떻게 부르면 좋을까요?")
                 
                 Text("당신의 호칭을 알려주세요.\n프로필에서 언제든 수정할 수 있습니다.")
                     .font(.system(size: 15))
@@ -54,9 +52,10 @@ struct CheckInScreen: View {
                 
                 Spacer()
             }
-            .padding(24)
+            .padding(.horizontal, 24)
             .padding(.top, 100)
             .ignoresSafeArea()
+            .navigationTitle("")
     }
 }
 

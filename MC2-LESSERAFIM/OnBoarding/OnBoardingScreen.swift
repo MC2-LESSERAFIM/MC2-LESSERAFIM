@@ -105,6 +105,7 @@ struct OnBoardingScreen: View {
                     }) .padding(.bottom, 30)
                 }
             }
+            .navigationTitle("")
         }
     }
 }
