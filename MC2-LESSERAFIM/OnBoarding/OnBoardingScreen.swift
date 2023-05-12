@@ -28,7 +28,7 @@ struct OnBoardingScreen: View {
                         }, label: {
                             Text("SKIP")
                                 .padding(.trailing, 30)
-                                .foregroundColor(.gray)
+                                .foregroundColor(.mainGray)
                                 .font(.system(size:15))
                             
                         })
@@ -64,11 +64,12 @@ struct OnBoardingScreen: View {
                             Rectangle()
                                 .frame(width: 10, height: 10)
                                 .cornerRadius(10)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.mainPink)
                         } else {
                             Circle()
                                 .frame(width: 10, height: 10)
                                 .opacity(0.3)
+                                .foregroundColor(.mainGray)
                         }
                     }
                 }
@@ -79,13 +80,13 @@ struct OnBoardingScreen: View {
                         self.currentTab += 1
                     }, label: {
                         Text("다음")
-                            .font(.custom("ButtonStyle", size: 18))
-                            .foregroundColor(.blue)
+                            .font(.system(size: 17, weight: .bold))
+                            .foregroundColor(.mainPink)
                             .frame(width: 345,height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(lineWidth: 1)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.mainPink)
                             )
                         
                     }) .padding(.bottom, 30)
@@ -95,12 +96,12 @@ struct OnBoardingScreen: View {
                             .environmentObject(userData)
                     , label: {
                         Text("나와의 연애 시작하기")
-                            .font(.custom("ButtonStyle", size: 18))
+                            .font(.system(size: 17, weight: .bold))
                             .foregroundColor(.white)
                             .frame(width: 345,height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .foregroundColor(.blue)
+                                    .foregroundColor(.mainPink)
                             )
                     }) .padding(.bottom, 30)
                 }
