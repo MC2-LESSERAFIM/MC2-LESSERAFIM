@@ -65,6 +65,7 @@ struct backgroundView_Previews: PreviewProvider {
 }
 
 struct background2View: View {
+    @EnvironmentObject var userData: UserData
     
     var width: CGFloat
     var height: CGFloat
@@ -76,7 +77,6 @@ struct background2View: View {
     // 59.96 // 255.9
     @State var offsets: [Offset] = []
     
-    @Binding var opacities: [CGFloat]
     var body: some View {
         ZStack{
             if !offsets.isEmpty{
@@ -84,7 +84,7 @@ struct background2View: View {
                     Ellipse()
                         .fill(circleColors[i])
                         .offset(x:offsets[i].x, y:offsets[i].y)
-                        .opacity(opacities[i])
+                        .opacity(userData.opacities[i])
                         .frame(width: 300, height: 346)
                         .blur(radius: 50.0)
                         .opacity(1.0)

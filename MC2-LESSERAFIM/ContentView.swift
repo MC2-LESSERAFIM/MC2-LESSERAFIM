@@ -132,7 +132,7 @@ struct ContentView: View {
                         }
                         .environmentObject(userData)
                     
-                    ChallengeScreen(tappedImageName: userData.selectedImageName, username: $userData.userName, width:geo.size.width, height:geo.size.height, opacities: $opacities)
+                    ChallengeScreen(tappedImageName: userData.selectedImageName, username: $userData.userName, width:geo.size.width, height:geo.size.height)
                         .tag(1)
                         .tabItem {
                             Image(systemName: "star")

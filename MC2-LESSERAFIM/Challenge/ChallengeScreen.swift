@@ -24,7 +24,6 @@ struct ChallengeScreen: View {
     
     var width: CGFloat
     var height: CGFloat
-    @Binding var opacities: [CGFloat]
     //@State var opacities: [CGFloat] = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     //@State var opacities: [CGFloat] = [0.3, 0.2, 0.1, 0.2, 1.0, 1.0]
     var body: some View {
@@ -32,10 +31,11 @@ struct ChallengeScreen: View {
             NavigationView {
                 ZStack{
                     
-                    background2View(width: width, height: height, opacities: $opacities)
+                    background2View(width: width, height: height)
                         .ignoresSafeArea()
                         .frame(width: width, height: height)
                         .border(.red)
+                        .environmentObject(userData)
                     VStack {
                         VStack {
                             PageTitle(titlePage: "Day1")

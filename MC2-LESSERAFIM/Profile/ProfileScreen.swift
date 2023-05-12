@@ -27,10 +27,11 @@ struct ProfileScreen: View {
     var body: some View {
         ZStack {
             
-            background2View(width: width, height: height, opacities: $opacities)
+            background2View(width: width, height: height)
                 .ignoresSafeArea()
                 .frame(width: width, height: height)
                 .border(.red)
+                .environmentObject(userData)
                 
             
             VStack(spacing: 0) {

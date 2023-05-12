@@ -38,21 +38,17 @@ struct SelectedUserCharacterScreen: View {
             Spacer()
             
             if tappedImageName.isEmpty != true {
-                NavigationLink(
-                    destination:
-                        CheckInComplete(tappedImageName: tappedImageName, username: $username)
-                        .environmentObject(userData),
-                    isActive: $isNextButtonEnabled,
-                    label: {
-                        Text("다음")
-                            .bold()
-                            .padding(16)
-                            .frame(maxWidth: .infinity)
-                            .background(Color.pink)
-                            .cornerRadius(12)
-                            .foregroundColor(.white)
-                    }
-                )
+                Button(action: {
+                    userData.isOnBoarding = false
+                }, label: {
+                    Text("다음")
+                        .bold()
+                        .padding(16)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.pink)
+                        .cornerRadius(12)
+                        .foregroundColor(.white)
+                })
             } else {
                 Text("다음")
                     .bold()

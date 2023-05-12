@@ -27,10 +27,11 @@ struct RecordCollectionView: View {
         GeometryReader { geo in
             NavigationView {
                 ZStack {
-                    background2View(width: width, height: height, opacities: $opacities)
+                    background2View(width: width, height: height)
                         .ignoresSafeArea()
                         .frame(width: width, height: height)
                         .border(.red)
+                        .environmentObject(postData)
                     
                     ScrollView(showsIndicators: false) {
                         // MARK: - sorting by .day

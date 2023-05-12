@@ -13,6 +13,9 @@ struct CheckInComplete: View {
     @State var isStartButtonEnabled: Bool = false
     @Binding var username: String
     
+    var width:CGFloat
+    var height:CGFloat
+    
     var body: some View {
         Spacer()
         VStack {
@@ -34,7 +37,7 @@ struct CheckInComplete: View {
             //                    .padding(.bottom, 164)
             
             NavigationLink(
-                destination: ChallengeScreen(tappedImageName: tappedImageName, username: $username)
+                destination: ChallengeScreen(tappedImageName: tappedImageName, username: $username,  width: width, height: height)
                     .environmentObject(userData),
                 isActive: $isStartButtonEnabled,
                 label: {
