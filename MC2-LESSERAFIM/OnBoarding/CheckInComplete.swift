@@ -49,6 +49,8 @@ struct CheckInComplete: View {
                 }
             )
         }
+        .padding(.top, 100)
+        .ignoresSafeArea()
     }
 }
 
