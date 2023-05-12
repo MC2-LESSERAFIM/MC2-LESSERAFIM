@@ -26,7 +26,7 @@ struct ProfileScreen: View {
                 ZStack {
                     VStack{
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.pink, lineWidth: 3)
+                            .stroke(Color.mainPinkOpacity, lineWidth: 3)
                             .frame(width: 345, height: 345)
                             .background(.clear)
                         
@@ -43,6 +43,7 @@ struct ProfileScreen: View {
                             Spacer()
                             
                             Image(systemName: "pencil.circle")
+                                .foregroundColor(Color.mainPink)
                                 .onTapGesture {
                                     showImageModal = true
                                 }
@@ -59,9 +60,10 @@ struct ProfileScreen: View {
                 
                 HStack {
                     Text(username)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 26, weight: .bold))
                     
                     Image(systemName: "pencil.circle")
+                        .foregroundColor(Color.mainPink)
                         .onTapGesture {
                             showNameModal = true
                         }
@@ -77,12 +79,12 @@ struct ProfileScreen: View {
                 HStack {
                     Toggle("알림", isOn: $isNotificationEnabled)
                         .font(.system(size: 18, weight: .medium))
-                        .toggleStyle(SwitchToggleStyle(tint: Color.pink))
+                        .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
                 }
                 HStack {
                     Toggle("잠금", isOn: $isLockEnabled)
                         .font(.system(size: 18, weight: .medium))
-                        .toggleStyle(SwitchToggleStyle(tint: Color.pink))
+                        .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
                 }
                 .padding(.top, 24)
             }
