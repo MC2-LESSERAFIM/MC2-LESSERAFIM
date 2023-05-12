@@ -11,7 +11,7 @@ struct PageTitle: View {
     var titlePage: String = ""   // 입력받은 Title
     var body: some View {
         Text(titlePage)
-            .font(.system(size: 27))    // 글씨 크기
+            .font(.system(size: 26))    // 글씨 크기
             .fontWeight(.bold)  // 글씨 두께
             .frame(maxWidth: .infinity, alignment: .leading) // 버튼 크기 + 정렬(좌측)
             .padding(.top, 2)   // 내비게이션 백버튼과의 갭 영역
