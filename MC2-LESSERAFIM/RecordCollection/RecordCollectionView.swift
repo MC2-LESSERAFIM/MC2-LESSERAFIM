@@ -40,6 +40,7 @@ struct RecordCollectionView: View {
                         }
                     }
                 }
+                .toolbar(.visible, for: .tabBar)
             }
         }
     }
