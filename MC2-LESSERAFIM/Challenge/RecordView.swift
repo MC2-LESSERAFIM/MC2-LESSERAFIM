@@ -27,6 +27,6 @@ struct RecordView: View {
             }
         }
         .navigationBarTitle("", displayMode: .inline)
-//        .navigationBarTitle(challenge, displayMode: .inline)
+        .toolbar(.hidden, for: .tabBar)
     }
 }

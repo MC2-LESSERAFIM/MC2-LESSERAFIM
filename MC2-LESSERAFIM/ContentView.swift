@@ -54,26 +54,69 @@ class PermissionManager : ObservableObject {
     }
 }
 
-struct Post : Identifiable {
+struct Post : Identifiable, Codable {
     var id = UUID()
     var type: String
-    var image: Image
     var title: String
     var content: String
+    var category: Category
+    var image: Image {
+        Image.fromData(imageData ?? Data()) ?? Image(systemName: "x.circle")
+    }
+    private var imageData: Data?
+    
+    // MARK: - init 1
+    init(type: String, imageData: Data?, title: String, content: String, category: Category) {
+        self.type = type
+        self.imageData = imageData
+        self.title = title
+        self.content = content
+        self.category = category
+    }
+    
+    // MARK: - init 2, Decode
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        id = try container.decode(UUID.self, forKey: .id)
+        type = try container.decode(String.self, forKey: .type)
+        title = try container.decode(String.self, forKey: .title)
+        content = try container.decode(String.self, forKey: .content)
+        category = try container.decode(Category.self, forKey: .category)
+
+        imageData = try container.decode(Data.self, forKey: .imageData)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(type, forKey: .type)
+        try container.encode(imageData, forKey: .imageData)
+        try container.encode(title, forKey: .title)
+        try container.encode(content, forKey: .content)
+        try container.encode(category, forKey: .category)
+    }
+    
+    enum CodingKeys : String, CodingKey {
+        case id
+        case type, content, title
+        case imageData
+        case category
+    }
 }
 
 struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
-    @ObservedObject var userData = UserData()
+    @StateObject var userData = UserData()
     @ObservedObject var appLock  = BiometricLock()
+    @State var isOnBoarding: Bool = true
     
     var body: some View {
         if userData.isOnBoarding {
             OnBoardingScreen()
                 .environmentObject(userData)
-        }
-        else{
-            TabView(){
+        } else {
+            TabView {
                 RecordCollectionView()
                     .tabItem {
                         Image(systemName: "star")
@@ -81,14 +124,14 @@ struct ContentView: View {
                     }
                     .environmentObject(userData)
                 
-                ChallengeScreen()
+                ChallengeScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("챌린지")
                     }
                     .environmentObject(userData)
                 
-                ProfileScreen()
+                ProfileScreen(tappedImageName: userData.selectedImageName, username: $userData.userName)
                     .tabItem {
                         Image(systemName: "star")
                         Text("프로필")

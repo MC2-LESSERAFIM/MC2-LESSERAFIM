@@ -23,22 +23,17 @@ struct CheckInScreen: View {
     @State private var isLinkActive = false
     
     var body: some View {
-        NavigationView{
-            
-            
+//        NavigationView{
             VStack(alignment: .leading, spacing: 0){
-                
                 Text("우리가 당신을 어떻게 부르면 좋을까요?")
                     .font(.system(size: 32, weight: .bold))
                     .multilineTextAlignment(.leading)
                 
-                
-                Text("당신의 호칭을 알려주세요.\n설정 탭에서 언제든 수정할 수 있습니다.")
+                Text("당신의 호칭을 알려주세요.\n프로필에서 언제든 수정할 수 있습니다.")
                     .font(.system(size: 15))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.gray)
                     .padding(.top, 12)
-                
                 
                 TextField("당신의 호칭을 알려주세요", text: $username)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -52,73 +47,23 @@ struct CheckInScreen: View {
                             self.isLinkActive = true
                         }
                     }
-            
-                NavigationLink(destination:
-                                CheckInComplete(username: $username)
-                                    .environmentObject(userData),
-                               isActive: $isLinkActive) {
-                                   EmptyView()
-                               }
                 
+                NavigationLink(destination: SelectedUserCharacterScreen(username: username), isActive: $isLinkActive) {
+                    EmptyView()
+                }
                 
                 Spacer()
             }
             .padding(24)
-            .padding(.top, 48)
-            
-            
-            
-            
-            
-            
-        }
-        //        .navigationViewStyle(.stack)
+            .padding(.top, 100)
+            .ignoresSafeArea()
     }
 }
 
 
-struct CheckInComplete: View {
-    @EnvironmentObject var userData: UserData
-    @Binding var username: String
-    
-    var body: some View {
-        Spacer()
-        VStack(alignment: .leading, spacing: 0){
-            Text("이제부터 당신의 짝꿍은")
-                .font(.system(size: 32, weight: .bold))
-            Text(username)
-                .foregroundColor(.blue)
-                .font(.system(size: 32, weight: .bold))
-            + Text("입니다.")
-                .font(.system(size: 32, weight: .bold))
-            
-            Image("Rectangle")
-                .resizable()
-                .frame(width: 345.0, height: 345.0)
-                .padding(.top, 48)
-                .padding(.bottom, 164)
-            
-            
-            Button(action: {
-            }, label: {
-                Text("시작하기")
-                    .font(.custom("ButtonStyle", size: 18))
-                    .foregroundColor(.white)
-                    .frame(width: 345,height: 50)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .foregroundColor(.blue)
-                        
-                    )
-                
-            })
-            
-        }
-    }
-}
-
-struct InfoView_Previews: PreviewProvider {
+struct CheckInScreen_Previews: PreviewProvider {
     static var previews: some View {
         CheckInScreen()
+            .environmentObject(UserData())
     }
 }

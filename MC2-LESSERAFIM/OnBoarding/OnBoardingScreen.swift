@@ -86,7 +86,6 @@ struct OnBoardingScreen: View {
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(lineWidth: 1)
                                     .foregroundColor(.blue)
-                                
                             )
                         
                     }) .padding(.bottom, 30)
@@ -105,7 +104,6 @@ struct OnBoardingScreen: View {
                             )
                     }) .padding(.bottom, 30)
                 }
-                
             }
         }
     }
