@@ -1,7 +1,7 @@
 [
     {
         "name": "Turtle Rock",
-        "category": "Rivers",
+        "category": "좋아하는 것",
         "city": "Twentynine Palms",
         "state": "California",
         "id": 1001,
@@ -13,11 +13,11 @@
             "latitude": 34.011286
         },
         "description": "Suscipit inceptos est felis purus aenean aliquet adipiscing diam venenatis, augue nibh duis neque aliquam tellus condimentum sagittis vivamus, cras ante etiam sit conubia elit tempus accumsan libero, mattis per erat habitasse cubilia ligula penatibus curae. Sagittis lorem augue arcu blandit libero molestie non ullamcorper, finibus imperdiet iaculis ad quam per luctus neque, ligula curae mauris parturient diam auctor eleifend laoreet ridiculus, hendrerit adipiscing sociosqu pretium nec velit aliquam. Inceptos egestas maecenas imperdiet eget id donec nisl curae congue, massa tortor vivamus ridiculus integer porta ultrices venenatis aliquet, curabitur et posuere blandit magnis dictum auctor lacinia, eleifend dolor in ornare vulputate ipsum morbi felis. Faucibus cursus malesuada orci ultrices diam nisl taciti torquent, tempor eros suspendisse euismod condimentum dis velit mi tristique, a quis etiam dignissim dictum porttitor lobortis ad fermentum, sapien consectetur dui dolor purus elit pharetra. Interdum mattis sapien ac orci vestibulum vulputate laoreet proin hac, maecenas mollis ridiculus morbi praesent cubilia vitae ligula vel, sem semper volutpat curae mauris justo nisl luctus, non eros primis ultrices nascetur erat varius integer.",
-        "imageName": "turtlerock"
+        "imageName": "niko"
     },
     {
         "name": "Silver Salmon Creek",
-        "category": "Lakes",
+        "category": "싫어하는 것",
         "city": "Port Alsworth",
         "state": "Alaska",
         "id": 1002,
@@ -33,7 +33,7 @@
     },
     {
         "name": "Chilkoot Trail",
-        "category": "Mountains",
+        "category": "강점",
         "city": "Skagway",
         "state": "Alaska",
         "id": 1003,
@@ -49,7 +49,7 @@
     },
     {
         "name": "St. Mary Lake",
-        "category": "Lakes",
+        "category": "약점",
         "city": "Browning",
         "state": "Montana",
         "id": 1004,
@@ -65,7 +65,7 @@
     },
     {
         "name": "Twin Lake",
-        "category": "Lakes",
+        "category": "안전지대",
         "city": "Twin Lakes",
         "state": "Alaska",
         "id": 1005,
@@ -81,7 +81,7 @@
     },
     {
         "name": "Lake McDonald",
-        "category": "Mountains",
+        "category": "가치 및 목표",
         "city": "West Glacier",
         "state": "Montana",
         "id": 1006,
@@ -97,7 +97,7 @@
     },
     {
         "name": "Charley Rivers",
-        "category": "Rivers",
+        "category": "가치 및 목표",
         "city": "Eaking",
         "state": "Alaska",
         "id": 1007,
@@ -113,7 +113,7 @@
     },
     {
         "name": "Icy Bay",
-        "category": "Mountains",
+        "category": "강점",
         "city": "Icy Bay",
         "state": "Alaska",
         "id": 1008,
@@ -129,7 +129,7 @@
     },
     {
         "name": "Rainbow Lake",
-        "category": "Lakes",
+        "category": "싫어하는 것",
         "city": "Willow",
         "state": "Alaska",
         "id": 1009,
@@ -145,7 +145,7 @@
     },
     {
         "name": "Hidden Lake",
-        "category": "Lakes",
+        "category": "좋아하는 것",
         "city": "Newhalem",
         "state": "Washington",
         "id": 1010,
@@ -161,7 +161,7 @@
     },
     {
         "name": "Chincoteague",
-        "category": "Rivers",
+        "category": "안전지대",
         "city": "Chincoteague",
         "state": "Virginia",
         "id": 1011,
@@ -177,7 +177,7 @@
     },
     {
         "name": "Lake Umbagog",
-        "category": "Lakes",
+        "category": "가치 및 목표",
         "city": "Errol",
         "state": "New Hampshire",
         "id": 1012,
