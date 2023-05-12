@@ -21,6 +21,8 @@ struct ChallengeScreen: View {
     
     private let challengeNumber: Int = 3
     
+    @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -93,6 +95,8 @@ struct ChallengeScreen: View {
                     // 뽑기 버튼
                     Button {
                         isPickedChallenge.toggle()
+                        
+                        dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
                     } label: {
                         Text("오늘의 챌린지 뽑기")
                             .foregroundColor(.white)
@@ -105,6 +109,15 @@ struct ChallengeScreen: View {
                 Spacer()
             }
             .onAppear(perform: {
+                // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
+                let today = NSDate().formatted  // 오늘 날짜
+                let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
+                if lastLaunchDate != today   // 오늘 앱 첫 실행
+                    {
+                        UserDefaults.standard.setValue(today, forKey:Constants.FIRSTLAUNCH)
+                        isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
+                    }
+                
                 if userData.todayChallenges.isEmpty {
                     initChallenges(number: challengeNumber)
                 }
@@ -152,4 +165,16 @@ fileprivate extension ChallengeScreen {
         userData.todayRemovedChallenges.append(num)
         userData.todayChallenges[index] = userData.challenges[num]
     }
+}
+
+extension NSDate {
+    var formatted: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter.string(from: self as Date)
+    }
+}
+
+struct Constants {
+    static let FIRSTLAUNCH = "first_launch"
 }
