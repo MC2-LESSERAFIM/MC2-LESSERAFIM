@@ -8,8 +8,11 @@
 import Foundation
 
 class UserData: ObservableObject {
+    @Published var userName: String = ""
+    @Published var selectedImageName: String = ""
     @Published var isOnBoarding: Bool = true
     @Published var posts: [Post] = []
+    @Published var userCharacterData: Data?
     @Published var challenges = [
         "당신이 가장 좋아하는 별명은 무엇인가요?",
         "좋아하는 음악 함께 듣기",

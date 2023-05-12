@@ -27,7 +27,12 @@
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
+		D22AEBF72A0DC646000FCAED /* ImageModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */; };
+		D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */; };
+		D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */; };
 		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
+		D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */; };
+		D2D82FE02A0CE02D004D91B7 /* CheckInComplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D82FDF2A0CE02D004D91B7 /* CheckInComplete.swift */; };
 		F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */; };
 		F41534D12A0875370006AAA7 /* OnBoardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */; };
 		F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41534D22A08754F0006AAA7 /* OnBoardingData.swift */; };
@@ -76,7 +81,12 @@
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
 		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalScreen.swift; sourceTree = "<group>"; };
+		D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModalScreen.swift; sourceTree = "<group>"; };
+		D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOnBoarding.swift; sourceTree = "<group>"; };
 		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUserCharacterScreen.swift; sourceTree = "<group>"; };
+		D2D82FDF2A0CE02D004D91B7 /* CheckInComplete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInComplete.swift; sourceTree = "<group>"; };
 		F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingScreen.swift; sourceTree = "<group>"; };
 		F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingTabView.swift; sourceTree = "<group>"; };
 		F41534D22A08754F0006AAA7 /* OnBoardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingData.swift; sourceTree = "<group>"; };
@@ -172,7 +182,9 @@
 				F41534CE2A08748A0006AAA7 /* OnBoardingScreen.swift */,
 				F41534D02A0875370006AAA7 /* OnBoardingTabView.swift */,
 				F41534D22A08754F0006AAA7 /* OnBoardingData.swift */,
+				D2D82FE12A0CE0B3004D91B7 /* UserCharacter */,
 				F41534D42A08759D0006AAA7 /* CheckInScreen.swift */,
+				D2D82FDF2A0CE02D004D91B7 /* CheckInComplete.swift */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -209,6 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				D22690142A06A51800BCF668 /* ProfileScreen.swift */,
+				D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */,
+				D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -253,6 +267,15 @@
 				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
 			);
 			path = Picture;
+			sourceTree = "<group>";
+		};
+		D2D82FE12A0CE0B3004D91B7 /* UserCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */,
+				D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */,
+			);
+			path = UserCharacter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,8 +410,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1A17E712A0CC26D009D4136 /* AppLockView.swift in Sources */,
+				D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */,
 				D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */,
 				F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */,
+				D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */,
+				D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */,
 				F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */,
 				F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */,
 				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
@@ -406,8 +432,10 @@
 				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
+				D22AEBF72A0DC646000FCAED /* ImageModalScreen.swift in Sources */,
 				F41534D12A0875370006AAA7 /* OnBoardingTabView.swift in Sources */,
 				8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */,
+				D2D82FE02A0CE02D004D91B7 /* CheckInComplete.swift in Sources */,
 				A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
