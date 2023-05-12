@@ -23,8 +23,6 @@ struct SmallOnBoarding: View {
     @State private var currentStep = 0
     @Binding var tappedImageName: String
     
-    
-    
     var body: some View {
         GeometryReader { geometry in
             VStack {
