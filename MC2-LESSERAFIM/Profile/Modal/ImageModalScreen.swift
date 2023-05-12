@@ -15,7 +15,7 @@ struct ImageModalScreen: View {
     @State var tappedImageName: String = ""
     @State var selectedOption: String = ""
     @State var isNextButtonEnabled: Bool = false
-    
+    @Binding var selectedImageName: String
     //@Binding var userName: String
     
     var body: some View {
@@ -42,10 +42,8 @@ struct ImageModalScreen: View {
             
             if tappedImageName.isEmpty != true {
                 Button(action: {
-                    tappedImageName = tappedImageName
-//                    tappedImageName: tappedImageName
+                    selectedImageName = tappedImageName
                     presentation.wrappedValue.dismiss()
-                    
                 }, label: {
                     Text("확인")
                         .bold()
@@ -76,8 +74,8 @@ struct ImageModalScreen: View {
     }
 }
 
-struct ImageModalScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageModalScreen()
-    }
-}
+//struct ImageModalScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ImageModalScreen(, selectedImageName: <#Binding<String>#>)
+//    }
+//}
