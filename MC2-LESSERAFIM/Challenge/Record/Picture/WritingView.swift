@@ -124,7 +124,12 @@ struct WritingView: View {
                     Image(systemName: "checkmark.circle")
                         .onTapGesture {
                             if (selectedImage != nil) {
-                                postData.posts.append(Post(type: type, image:profileImage!, title:title, content:content))
+                                let newPost =  Post(type: type,
+                                                    imageData: selectedImage?.jpegData(compressionQuality: 1.0),
+                                                    title: title,
+                                                    content: content,
+                                                    category: Category.random())
+                                postData.posts.append(newPost)
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                             else{

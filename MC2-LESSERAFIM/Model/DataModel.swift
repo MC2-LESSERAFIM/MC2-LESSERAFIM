@@ -106,5 +106,12 @@ class UserData: ObservableObject {
     ]
     @Published var todayRemovedChallenges: [Int] = []
     @Published var todayChallenges: [String] = []
+    
+    var categories: [String: [Post]] {
+        Dictionary(
+            grouping: posts,
+            by: { $0.category.rawValue }
+        )
+    }
 }
 
