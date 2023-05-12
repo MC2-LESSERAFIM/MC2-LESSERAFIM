@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct NameModalScreen: View {
+    @Environment(\.presentationMode) var presentation
     @EnvironmentObject var userData: UserData
     @State private var username = ""
     @State private var isLinkActive = false
+    @Binding var userName: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
@@ -31,14 +33,28 @@ struct NameModalScreen: View {
                     }
                 }
             Spacer()
+            
+            Button(action: {
+                userName = username
+                presentation.wrappedValue.dismiss()
+                
+            }, label: {
+                Text("확인")
+                    .bold()
+                    .padding(16)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.pink)
+                    .cornerRadius(12)
+                    .foregroundColor(.white)
+            })
         }
         .padding(24)
         .padding(.top, 48)
     }
 }
 
-struct NameModalScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        NameModalScreen()
-    }
-}
+//struct NameModalScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NameModalScreen()
+//    }
+//}
