@@ -240,5 +240,6 @@ extension Image {
             return nil
         }
         return Image(uiImage: uiImage)
+            .renderingMode(.original)
     }
 }
