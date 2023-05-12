@@ -70,11 +70,11 @@ struct RecordSelectionView: View {
                     }
                 }
                 .padding(.top, 48)  // 타이틀과의 갭 영역
-                .padding(.horizontal, 24)   // 양 옆 가드 영역
                 
                 // 위로 밀기
                 Spacer()
             }
+            .padding(.horizontal, 24)   // 양 옆 가드 영역
             .navigationTitle("")
         }
         .ignoresSafeArea()
