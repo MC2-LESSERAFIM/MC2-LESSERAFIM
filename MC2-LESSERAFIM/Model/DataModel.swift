@@ -9,6 +9,7 @@ import Foundation
 
 class UserData: ObservableObject {
     @Published var isOnBoarding: Bool = true
+    @Published var selectedTab: Int = 1
     @Published var posts: [Post] = []
     @Published var challenges = [
         "당신이 가장 좋아하는 별명은 무엇인가요?",

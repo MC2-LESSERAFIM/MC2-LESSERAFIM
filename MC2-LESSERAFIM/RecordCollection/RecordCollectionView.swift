@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+
 //MARK: - TabView에 포함 시킬 "기록모음" 뷰
 struct RecordCollectionView: View {
     @EnvironmentObject var postData: UserData
@@ -25,102 +26,100 @@ struct RecordCollectionView: View {
         GridItem(.flexible())
     ]
     
+    var width: CGFloat
+    var height: CGFloat
+    @Binding var opacities: [CGFloat]
+    
     var body: some View {
         //TODO: - 들여쓰기 레벨 줄이기
-        NavigationView {
-            GeometryReader { geo in
-                ScrollView {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        
-                        if postData.posts.isEmpty == false {
+        GeometryReader { geo in
+            NavigationView {
+                ZStack{
+                    background2View(width: width, height: height, opacities: $opacities)
+                        .ignoresSafeArea()
+                        .frame(width: width, height: height)
+                        .border(.red)
+                    
+                    ScrollView {
+                        // MARK: - sorting by .day
+                        if selectedSort == .day {
                             
-                            VStack(alignment: .leading) {
-                                ForEach(0..<5) { i in
-                                    HStack {
-                                        ForEach(0..<3) { j in
-                                            if (i*3 + j) < postData.posts.count {
-                                                postData.posts[i*3 + j].image
-                                                    .resizable()
-                                                    .scaledToFill()
-                                                    .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
-                                                    .clipped()
-                                                /*
-                                                Section(postData.posts[i*5 + j].type){
-                                                    postData.posts[i*5 + j].image
+                            if postData.posts.isEmpty == false {
+                                
+                                VStack(alignment: .leading) {
+                                    ForEach(0..<5) { i in
+                                        HStack {
+                                            ForEach(0..<3) { j in
+                                                if (i*3 + j) < postData.posts.count {
+                                                    postData.posts[i*3 + j].image
                                                         .resizable()
                                                         .scaledToFill()
                                                         .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
                                                         .clipped()
-                                                    Text(postData.posts[i*5 + j].title)
-                                                    Text(postData.posts[i*5 + j].content)
+                                                    /*
+                                                     Section(postData.posts[i*5 + j].type){
+                                                     postData.posts[i*5 + j].image
+                                                     .resizable()
+                                                     .scaledToFill()
+                                                     .frame(width: (geo.size.width - 8) / 3, height: geo.size.width / 2.2, alignment: .center)
+                                                     .clipped()
+                                                     Text(postData.posts[i*5 + j].title)
+                                                     Text(postData.posts[i*5 + j].content)
+                                                     }
+                                                     */
+                                                    /*
+                                                     postData.posts[i*5 + j]
+                                                     Rectangle()
+                                                     .frame(width: (geo.size.width - 8) / 3, // h / w = 1.33
+                                                     height: geo.size.width / 2.2)
+                                                     .foregroundColor(Color(.systemGray5))
+                                                     */
                                                 }
-                                                 */
-                                                /*
-                                                 postData.posts[i*5 + j]
-                                                 Rectangle()
-                                                 .frame(width: (geo.size.width - 8) / 3, // h / w = 1.33
-                                                 height: geo.size.width / 2.2)
-                                                 .foregroundColor(Color(.systemGray5))
-                                                 */
                                             }
                                         }
                                     }
                                 }
+                            } else {
+                                Text("No Data")
                             }
-                            .toolbar {
-                                Picker("", selection: $selectedSort) {
-                                    ForEach(SortBy.allCases) { sort in
-                                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                            .labelStyle(.titleAndIcon)
+                            
+                            // MARK: - sorting by .category
+                        } else if selectedSort == .category {
+                            LazyVGrid(columns: numberColumns, spacing: 20) {
+                                
+                                VStack {
+                                    Text("RecordCollectionView")
+                                }
+                                ForEach(categories) { category in
+                                    NavigationLink {
+                                        Text(category.rawValue)
+                                    } label: {
+                                        VStack(alignment: .leading) {
+                                            Rectangle()
+                                                .frame(width: 170, height: 170)
+                                                .foregroundColor(Color(.systemGray5))
+                                                .cornerRadius(30)
+                                            
+                                            Text(category.rawValue)
+                                                .foregroundColor(.black)
+                                                .font(.system(size: 17, weight: .medium, design: .rounded))
+                                                .padding(.leading)
+                                        }
                                     }
                                 }
                             }
-                        } else {
-                            Text("No Data").toolbar {
-                                Picker("", selection: $selectedSort) {
-                                    ForEach(SortBy.allCases) { sort in
-                                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                            .labelStyle(.titleAndIcon)
-                                    }
-                                }
-                            }
+                            
                         }
                         
-                        // MARK: - sorting by .category
-                    } else if selectedSort == .category {
-                        LazyVGrid(columns: numberColumns, spacing: 20) {
-                            
-                            VStack {
-                                Text("RecordCollectionView")
-                            }
-                            ForEach(categories) { category in
-                                NavigationLink {
-                                    Text(category.rawValue)
-                                } label: {
-                                    VStack(alignment: .leading) {
-                                        Rectangle()
-                                            .frame(width: 170, height: 170)
-                                            .foregroundColor(Color(.systemGray5))
-                                            .cornerRadius(30)
-                                        
-                                        Text(category.rawValue)
-                                            .foregroundColor(.black)
-                                            .font(.system(size: 17, weight: .medium, design: .rounded))
-                                            .padding(.leading)
-                                    }
-                                }
-                            }
-                        }.toolbar {
-                            Picker("", selection: $selectedSort) {
-                                ForEach(SortBy.allCases) { sort in
-                                    Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                        .labelStyle(.titleAndIcon)
-                                }
-                            }
-                        }
-
                     }
+                    
+                    Picker("", selection: $selectedSort) {
+                        ForEach(SortBy.allCases) { sort in
+                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
+                                .labelStyle(.titleAndIcon)
+                        }
+                    }
+                    .frame(width: geo.size.width, height: geo.size.height, alignment: .topTrailing)
                     
                 }
             }
@@ -179,14 +178,3 @@ func load<T: Decodable>(_ filename: String) -> T {
         fatalError("Couldn't parse \(filename) as \(T.self):\n\(error)")
     }
 }
-
-struct RecordView_Preview: PreviewProvider {
-    var record = Record(id: 1, category: .favorites, imageName: "stmarylake")
-    
-    static var previews: some View {
-        NavigationStack {
-            RecordCollectionView()
-        }
-    }
-}
-

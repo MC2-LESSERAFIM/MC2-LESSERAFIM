@@ -16,8 +16,19 @@ struct ProfileScreen: View {
     @State private var isNotificationEnabled: Bool = true
     @State private var isLockEnabled: Bool = true
     
+    var width: CGFloat
+    var height: CGFloat
+    @Binding var opacities: [CGFloat]
+    
     var body: some View {
-        VStack(spacing: 0) {
+        ZStack{
+            
+            background2View(width: width, height: height, opacities: $opacities)
+                .ignoresSafeArea()
+                .frame(width: width, height: height)
+                .border(.red)
+                
+            VStack(spacing: 0) {
                 Rectangle()
                     .frame(width: 140, height: 140)
                     .cornerRadius(70)
@@ -35,31 +46,31 @@ struct ProfileScreen: View {
                     .padding(.top, 4)
                 
                 HStack(alignment: .center) {
-                        Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
-                            .font(.system(size: 20))
-                            .foregroundColor(.black)
-                            .frame(width: 30, height: 30)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(15)
-                            .padding(.trailing, 24)
-                            .onTapGesture {
-                                isNotificationEnabled.toggle()
+                    Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
+                        .frame(width: 30, height: 30)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(15)
+                        .padding(.trailing, 24)
+                        .onTapGesture {
+                            isNotificationEnabled.toggle()
+                        }
+                    
+                    Image(systemName: isLockEnabled ? "lock" : "lock.slash")
+                        .font(.system(size: 20))
+                        .foregroundColor(.black)
+                        .frame(width: 30, height: 30)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(15)
+                        .onTapGesture {
+                            isLockEnabled.toggle()
+                            if isLockEnabled {
+                                appLock.isAppLockEnabled = true
+                            }else {
+                                appLock.isAppLockEnabled = false
                             }
-                   
-                        Image(systemName: isLockEnabled ? "lock" : "lock.slash")
-                            .font(.system(size: 20))
-                            .foregroundColor(.black)
-                            .frame(width: 30, height: 30)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(15)
-                            .onTapGesture {
-                                isLockEnabled.toggle()
-                                if isLockEnabled {
-                                    appLock.isAppLockEnabled = true
-                                }else {
-                                    appLock.isAppLockEnabled = false
-                                }
-                            }
+                        }
                     
                 }
                 .padding(.top, 12)
@@ -69,10 +80,5 @@ struct ProfileScreen: View {
             }
             .padding(.top, 48)
         }
-}
-
-struct ProfileScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileScreen()
     }
 }

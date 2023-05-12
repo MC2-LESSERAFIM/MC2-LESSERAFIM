@@ -100,6 +100,7 @@ struct CheckInComplete: View {
             
             
             Button(action: {
+                userData.isOnBoarding.toggle()
             }, label: {
                 Text("시작하기")
                     .font(.custom("ButtonStyle", size: 18))
@@ -110,9 +111,7 @@ struct CheckInComplete: View {
                             .foregroundColor(.blue)
                         
                     )
-                
             })
-            
         }
     }
 }

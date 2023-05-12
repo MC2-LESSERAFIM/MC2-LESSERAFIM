@@ -66,36 +66,72 @@ struct ContentView: View {
     @StateObject var permissionManager = PermissionManager()
     @ObservedObject var userData = UserData()
     
+    @State var tag = 0
+    
+    @State var opacities: [CGFloat] = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    
+    
     var body: some View {
         if userData.isOnBoarding {
             OnBoardingScreen()
                 .environmentObject(userData)
         }
         else{
-            TabView(){
-                RecordCollectionView()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("기록모음")
+            GeometryReader { geo in
+                TabView(selection: $userData.selectedTab){
+                    RecordCollectionView(width:geo.size.width, height:geo.size.height, opacities: $opacities)
+                        .tag(0)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("기록모음")
+                        }
+                        .environmentObject(userData)
+                    
+                    ChallengeScreen(width:geo.size.width, height:geo.size.height, opacities: $opacities)
+                        .tag(1)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("챌린지")
+                        }
+                        .environmentObject(userData)
+                    
+                    ProfileScreen(width:geo.size.width, height:geo.size.height, opacities: $opacities)
+                        .tag(2)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("프로필")
+                        }
+                        .environmentObject(userData)
+                }
+                .onAppear {
+                    permissionManager.requestAlbumPermission()
+                    permissionManager.requestAlramPermission()
+                    
+                }
+                .onReceive(userData.$selectedTab, perform: { newTag in
+                    let appearance = UITabBarAppearance()
+                    
+                    if (newTag == 1){
+                        print("trasparent")
+                        appearance.configureWithTransparentBackground()
+                        appearance.backgroundEffect = UIBlurEffect(style: .regular)
+                        appearance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
                     }
-                    .environmentObject(userData)
-                
-                ChallengeScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("챌린지")
+                    else{
+                        print("default")
+                        appearance.configureWithOpaqueBackground()
+                        appearance.backgroundEffect = nil
+                        appearance.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1.0)
                     }
-                    .environmentObject(userData)
-                
-                ProfileScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("프로필")
-                    }
-                    .environmentObject(userData)
-            } .onAppear {
-                permissionManager.requestAlbumPermission()
-                permissionManager.requestAlramPermission()
+                    appearance.stackedLayoutAppearance.normal.iconColor = .systemGray2
+                    appearance.stackedLayoutAppearance.normal.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.systemGray2]
+                    
+                    appearance.stackedLayoutAppearance.selected.iconColor = UIColor(Color.accentColor)
+                    appearance.stackedLayoutAppearance.selected.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor(Color.accentColor)]
+                    
+                    UITabBar.appearance().standardAppearance = appearance
+                    UITabBar.appearance().scrollEdgeAppearance = appearance
+                })
             }
         }
     }
@@ -107,4 +143,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-

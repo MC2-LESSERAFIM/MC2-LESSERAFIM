@@ -21,6 +21,7 @@
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
 		A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */; };
 		BE5590C82A08821600D765F6 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BE5590C72A08821600D765F6 /* landmarkData.json */; };
+		BFAD7D5D2A0C87B4005BB3A4 /* backgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD7D5C2A0C87B4005BB3A4 /* backgroundView.swift */; };
 		BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF464E2A078C9500BBDFDB /* RecordView.swift */; };
 		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
@@ -68,6 +69,7 @@
 		A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5590C72A08821600D765F6 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
+		BFAD7D5C2A0C87B4005BB3A4 /* backgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundView.swift; sourceTree = "<group>"; };
 		BFCF464E2A078C9500BBDFDB /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
 				BFCF464E2A078C9500BBDFDB /* RecordView.swift */,
 				BF7520542A09DD6200BF81DC /* Record */,
+				BFAD7D5C2A0C87B4005BB3A4 /* backgroundView.swift */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */,
 				F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */,
 				F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */,
+				BFAD7D5D2A0C87B4005BB3A4 /* backgroundView.swift in Sources */,
 				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
 				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
 				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
@@ -560,7 +564,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = F5LF3NUCU2;
+				DEVELOPMENT_TEAM = M6KTL34CVP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MC2-LESSERAFIM/Info.plist";
@@ -594,7 +598,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MC2-LESSERAFIM/Preview Content\"";
-				DEVELOPMENT_TEAM = F5LF3NUCU2;
+				DEVELOPMENT_TEAM = M6KTL34CVP;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "MC2-LESSERAFIM/Info.plist";
