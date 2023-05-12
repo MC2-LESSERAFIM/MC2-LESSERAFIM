@@ -35,7 +35,7 @@ struct SmallOnBoarding: View {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: geometry.size.width * 0.7)
-                                    .background(tappedImageName == imageName ? Color.pink : Color.clear)
+                                    .background(tappedImageName == imageName ? Color.mainPink : Color.clear)
                                     .cornerRadius(12)
                                     .onTapGesture {
                                         tappedImageName = imageName
@@ -54,13 +54,13 @@ struct SmallOnBoarding: View {
                     ForEach(0..<UserCharacterDataSteps.count) { it in
                         if it == currentStep {
                             Rectangle()
-                                .frame(width: 20, height: 10)
+                                .frame(width: 10, height: 10)
                                 .cornerRadius(10)
-                                .foregroundColor(Color.pink)
+                                .foregroundColor(.mainPink)
                         } else {
                             Circle()
                                 .frame(width: 10, height: 10)
-                                .foregroundColor(Color.gray)
+                                .foregroundColor(.mainGray)
                                 .opacity(0.3)
                         }
                     }
