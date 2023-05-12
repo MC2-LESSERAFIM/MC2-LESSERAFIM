@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct RecordCollectionView: View {
-    @EnvironmentObject var postData: UserData
+    @EnvironmentObject var userData: UserData
     
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
@@ -16,18 +16,23 @@ struct RecordCollectionView: View {
     }
     
     @State private var selectedSort: SortBy = .day
+    var width: CGFloat
+    var height: CGFloat
     
     var body: some View {
-        GeometryReader { geo in
-            NavigationView {
+        NavigationView {
+            ZStack{
+                background2View(width: width, height: height)
+                    .environmentObject(userData)
+                
                 ScrollView(showsIndicators: false) {
                     // MARK: - sorting by .day
                     if selectedSort == .day {
-                        GalleryView(posts: postData.posts)
+                        GalleryView(posts: userData.posts)
                     }
                     // MARK: - sorting by .category
                     else if selectedSort == .category {
-                        CategoryView(categories: postData.categories)
+                        CategoryView(categories: userData.categories)
                     }
                 }
                 .navigationTitle("나의 기록")
@@ -48,9 +53,11 @@ struct RecordCollectionView: View {
 
 struct RecordCollectionView_Preview: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            RecordCollectionView()
-                .environmentObject(ModelData())
+        GeometryReader { geo in
+            NavigationStack {
+                RecordCollectionView(width: geo.size.width, height: geo.size.height)
+                    .environmentObject(ModelData())
+            }
         }
     }
 }

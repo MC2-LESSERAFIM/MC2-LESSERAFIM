@@ -23,109 +23,115 @@ struct ChallengeScreen: View {
     
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
     
+    var width: CGFloat
+    var height: CGFloat
+    
     var body: some View {
         NavigationView {
-            VStack {
-                VStack {
-                    PageTitle(titlePage: "Day1")
-                }
-                .padding(.top, 48)
-                .padding(.horizontal, 24)
-                
+            ZStack {
+                background2View(width: width, height: height)
+                    .environmentObject(userData)
                 VStack {
                     VStack {
-                        Image(tappedImageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 320)
-                        
-                        Text(username)
-                            .font(.system(size: 20, weight: .semibold))
-                            .padding(.bottom, 15)
+                        PageTitle(titlePage: "Day1")
+                    }
+                    .padding(.top, 48)
+                    
+                    VStack {
+                        VStack {
+                            Image(tappedImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 320)
+                            
+                            Text(username)
+                                .font(.system(size: 20, weight: .semibold))
+                                .padding(.bottom, 15)
+                        }
+                        .padding(.top, 24)
+                        .frame(width: UIScreen.main.bounds.width - 48, height: 346)
+                        .frame(alignment: .bottom)
                     }
                     .padding(.top, 24)
-                    .frame(width: UIScreen.main.bounds.width - 48, height: 346)
-                    .frame(alignment: .bottom)
-                }
-                .padding(.top, 24)
-                .padding(.bottom, 24)
-                
-                Spacer()
-                
-                if isPickedChallenge {
-                    VStack {
-                        HStack(alignment: .bottom) {
-                            Text("오늘의 챌린지")
-                                .font(.system(size: 24, weight: .bold))
+                    .padding(.bottom, 24)
+                    
+                    Spacer()
+                    
+                    if isPickedChallenge {
+                        VStack {
+                            HStack(alignment: .bottom) {
+                                Text("오늘의 챌린지")
+                                    .font(.system(size: 24, weight: .bold))
+                                
+                                Spacer()
+                                
+                                Text("다시 뽑기 \(numberOfTimeLeft)회")
+                                    .font(.system(size: 14, weight: .regular))
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.horizontal, 24)
                             
-                            Spacer()
-                            
-                            Text("다시 뽑기 \(numberOfTimeLeft)회")
-                                .font(.system(size: 14, weight: .regular))
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal, 24)
-                        
-                        List {
-                            ForEach(0..<3) { i in
-                                NavigationLink {
-                                    RecordView(challenge: userData.todayChallenges[i])
-                                } label: {
-                                    Text(userData.todayChallenges[i])
-                                        .swipeActions(edge: .leading) {
-                                            Button {
-                                                if numberOfTimeLeft > 0 {
-                                                    modifyChallenge(index: i)
-                                                    self.numberOfTimeLeft -= 1
-                                                } else {
-                                                    self.showingAlert = true
+                            List {
+                                ForEach(0..<3) { i in
+                                    NavigationLink {
+                                        RecordView(challenge: userData.todayChallenges[i])
+                                    } label: {
+                                        Text(userData.todayChallenges[i])
+                                            .swipeActions(edge: .leading) {
+                                                Button {
+                                                    if numberOfTimeLeft > 0 {
+                                                        modifyChallenge(index: i)
+                                                        self.numberOfTimeLeft -= 1
+                                                    } else {
+                                                        self.showingAlert = true
+                                                    }
+                                                } label: {
+                                                    Label("다시 뽑기", systemImage: "arrow.counterclockwise")
                                                 }
-                                            } label: {
-                                                Label("다시 뽑기", systemImage: "arrow.counterclockwise")
+                                                .tint(.purple)
                                             }
-                                            .tint(.purple)
-                                        }
+                                    }
                                 }
                             }
+                            .listStyle(.inset)
+                            .padding(.top, 12)
                         }
-                        .listStyle(.inset)
-                        .padding(.top, 12)
-                    }
-                    
-                } else {
-                    // 뽑기 버튼
-                    Button {
-                        isPickedChallenge.toggle()
                         
-                        dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
-                    } label: {
-                        Text("오늘의 챌린지 뽑기")
-                            .foregroundColor(.white)
-                            .font(.system(.headline))
+                    } else {
+                        // 뽑기 버튼
+                        Button {
+                            isPickedChallenge.toggle()
+                            
+                            dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
+                        } label: {
+                            Text("오늘의 챌린지 뽑기")
+                                .foregroundColor(.white)
+                                .font(.system(.headline))
+                        }
+                        .frame(width: UIScreen.main.bounds.width - 48, height: 120)
+                        .background(.blue)
+                        .cornerRadius(12)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 48, height: 120)
-                    .background(.blue)
-                    .cornerRadius(12)
+                    Spacer()
                 }
-                Spacer()
-            }
-            .onAppear(perform: {
-                // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
-                let today = NSDate().formatted  // 오늘 날짜
-                let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
-                if lastLaunchDate != today   // 오늘 앱 첫 실행
+                .onAppear(perform: {
+                    // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
+                    let today = NSDate().formatted  // 오늘 날짜
+                    let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
+                    if lastLaunchDate != today   // 오늘 앱 첫 실행
                     {
                         UserDefaults.standard.setValue(today, forKey:Constants.FIRSTLAUNCH)
                         isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
                     }
-                
-                if userData.todayChallenges.isEmpty {
-                    initChallenges(number: challengeNumber)
-                }
-            })
-            .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
-                Button("알겠어요", role: .cancel){
-                    self.showingAlert = false
+                    
+                    if userData.todayChallenges.isEmpty {
+                        initChallenges(number: challengeNumber)
+                    }
+                })
+                .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
+                    Button("알겠어요", role: .cancel){
+                        self.showingAlert = false
+                    }
                 }
             }
         }
@@ -134,12 +140,14 @@ struct ChallengeScreen: View {
     }
 }
 
-//struct ChallengeScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ChallengeScreen(tappedImageName: , username: <#T##Binding<String>#>)
-//            .environmentObject(UserData())
-//    }
-//}
+struct ChallengeScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        GeometryReader { geo in
+            ChallengeScreen(tappedImageName: .constant("girl1"), username: .constant("베리"), width: geo.size.width, height: geo.size.height)
+                .environmentObject(UserData())
+        }
+    }
+}
 
 fileprivate extension ChallengeScreen {
     func initChallenges(number: Int) {
