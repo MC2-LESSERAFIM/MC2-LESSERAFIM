@@ -57,6 +57,7 @@ struct CheckInScreen: View {
             .padding(24)
             .padding(.top, 100)
             .ignoresSafeArea()
+            .navigationTitle("")
     }
 }
 
