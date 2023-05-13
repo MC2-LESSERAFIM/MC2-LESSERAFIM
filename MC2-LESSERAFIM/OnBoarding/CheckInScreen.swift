@@ -28,18 +28,14 @@ struct CheckInScreen: View {
                 PageTitle(titlePage: "우리가 당신을 어떻게 부르면 좋을까요?")
                 
                 Text("당신의 호칭을 알려주세요.\n프로필에서 언제든 수정할 수 있습니다.")
-                    .font(.system(size: 15))
+                    .font(.system(size: 17))
+                    .lineSpacing(4)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.gray)
                     .padding(.top, 12)
                 
-                TextField("당신의 호칭을 알려주세요", text: $username)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                UserNameTextField(username: $username, placeholder: "호칭을 적어주세요")
                     .padding(.top, 24)
-                    .font(.system(size: 15, weight: .regular, design: .default))
-                    .accentColor(.blue)
-                    .textInputAutocapitalization(.never)
-                    .disableAutocorrection(true)
                     .onSubmit {
                         if !username.isEmpty {
                             self.isLinkActive = true

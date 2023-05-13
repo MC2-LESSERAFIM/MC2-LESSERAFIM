@@ -17,12 +17,12 @@ struct SelectedUserCharacterScreen: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
-            Text("당신의 캐릭터를\n골라볼까요?")
+            Text("당신의 캐릭터를 골라볼까요?")
                 .font(.system(size: 27, weight: .bold))
                 .multilineTextAlignment(.leading)
             
             Text("마음에 드는 캐릭터의 배를 간지럽혀주세요.")
-                .font(.system(size: 15))
+                .font(.system(size: 17))
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.gray)
                 .padding(.top, 12)
@@ -45,20 +45,21 @@ struct SelectedUserCharacterScreen: View {
                     isActive: $isNextButtonEnabled,
                     label: {
                         Text("다음")
+                            .font(.system(size: 17))
                             .bold()
                             .padding(16)
                             .frame(maxWidth: .infinity)
-                            .background(Color.pink)
+                            .background(Color.mainPink)
                             .cornerRadius(12)
                             .foregroundColor(.white)
                     }
                 )
             } else {
                 Text("다음")
-                    .bold()
+                    .font(.system(size: 17, weight: .bold))
                     .padding(16)
                     .frame(maxWidth: .infinity)
-                    .background(.ultraThickMaterial)
+                    .background(Color.disabledButtonGray)
                     .cornerRadius(12)
                     .foregroundColor(.white)
             }

@@ -88,9 +88,9 @@ struct ChallengeScreen: View {
                                                 } label: {
                                                     Label("다시 뽑기", systemImage: "arrow.counterclockwise")
                                                 }
-                                                .tint(.purple)
+                                              .tint(.mainPink)
                                             }
-                                    }
+
                                 }
                             }
                             .listStyle(.inset)
@@ -112,7 +112,9 @@ struct ChallengeScreen: View {
                         .background(.blue)
                         .cornerRadius(12)
                     }
-                    Spacer()
+                    .frame(width: UIScreen.main.bounds.width - 48, height: 50)
+                    .background(Color.mainPink)
+                    .cornerRadius(12)
                 }
                 .onAppear(perform: {
                     // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
