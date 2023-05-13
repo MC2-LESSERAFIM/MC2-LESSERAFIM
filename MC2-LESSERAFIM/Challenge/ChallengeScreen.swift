@@ -23,8 +23,8 @@ struct ChallengeScreen: View {
     
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
     
-    var width: CGFloat
-    var height: CGFloat
+    var width: CGFloat = 393
+    var height: CGFloat = 852
     
     var body: some View {
         NavigationView {
@@ -88,15 +88,15 @@ struct ChallengeScreen: View {
                                                 } label: {
                                                     Label("다시 뽑기", systemImage: "arrow.counterclockwise")
                                                 }
-                                              .tint(.mainPink)
+                                                .tint(.mainPink)
                                             }
-
+                                        
+                                    }
                                 }
+                                .listStyle(.inset)
+                                .padding(.top, 12)
                             }
-                            .listStyle(.inset)
-                            .padding(.top, 12)
                         }
-                        
                     } else {
                         // 뽑기 버튼
                         Button {
@@ -109,12 +109,9 @@ struct ChallengeScreen: View {
                                 .font(.system(.headline))
                         }
                         .frame(width: UIScreen.main.bounds.width - 48, height: 120)
-                        .background(.blue)
+                        .background(Color.mainPink)
                         .cornerRadius(12)
                     }
-                    .frame(width: UIScreen.main.bounds.width - 48, height: 50)
-                    .background(Color.mainPink)
-                    .cornerRadius(12)
                 }
                 .onAppear(perform: {
                     // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
