@@ -116,35 +116,48 @@ struct ContentView: View {
             OnBoardingScreen()
                 .environmentObject(userData)
         } else {
-            TabView {
-                RecordCollectionView()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("기록모음")
-                    }
-                    .environmentObject(userData)
-                
-                ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("챌린지")
-                    }
-                    .environmentObject(userData)
-                
-                ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("프로필")
-                    }
-                    .environmentObject(userData)
-                    .environmentObject(appLock)
-            } .onAppear {
-                permissionManager.requestAlbumPermission()
-                permissionManager.requestAlramPermission()
+            GeometryReader { geo in
+                TabView {
+                    RecordCollectionView(width: geo.size.width, height: geo.size.height)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("기록모음")
+                        }
+                        .environmentObject(userData)
+                    ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName, width: geo.size.width, height: geo.size.height)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("챌린지")
+                        }
+                        .environmentObject(userData)
+                    
+                    ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("프로필")
+                        }
+                        .environmentObject(userData)
+                        .environmentObject(appLock)
+                } .onAppear {
+                    makeTabBarTransparent()
+                    permissionManager.requestAlbumPermission()
+                    permissionManager.requestAlramPermission()
+                }
             }
         }
     }
        
+}
+
+
+func makeTabBarTransparent() -> Void {
+    let appearance = UITabBarAppearance()
+    
+    appearance.configureWithTransparentBackground()
+    appearance.backgroundEffect = UIBlurEffect(style: .regular)
+    
+    UITabBar.appearance().standardAppearance = appearance
+    UITabBar.appearance().scrollEdgeAppearance = appearance
 }
 
 struct ContentView_Previews: PreviewProvider {

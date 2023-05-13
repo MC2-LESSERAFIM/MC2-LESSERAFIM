@@ -30,22 +30,15 @@ struct CheckInComplete: View {
                 .frame(height: 400)
                 .padding(.top, 48)
             //                    .padding(.bottom, 164)
-            
-            NavigationLink(
-                destination: ChallengeScreen(tappedImageName: $tappedImageName, username: $username)
-                    .environmentObject(userData),
-                isActive: $isStartButtonEnabled,
-                label: {
-                    Button("시작하기", action: finishOnboarding)
-                        .font(.custom("ButtonStyle", size: 18))
-                        .foregroundColor(.white)
-                        .frame(width: 345,height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.blue)
-                        )
-                }
-            )
+        
+            Button("시작하기", action: finishOnboarding)
+                .font(.custom("ButtonStyle", size: 18))
+                .foregroundColor(.white)
+                .frame(width: 345,height: 50)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(.blue)
+                )
         }
     }
 }
