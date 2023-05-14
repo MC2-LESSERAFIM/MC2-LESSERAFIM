@@ -40,14 +40,14 @@ struct RecordWritingView: View {
             .padding(.horizontal, 24)   // 양 옆 가드 영역
             // 내용 입력 누락 시 경고
             .alert("내용을 모두 작성해주세요", isPresented: $showingAlert) {
-              Button("OK", role: .cancel) {
-                  self.showingAlert = false
-              }
+                Button("OK", role: .cancel) {
+                    self.showingAlert = false
+                }
             }
             // 제출 버튼
             .toolbar{
                 Image(systemName: "checkmark.circle")
-                    .foregroundColor(.blue) // 기본색이 검정이어서 변경
+                    .foregroundColor(.mainPink) // 기본색이 검정이어서 변경
                     .onTapGesture {
                         if titleRecord == "" {   // 제목 입력 누락
                             print("no title")
