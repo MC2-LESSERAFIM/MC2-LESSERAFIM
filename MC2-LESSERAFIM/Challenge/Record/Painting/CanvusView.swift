@@ -104,94 +104,93 @@ struct CanvusView: View {
     
     
     var body: some View {
-        
-        NavigationStack{
-            //화면 시작
-            ZStack {
-                VStack{
-                    
-                    //캔버스 호출
-                    canvus
-                    
-                    //툴바 호출
-                    drawingTools
-                    
-                    TextField("이번 챌린지 사진에 제목을 붙여볼까요?", text: $challengeTitle)
-                        .padding()
-                        .frame(width: 345, height: 39)
-                        .border(Color.black)
-                    
-                    TextField("어떤 이야기가 담겨있나요?", text: $challegeContent)
-                        .padding()
-                        .frame(width: 345, height: 122)
-                        .border(Color.black)
-                    
-                    }
-                    .toolbar{
-                        //Tool bar 상단에 체크 버튼 생성
-                        Button {
-                            //체크 버튼 엑션
-                            print("Button Clicked")
-                            let canvusImage = ImageRenderer(content: canvus)
+        GeometryReader { geo in
+            NavigationStack{
+                ScrollView {
+                    //화면 시작ddd
+                    ZStack {
+                        VStack{
                             
-                            if let image = canvusImage.uiImage{
-                                //이미지 처리
-                            renImage = Image(uiImage: image)
-                                //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
-//                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                            //캔버스 호출
+                            canvus
+                                .frame(width: geo.size.width - 40, height: geo.size.height - 283, alignment: .center)
+                            
+                            //툴바 호출
+                            drawingTools
+                            
+                            TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
+                                .padding(.horizontal, 24)
+                            
+                            OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
+                                .padding(.horizontal, 24)
+                        }
+                        .toolbar{
+                            //Tool bar 상단에 체크 버튼 생성
+                            Button {
+                                //체크 버튼 엑션
+                                print("Button Clicked")
+                                let canvusImage = ImageRenderer(content: canvus)
                                 
-                                //텍스트 처리
-//                                $challengeTitle
-//                                $challegeContent
+                                if let image = canvusImage.uiImage{
+                                    //이미지 처리
+                                    renImage = Image(uiImage: image)
+                                    //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
+                                    //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                                    
+                                    //텍스트 처리
+                                    //                                $challengeTitle
+                                    //                                $challegeContent
+                                }
+                                
+                                
+                            } label: {
+                                Image(systemName: "checkmark.circle")
                             }
-                             
-                        
-                        } label: {
-                            Image(systemName: "checkmark.circle")
                         }
-                }
-                
-                //필요시 나타나는 View
-                VStack{ //case문 좀 치겠는데?
-                    Spacer()
-                        .frame(width: 325, height: 225)
-                    
-                    if toolClicked {
-                        switch whatTool {
-                        case 1:
-                            CanvusThicknessSlider(panThickness: $thickness, currentLine:$currentLine)
                         
-                        case 2:
-                            CanvusThicknessSlider(panThickness: $thickness, currentLine:$currentLine)
-                            
-//                        case 3:
-//                            CanvusColorPickerView(selectedColor: $selectedColor, colorOpacity: $colorOpacity)
-//                                .onChange(of: selectedColor){ changeColor in
-//                                    currentLine.color = changeColor
-//                                }
-                            
-                        default:
+                        //필요시 나타나는 View
+                        VStack{ //case문 좀 치겠는데?
                             Spacer()
+                                .frame(width: 325, height: 160)
+                            
+                            if toolClicked {
+                                switch whatTool {
+                                case 1:
+                                    CanvusThicknessSlider(panThickness: $thickness, currentLine:$currentLine)
+                                    
+                                case 2:
+                                    CanvusThicknessSlider(panThickness: $thickness, currentLine:$currentLine)
+                                    
+                                    //                        case 3:
+                                    //                            CanvusColorPickerView(selectedColor: $selectedColor, colorOpacity: $colorOpacity)
+                                    //                                .onChange(of: selectedColor){ changeColor in
+                                    //                                    currentLine.color = changeColor
+                                    //                                }
+                                    
+                                default:
+                                    Spacer()
+                                    
+                                }
+                            }
+                        }
+                        
+                        //지우개 소환!
+                        if eraserVisable {
+                            Circle()
+                                .fill(Color.black)
+                                .frame(width: thickness, height: thickness)
+                            //왼쪽 공간이 남아서 그럼 (제스쳐.location은 상대적 위치만 줌)
+                                .offset(x: 24)
+                                .position(eraserCenter)
+                            
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: thickness * 0.9, height: thickness * 0.9)
+                                .offset(x: 24)
+                                .position(eraserCenter)
                             
                         }
                     }
-                }
-                
-                //지우개 소환!
-                if eraserVisable {
-                    Circle()
-                        .fill(Color.black)
-                        .frame(width: thickness, height: thickness)
-                    //왼쪽 공간이 남아서 그럼 (제스쳐.location은 상대적 위치만 줌)
-                        .offset(x: 24)
-                        .position(eraserCenter)
-                    
-                    Circle()
-                        .fill(Color.white)
-                        .frame(width: thickness * 0.9, height: thickness * 0.9)
-                        .offset(x: 24)
-                        .position(eraserCenter)
-                    
                 }
             }
         }
