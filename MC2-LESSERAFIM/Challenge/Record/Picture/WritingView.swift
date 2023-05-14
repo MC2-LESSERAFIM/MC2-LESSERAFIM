@@ -89,7 +89,27 @@ struct WritingView: View {
         guard let selectedImage = selectedImage else { return }
         profileImage = Image(uiImage: selectedImage)
     }
-    
+    func changeBackgroundOpacity() {
+        switch(challenge.category){
+        case "Favorites":
+            opacities[0] = min(opacities[0] + 0.4, 1.0)
+        case "Dislikes":
+            opacities[1] = min(opacities[1] + 0.4, 1.0)
+        case "Strengths":
+            opacities[2] = min(opacities[2] + 0.4, 1.0)
+        case "Weaknesses":
+            opacities[3] = min(opacities[3] + 0.4, 1.0)
+        case "ComfortZone":
+            opacities[4] = min(opacities[4] + 0.4, 1.0)
+        case "Values":
+            opacities[5] = min(opacities[5] + 0.4, 1.0)
+        case .none:
+            break
+        case .some(_):
+            break
+        }
+        
+    }
     var body: some View {
         GeometryReader { geo in
             ScrollView {
@@ -156,30 +176,7 @@ struct WritingView: View {
                         .onTapGesture {
                             if (selectedImage != nil) {
                                 addPost(title: title, content: content, createdAt: Date.now, day: Int16(1), isFirstPost: true, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
-                                switch(self.challenge.category){
-                                case "Favorites":
-                                    opacities[0] = min(opacities[0] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case "Dislikes":
-                                    opacities[1] = min(opacities[1] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case "Strengths":
-                                    opacities[2] = min(opacities[2] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case "Weaknesses":
-                                    opacities[3] = min(opacities[3] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case "ComfortZone":
-                                    opacities[4] = min(opacities[4] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case "Values":
-                                    opacities[5] = min(opacities[5] + 0.4, 1.0)
-                                    let _ = print(opacities)
-                                case .none:
-                                    break
-                                case .some(_):
-                                    break
-                                }
+                                changeBackgroundOpacity()
                                 /*
                                 let newPost =  PostModel(type: type,
                                 imageData: selectedImage?.jpegData(compressionQuality: 1.0),
@@ -207,10 +204,3 @@ extension View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-/*
-struct WritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingView(type: "글+사진")
-    }
-}
-*/
