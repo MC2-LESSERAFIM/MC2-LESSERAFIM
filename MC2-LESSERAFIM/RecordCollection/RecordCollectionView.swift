@@ -218,10 +218,17 @@ struct CategoryView: View {
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
-                        posts.first?.image
-                            .frame(width: 170, height: 170)
-                            .foregroundColor(Color(.systemGray5))
-                            .cornerRadius(12)
+                        if let first = posts.first {
+                            first.image
+                                .frame(width: 170, height: 170)
+                                .foregroundColor(Color(.systemGray5))
+                                .cornerRadius(12)
+                        } else  {
+                            Image("niko")
+                                .frame(width: 170, height: 170)
+                                .foregroundColor(Color(.systemGray5))
+                                .cornerRadius(12)
+                        }
                         
                         Text(category)
                             .foregroundColor(.black)
