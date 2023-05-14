@@ -25,6 +25,7 @@
 		BF81D5702A0E270000A08360 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D56F2A0E270000A08360 /* BackgroundView.swift */; };
 		BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */; };
 		BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */; };
+		BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */ = {isa = PBXBuildFile; fileRef = BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */; };
 		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
@@ -83,6 +84,7 @@
 		BF81D56F2A0E270000A08360 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSetting.swift; sourceTree = "<group>"; };
+		BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Challenges.csv; sourceTree = "<group>"; };
 		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				BF81D56F2A0E270000A08360 /* BackgroundView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				BE5590C72A08821600D765F6 /* landmarkData.json */,
+				BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
 				BF7520532A09DD2300BF81DC /* Model */,
 				BF7520522A09DD1D00BF81DC /* Profile */,
@@ -423,6 +426,7 @@
 			files = (
 				A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */,
 				A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */,
+				BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */,
 				BE5590C82A08821600D765F6 /* landmarkData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -643,7 +647,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -677,7 +681,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

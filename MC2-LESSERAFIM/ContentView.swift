@@ -66,19 +66,15 @@ struct ContentView: View {
     @ObservedObject var appLock  = BiometricLock()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     @AppStorage("userName") var userName: String = ""
-/*
-    @AppStorage("charaterData") var charaterData: Data = Data()
-    @AppStorage("selectedImageName") var selectedImageName: String = ""
-    @AppStorage("isLockEnabled") var lockSetting: Bool = false
-    @AppStorage("isNotificationEnabled") var AlarmSetting: Bool = false
-    @AppStorage("todayChallenges") var todayChallenges: [Int] = []
-    @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
-    @AppStorage("opacities") var opacities: [Double] = []
-    */
+    
     @State var isSeletedTab: Int = 1
+    
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
     
+    init() {
+        getCSVData()
+    }
     
     var body: some View {
         if isOnBoarding {
@@ -138,12 +134,7 @@ struct ContentView: View {
     func loadData() {
         if challenges.count == 0 {
             print("CoreData : Initialize challenges")
-            addChallenges(category: "Favorites", difficulty: Int16(1), question: "당신이 가장 좋아하는 별명은 무엇인가요?")
-            addChallenges(category: "Dislikes", difficulty: Int16(1), question: "올해 가장 화났던 일화 들려주기")
-            addChallenges(category: "Strengths", difficulty: Int16(1), question: "내가 가진 습관 중 가장 멋진 습관 자랑하기")
-            addChallenges(category: "Weaknesses", difficulty: Int16(2), question: "고치고 싶은 나쁜 습관이 무엇인가요?")
-            addChallenges(category: "ComfortZone", difficulty: Int16(1), question: "내 이름 세 번 부르기")
-            addChallenges(category: "Values", difficulty: Int16(3), question: "힘든 시간을 보내는 사람을 보면 어떤 감정이 드나요?")
+            getCSVData()
             print("CoreData : \(challenges.count) challenges added")
         }
         else {
@@ -151,6 +142,37 @@ struct ContentView: View {
         }
     }
     
+    func getCSVData() {
+        guard let filepath = Bundle.main.path(forResource: "Challenges", ofType: "csv") else {
+            print("Error: Could not find CSV file")
+            return
+        }
+        var data = ""
+        do {
+            data = try String(contentsOfFile: filepath)
+        } catch {
+            print(error)
+            return
+        }
+        var rows = data.components(separatedBy: "\r\n")
+        //rows.removeFirst()
+
+        //now loop around each row, and split it into each of its columns
+        for row in rows {
+            let columns = row.components(separatedBy: ",")
+            
+            //check that we have enough columns
+            if columns.count == 5 {
+                let category = columns[0]
+                let subdivision = columns[1]
+                let keyword = columns[2]
+                let question = columns[3]
+                let difficulty = Int16(columns[4]) ?? 0
+                print(columns)
+                addChallenges(category: category, difficulty: difficulty, question: question)
+            }
+        }
+    }
 }
 
 
