@@ -52,8 +52,8 @@ struct WritingView: View {
     @State private var profileImage: Image?
     
     @State private var showingAlert = false
-    @State var title: String = ""
-    @State var content: String = ""
+    @State var titleRecord: String = ""   // 챌린지 타이틀
+    @State var contentRecord: String = ""   // 챌린지 내용
     var type: String
     
     @FocusState private var focusedField: FocusField?
