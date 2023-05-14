@@ -40,12 +40,16 @@ struct ImagePicker: UIViewControllerRepresentable {
 }
 
 struct WritingView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
     enum FocusField: Hashable {
         case title
         case content
     }
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var postData: UserData
+    
+    @FetchRequest(entity: Post.entity(), sortDescriptors: [])
+    private var posts: FetchedResults<Post>
     
     @State private var imagePickerPresented = false
     @State private var selectedImage: UIImage?
@@ -55,8 +59,30 @@ struct WritingView: View {
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
     var type: String
+    var challenge: Challenge
     
     @FocusState private var focusedField: FocusField?
+
+    
+    func saveContext() {
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func addPost(title: String, content: String, createdAt: Date, day: Int16, isFirstPost: Bool, imageData: Data) {
+        let post = Post(context: viewContext)
+        post.title = title
+        post.content = content
+        post.day = day
+        post.isFirstPost = isFirstPost
+        post.imageData = imageData
+        post.createdAt = createdAt
+        post.challenge = self.challenge
+        saveContext()
+    }
 
     func loadImage() {
         guard let selectedImage = selectedImage else { return }
@@ -128,12 +154,15 @@ struct WritingView: View {
                         .foregroundColor(.mainPink)
                         .onTapGesture {
                             if (selectedImage != nil) {
-                                let newPost =  Post(type: type,
-                                                    imageData: selectedImage?.jpegData(compressionQuality: 1.0),
-                                                    title: titleRecord,
-                                                    content: contentRecord,
-                                                    category: Category.random())
+                                addPost(title: title, content: content, createdAt: Date.now, day: Int16(1), isFirstPost: true, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                /*
+                                let newPost =  PostModel(type: type,
+                                imageData: selectedImage?.jpegData(compressionQuality: 1.0),
+                                title: titleRecord,
+                                content: contentRecord,
+                                category: Category.random())
                                 postData.posts.append(newPost)
+                                 */
                                 self.presentationMode.wrappedValue.dismiss()
                             }
                             else{
@@ -153,9 +182,10 @@ extension View {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }
-
+/*
 struct WritingView_Previews: PreviewProvider {
     static var previews: some View {
         WritingView(type: "글+사진")
     }
 }
+*/

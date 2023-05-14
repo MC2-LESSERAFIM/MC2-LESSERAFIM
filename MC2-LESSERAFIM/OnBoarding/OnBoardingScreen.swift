@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct OnBoardingScreen: View {
-    @EnvironmentObject var userData: UserData
-    
     @State var pageTag:Int? = nil
     @State var tag:Int? = nil
     @State private var currentTab = 0
@@ -93,7 +91,6 @@ struct OnBoardingScreen: View {
                 } else {
                     NavigationLink(destination:
                         CheckInScreen()
-                            .environmentObject(userData)
                     , label: {
                         Text("나와의 연애 시작하기")
                             .font(.system(size: 17, weight: .bold))

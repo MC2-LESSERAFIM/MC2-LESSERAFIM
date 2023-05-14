@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct RecordView: View {
-    @EnvironmentObject var userData: UserData
-    var challenge: String
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var challenge: Challenge
+    
     let item = ["사진+글", "글", "그림"]
     
     var body: some View {
@@ -18,8 +20,8 @@ struct RecordView: View {
             List{
                 ForEach(item, id: \.self) { type in
                     NavigationLink{
-                        WritingView(type: type)
-                            .environmentObject(userData)
+                        WritingView(type: type, challenge: challenge)
+                            .environment(\.managedObjectContext, viewContext)
                     } label: {
                         Label(type, systemImage: "square.and.pencil")
                     }

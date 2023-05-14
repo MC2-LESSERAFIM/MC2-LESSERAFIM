@@ -7,11 +7,11 @@
 
 import Foundation
 
-class UserData: ObservableObject {
+class UserDataModel: ObservableObject {
     @Published var userName: String = ""
     @Published var selectedImageName: String = ""
-    @Published var isOnBoarding: Bool = true
-    @Published var posts: [Post] = []
+    @Published var isOnBoarding: Bool = false
+    @Published var posts: [PostModel] = []
     @Published var userCharacterData: Data?
     @Published var opacities: [CGFloat] = [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     @Published var challenges = [
@@ -109,9 +109,9 @@ class UserData: ObservableObject {
         "영상 편지로 고마움과 애정 전하기"
     ]
     @Published var todayRemovedChallenges: [Int] = []
-    @Published var todayChallenges: [String] = []
+    @Published var todayChallenges: [Int] = []
     
-    var categories: [String: [Post]] {
+    var categories: [String: [PostModel]] {
         Dictionary(
             grouping: posts,
             by: { $0.category.rawValue }

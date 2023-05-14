@@ -9,10 +9,8 @@ import SwiftUI
 
 struct NameModalScreen: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var userData: UserData
-    @State private var username = ""
+    @AppStorage("userName") var userName: String = ""
     @State private var isLinkActive = false
-    @Binding var userName: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
@@ -23,7 +21,7 @@ struct NameModalScreen: View {
             UserNameTextField(username: $username, placeholder: "호칭을 적어주세요")
                 .padding(.top, 24)
                 .onSubmit {
-                    if !username.isEmpty {
+                    if !userName.isEmpty {
                         self.isLinkActive = true
                     }
                 }
@@ -31,9 +29,7 @@ struct NameModalScreen: View {
             Spacer()
             
             Button(action: {
-                userName = username
                 presentation.wrappedValue.dismiss()
-                
             }, label: {
                 Text("확인")
                     .bold()
