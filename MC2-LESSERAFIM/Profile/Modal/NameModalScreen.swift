@@ -17,21 +17,17 @@ struct NameModalScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
             Text("우리가 당신을 어떻게 부르면 좋을까요?")
-                .font(.system(size: 32, weight: .bold))
+                .font(.system(size: 26, weight: .bold))
                 .multilineTextAlignment(.leading)
             
-            TextField("당신의 호칭을 알려주세요", text: $username)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            UserNameTextField(username: $username, placeholder: "호칭을 적어주세요")
                 .padding(.top, 24)
-                .font(.system(size: 15, weight: .regular, design: .default))
-                .accentColor(.blue)
-                .textInputAutocapitalization(.never)
-                .disableAutocorrection(true)
                 .onSubmit {
                     if !username.isEmpty {
                         self.isLinkActive = true
                     }
                 }
+            
             Spacer()
             
             Button(action: {
@@ -43,7 +39,7 @@ struct NameModalScreen: View {
                     .bold()
                     .padding(16)
                     .frame(maxWidth: .infinity)
-                    .background(Color.pink)
+                    .background(Color.mainPink)
                     .cornerRadius(12)
                     .foregroundColor(.white)
             })

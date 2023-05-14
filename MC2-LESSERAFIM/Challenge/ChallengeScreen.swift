@@ -36,6 +36,7 @@ struct ChallengeScreen: View {
                         PageTitle(titlePage: "Day1")
                     }
                     .padding(.top, 48)
+                    .padding(.horizontal, 24)
                     
                     VStack {
                         VStack {
@@ -58,10 +59,10 @@ struct ChallengeScreen: View {
                     Spacer()
                     
                     if isPickedChallenge {
-                        VStack {
+                        VStack(spacing: 0) {
                             HStack(alignment: .bottom) {
                                 Text("오늘의 챌린지")
-                                    .font(.system(size: 24, weight: .bold))
+                                    .font(.system(size: 20, weight: .bold))
                                 
                                 Spacer()
                                 
@@ -90,13 +91,15 @@ struct ChallengeScreen: View {
                                                 }
                                                 .tint(.mainPink)
                                             }
-                                        
                                     }
                                 }
                                 .listStyle(.inset)
-                                .padding(.top, 12)
+                                .listRowBackground(Color.opacityWhite)
                             }
+                            .scrollContentBackground(.hidden)
                         }
+                        .padding(.bottom, 66)
+                        .ignoresSafeArea()
                     } else {
                         // 뽑기 버튼
                         Button {
@@ -108,9 +111,10 @@ struct ChallengeScreen: View {
                                 .foregroundColor(.white)
                                 .font(.system(.headline))
                         }
-                        .frame(width: UIScreen.main.bounds.width - 48, height: 120)
+                        .frame(width: UIScreen.main.bounds.width - 48, height: 50)
                         .background(Color.mainPink)
                         .cornerRadius(12)
+                        .padding(.bottom, 66)
                     }
                 }
                 .onAppear(perform: {

@@ -23,6 +23,13 @@ struct ProfileScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack {
+                PageTitle(titlePage: "나의 짝꿍")
+            }
+            .padding(.horizontal, 24)
+            
+            Spacer()
+            
+            VStack {
                 ZStack {
                     VStack{
                         RoundedRectangle(cornerRadius: 12)

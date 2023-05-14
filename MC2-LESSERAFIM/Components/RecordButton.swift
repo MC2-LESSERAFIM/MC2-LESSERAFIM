@@ -12,7 +12,7 @@ struct RecordButton: View {
     
     var labelTitle: String = "" // 버튼 라벨
     var labelImage: String = "" // 버튼 아이콘 이미지
-    var colorButton = Color(red: 153/255, green: 153/255, blue: 153/255)    // 버튼 색상
+    var colorButton = Color.opacityWhite    // 버튼 색상
     
     var body: some View {
         VStack {
@@ -24,14 +24,17 @@ struct RecordButton: View {
             
             // 버튼 라벨
             Text(labelTitle)
-                .foregroundColor(Color.white)   // 글씨 색상
+                .foregroundColor(Color.mainBlack)   // 글씨 색상
                 .font(.system(size: 17))    // 글씨 크기
                 .fontWeight(.semibold)  // 글씨 두께
         }
         // 버튼 스타일
         .frame(width: 107, height: 96)  // 버튼 크기
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.mainPinkOpacity, lineWidth: 2)
+        )
         .background(colorButton) // 버튼 색상
-        .cornerRadius(radiusButton) // 버튼 곡률
     }
 }
 
