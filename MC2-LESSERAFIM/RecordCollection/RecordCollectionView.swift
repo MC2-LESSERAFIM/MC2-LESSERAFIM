@@ -37,50 +37,52 @@ struct RecordCollectionView: View {
         NavigationView {
             ZStack(alignment: .topTrailing) {
                 BackgroundView()
-                ScrollView(showsIndicators: false) {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        GalleryView()
-                            .environment(\.managedObjectContext, viewContext)
-                    }
-                    // MARK: - sorting by .category
-                    else if selectedSort == .category {
-                        CategoryView(categories: userData.categories)
-                            .environment(\.managedObjectContext, viewContext)
-                        /* 
-                         Dictionary(
-                         grouping: posts,
-                         by: { $0.category.rawValue }
-                         )*/
-                    }
-                }
-                .scrollContentBackground(.hidden)
-                .navigationTitle("나의 기록")
-                .navigationBarTitleDisplayMode(.large)
-                /*
-                VStack{
-                    ForEach(challenges){ challenge in
-                        Text(challenge.question ?? "NO")
-                    }
-                }
-                 */
-                Picker("", selection: $selectedSort) {
-                    ForEach(SortBy.allCases) { sort in
-                        Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                            .labelStyle(.titleAndIcon)
+                VStack {
+                    HStack(alignment: .bottom) {
+                        PageTitle(titlePage: "나의 기록")
+                            .padding(.top, 48)
+                        
+                        Menu {
+                            Button(action: {
+                                selectedSort = SortBy.day
+                            }, label: {
+                                Text("날짜")
+                            })
+                            Button(action: {
+                                selectedSort = SortBy.category
+                            }, label: {
+                                Text("주제")
+                            })
+                        } label: {
+                            Label(title: {
+                                Text("\(selectedSort.rawValue)")
+                                    .font(.system(size: 12, weight: .regular))
+                            }, icon: {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .font(.system(size: 12))
+                                    .frame(width: 12, height: 12)
+                            })
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.mainPink.opacity(0.2))
+                            .cornerRadius(9)
+                        }
                     }
                     .padding(.horizontal, 24)
                     
                     ScrollView(showsIndicators: false) {
                         if (selectedSort.rawValue == "날짜") {
-                            GalleryView(posts: userData.posts)
+                            GalleryView()
+                                .environment(\.managedObjectContext, viewContext)
                         }
                         else if (selectedSort.rawValue == "주제") {
                             CategoryView(categories: userData.categories)
+                                .environment(\.managedObjectContext, viewContext)
                         }
                     }
                     .toolbar(.visible, for: .tabBar)
                 }
+                
             }
         }
     }
@@ -238,6 +240,8 @@ struct PostDetailView: View {
         
     let post: Post
     
+    @State var isTabBarVisible = false
+    
     var body: some View {
         (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
             .resizable()
@@ -246,6 +250,7 @@ struct PostDetailView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
+                        isTabBarVisible = true
                         dismiss()
                     } label: {
                         Image(systemName: "x.circle")
@@ -256,10 +261,10 @@ struct PostDetailView: View {
                     }
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
+            .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden()
-        
     }
+        
 }
 /*
 struct PostDetailView_Preview: PreviewProvider {
