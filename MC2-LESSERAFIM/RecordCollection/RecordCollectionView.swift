@@ -15,7 +15,7 @@ struct RecordCollectionView: View {
         var id: Self { self }
     }
     
-    @State private var selectedSort: SortBy = .day
+    @State private var choiceMade = "날짜"
     var width: CGFloat
     var height: CGFloat
     
@@ -25,27 +25,47 @@ struct RecordCollectionView: View {
                 backgroundView(width: width, height: height)
                     .environmentObject(userData)
                 
-                ScrollView(showsIndicators: false) {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        GalleryView(posts: userData.posts)
-                    }
-                    // MARK: - sorting by .category
-                    else if selectedSort == .category {
-                        CategoryView(categories: userData.categories)
-                    }
-                }
-                .navigationTitle("나의 기록")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbar {
-                    Picker("", selection: $selectedSort) {
-                        ForEach(SortBy.allCases) { sort in
-                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                .labelStyle(.titleAndIcon)
+                VStack {
+                    HStack(alignment: .bottom) {
+                        PageTitle(titlePage: "나의 기록")
+                            .padding(.top, 48)
+                        
+                        Menu {
+                            Button(action: {
+                                choiceMade = "날짜"
+                            }, label: {
+                                Text("날짜")
+                            })
+                            Button(action: {
+                                choiceMade = "주제"
+                            }, label: {
+                                Text("주제")
+                            })
+                        } label: {
+                            Label(title: {
+                                Text("\(choiceMade)")
+                                    .font(.system(size: 12, weight: .regular))
+                            }, icon: {
+                                Image(systemName: "arrowtriangle.down.fill")
+                            })
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.mainPink.opacity(0.2))
+                            .cornerRadius(9)
                         }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    ScrollView(showsIndicators: false) {
+                        if (choiceMade == "날짜") {
+                            GalleryView(posts: userData.posts)
+                        }
+                        else if (choiceMade == "주제") {
+                            CategoryView(categories: userData.categories)
+                        }
+                    }
+                    .toolbar(.visible, for: .tabBar)
                 }
-                .toolbar(.visible, for: .tabBar)
             }
         }
     }
