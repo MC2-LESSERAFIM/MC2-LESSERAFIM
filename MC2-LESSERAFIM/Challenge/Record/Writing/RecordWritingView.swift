@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct RecordWritingView: View {
-    @State private var titleRecordWriting: String = ""   // 챌린지 타이틀
-    @State private var storyRecordWriting: String = ""   // 챌린지 내용
+    @State var titleRecord: String = ""   // 챌린지 타이틀
+    @State var contentRecord: String = ""   // 챌린지 내용
     
     @State private var showingAlert = false // 경고 출력 여부
     @Environment(\.dismiss) private var dismiss // 화면 이탈

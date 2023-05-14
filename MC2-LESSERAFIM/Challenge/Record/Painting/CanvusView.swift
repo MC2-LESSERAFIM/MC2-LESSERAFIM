@@ -34,10 +34,10 @@ struct CanvusView: View {
     @State private var whatTool = 0
     
     //Challenge Title TextField
-    @State private var challengeTitle = ""
+    @State var titleRecord: String = ""   // 챌린지 타이틀
     
     //Challege Content TextField
-    @State private var challegeContent = ""
+    @State var contentRecord: String = ""   // 챌린지 내용
     
     @State private var renImage = Image("")
     
