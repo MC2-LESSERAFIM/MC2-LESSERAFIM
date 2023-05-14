@@ -15,7 +15,7 @@ struct RecordCollectionView: View {
         var id: Self { self }
     }
     
-    @State private var choiceMade = "날짜"
+    @State private var selectedSort: SortBy = .day
     var width: CGFloat
     var height: CGFloat
     
@@ -32,18 +32,18 @@ struct RecordCollectionView: View {
                         
                         Menu {
                             Button(action: {
-                                choiceMade = "날짜"
+                                selectedSort = SortBy.day
                             }, label: {
                                 Text("날짜")
                             })
                             Button(action: {
-                                choiceMade = "주제"
+                                selectedSort = SortBy.category
                             }, label: {
                                 Text("주제")
                             })
                         } label: {
                             Label(title: {
-                                Text("\(choiceMade)")
+                                Text("\(selectedSort.rawValue)")
                                     .font(.system(size: 12, weight: .regular))
                             }, icon: {
                                 Image(systemName: "arrowtriangle.down.fill")
@@ -59,10 +59,10 @@ struct RecordCollectionView: View {
                     .padding(.horizontal, 24)
                     
                     ScrollView(showsIndicators: false) {
-                        if (choiceMade == "날짜") {
+                        if (selectedSort.rawValue == "날짜") {
                             GalleryView(posts: userData.posts)
                         }
-                        else if (choiceMade == "주제") {
+                        else if (selectedSort.rawValue == "주제") {
                             CategoryView(categories: userData.categories)
                         }
                     }
