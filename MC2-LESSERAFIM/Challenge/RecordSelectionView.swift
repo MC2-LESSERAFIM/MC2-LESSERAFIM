@@ -29,8 +29,9 @@ struct RecordSelectionView: View {
                     }) {
                         RecordButton(
                             labelTitle: "사진 + 글",
-                            labelImage: "camera.fill@5x",
-                            colorButton: self.showActionSheet ? colorSelectedButton : colorDefaultButton    // 액션 시트 표출 여부에 따른 버튼 배경색 변경
+                            labelImage: "camera.fill",
+                            colorButton: self.showActionSheet ? colorSelectedButton : colorDefaultButton,    // 액션 시트 표출 여부에 따른 버튼 배경색 변경
+                            colorButtonIcon: self.showActionSheet ? Color.white : Color.mainBlack
                         )
                     }
                     // 기록/사진 화면의 액션시트
@@ -54,7 +55,7 @@ struct RecordSelectionView: View {
                     NavigationLink(destination: RecordWritingView()) {
                         RecordButton(
                             labelTitle: "글",
-                            labelImage: "square.and.pencil@5x",
+                            labelImage: "square.and.pencil",
                             colorButton: colorDefaultButton
                         )
                         .padding(.horizontal, 12)   // 버튼 간의 갭
@@ -64,7 +65,7 @@ struct RecordSelectionView: View {
                     NavigationLink(destination: CanvusView()) {
                         RecordButton(
                             labelTitle: "그림",
-                            labelImage: "paintpalette.fill@5x",
+                            labelImage: "paintpalette.fill",
                             colorButton: colorDefaultButton
                         )
                     }
