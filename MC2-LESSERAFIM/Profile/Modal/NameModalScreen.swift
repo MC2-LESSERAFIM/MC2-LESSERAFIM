@@ -18,7 +18,7 @@ struct NameModalScreen: View {
                 .font(.system(size: 26, weight: .bold))
                 .multilineTextAlignment(.leading)
             
-            UserNameTextField(username: $username, placeholder: "호칭을 적어주세요")
+            UserNameTextField(username: $userName, placeholder: "호칭을 적어주세요")
                 .padding(.top, 24)
                 .onSubmit {
                     if !userName.isEmpty {

@@ -79,6 +79,39 @@ struct ContentView: View {
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
     
+    var body: some View {
+        if isOnBoarding {
+            OnBoardingScreen()
+        } else {
+            TabView {
+                RecordCollectionView()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("기록모음")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                ChallengeScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("챌린지")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                
+                ProfileScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("프로필")
+                    }
+                    .environmentObject(appLock)
+            } .onAppear {
+                loadData()
+                makeTabBarTransparent()
+                permissionManager.requestAlbumPermission()
+                permissionManager.requestAlramPermission()
+            }
+        }
+    }
+    
     func addChallenges(category: String, difficulty: Int16, isSuccess: Bool = false, question: String){
         let challenge = Challenge(context: viewContext)
         challenge.category = category
@@ -113,39 +146,6 @@ struct ContentView: View {
         }
     }
     
-    var body: some View {
-        if isOnBoarding {
-            OnBoardingScreen()
-        } else {
-            TabView {
-                RecordCollectionView()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("기록모음")
-                    }
-                    .environment(\.managedObjectContext, viewContext)
-                ChallengeScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("챌린지")
-                    }
-                    .environment(\.managedObjectContext, viewContext)
-                
-                ProfileScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("프로필")
-                    }
-                    .environmentObject(appLock)
-            } .onAppear {
-                loadData()
-                makeTabBarTransparent()
-                permissionManager.requestAlbumPermission()
-                permissionManager.requestAlramPermission()
-            }
-        }
-    }
-       
 }
 
 
