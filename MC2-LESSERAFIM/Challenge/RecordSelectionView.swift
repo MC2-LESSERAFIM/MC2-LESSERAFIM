@@ -10,8 +10,8 @@ import SwiftUI
 struct RecordSelectionView: View {
     
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
-    let colorDefaultButton = Color(red: 153/255, green: 153/255, blue: 153/255) // 버튼 색상
-    let colorSelectedButton = Color.blue
+    let colorDefaultButton = Color.opacityWhite // 버튼 색상
+    let colorSelectedButton = Color.mainPink
     
     var body: some View {
         NavigationView{
