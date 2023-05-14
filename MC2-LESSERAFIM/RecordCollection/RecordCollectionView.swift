@@ -47,6 +47,8 @@ struct RecordCollectionView: View {
                                     .font(.system(size: 12, weight: .regular))
                             }, icon: {
                                 Image(systemName: "arrowtriangle.down.fill")
+                                    .font(.system(size: 12))
+                                    .frame(width: 12, height: 12)
                             })
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
