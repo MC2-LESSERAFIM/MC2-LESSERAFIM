@@ -49,23 +49,23 @@ struct CanvusView: View {
                 path.addLines(line.point)
                 context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
             }
-        }.frame(width: 345, height: 513) //크기 지정
-            .overlay(RoundedRectangle(cornerRadius: 20) //테두리 Radius
-                .stroke(Color.black, lineWidth: 5))
-            .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                .onChanged({ value in
-                    currentLine.color = selectedColor
-                    let newPoint = value.location
-                    currentLine.point.append(newPoint) //라인 1개 생성
-                    self.lines.append(currentLine) // 그려진 라인을 빈 Arr에 추가
-                    eraserCenter = value.location
-                    eraserVisable = true
-                        })
-                    .onEnded({ value in
-                        self.currentLine = PaintingLine(point: [], color: selectedColor, lineWidth: thickness)
-                        eraserVisable.toggle()
-                    })
-            )
+        }
+        .overlay(RoundedRectangle(cornerRadius: 12) //테두리 Radius
+            .stroke(Color.mainPinkOpacity, lineWidth: 2))
+        .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+            .onChanged({ value in
+                currentLine.color = selectedColor
+                let newPoint = value.location
+                currentLine.point.append(newPoint) //라인 1개 생성
+                self.lines.append(currentLine) // 그려진 라인을 빈 Arr에 추가
+                eraserCenter = value.location
+                eraserVisable = true
+            })
+                .onEnded({ value in
+                    self.currentLine = PaintingLine(point: [], color: selectedColor, lineWidth: thickness)
+                    eraserVisable.toggle()
+                })
+        )
     }
     
     //View에 사용될 drawingTools View 정의
@@ -98,6 +98,7 @@ struct CanvusView: View {
             
             
         }
+        .padding(.horizontal, 4)
         .frame(width: 345, height: 44)
     }
     
