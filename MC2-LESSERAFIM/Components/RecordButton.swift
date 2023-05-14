@@ -17,7 +17,7 @@ struct RecordButton: View {
     var body: some View {
         VStack {
             // 버튼 아이콘
-            Image(labelImage)
+            Image(systemName: labelImage)
                 .resizable()    // 이미지 크기 수정 가능
                 .aspectRatio(contentMode: .fit) // 이미지 비율 고정
                 .frame(height: 24)  // 높이 기준 이미지 크기 수정
