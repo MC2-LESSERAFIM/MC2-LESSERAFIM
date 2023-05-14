@@ -9,14 +9,12 @@ import SwiftUI
 
 struct ImageModalScreen: View {
     @Environment(\.presentationMode) var presentation
-    @EnvironmentObject var userData: UserData
     @State private var isLinkActive = false
-    @State var username = ""
     @State var tappedImageName: String = ""
     @State var selectedOption: String = ""
     @State var isNextButtonEnabled: Bool = false
-    @Binding var selectedImageName: String
-    //@Binding var userName: String
+    @AppStorage("selectedImageName") var selectedImageName: String = ""
+    @AppStorage("userName") var userName: String = ""
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0){

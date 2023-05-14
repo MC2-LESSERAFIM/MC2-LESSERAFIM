@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct ChallengeScreen: View {
-    @EnvironmentObject var userData: UserData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors: [])
+    private var posts: FetchedResults<Post>
+    
+    @FetchRequest(sortDescriptors: [])
+    private var challenges: FetchedResults<Challenge>
+    
     // tables swipe action
     @State private var action = ""
     // user picked challenge
@@ -16,21 +23,19 @@ struct ChallengeScreen: View {
     @State private var numberOfTimeLeft: Int = 3
     @State private var showingAlert: Bool = false
     @State var nextView = false
-    @Binding var tappedImageName: String
-    @Binding var username: String
+    @AppStorage("selectedImageName") var selectedImageName: String = ""
+    @AppStorage("userName") var userName: String = ""
+    @AppStorage("todayChallenges") var todayChallenges: [Int] = []
+    @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
     
     private let challengeNumber: Int = 3
     
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
     
-    var width: CGFloat = 393
-    var height: CGFloat = 852
-    
     var body: some View {
         NavigationView {
             ZStack {
-                backgroundView(width: width, height: height)
-                    .environmentObject(userData)
+                backgroundView()
                 VStack {
                     VStack {
                         PageTitle(titlePage: "Day1")
@@ -39,12 +44,12 @@ struct ChallengeScreen: View {
                     
                     VStack {
                         VStack {
-                            Image(tappedImageName)
+                            Image(selectedImageName)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: 320)
                             
-                            Text(username)
+                            Text(userName)
                                 .font(.system(size: 20, weight: .semibold))
                                 .padding(.bottom, 15)
                         }
@@ -74,9 +79,10 @@ struct ChallengeScreen: View {
                             List {
                                 ForEach(0..<3) { i in
                                     NavigationLink {
-                                        RecordView(challenge: userData.todayChallenges[i])
+                                        RecordView(challenge: challenges[todayChallenges[i]])
+                                            .environment(\.managedObjectContext, viewContext)
                                     } label: {
-                                        Text(userData.todayChallenges[i])
+                                        Text(challenges[todayChallenges[i]].question!)
                                             .swipeActions(edge: .leading) {
                                                 Button {
                                                     if numberOfTimeLeft > 0 {
@@ -123,7 +129,7 @@ struct ChallengeScreen: View {
                         isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
                     }
                     
-                    if userData.todayChallenges.isEmpty {
+                    if todayChallenges.isEmpty {
                         initChallenges(number: challengeNumber)
                     }
                 })
@@ -142,8 +148,7 @@ struct ChallengeScreen: View {
 struct ChallengeScreen_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            ChallengeScreen(tappedImageName: .constant("girl1"), username: .constant("베리"), width: geo.size.width, height: geo.size.height)
-                .environmentObject(UserData())
+            ChallengeScreen()
         }
     }
 }
@@ -152,12 +157,12 @@ fileprivate extension ChallengeScreen {
     func initChallenges(number: Int) {
         
         func addChallenge() {
-            var num = Int.random(in: 0 ..< userData.challenges.count)
-            while (userData.todayRemovedChallenges.contains(num)) {
-                num = Int.random(in: 0 ..< userData.challenges.count)
+            var num = Int.random(in: 0 ..< challenges.count)
+            while (todayRemovedChallenges.contains(num)) {
+                num = Int.random(in: 0 ..< challenges.count)
             }
-            userData.todayRemovedChallenges.append(num)
-            userData.todayChallenges.append(userData.challenges[num])
+            todayRemovedChallenges.append(num)
+            todayChallenges.append(num)
         }
         
         for _ in 0..<number {
@@ -166,12 +171,12 @@ fileprivate extension ChallengeScreen {
     }
     
     func modifyChallenge(index: Int) {
-        var num = Int.random(in: 0 ..< userData.challenges.count)
-        while (userData.todayRemovedChallenges.contains(num)) {
-            num = Int.random(in: 0 ..< userData.challenges.count)
+        var num = Int.random(in: 0 ..< challenges.count)
+        while (todayRemovedChallenges.contains(num)) {
+            num = Int.random(in: 0 ..< challenges.count)
         }
-        userData.todayRemovedChallenges.append(num)
-        userData.todayChallenges[index] = userData.challenges[num]
+        todayRemovedChallenges.append(num)
+        todayChallenges[index] = num
     }
 }
 

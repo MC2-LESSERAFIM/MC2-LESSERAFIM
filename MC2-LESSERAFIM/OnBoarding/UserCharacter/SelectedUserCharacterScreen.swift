@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SelectedUserCharacterScreen: View {
-    @EnvironmentObject var userData: UserData
+    @AppStorage("userName") var userName: String = ""
     @State private var isLinkActive = false
-    @State var username = ""
     @State var tappedImageName: String = ""
     @State var selectedOption: String = ""
     @State var isNextButtonEnabled: Bool = false
@@ -40,8 +39,7 @@ struct SelectedUserCharacterScreen: View {
             if tappedImageName.isEmpty != true {
                 NavigationLink(
                     destination:
-                        CheckInComplete(tappedImageName: tappedImageName, username: $username)
-                        .environmentObject(userData),
+                        CheckInComplete(tappedImageName: tappedImageName),
                     isActive: $isNextButtonEnabled,
                     label: {
                         Text("다음")

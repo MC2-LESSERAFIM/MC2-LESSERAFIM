@@ -6,55 +6,8 @@
 //
 
 import SwiftUI
-import Photos
-import UserNotifications
 
-struct Notification {
-    var id: String
-    var title: String
-}
-
-class LocalNotificationManager {
-    var notifications = [Notification]()
-    
-    func addNotification(title: String) -> Void {
-        notifications.append(Notification(id : UUID().uuidString, title: title))
-    }
-}
-
-class PermissionManager : ObservableObject {
-    @Published var permissionGranted = false
-    
-    func requestAlbumPermission() {
-        PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: { status in
-            switch status{
-            case .authorized:
-                print("Album: 권한 허용")
-            case .denied:
-                print("Album: 권한 거부")
-            case .restricted, .notDetermined:
-                print("Album: 선택하지 않음")
-            default:
-                break
-            }
-        })
-    }
-    
-    func requestAlramPermission() {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { status, error in
-                if status == true && error == nil {
-                    print("Alram: 권한 허용")
-                }
-                else{
-                    print("Alram: 권한 거부")
-                }
-            }
-    }
-}
-
-struct Post : Identifiable, Codable {
+struct PostModel : Identifiable, Codable {
     var id = UUID()
     var type: String
     var title: String
@@ -106,43 +59,49 @@ struct Post : Identifiable, Codable {
 }
 
 struct ContentView: View {
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
     @StateObject var permissionManager = PermissionManager()
-    @StateObject var userData = UserData()
     @ObservedObject var appLock  = BiometricLock()
-    @State var isOnBoarding: Bool = true
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
+    @AppStorage("userName") var userName: String = ""
+    @AppStorage("charaterData") var charaterData: Data = Data()
+    @AppStorage("selectedImageName") var selectedImageName: String = ""
+    @AppStorage("isLockEnabled") var lockSetting: Bool = false
+    @AppStorage("isNotificationEnabled") var AlarmSetting: Bool = false
+    @AppStorage("todayChallenges") var todayChallenges: [Int] = []
+    @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
+    @AppStorage("opacities") var opacities: [Double] = []
     
     var body: some View {
-        if userData.isOnBoarding {
+        if isOnBoarding {
             OnBoardingScreen()
-                .environmentObject(userData)
         } else {
-            GeometryReader { geo in
-                TabView {
-                    RecordCollectionView(width: geo.size.width, height: geo.size.height)
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("기록모음")
-                        }
-                        .environmentObject(userData)
-                    ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName, width: geo.size.width, height: geo.size.height)
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("챌린지")
-                        }
-                        .environmentObject(userData)
-                    
-                    ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("프로필")
-                        }
-                        .environmentObject(userData)
-                        .environmentObject(appLock)
-                } .onAppear {
-                    makeTabBarTransparent()
-                    permissionManager.requestAlbumPermission()
-                    permissionManager.requestAlramPermission()
-                }
+            TabView {
+                RecordCollectionView()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("기록모음")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                ChallengeScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("챌린지")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                
+                ProfileScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("프로필")
+                    }
+                    .environmentObject(appLock)
+            } .onAppear {
+                makeTabBarTransparent()
+                permissionManager.requestAlbumPermission()
+                permissionManager.requestAlramPermission()
             }
         }
     }
