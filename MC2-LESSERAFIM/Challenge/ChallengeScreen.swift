@@ -94,7 +94,9 @@ struct ChallengeScreen: View {
                                     }
                                 }
                                 .listStyle(.inset)
+                                .listRowBackground(Color.opacityWhite)
                             }
+                            .scrollContentBackground(.hidden)
                         }
                         .padding(.bottom, 66)
                         .ignoresSafeArea()
