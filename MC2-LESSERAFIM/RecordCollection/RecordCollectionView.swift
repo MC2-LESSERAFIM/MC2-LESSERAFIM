@@ -220,13 +220,14 @@ struct CategoryView: View {
                     VStack(alignment: .leading) {
                         if let first = posts.first {
                             first.image
-                                .frame(width: 170, height: 170)
-                                .foregroundColor(Color(.systemGray5))
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 170, height: 170, alignment: .center)
+                                .clipped()
                                 .cornerRadius(12)
                         } else  {
                             Image("niko")
                                 .frame(width: 170, height: 170)
-                                .foregroundColor(Color(.systemGray5))
                                 .cornerRadius(12)
                         }
                         
