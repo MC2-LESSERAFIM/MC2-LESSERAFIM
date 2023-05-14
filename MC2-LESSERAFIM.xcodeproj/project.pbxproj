@@ -25,7 +25,6 @@
 		BF81D5702A0E270000A08360 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D56F2A0E270000A08360 /* BackgroundView.swift */; };
 		BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */; };
 		BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */; };
-		BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF464E2A078C9500BBDFDB /* RecordView.swift */; };
 		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
@@ -84,7 +83,6 @@
 		BF81D56F2A0E270000A08360 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSetting.swift; sourceTree = "<group>"; };
-		BFCF464E2A078C9500BBDFDB /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			children = (
 				D22690122A06A50B00BCF668 /* ChallengeScreen.swift */,
 				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
-				BFCF464E2A078C9500BBDFDB /* RecordView.swift */,
 				BF7520542A09DD6200BF81DC /* Record */,
 			);
 			path = Challenge;
@@ -474,7 +471,6 @@
 				BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
-				BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */,
 				BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */,
 				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,

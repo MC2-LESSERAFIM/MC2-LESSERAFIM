@@ -15,6 +15,9 @@ struct PaintingLine {
 }
 
 struct CanvusView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.dismiss) private var dismiss // 화면 이탈
+    var challenge: Challenge
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
@@ -40,6 +43,12 @@ struct CanvusView: View {
     @State var contentRecord: String = ""   // 챌린지 내용
     
     @State private var renImage = Image("")
+    
+    @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+    
+    @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
+    @AppStorage("progressDay") var progressDay: Int = 0
+    @AppStorage("isDayChanging") var isDayChanging: Bool = false
     
     //View에 사용될 Canvus 정의
     var canvus : some View{
@@ -110,7 +119,6 @@ struct CanvusView: View {
                     //화면 시작ddd
                     ZStack {
                         VStack{
-                            
                             //캔버스 호출
                             canvus
                                 .frame(width: geo.size.width - 40, height: geo.size.height - 283, alignment: .center)
@@ -135,13 +143,13 @@ struct CanvusView: View {
                                 
                                 if let image = canvusImage.uiImage{
                                     //이미지 처리
-                                    renImage = Image(uiImage: image)
+                                    //renImage = Image(uiImage: image)
                                     //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
                                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                                     
-                                    //텍스트 처리
-                                    //                                $challengeTitle
-                                    //                                $challegeContent
+                                    addPost(title: $titleRecord, content: $contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                                    changeBackgroundOpacity()
+                                    dismiss()
                                 }
                                 
                                 
@@ -197,10 +205,45 @@ struct CanvusView: View {
             }
         }
     }
-}
+    
+    func saveContext() {
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func addPost(title: String, content: String, createdAt: Date, day: Int16, isFirstPost: Bool, imageData: Data) {
+        let post = Post(context: viewContext)
+        post.title = title
+        post.content = content
+        post.day = day
+        post.isFirstPost = isFirstPost
+        post.imageData = imageData
+        post.createdAt = createdAt
+        post.challenge = self.challenge
+        saveContext()
+    }
 
-struct Canvus_Previews: PreviewProvider {
-    static var previews: some View {
-        CanvusView()
+    func changeBackgroundOpacity() {
+        switch(challenge.category){
+        case "Favorites":
+            opacities[0] = min(opacities[0] + 0.4, 1.0)
+        case "Dislikes":
+            opacities[1] = min(opacities[1] + 0.4, 1.0)
+        case "Strengths":
+            opacities[2] = min(opacities[2] + 0.4, 1.0)
+        case "Weaknesses":
+            opacities[3] = min(opacities[3] + 0.4, 1.0)
+        case "ComfortZone":
+            opacities[4] = min(opacities[4] + 0.4, 1.0)
+        case "Values":
+            opacities[5] = min(opacities[5] + 0.4, 1.0)
+        case .none:
+            break
+        case .some(_):
+            break
+        }
     }
 }
