@@ -20,12 +20,18 @@ struct CanvusThicknessSlider: View {
             Slider(value: $panThickness, in: 5...50,onEditingChanged: { _ in
                 currentLine.lineWidth = panThickness
             })
-                .frame(width: 280)
+            .frame(width: 280)
         }
         .frame(width: 325, height: 40)
         .background(Color.white)
-        .overlay(RoundedRectangle(cornerRadius: 20) //테두리 Radius
-            .stroke(Color.black, lineWidth: 1))
+        .cornerRadius(12)
+        .background(
+            Rectangle()
+                .fill(Color.white)
+                .cornerRadius(12)
+                .shadow(radius: 12)
+                .opacity(0.5)
+        )
     }
 }
 
