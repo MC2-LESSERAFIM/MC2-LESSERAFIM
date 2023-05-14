@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Challenge" representedClassName="Challenge" isAbstract="YES" parentEntity="Post" syncable="YES" codeGenerationType="class">
+    <entity name="Challenge" representedClassName="Challenge" syncable="YES" codeGenerationType="class">
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="difficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isSuccess" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="question" optional="YES" attributeType="String"/>
     </entity>
-    <entity name="Post" representedClassName="Post" isAbstract="YES" syncable="YES" codeGenerationType="class">
+    <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="day" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary"/>
         <attribute name="isFirstPost" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="postID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="challenge" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Challenge"/>
     </entity>
