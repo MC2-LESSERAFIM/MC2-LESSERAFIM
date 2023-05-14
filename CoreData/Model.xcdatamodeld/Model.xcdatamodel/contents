@@ -15,5 +15,4 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <relationship name="challenge" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Challenge"/>
     </entity>
-    <fetchRequest name="fetchAllPost" entity="Post"/>
 </model>
