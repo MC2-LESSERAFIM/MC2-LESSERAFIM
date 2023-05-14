@@ -18,7 +18,7 @@ struct SelectedUserCharacterScreen: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
             Text("당신의 캐릭터를 골라볼까요?")
-                .font(.system(size: 27, weight: .bold))
+                .font(.system(size: 26, weight: .bold))
                 .multilineTextAlignment(.leading)
             
             Text("마음에 드는 캐릭터의 배를 간지럽혀주세요.")
