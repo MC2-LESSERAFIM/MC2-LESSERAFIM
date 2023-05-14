@@ -15,23 +15,21 @@ struct CheckInComplete: View {
     
     var body: some View {
         VStack(spacing: 0){
-                PageTitle(titlePage: "이제부터 당신의 짝꿍은")
-                HStack {
-                    Text(username)
-                        .foregroundColor(.mainPink)
-                        .font(.system(size: 32, weight: .bold))
-                    PageTitle(titlePage: "입니다.")
-                    Spacer()
-                }
-
-            Spacer()
+            PageTitle(titlePage: "이제부터 당신의 짝꿍은")
+            HStack {
+                Text(username)
+                    .foregroundColor(.mainPink)
+                    .font(.system(size: 26, weight: .bold))
+                PageTitle(titlePage: "입니다")
+            }
             
             Image(tappedImageName)
                 .resizable()
                 .scaledToFit()
-                .frame(height: 500)
+                .frame(height: 470)
                 .padding(.top, 48)
             
+            Spacer()
             Spacer()
             
             NavigationLink(
@@ -52,8 +50,7 @@ struct CheckInComplete: View {
             Spacer()
         }
         .padding(.horizontal, 24)
-        .padding(.top, 100)
-        .ignoresSafeArea()
+//        .padding(.top, 48)
     }
 }
 struct CheckInComplete_Previews: PreviewProvider {

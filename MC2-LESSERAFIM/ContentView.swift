@@ -120,7 +120,7 @@ struct ContentView: View {
                 TabView {
                     RecordCollectionView(width: geo.size.width, height: geo.size.height)
                         .tabItem {
-                            Image(systemName: "star")
+                            Image(systemName: "magazine.fill")
                             Text("기록모음")
                         }
                         .environmentObject(userData)
@@ -133,7 +133,7 @@ struct ContentView: View {
                     
                     ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
                         .tabItem {
-                            Image(systemName: "star")
+                            Image(systemName: "person.crop.circle.fill")
                             Text("프로필")
                         }
                         .environmentObject(userData)

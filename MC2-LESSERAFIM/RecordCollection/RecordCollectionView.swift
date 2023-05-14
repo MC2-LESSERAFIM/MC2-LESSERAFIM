@@ -25,27 +25,49 @@ struct RecordCollectionView: View {
                 backgroundView(width: width, height: height)
                     .environmentObject(userData)
                 
-                ScrollView(showsIndicators: false) {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        GalleryView(posts: userData.posts)
-                    }
-                    // MARK: - sorting by .category
-                    else if selectedSort == .category {
-                        CategoryView(categories: userData.categories)
-                    }
-                }
-                .navigationTitle("나의 기록")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbar {
-                    Picker("", selection: $selectedSort) {
-                        ForEach(SortBy.allCases) { sort in
-                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                .labelStyle(.titleAndIcon)
+                VStack {
+                    HStack(alignment: .bottom) {
+                        PageTitle(titlePage: "나의 기록")
+                            .padding(.top, 48)
+                        
+                        Menu {
+                            Button(action: {
+                                selectedSort = SortBy.day
+                            }, label: {
+                                Text("날짜")
+                            })
+                            Button(action: {
+                                selectedSort = SortBy.category
+                            }, label: {
+                                Text("주제")
+                            })
+                        } label: {
+                            Label(title: {
+                                Text("\(selectedSort.rawValue)")
+                                    .font(.system(size: 12, weight: .regular))
+                            }, icon: {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .font(.system(size: 12))
+                                    .frame(width: 12, height: 12)
+                            })
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.mainPink.opacity(0.2))
+                            .cornerRadius(9)
                         }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    ScrollView(showsIndicators: false) {
+                        if (selectedSort.rawValue == "날짜") {
+                            GalleryView(posts: userData.posts)
+                        }
+                        else if (selectedSort.rawValue == "주제") {
+                            CategoryView(categories: userData.categories)
+                        }
+                    }
+                    .toolbar(.visible, for: .tabBar)
                 }
-                .toolbar(.visible, for: .tabBar)
             }
         }
     }
