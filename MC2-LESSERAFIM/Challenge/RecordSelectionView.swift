@@ -30,7 +30,8 @@ struct RecordSelectionView: View {
                         RecordButton(
                             labelTitle: "사진 + 글",
                             labelImage: "camera.fill",
-                            colorButton: self.showActionSheet ? colorSelectedButton : colorDefaultButton    // 액션 시트 표출 여부에 따른 버튼 배경색 변경
+                            colorButton: self.showActionSheet ? colorSelectedButton : colorDefaultButton,    // 액션 시트 표출 여부에 따른 버튼 배경색 변경
+                            colorButtonIcon: self.showActionSheet ? Color.white : Color.mainBlack
                         )
                     }
                     // 기록/사진 화면의 액션시트
