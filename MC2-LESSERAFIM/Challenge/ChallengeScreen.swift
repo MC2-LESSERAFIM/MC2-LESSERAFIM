@@ -16,8 +16,7 @@ struct ChallengeScreen: View {
     // tables swipe action
     @State private var action = ""
     // user picked challenge
-    @State private var isPickedChallenge: Bool = false
-    @State private var numberOfTimeLeft: Int = 3
+    @AppStorage("numberOfTimeLeft") var numberOfTimeLeft: Int = 3
     @State private var showingAlert: Bool = false
     @State var nextView = false
     @AppStorage("selectedImageName") var selectedImageName: String = ""
@@ -28,7 +27,9 @@ struct ChallengeScreen: View {
     private let challengeNumber: Int = 3
     
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
-    
+    @AppStorage("isPickedChallenge") var isPickedChallenge: Bool = false
+    @AppStorage("progressDay") var progressDay: Int = 0
+    @AppStorage("isDayChanging") var isDayChanging: Bool = true
     
     var body: some View {
         NavigationView {
@@ -36,7 +37,7 @@ struct ChallengeScreen: View {
                 BackgroundView()
                 VStack {
                     VStack {
-                        PageTitle(titlePage: "Day1")
+                        PageTitle(titlePage: "Day \(progressDay)")
                     }
                     .padding(.top, 48)
                     .padding(.horizontal, 24)
@@ -78,7 +79,7 @@ struct ChallengeScreen: View {
                             List {
                                 ForEach(0..<3) { i in
                                     NavigationLink {
-                                        RecordView(challenge: challenges[todayChallenges[i]])
+                                        RecordSelectionView(challenge: challenges[todayChallenges[i]])
                                             .environment(\.managedObjectContext, viewContext)
                                     } label: {
                                         Text(challenges[todayChallenges[i]].question!)
@@ -86,7 +87,7 @@ struct ChallengeScreen: View {
                                                 Button {
                                                     if numberOfTimeLeft > 0 {
                                                         modifyChallenge(index: i)
-                                                        self.numberOfTimeLeft -= 1
+                                                        numberOfTimeLeft -= 1
                                                     } else {
                                                         self.showingAlert = true
                                                     }
@@ -107,8 +108,7 @@ struct ChallengeScreen: View {
                     } else {
                         // 뽑기 버튼
                         Button {
-                            isPickedChallenge.toggle()
-                            
+                            isPickedChallenge = true
                             dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
                         } label: {
                             Text("오늘의 챌린지 뽑기")
@@ -129,9 +129,15 @@ struct ChallengeScreen: View {
                     {
                         UserDefaults.standard.setValue(today, forKey:Constants.FIRSTLAUNCH)
                         isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
-                    }
-                    
-                    if todayChallenges.isEmpty {
+                        dailyFirstUse = true
+                        if isDayChanging {
+                            progressDay += 1
+                            isDayChanging = false
+                        }
+                        
+                        numberOfTimeLeft = 3
+                        todayRemovedChallenges = []
+                        todayChallenges = []
                         initChallenges(number: challengeNumber)
                     }
                 })
@@ -141,6 +147,7 @@ struct ChallengeScreen: View {
                     }
                 }
             }
+            .navigationTitle("")
         }
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.visible, for: .tabBar)
