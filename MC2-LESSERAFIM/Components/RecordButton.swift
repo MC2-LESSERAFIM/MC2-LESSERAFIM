@@ -30,8 +30,11 @@ struct RecordButton: View {
         }
         // 버튼 스타일
         .frame(width: 107, height: 96)  // 버튼 크기
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(Color.mainPinkOpacity, lineWidth: 2)
+        )
         .background(colorButton) // 버튼 색상
-        .cornerRadius(radiusButton) // 버튼 곡률
     }
 }
 
