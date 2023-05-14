@@ -105,8 +105,6 @@ struct WritingView: View {
                         }
                 }
             }
-            .font(.subheadline)
-            .textFieldStyle(.roundedBorder)
             .onSubmit {
                 switch focusedField {
                 case .title:
