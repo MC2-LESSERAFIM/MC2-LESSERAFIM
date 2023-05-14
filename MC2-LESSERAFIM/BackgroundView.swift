@@ -1,5 +1,5 @@
 //
-//  backgroundView.swift
+//  BackgroundView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by Jun on 2023/05/12.
@@ -16,7 +16,7 @@ let circleColors = [Color(red:248/255, green: 149/255, blue: 203/255),
 ]
 
 
-struct backgroundView: View {
+struct BackgroundView: View {
     @AppStorage("opacities") var opacities: [Double] = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
     var width: Double
     var height: Double
@@ -52,8 +52,8 @@ struct backgroundView: View {
 }
 
 
-struct backgroundView_Previews: PreviewProvider {
+struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        backgroundView()
+        BackgroundView()
     }
 }

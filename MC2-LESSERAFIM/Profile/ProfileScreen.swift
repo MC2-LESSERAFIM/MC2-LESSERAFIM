@@ -21,7 +21,7 @@ struct ProfileScreen: View {
     
     var body: some View {
         ZStack {
-            backgroundView()
+            BackgroundView()
             VStack(spacing: 0) {
                 VStack {
                     ZStack {

@@ -36,7 +36,7 @@ struct RecordCollectionView: View {
     var body: some View {
         NavigationView {
             ZStack(alignment: .topTrailing) {
-                backgroundView()
+                BackgroundView()
                 ScrollView(showsIndicators: false) {
                     // MARK: - sorting by .day
                     if selectedSort == .day {

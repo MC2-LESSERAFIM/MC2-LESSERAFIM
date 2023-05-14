@@ -11,9 +11,6 @@ struct ChallengeScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(sortDescriptors: [])
-    private var posts: FetchedResults<Post>
-    
-    @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
     
     // tables swipe action
@@ -32,10 +29,11 @@ struct ChallengeScreen: View {
     
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false    // 오늘 앱 처음 사용 여부 == 첫 기록 확인용
     
+    
     var body: some View {
         NavigationView {
             ZStack {
-                backgroundView()
+                BackgroundView()
                 VStack {
                     VStack {
                         PageTitle(titlePage: "Day1")
