@@ -108,3 +108,37 @@ struct OnlyWritingContentTextField: View {
         }
     }
 }
+
+struct OtherContentTextField: View {
+    @Binding var contentRecord: String   // 챌린지 내용
+    
+    var placeholder: String
+    
+    var body: some View {
+        ScrollView {
+            ZStack {
+                TextField("", text: $contentRecord,  axis: .vertical)
+                    .placeholder(when: contentRecord.isEmpty, placeholder: {
+                        Text("\(placeholder)")
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundColor(.mainGray)
+                    })
+                    .frame(height: 120)
+                    .lineLimit(1...)
+                    .padding(.horizontal, 12)
+                    .foregroundColor(.mainBlack)
+                    .font(.system(size: 15, weight: .regular))
+                    .accentColor(.mainPink)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+            }
+            .padding(.horizontal, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.white, lineWidth: 1)
+                    .background(Color.opacityWhite)
+            )
+            .cornerRadius(5)
+        }
+    }
+}
