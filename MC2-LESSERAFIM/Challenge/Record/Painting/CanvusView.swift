@@ -120,9 +120,11 @@ struct CanvusView: View {
                             
                             TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
                                 .padding(.horizontal, 24)
+                                .submitLabel(.return)
                             
                             OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
                                 .padding(.horizontal, 24)
+                                .submitLabel(.return)
                         }
                         .toolbar{
                             //Tool bar 상단에 체크 버튼 생성
