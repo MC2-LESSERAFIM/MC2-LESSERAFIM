@@ -41,6 +41,7 @@ struct ImagePicker: UIViewControllerRepresentable {
 
 struct WritingView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
     
     enum FocusField: Hashable {
         case title
@@ -155,6 +156,30 @@ struct WritingView: View {
                         .onTapGesture {
                             if (selectedImage != nil) {
                                 addPost(title: title, content: content, createdAt: Date.now, day: Int16(1), isFirstPost: true, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                switch(self.challenge.category){
+                                case "Favorites":
+                                    opacities[0] = min(opacities[0] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case "Dislikes":
+                                    opacities[1] = min(opacities[1] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case "Strengths":
+                                    opacities[2] = min(opacities[2] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case "Weaknesses":
+                                    opacities[3] = min(opacities[3] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case "ComfortZone":
+                                    opacities[4] = min(opacities[4] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case "Values":
+                                    opacities[5] = min(opacities[5] + 0.4, 1.0)
+                                    let _ = print(opacities)
+                                case .none:
+                                    break
+                                case .some(_):
+                                    break
+                                }
                                 /*
                                 let newPost =  PostModel(type: type,
                                 imageData: selectedImage?.jpegData(compressionQuality: 1.0),
