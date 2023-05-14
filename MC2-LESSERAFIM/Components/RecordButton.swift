@@ -35,6 +35,7 @@ struct RecordButton: View {
                 .stroke(Color.mainPinkOpacity, lineWidth: 2)
         )
         .background(colorButton) // 버튼 색상
+        .cornerRadius(12)   // 배경 버튼 곡률
     }
 }
 
