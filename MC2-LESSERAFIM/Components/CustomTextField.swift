@@ -36,3 +36,37 @@ struct UserNameTextField: View {
         .cornerRadius(5)
     }
 }
+
+struct TitleTextField: View {
+    @Binding var titleRecord: String   // 챌린지 타이틀
+    
+    var placeholder: String
+    
+    var body: some View {
+        ScrollView {
+            ZStack {
+                TextField("", text: $titleRecord,  axis: .vertical)
+                    .placeholder(when: titleRecord.isEmpty, placeholder: {
+                        Text("\(placeholder)")
+                            .font(.system(size: 15, weight: .regular))
+                            .foregroundColor(.mainGray)
+                    })
+                    .frame(height: 48)
+                    .lineLimit(1...)
+                    .padding(.horizontal, 12)
+                    .foregroundColor(.mainBlack)
+                    .font(.system(size: 15, weight: .regular))
+                    .accentColor(.mainPink)
+                    .textInputAutocapitalization(.never)
+                    .disableAutocorrection(true)
+            }
+            .padding(.horizontal, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke(Color.white, lineWidth: 1)
+                    .background(Color.opacityWhite)
+            )
+            .cornerRadius(5)
+        }
+    }
+}
