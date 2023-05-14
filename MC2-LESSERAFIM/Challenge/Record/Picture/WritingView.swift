@@ -115,9 +115,9 @@ struct WritingView: View {
             }
             .padding(EdgeInsets(top: 47-30, leading: 20, bottom: 34, trailing: 20))
             .alert("이미지를 업로드 해주세요", isPresented: $showingAlert) {
-              Button("OK", role: .cancel) {
-                  self.showingAlert = false
-              }
+                Button("OK", role: .cancel) {
+                    self.showingAlert = false
+                }
             }
             .sheet(isPresented: $imagePickerPresented,
                    onDismiss: loadImage,
@@ -125,12 +125,13 @@ struct WritingView: View {
             .toolbar {
                 ToolbarItem {
                     Image(systemName: "checkmark.circle")
+                        .foregroundColor(.mainPink)
                         .onTapGesture {
                             if (selectedImage != nil) {
                                 let newPost =  Post(type: type,
                                                     imageData: selectedImage?.jpegData(compressionQuality: 1.0),
-                                                    title: title,
-                                                    content: content,
+                                                    title: titleRecord,
+                                                    content: contentRecord,
                                                     category: Category.random())
                                 postData.posts.append(newPost)
                                 self.presentationMode.wrappedValue.dismiss()
