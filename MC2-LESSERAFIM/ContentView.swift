@@ -66,6 +66,7 @@ struct ContentView: View {
     @ObservedObject var appLock  = BiometricLock()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     @AppStorage("userName") var userName: String = ""
+/*
     @AppStorage("charaterData") var charaterData: Data = Data()
     @AppStorage("selectedImageName") var selectedImageName: String = ""
     @AppStorage("isLockEnabled") var lockSetting: Bool = false
@@ -73,7 +74,7 @@ struct ContentView: View {
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
     @AppStorage("opacities") var opacities: [Double] = []
-    
+    */
     var body: some View {
         if isOnBoarding {
             OnBoardingScreen()

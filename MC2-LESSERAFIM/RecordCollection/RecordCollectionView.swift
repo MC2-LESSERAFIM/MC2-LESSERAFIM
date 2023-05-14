@@ -35,7 +35,7 @@ struct RecordCollectionView: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
+            ZStack(alignment: .topTrailing) {
                 backgroundView()
                 ScrollView(showsIndicators: false) {
                     // MARK: - sorting by .day
@@ -47,7 +47,7 @@ struct RecordCollectionView: View {
                     else if selectedSort == .category {
                         CategoryView(categories: userData.categories)
                             .environment(\.managedObjectContext, viewContext)
-                        /*
+                        /* 
                          Dictionary(
                          grouping: posts,
                          by: { $0.category.rawValue }
