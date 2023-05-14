@@ -70,12 +70,12 @@ struct RecordCollectionView: View {
                     }
                     .padding(.horizontal, 24)
                     
-                    ScrollView(showsIndicators: false) {
-                        if (selectedSort.rawValue == "날짜") {
+                    ScrollView(showsIndicators: false) {                            
+                        if selectedSort == .day {
                             GalleryView()
                                 .environment(\.managedObjectContext, viewContext)
                         }
-                        else if (selectedSort.rawValue == "주제") {
+                        else if selectedSort == .category {
                             CategoryView(categories: userData.categories)
                                 .environment(\.managedObjectContext, viewContext)
                         }
