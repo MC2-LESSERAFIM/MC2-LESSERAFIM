@@ -75,6 +75,44 @@ struct ContentView: View {
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
     @AppStorage("opacities") var opacities: [Double] = []
     */
+    
+    @FetchRequest(sortDescriptors: [])
+    private var challenges: FetchedResults<Challenge>
+    
+    func addChallenges(category: String, difficulty: Int16, isSuccess: Bool = false, question: String){
+        let challenge = Challenge(context: viewContext)
+        challenge.category = category
+        challenge.difficulty = difficulty
+        challenge.isSuccess = isSuccess
+        challenge.question = question
+        saveContext()
+    }
+    
+    
+    func saveContext() {
+      do {
+          try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func loadData() {
+        if challenges.count == 0 {
+            print("CoreData : Initialize challenges")
+            addChallenges(category: "Favorites", difficulty: Int16(1), question: "당신이 가장 좋아하는 별명은 무엇인가요?")
+            addChallenges(category: "Dislikes", difficulty: Int16(1), question: "올해 가장 화났던 일화 들려주기")
+            addChallenges(category: "Strengths", difficulty: Int16(1), question: "내가 가진 습관 중 가장 멋진 습관 자랑하기")
+            addChallenges(category: "Weaknesses", difficulty: Int16(2), question: "고치고 싶은 나쁜 습관이 무엇인가요?")
+            addChallenges(category: "ComfortZone", difficulty: Int16(1), question: "내 이름 세 번 부르기")
+            addChallenges(category: "Values", difficulty: Int16(3), question: "힘든 시간을 보내는 사람을 보면 어떤 감정이 드나요?")
+            print("CoreData : \(challenges.count) challenges added")
+        }
+        else {
+            print("CoreData : Already \(challenges.count) challenges in CoreData")
+        }
+    }
+    
     var body: some View {
         if isOnBoarding {
             OnBoardingScreen()
@@ -100,6 +138,7 @@ struct ContentView: View {
                     }
                     .environmentObject(appLock)
             } .onAppear {
+                loadData()
                 makeTabBarTransparent()
                 permissionManager.requestAlbumPermission()
                 permissionManager.requestAlramPermission()
