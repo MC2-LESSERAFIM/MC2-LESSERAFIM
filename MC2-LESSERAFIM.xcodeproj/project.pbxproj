@@ -32,7 +32,7 @@
 		D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */; };
 		D24371DA2A0E9776007DC1A6 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371D92A0E9776007DC1A6 /* ColorExtension.swift */; };
 		D24371DC2A0E9CA7007DC1A6 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371DB2A0E9CA7007DC1A6 /* ViewExtension.swift */; };
-		D24371DE2A0E9CD1007DC1A6 /* UserNameTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */; };
+		D24371DE2A0E9CD1007DC1A6 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24371DD2A0E9CD1007DC1A6 /* CustomTextField.swift */; };
 		D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */; };
 		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
 		D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */; };
@@ -90,7 +90,7 @@
 		D22AEBF82A0DC654000FCAED /* NameModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameModalScreen.swift; sourceTree = "<group>"; };
 		D24371D92A0E9776007DC1A6 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		D24371DB2A0E9CA7007DC1A6 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
-		D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNameTextField.swift; sourceTree = "<group>"; };
+		D24371DD2A0E9CD1007DC1A6 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOnBoarding.swift; sourceTree = "<group>"; };
 		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUserCharacterScreen.swift; sourceTree = "<group>"; };
@@ -204,7 +204,7 @@
 			children = (
 				8E15E4CC2A087F67003C7D3F /* RecordButton.swift */,
 				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
-				D24371DD2A0E9CD1007DC1A6 /* UserNameTextField.swift */,
+				D24371DD2A0E9CD1007DC1A6 /* CustomTextField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				D24371DA2A0E9776007DC1A6 /* ColorExtension.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
-				D24371DE2A0E9CD1007DC1A6 /* UserNameTextField.swift in Sources */,
+				D24371DE2A0E9CD1007DC1A6 /* CustomTextField.swift in Sources */,
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */,
