@@ -87,19 +87,27 @@ struct RecordWritingView: View {
                                 print("no story")
                                 self.showingAlert = true
                             } else {    // 내용 입력 누락이 없을 경우 제출 가능
+                                // 데이가 바뀐적이 없다면 데이가 바뀐다..?
                                 if isDayChanging == false {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 changeBackgroundOpacity()
                                 backToCollection = true
-//                                dismiss()
+                                updateFirstUse()
+                                dismiss()
                             }
                         }
                 }
             }
         }
     }   // body
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
+        }
+    }
     
     func saveContext() {
       do {

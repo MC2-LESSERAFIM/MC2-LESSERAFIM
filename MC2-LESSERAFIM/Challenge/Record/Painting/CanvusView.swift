@@ -227,8 +227,8 @@ struct CanvusView: View {
                     
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     changeBackgroundOpacity()
-                    backToCollection = true
-                    //dismiss()
+                    updateFirstUse()
+                    backToChallenge = true
                 }
                 
                 
@@ -236,6 +236,12 @@ struct CanvusView: View {
                 Image(systemName: "checkmark.circle")
             }
         }.navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
+        }
     }
     
     func saveContext() {

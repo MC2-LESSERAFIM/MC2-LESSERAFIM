@@ -151,7 +151,8 @@ struct WritingView: View {
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
                                     changeBackgroundOpacity()
                                     backToCollection = true
-//                                    dismiss()
+                                    updateFirstUse()
+                                    dismiss()
                                 }
                                 else{
                                     self.showingAlert = true
@@ -161,6 +162,12 @@ struct WritingView: View {
                     
                 }
             }
+        }
+    }
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
         }
     }
     
