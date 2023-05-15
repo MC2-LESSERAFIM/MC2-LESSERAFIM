@@ -23,5 +23,5 @@ extension Color {
     static let mainBlack = Color(hex: "292929")
     static let disabledButtonGray = Color(hex: "DDDDDD")
     static let opacityWhite = Color(hex: "FFFFFF")
-        .opacity(0.3)
+        .opacity(0.7)
 }

@@ -7,7 +7,15 @@
 import SwiftUI
 
 struct RecordCollectionView: View {
-    @EnvironmentObject var userData: UserData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @EnvironmentObject var userData: UserDataModel
+    
+    @FetchRequest(sortDescriptors: [])
+    private var challenges: FetchedResults<Challenge>
+    
+    @FetchRequest(sortDescriptors: [])
+    private var posts: FetchedResults<Post>
     
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
@@ -16,36 +24,65 @@ struct RecordCollectionView: View {
     }
     
     @State private var selectedSort: SortBy = .day
-    var width: CGFloat
-    var height: CGFloat
+    
+    func saveContext() {
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
     
     var body: some View {
         NavigationView {
-            ZStack{
-                backgroundView(width: width, height: height)
-                    .environmentObject(userData)
-                
-                ScrollView(showsIndicators: false) {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        GalleryView(posts: userData.posts)
-                    }
-                    // MARK: - sorting by .category
-                    else if selectedSort == .category {
-                        CategoryView(categories: userData.categories)
-                    }
-                }
-                .navigationTitle("나의 기록")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbar {
-                    Picker("", selection: $selectedSort) {
-                        ForEach(SortBy.allCases) { sort in
-                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                .labelStyle(.titleAndIcon)
+            ZStack {
+                BackgroundView()
+                VStack {
+                    HStack(alignment: .bottom) {
+                        PageTitle(titlePage: "나의 기록")
+                            .padding(.top, 48)
+                        
+                        Menu {
+                            Button(action: {
+                                selectedSort = SortBy.day
+                            }, label: {
+                                Text("날짜")
+                            })
+                            Button(action: {
+                                selectedSort = SortBy.category
+                            }, label: {
+                                Text("주제")
+                            })
+                        } label: {
+                            Label(title: {
+                                Text("\(selectedSort.rawValue)")
+                                    .font(.system(size: 12, weight: .regular))
+                            }, icon: {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .font(.system(size: 12))
+                                    .frame(width: 12, height: 12)
+                            })
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.mainPink.opacity(0.2))
+                            .cornerRadius(9)
                         }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    ScrollView(showsIndicators: false) {
+                        if (selectedSort.rawValue == "날짜") {
+                            GalleryView()
+                                .environment(\.managedObjectContext, viewContext)
+                        }
+                        else if (selectedSort.rawValue == "주제") {
+                            CategoryView(categories: userData.categories)
+                                .environment(\.managedObjectContext, viewContext)
+                        }
+                    }
+                    .toolbar(.visible, for: .tabBar)
                 }
-                .toolbar(.visible, for: .tabBar)
+                
             }
         }
     }
@@ -53,12 +90,7 @@ struct RecordCollectionView: View {
 
 struct RecordCollectionView_Preview: PreviewProvider {
     static var previews: some View {
-        GeometryReader { geo in
-            NavigationStack {
-                RecordCollectionView(width: geo.size.width, height: geo.size.height)
-                    .environmentObject(ModelData())
-            }
-        }
+        RecordCollectionView()
     }
 }
 
@@ -132,7 +164,10 @@ func load<T: Decodable>(_ filename: String) -> T {
 }
 
 struct GalleryView: View {
-    let posts: [Post]
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors: [])
+    private var posts: FetchedResults<Post>
     
     private var items: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
@@ -146,7 +181,7 @@ struct GalleryView: View {
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        post.image
+                        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
                             .resizable()
                             .scaledToFit()
                             .frame(minHeight: 172)
@@ -165,7 +200,7 @@ struct GalleryView: View {
 
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
-    let categories: [String: [Post]]
+    let categories: [String: [PostModel]]
     
     private let numberColumns = [
         GridItem(.adaptive(minimum: 164)),
@@ -179,7 +214,7 @@ struct CategoryView: View {
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
-                    GalleryView(posts: posts)
+                    GalleryView()
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
@@ -205,14 +240,17 @@ struct PostDetailView: View {
         
     let post: Post
     
+    @State var isTabBarVisible = false
+    
     var body: some View {
-        post.image
+        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
             .resizable()
             .scaledToFill()
             .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button {
+                        isTabBarVisible = true
                         dismiss()
                     } label: {
                         Image(systemName: "x.circle")
@@ -223,23 +261,10 @@ struct PostDetailView: View {
                     }
                 }
             }
-            .toolbar(.hidden, for: .tabBar)
+            .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden()
+    }
         
-    }
-}
-
-struct PostDetailView_Preview: PreviewProvider {
-    @StateObject static var userData = UserData()
-    
-    static var previews: some View {
-        PostDetailView(post: userData.posts.last
-                       ?? Post(type: "글 + 사진",
-                               imageData: nil,
-                               title: "행복로",
-                               content: "사랑시",
-                               category: .comfortZone))
-    }
 }
 
 extension Image {
