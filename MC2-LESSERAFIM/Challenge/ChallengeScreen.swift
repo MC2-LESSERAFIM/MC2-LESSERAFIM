@@ -43,12 +43,12 @@ struct ChallengeScreen: View {
                     .padding(.horizontal, 24)
                     
                     VStack {
-                        Image(tappedImageName)
+                        Image(selectedImageName)
                             .resizable()
                             .scaledToFit()
                             .frame(height: 320)
                         
-                        Text(username)
+                        Text(userName)
                             .font(.system(size: 20, weight: .semibold))
                             .padding(.bottom, 15)
                         
