@@ -73,38 +73,41 @@ struct ContentView: View {
     private var challenges: FetchedResults<Challenge>
     
     var body: some View {
-        if isOnBoarding {
-            OnBoardingScreen()
-                .onAppear{
-                    loadData()
-                }
-        } else {
-            TabView(selection: $isSeletedTab) {
-                RecordCollectionView()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("기록모음")
+        GeometryReader { geo in
+            if isOnBoarding {
+                OnBoardingScreen()
+                    .onAppear{
+                        loadData()
                     }
-                    .environment(\.managedObjectContext, viewContext)
-                    .tag(0)
-                ChallengeScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("챌린지")
+            } else {
+                TabView(selection: $isSeletedTab) {
+                    RecordCollectionView()
+                        .tabItem {
+                            Image(systemName: "magazine.fill")
+                            Text("기록모음")
+                        }
+                        .environment(\.managedObjectContext, viewContext)
+                        .tag(0)
+                    ChallengeScreen()
+                        .tabItem {
+                            Image(systemName: "star")
+                            Text("챌린지")
+                        }
+                        .environment(\.managedObjectContext, viewContext)
+                        .tag(1)
+                    ProfileScreen()
+                        .tabItem {
+                            Image(systemName: "person.crop.circle.fill")
+                            Text("프로필")
+                        }
+                        .environmentObject(appLock)
+                        .tag(2)
+                }.frame(height: geo.size.height)
+                    .onAppear {
+                        makeTabBarTransparent()
+                        permissionManager.requestAlbumPermission()
+                        permissionManager.requestAlramPermission()
                     }
-                    .environment(\.managedObjectContext, viewContext)
-                    .tag(1)
-                ProfileScreen()
-                    .tabItem {
-                        Image(systemName: "star")
-                        Text("프로필")
-                    }
-                    .environmentObject(appLock)
-                    .tag(2)
-            } .onAppear {
-                makeTabBarTransparent()
-                permissionManager.requestAlbumPermission()
-                permissionManager.requestAlramPermission()
             }
         }
     }
