@@ -18,12 +18,13 @@ import SwiftUI
 //}
 
 struct CheckInScreen: View {
-    @EnvironmentObject var userData: UserData
-    @State private var username = ""
+    @AppStorage("userName") var userName: String = ""
     @State private var isLinkActive = false
     
     var body: some View {
 //        NavigationView{
+        ZStack{
+            BackgroundView()
             VStack(alignment: .leading, spacing: 0){
                 PageTitle(titlePage: "우리가 당신을 어떻게 부르면 좋을까요?")
                 
@@ -34,15 +35,15 @@ struct CheckInScreen: View {
                     .foregroundColor(.gray)
                     .padding(.top, 12)
                 
-                UserNameTextField(username: $username, placeholder: "호칭을 적어주세요")
+                UserNameTextField(username: $userName, placeholder: "호칭을 적어주세요")
                     .padding(.top, 24)
                     .onSubmit {
-                        if !username.isEmpty {
+                        if !userName.isEmpty {
                             self.isLinkActive = true
                         }
                     }
                 
-                NavigationLink(destination: SelectedUserCharacterScreen(username: username), isActive: $isLinkActive) {
+                NavigationLink(destination: SelectedUserCharacterScreen(), isActive: $isLinkActive) {
                     EmptyView()
                 }
                 
@@ -52,6 +53,7 @@ struct CheckInScreen: View {
             .padding(.top, 100)
             .ignoresSafeArea()
             .navigationTitle("")
+        }
     }
 }
 
@@ -59,6 +61,5 @@ struct CheckInScreen: View {
 struct CheckInScreen_Previews: PreviewProvider {
     static var previews: some View {
         CheckInScreen()
-            .environmentObject(UserData())
     }
 }

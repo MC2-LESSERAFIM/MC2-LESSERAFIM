@@ -1,5 +1,5 @@
 //
-//  backgroundView.swift
+//  BackgroundView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by Jun on 2023/05/12.
@@ -16,28 +16,22 @@ let circleColors = [Color(red:248/255, green: 149/255, blue: 203/255),
 ]
 
 
-struct backgroundView: View {
-    @EnvironmentObject var userData: UserData
-    
-    var width: CGFloat
-    var height: CGFloat
-    
-    struct Offset {
-        var x: CGFloat
-        var y: CGFloat
-    }
-    
+struct BackgroundView: View {
+    @AppStorage("opacities") var opacities: [Double] = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+    var width: Double
+    var height: Double
     @State var offsets: [Offset]
     
-    init(width: CGFloat, height: CGFloat) {
-        self.width = width
-        self.height = height
+    init() {
+        self.width = UIScreen.main.bounds.size.width
+        self.height = UIScreen.main.bounds.size.height
+        
         self._offsets = State(initialValue: [Offset(x:(-58.04 - 59.96) * (width / 393), y:(10 - 255.9) * (height / 852)),
-                          Offset(x:(139.63 - 59.96) * (width / 393), y:(-67 - 255.9) * (height / 852)),
-                          Offset(x:(-33.33 - 59.96) * (width / 393), y:(307.24 - 255.9) * (height / 852)),
-                          Offset(x:(199.83 - 59.96) * (width / 393), y:(238.78 - 255.9) * (height / 852)),
-                          Offset(x:(-80 - 59.96) * (width / 393), y:(578.94 - 255.9) * (height / 852)),
-                          Offset(x:(139.63 - 59.96) * (width / 393), y:(524.26 - 255.9) * (height / 852))])
+                                             Offset(x:(139.63 - 59.96) * (width / 393), y:(-67 - 255.9) * (height / 852)),
+                                             Offset(x:(-33.33 - 59.96) * (width / 393), y:(307.24 - 255.9) * (height / 852)),
+                                             Offset(x:(199.83 - 59.96) * (width / 393), y:(238.78 - 255.9) * (height / 852)),
+                                             Offset(x:(-80 - 59.96) * (width / 393), y:(578.94 - 255.9) * (height / 852)),
+                                             Offset(x:(139.63 - 59.96) * (width / 393), y:(524.26 - 255.9) * (height / 852))])
     }
     
     var body: some View {
@@ -47,7 +41,7 @@ struct backgroundView: View {
                     Ellipse()
                         .fill(circleColors[i])
                         .offset(x:offsets[i].x, y:offsets[i].y)
-                        .opacity(userData.opacities[i])
+                        .opacity(opacities[i])
                         .frame(width: 300, height: 346)
                         .blur(radius: 50.0)
                         .opacity(1.0)
@@ -58,8 +52,8 @@ struct backgroundView: View {
 }
 
 
-struct backgroundView_Previews: PreviewProvider {
+struct BackgroundView_Previews: PreviewProvider {
     static var previews: some View {
-        backgroundView(width: CGFloat(393), height: CGFloat(852))
+        BackgroundView()
     }
 }

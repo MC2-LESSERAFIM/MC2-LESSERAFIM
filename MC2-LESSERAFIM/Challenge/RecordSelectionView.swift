@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct RecordSelectionView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    var challenge: Challenge
     
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
+    @State var isWritingView: Bool = false
     
     var body: some View {
-        NavigationView{
+        ZStack {
+            BackgroundView()
             VStack {    // 내비게이션 백버튼 - 타이틀 - 기록선택버튼
                 // 내비게이션 백버튼
                 
@@ -41,6 +46,7 @@ struct RecordSelectionView: View {
                             // 액션시트 리스트
                             buttons: [
                                 .default(Text("사진 첨부"), action: {
+                                    isWritingView = true
                                     // 항목 1 선택 시 처리
                                 }),
                                 .default(Text("사진 촬영"), action: {
@@ -51,8 +57,17 @@ struct RecordSelectionView: View {
                         )
                     }
                     
+                    NavigationLink(destination:
+                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                                   , isActive: $isWritingView
+                    ) {
+                        EmptyView()
+                    }
+                    
                     // 기록/글 화면 이동 버튼
-                    NavigationLink(destination: RecordWritingView()) {
+                    NavigationLink(destination:
+                                    RecordWritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                    ) {
                         RecordButton(
                             labelTitle: "글",
                             labelImage: "square.and.pencil",
@@ -62,7 +77,7 @@ struct RecordSelectionView: View {
                     }
                     
                     // 기록/그림 화면 이동 버튼
-                    NavigationLink(destination: CanvusView()) {
+                    NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)) {
                         RecordButton(
                             labelTitle: "그림",
                             labelImage: "paintpalette.fill",
@@ -78,12 +93,5 @@ struct RecordSelectionView: View {
             .padding(.horizontal, 24)   // 양 옆 가드 영역
             .navigationTitle("")
         }
-        .ignoresSafeArea()
-    }
-}
-
-struct RecordSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordSelectionView()
     }
 }
