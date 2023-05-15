@@ -22,7 +22,7 @@ struct OnboardingTabView: View {
             Text(data.primaryText)
                 .font(.system(size: 26, weight: .bold))
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 43.0)
+                .padding(.horizontal, 25.0)
             
             Spacer()
                 .frame(height: 23.5)
@@ -31,7 +31,7 @@ struct OnboardingTabView: View {
                 .font(.system(size: 17))
                 .lineSpacing(4)
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 43.0)
+                .padding(.horizontal, 30.0)
                 .foregroundColor(.mainGray)
             
             Spacer()

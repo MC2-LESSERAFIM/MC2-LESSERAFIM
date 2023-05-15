@@ -94,7 +94,7 @@ struct OnBoardingScreen: View {
                         NavigationLink(destination:
                                         CheckInScreen()
                                        , label: {
-                            Text("나와의 연애 시작하기")
+                            Text("나를 찾아 떠나기")
                                 .font(.system(size: 17, weight: .bold))
                                 .foregroundColor(.white)
                                 .frame(width: 345,height: 50)
