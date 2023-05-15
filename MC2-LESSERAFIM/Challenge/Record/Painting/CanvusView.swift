@@ -204,13 +204,13 @@ struct CanvusView: View {
                 
                 if let image = canvusImage.uiImage{
                     //이미지 처리
-                    renImage = Image(uiImage: image)
+                    //renImage = Image(uiImage: image)
                     //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     
-                    //텍스트 처리
-                    //                                $challengeTitle
-                    //                                $challegeContent
+                    addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                    changeBackgroundOpacity()
+                    dismiss()
                 }
                 
                 
@@ -221,11 +221,11 @@ struct CanvusView: View {
     }
     
     func saveContext() {
-      do {
-        try viewContext.save()
-      } catch {
-        print("Error saving managed object context: \(error)")
-      }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
     }
     
     func addPost(title: String, content: String, createdAt: Date, day: Int16, isFirstPost: Bool, imageData: Data) {
@@ -239,7 +239,7 @@ struct CanvusView: View {
         post.challenge = self.challenge
         saveContext()
     }
-
+    
     func changeBackgroundOpacity() {
         switch(challenge.category){
         case "Favorites":
