@@ -58,9 +58,3 @@ struct CheckInComplete_Previews: PreviewProvider {
         CheckInScreen()
     }
 }
-
-fileprivate extension CheckInComplete {
-    func finishOnboarding() {
-        isOnBoarding = false
-    }
-}
