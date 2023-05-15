@@ -52,8 +52,8 @@ struct WritingView: View {
     @State private var profileImage: Image?
     
     @State private var showingAlert = false
-    @State var title: String = ""
-    @State var content: String = ""
+    @State var titleRecord: String = ""   // 챌린지 타이틀
+    @State var contentRecord: String = ""   // 챌린지 내용
     var type: String
     
     @FocusState private var focusedField: FocusField?
@@ -65,43 +65,46 @@ struct WritingView: View {
     
     var body: some View {
         GeometryReader { geo in
-            VStack(spacing: 10) {
-                
-                Button(action: {
-                    imagePickerPresented.toggle()
-                }, label: {
-                    if profileImage == nil {
-                        Rectangle()
-                            .foregroundColor(.gray)
-                        
-                    }
-                    else{
-                        profileImage!
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geo.size.width - 40, height: geo.size.height - 170, alignment: .center)
-                            .clipped()
-                    }
-                })
-                
-                TextField("이번 챌린지 사진에 제목을 붙여볼까요?", text: $title)
-                    .focused($focusedField, equals: .title)
-                    .submitLabel(.next)
-                
-                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
-                    .focused($focusedField, equals: .content)
-                    .lineLimit(3...)
-                    .submitLabel(.return)
-                    .toolbar {
-                        ToolbarItemGroup(placement: .keyboard) {
-                            Button("완료") {
-                                hideKeyboard()
+            ScrollView {
+                VStack(spacing: 10) {
+                    
+                    Button(action: {
+                        imagePickerPresented.toggle()
+                    }, label: {
+                        if profileImage == nil {
+                            ZStack {
+                                Text("이미지를 업로드 해주세요.")
+                                
+                                Rectangle()
+                                    .foregroundColor(.mainGray)
+                                    .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
                             }
                         }
-                    }
+                        else{
+                            profileImage!
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
+                                .clipped()
+                        }
+                    })
+                    
+                    TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
+                        .submitLabel(.return)
+                    
+                    //                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
+                    OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
+                        .lineLimit(3)
+                        .submitLabel(.return)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Button("완료") {
+                                    hideKeyboard()
+                                }
+                            }
+                        }
+                }
             }
-            .font(.subheadline)
-            .textFieldStyle(.roundedBorder)
             .onSubmit {
                 switch focusedField {
                 case .title:
@@ -112,9 +115,9 @@ struct WritingView: View {
             }
             .padding(EdgeInsets(top: 47-30, leading: 20, bottom: 34, trailing: 20))
             .alert("이미지를 업로드 해주세요", isPresented: $showingAlert) {
-              Button("OK", role: .cancel) {
-                  self.showingAlert = false
-              }
+                Button("OK", role: .cancel) {
+                    self.showingAlert = false
+                }
             }
             .sheet(isPresented: $imagePickerPresented,
                    onDismiss: loadImage,
@@ -122,12 +125,13 @@ struct WritingView: View {
             .toolbar {
                 ToolbarItem {
                     Image(systemName: "checkmark.circle")
+                        .foregroundColor(.mainPink)
                         .onTapGesture {
                             if (selectedImage != nil) {
                                 let newPost =  Post(type: type,
                                                     imageData: selectedImage?.jpegData(compressionQuality: 1.0),
-                                                    title: title,
-                                                    content: content,
+                                                    title: titleRecord,
+                                                    content: contentRecord,
                                                     category: Category.random())
                                 postData.posts.append(newPost)
                                 self.presentationMode.wrappedValue.dismiss()
