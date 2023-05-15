@@ -214,15 +214,7 @@ struct GalleryView: View {
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)    // 프레임 내에 이미지 가득 채우기
-                            .frame(width: 129, height: 172)
-                            .background(
-                                LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
-                                               startPoint: .top, endPoint: .bottom)
-                            )
-                            .clipped()
+                        ThumbnailView(post: post)
                     }
                 }
             }
