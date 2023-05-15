@@ -102,12 +102,13 @@ struct ContentView: View {
                         }
                         .environmentObject(appLock)
                         .tag(2)
-                }.frame(height: geo.size.height)
-                    .onAppear {
-                        makeTabBarTransparent()
-                        permissionManager.requestAlbumPermission()
-                        permissionManager.requestAlramPermission()
-                    }
+                }
+                .frame(height: geo.size.height)
+                .onAppear {
+                    makeTabBarTransparent()
+                    permissionManager.requestAlbumPermission()
+                    permissionManager.requestAlramPermission()
+                }
             }
         }
     }
@@ -167,7 +168,6 @@ struct ContentView: View {
                 let keyword = columns[2]
                 let question = columns[3]
                 let difficulty = Int16(columns[4]) ?? 0
-                print(columns)
                 addChallenges(category: category, difficulty: difficulty, question: question)
             }
         }
