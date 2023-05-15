@@ -13,7 +13,7 @@ struct UserNameTextField: View {
     
     var body: some View {
         ZStack {
-            TextField("", text: $username,  axis: .vertical)
+            TextField("", text: $username)
                 .placeholder(when: username.isEmpty, placeholder: {
                     Text("\(placeholder)")
                         .font(.system(size: 15, weight: .regular))
