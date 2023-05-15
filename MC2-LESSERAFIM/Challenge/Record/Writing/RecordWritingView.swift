@@ -46,7 +46,7 @@ struct RecordWritingView: View {
                     // 챌린지 내용
                     OnlyWritingContentTextField(contentRecord: $contentRecord, onStory: false, placeholder: "어떤 이야기가 담겨있나요?")
                         .submitLabel(.return)
-                        .frame(height: onStory ? geo.size.height - 100 : 620)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
+                        .frame(height: onStory ? geo.size.height - 100 : 580)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
                         .onTapGesture {
                             onStory = true
                             print(geo.size.height)
