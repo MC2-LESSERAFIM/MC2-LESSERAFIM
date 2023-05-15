@@ -69,6 +69,7 @@ struct CanvusView: View {
             .stroke(Color.mainPinkOpacity, lineWidth: 2))
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
             .onChanged({ value in
+                toolClicked = false
                 currentLine.color = selectedColor
                 let newPoint = value.location
                 currentLine.point.append(newPoint) //라인 1개 생성
