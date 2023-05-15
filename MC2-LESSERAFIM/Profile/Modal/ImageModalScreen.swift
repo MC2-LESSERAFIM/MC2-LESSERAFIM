@@ -23,6 +23,7 @@ struct ImageModalScreen: View {
                 Text("당신의 캐릭터를 골라볼까요?")
                     .font(.system(size: 26, weight: .bold))
                     .multilineTextAlignment(.leading)
+                    .padding(.top, 48)
                 
                 Text("마음에 드는 캐릭터의 배를 간지럽혀주세요.")
                     .font(.system(size: 17))
