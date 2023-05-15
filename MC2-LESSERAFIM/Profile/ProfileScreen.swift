@@ -78,27 +78,7 @@ struct ProfileScreen: View {
                             Spacer()
                                 .frame(height: 308)
                         }
-                        
-                        
                     }
-                    
-                    HStack {
-                        Image(systemName: "pencil.circle")
-                            .foregroundColor(Color.clear)
-
-                        Text(userName)
-                            .font(.system(size: 26, weight: .bold))
-                        
-                        Image(systemName: "pencil.circle")
-                            .foregroundColor(Color.mainPink)
-                            .onTapGesture {
-                                showNameModal = true
-                            }
-                            .sheet(isPresented: $showNameModal) {
-                                NameModalScreen()
-                            }
-                    }
-                    .padding(.top, 12)
                 }
                 .padding(.top, 48)
                 
