@@ -231,6 +231,51 @@ struct GalleryView: View {
     }
 }
 
+struct ThumbnailView: View {
+    let post: Post
+    
+    var body: some View {
+        if let imageData = post.imageData,
+           let image = Image.fromData(imageData) {
+            // MARK: - 사진 or 그림 Post
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 129, height: 172)
+                .clipped()
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
+                                   startPoint: .top, endPoint: .bottom)
+                )
+                .overlay {
+                    DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                        .frame(alignment: .topLeading)
+                        .padding([.leading, .top], 4)
+                }
+        } else {
+            // MARK: - 글 Post
+            VStack(spacing: 30) {
+                Text(post.title ?? "")
+                    .padding([.leading, .top], 4)
+                    .font(.title3)
+                    .lineLimit(1)
+                
+                Text(post.content ?? "")
+                    .padding([.leading], 4)
+                    .foregroundColor(.black)
+                    .font(.body)
+                    .lineLimit(5)
+            }
+            .frame(width: 129, height: 172, alignment: .topLeading)
+            .background(.white)
+            .overlay {
+                DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                    .frame(alignment: .topLeading)
+                    .padding([.leading, .top], 4)
+            }
+        }
+    }
+}
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
