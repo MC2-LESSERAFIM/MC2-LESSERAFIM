@@ -85,7 +85,10 @@ struct RecordCollectionView: View {
                     }
                     .toolbar(.visible, for: .tabBar)
                 }
-                
+            }
+            .onAppear {
+                self.posts = PersistenceController.shared.getAllPosts()
+                self.postsByCategory = PersistenceController.shared.getPostsByCategory()
             }
         }
     }
