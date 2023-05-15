@@ -80,11 +80,12 @@ struct WritingView: View {
                         }, label: {
                             if profileImage == nil {
                                 ZStack {
-                                    Text("이미지를 업로드 해주세요.")
-                                    
                                     Rectangle()
-                                        .foregroundColor(.mainGray)
+                                        .foregroundColor(.mainPinkOpacity)
                                         .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
+
+                                    Text("이미지를 업로드 해주세요.")
+                                        .foregroundColor(.white)
                                 }
                             }
                             else{
@@ -98,6 +99,13 @@ struct WritingView: View {
                         
                         TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
                             .submitLabel(.return)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    Button("완료") {
+                                        hideKeyboard()
+                                    }
+                                }
+                            }
                         
                         //                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
                         OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
