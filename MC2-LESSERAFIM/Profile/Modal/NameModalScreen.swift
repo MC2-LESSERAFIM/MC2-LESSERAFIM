@@ -47,9 +47,3 @@ struct NameModalScreen: View {
         }
     }
 }
-
-//struct NameModalScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        NameModalScreen()
-//    }
-//}
