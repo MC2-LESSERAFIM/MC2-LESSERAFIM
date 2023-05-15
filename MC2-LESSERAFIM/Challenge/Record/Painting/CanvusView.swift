@@ -75,6 +75,7 @@ struct CanvusView: View {
                     eraserVisable.toggle()
                 })
         )
+        .background(.white)
     }
     
     //View에 사용될 drawingTools View 정의
@@ -113,12 +114,12 @@ struct CanvusView: View {
     
     
     var body: some View {
-        ZStack {
-            BackgroundView()
             GeometryReader { geo in
                 NavigationStack{
                     ScrollView {
                         //화면 시작ddd
+                        ZStack {
+                            BackgroundView()
                         ZStack {
                             VStack{
                                 //캔버스 호출
