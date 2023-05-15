@@ -13,9 +13,9 @@ struct RecordCollectionView: View {
     
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
-    
-    @FetchRequest(sortDescriptors: [])
-    private var posts: FetchedResults<Post>
+
+    @State var posts: [Post] = []
+    @State var postsByCategory: [String: [Post]] = [:]
     
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
@@ -25,12 +25,17 @@ struct RecordCollectionView: View {
     
     @State private var selectedSort: SortBy = .day
     
+    init() {
+        self.posts = PersistenceController.shared.getAllPosts()
+        self.postsByCategory = PersistenceController.shared.getPostsByCategory()
+    }
+    
     func saveContext() {
-      do {
-        try viewContext.save()
-      } catch {
-        print("Error saving managed object context: \(error)")
-      }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
     }
     
     var body: some View {
@@ -71,28 +76,24 @@ struct RecordCollectionView: View {
                     .padding(.horizontal, 24)
                     
                     ScrollView(showsIndicators: false) {
-                        if (selectedSort.rawValue == "날짜") {
-                            GalleryView()
-                                .environment(\.managedObjectContext, viewContext)
+                        if selectedSort == .day {
+                            GalleryView(posts: posts)
                         }
-                        else if (selectedSort.rawValue == "주제") {
-                            CategoryView(categories: userData.categories)
-                                .environment(\.managedObjectContext, viewContext)
+                        else if selectedSort == .category {
+                            CategoryView(categories: postsByCategory)
                         }
                     }
                     .toolbar(.visible, for: .tabBar)
                 }
-                
+            }
+            .onAppear {
+                self.posts = PersistenceController.shared.getAllPosts()
+                self.postsByCategory = PersistenceController.shared.getPostsByCategory()
             }
         }
     }
 }
 
-struct RecordCollectionView_Preview: PreviewProvider {
-    static var previews: some View {
-        RecordCollectionView()
-    }
-}
 
 enum Category: String, CaseIterable, Codable, Identifiable {
     case favorites = "좋아하는 것"
@@ -107,29 +108,64 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     static func random() -> Self {
         return Category.allCases.randomElement() ?? .comfortZone
     }
+    
+    var textFromCSV: String {
+        switch self {
+        case .favorites:
+            return "Favorites"
+        case .dislikes:
+            return "Dislikes"
+        case .strengths:
+            return "Strengths"
+        case .weaknesses:
+            return "Weaknesses"
+        case .comfortZone:
+            return "ComfortZone"
+        case .valuesAndAim:
+            return "Values"
+        }
+    }
 }
 
 struct Record: Hashable, Codable {
     var id: Int
     var category: Category
     var imageName: String
+    var postedAt: String
     var image: Image {
         Image(imageName)
     }
-    
-    init(id: Int, category: Category, imageName: String) {
+    var beforeDay: Int {
+        //MARK: - 0 == today, 1 == yesterday, 2 == the day before yesterday(two days ago)
+        let yearMonthDay = postedAt.split(separator: "-").compactMap({ Int($0) })
+        let year = yearMonthDay[0]
+        let month = yearMonthDay[1]
+        let day = yearMonthDay[2]
+        let postedDateComponent = DateComponents(year: year, month: month, day: day)
+        let postedDate = Calendar.current.date(from: postedDateComponent) ?? Date()
+        let gap = abs(postedDate - Date())
+        return Int(gap / 86400) // 86400 == 1 day
+    }
+    init(id: Int, category: Category, imageName: String, postedAt: String) {
         self.id = id
         self.category = category
         self.imageName = imageName
+        self.postedAt = postedAt
     }
     
     enum CodingKeys : String, CodingKey {
         case imageName
         case category
         case id
+        case postedAt
     }
 }
 
+fileprivate extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    }
+}
 class ModelData: ObservableObject {
     @Published var records: [Record] = load("landmarkData.json")
     
@@ -164,10 +200,7 @@ func load<T: Decodable>(_ filename: String) -> T {
 }
 
 struct GalleryView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(sortDescriptors: [])
-    private var posts: FetchedResults<Post>
+    let posts: [Post]
     
     private var items: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
@@ -200,7 +233,7 @@ struct GalleryView: View {
 
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
-    let categories: [String: [PostModel]]
+    let categories: [String: [Post]]
     
     private let numberColumns = [
         GridItem(.adaptive(minimum: 164)),
@@ -210,18 +243,29 @@ struct CategoryView: View {
     var body: some View {
         LazyVGrid(columns: numberColumns, spacing: 20) {
             ForEach(categoryKeys, id: \.self) { category in
-                let category = category.rawValue
+                let category = category.textFromCSV
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
-                    GalleryView()
+                    GalleryView(posts: posts)
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
-                        posts.first?.image
-                            .frame(width: 170, height: 170)
-                            .foregroundColor(Color(.systemGray5))
-                            .cornerRadius(12)
+                        if let first = posts.first,
+                           let data = first.imageData,
+                           let image = Image.fromData(data) {
+                            
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 170, height: 170, alignment: .center)
+                                .cornerRadius(12)
+                                .clipped()
+                        } else  {
+                            Image("niko")
+                                .frame(width: 170, height: 170)
+                                .cornerRadius(12)
+                        }
                         
                         Text(category)
                             .foregroundColor(.black)
@@ -237,7 +281,7 @@ struct CategoryView: View {
 
 struct PostDetailView: View {
     @Environment(\.dismiss) var dismiss
-        
+    
     let post: Post
     
     @State var isTabBarVisible = false
@@ -261,7 +305,7 @@ struct PostDetailView: View {
             .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden()
     }
-        
+    
 }
 
 extension Image {

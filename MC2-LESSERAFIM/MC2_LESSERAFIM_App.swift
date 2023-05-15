@@ -36,6 +36,23 @@ struct PersistenceController {
       }
     }
     
+    func getAllPosts() -> [Post] {
+        let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
+        
+        do {
+            return try container.viewContext.fetch(fetchRequest)
+        } catch {
+            print("Failed to fetch Posts: \(error)")
+            return []
+        }
+    }
+    
+    func getPostsByCategory() -> [String: [Post]] {
+        let posts = getAllPosts()
+        return Dictionary(grouping: posts) { post in
+            post.challenge?.category ?? ""
+        }
+    }
 }
 
 
