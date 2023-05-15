@@ -18,6 +18,8 @@ struct RecordSelectionView: View {
     @State var isWritingView: Bool = false
     
     var body: some View {
+        ZStack {
+            BackgroundView()
             VStack {    // 내비게이션 백버튼 - 타이틀 - 기록선택버튼
                 // 내비게이션 백버튼
                 
@@ -91,4 +93,5 @@ struct RecordSelectionView: View {
             .padding(.horizontal, 24)   // 양 옆 가드 영역
             .navigationTitle("")
         }
+    }
 }
