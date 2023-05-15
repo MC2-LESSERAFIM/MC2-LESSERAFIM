@@ -253,11 +253,8 @@ struct PostDetailView: View {
                         isTabBarVisible = true
                         dismiss()
                     } label: {
-                        Image(systemName: "x.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 36)
-                            .foregroundColor(.black)
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.mainPink)
                     }
                 }
             }

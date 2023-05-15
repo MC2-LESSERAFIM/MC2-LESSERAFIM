@@ -22,6 +22,8 @@ extension Color {
     static let mainGray = Color(hex: "9D9D9D")
     static let mainBlack = Color(hex: "292929")
     static let disabledButtonGray = Color(hex: "DDDDDD")
-    static let opacityWhite = Color(hex: "FFFFFF")
+    static let opacityWhite = Color(hex: "FFFFFF") //TextField
         .opacity(0.7)
+    static let opacityWhiteChallenge = Color(hex: "FFFFFF") //버튼
+        .opacity(0.3)
 }

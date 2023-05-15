@@ -47,8 +47,7 @@ struct SelectedUserCharacterScreen: View {
                             Text("다음")
                                 .font(.system(size: 17))
                                 .bold()
-                                .padding(16)
-                                .frame(maxWidth: .infinity)
+                                .frame(width: 345, height: 50)
                                 .background(Color.mainPink)
                                 .cornerRadius(12)
                                 .foregroundColor(.white)
@@ -57,8 +56,7 @@ struct SelectedUserCharacterScreen: View {
                 } else {
                     Text("다음")
                         .font(.system(size: 17, weight: .bold))
-                        .padding(16)
-                        .frame(maxWidth: .infinity)
+                        .frame(width: 345, height: 50)
                         .background(Color.disabledButtonGray)
                         .cornerRadius(12)
                         .foregroundColor(.white)
@@ -66,18 +64,9 @@ struct SelectedUserCharacterScreen: View {
             }
             .padding(.horizontal, 24)
             .padding(.top, 100)
-            .padding(.bottom, 24)
+            .padding(.bottom, 66)
             .ignoresSafeArea()
             .navigationTitle("")
         }
-//        Spacer()
-//
-//            .padding(.top, 48)
     }
 }
-
-//struct SelectedUserCharacterScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SelectedUserCharacterScreen()
-//    }
-//}

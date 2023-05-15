@@ -43,22 +43,19 @@ struct ChallengeScreen: View {
                     .padding(.horizontal, 24)
                     
                     VStack {
-                        VStack {
-                            Image(selectedImageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 320)
-                            
-                            Text(userName)
-                                .font(.system(size: 20, weight: .semibold))
-                                .padding(.bottom, 15)
-                        }
-                        .padding(.top, 24)
-                        .frame(width: UIScreen.main.bounds.width - 48, height: 346)
-                        .frame(alignment: .bottom)
+                        Image(selectedImageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 320)
+                        
+                        Text(userName)
+                            .font(.system(size: 20, weight: .semibold))
+                            .padding(.bottom, 15)
+                        
                     }
-                    .padding(.top, 24)
-                    .padding(.bottom, 24)
+                    .frame(width: UIScreen.main.bounds.width - 48, height: 346)
+                    .frame(alignment: .bottom)
+                    .padding(.bottom, 12)
                     
                     Spacer()
                     
@@ -99,7 +96,7 @@ struct ChallengeScreen: View {
                                     }
                                 }
                                 .listStyle(.inset)
-                                .listRowBackground(Color.opacityWhite)
+                                .listRowBackground(Color.opacityWhiteChallenge)
                             }
                             .scrollContentBackground(.hidden)
                         }
@@ -114,11 +111,11 @@ struct ChallengeScreen: View {
                             Text("오늘의 챌린지 뽑기")
                                 .foregroundColor(.white)
                                 .font(.system(.headline))
+                                .frame(width: UIScreen.main.bounds.width - 48, height: 50)
+                                .background(Color.mainPink)
+                                .cornerRadius(12)
                         }
-                        .frame(width: UIScreen.main.bounds.width - 48, height: 50)
-                        .background(Color.mainPink)
-                        .cornerRadius(12)
-                        .padding(.bottom, 66)
+                        .padding(.bottom, 120)
                     }
                 }
                 .onAppear(perform: {

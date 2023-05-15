@@ -13,7 +13,7 @@ struct RecordSelectionView: View {
     var challenge: Challenge
     
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
-    let colorDefaultButton = Color.opacityWhite // 버튼 색상
+    let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
     @State var isWritingView: Bool = false
     
@@ -64,6 +64,8 @@ struct RecordSelectionView: View {
                         EmptyView()
                     }
                     
+                    Spacer()
+                    
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
                                     RecordWritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
@@ -73,8 +75,10 @@ struct RecordSelectionView: View {
                             labelImage: "square.and.pencil",
                             colorButton: colorDefaultButton
                         )
-                        .padding(.horizontal, 12)   // 버튼 간의 갭
+//                        .padding(.horizontal, 12)   // 버튼 간의 갭
                     }
+                    
+                    Spacer()
                     
                     // 기록/그림 화면 이동 버튼
                     NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)) {
@@ -85,7 +89,7 @@ struct RecordSelectionView: View {
                         )
                     }
                 }
-                .padding(.top, 48)  // 타이틀과의 갭 영역
+                .padding(.top, 36)  // 타이틀과의 갭 영역
                 
                 // 위로 밀기
                 Spacer()

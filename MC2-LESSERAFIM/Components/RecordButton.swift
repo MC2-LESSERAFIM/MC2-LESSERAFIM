@@ -12,7 +12,7 @@ struct RecordButton: View {
     
     var labelTitle: String = "" // 버튼 라벨
     var labelImage: String = "" // 버튼 아이콘 이미지
-    var colorButton = Color.opacityWhite    // 버튼 색상
+    var colorButton = Color.opacityWhiteChallenge    // 버튼 색상
     var colorButtonIcon = Color.mainBlack   // 버튼 텍스트 및 아이콘 색상
     
     var body: some View {
