@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct RecordWritingView: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
+    var challenge: Challenge
     
     @State private var showingAlert = false // 경고 출력 여부
     @Environment(\.dismiss) private var dismiss // 화면 이탈
     
     @State var onStory = false   // 챌린지 내용 입력 중 여부
+    @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+    
+    @FetchRequest(entity: Post.entity(), sortDescriptors: [])
+    private var posts: FetchedResults<Post>
+    
+    @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
+    @AppStorage("progressDay") var progressDay: Int = 0
+    @AppStorage("isDayChanging") var isDayChanging: Bool = false
     
     var body: some View {
         GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
@@ -56,16 +66,56 @@ struct RecordWritingView: View {
                             print("no story")
                             self.showingAlert = true
                         } else {    // 내용 입력 누락이 없을 경우 제출 가능
+                            if isDayChanging == false {
+                                isDayChanging = true
+                            }
+                            addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
+                            changeBackgroundOpacity()
                             dismiss()
                         }
                     }
             }
         }
     }   // body
-}
+    
+    func saveContext() {
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func addPost(title: String, content: String, createdAt: Date, day: Int16, isFirstPost: Bool) {
+        let post = Post(context: viewContext)
+        post.title = title
+        post.content = content
+        post.day = day
+        post.isFirstPost = isFirstPost
+        post.createdAt = createdAt
+        post.challenge = self.challenge
+        saveContext()
+    }
 
-struct RecordWritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordWritingView()
+    func changeBackgroundOpacity() {
+        switch(challenge.category){
+        case "Favorites":
+            opacities[0] = min(opacities[0] + 0.4, 1.0)
+        case "Dislikes":
+            opacities[1] = min(opacities[1] + 0.4, 1.0)
+        case "Strengths":
+            opacities[2] = min(opacities[2] + 0.4, 1.0)
+        case "Weaknesses":
+            opacities[3] = min(opacities[3] + 0.4, 1.0)
+        case "ComfortZone":
+            opacities[4] = min(opacities[4] + 0.4, 1.0)
+        case "Values":
+            opacities[5] = min(opacities[5] + 0.4, 1.0)
+        case .none:
+            break
+        case .some(_):
+            break
+        }
     }
 }
+

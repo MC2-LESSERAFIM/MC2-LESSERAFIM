@@ -6,55 +6,8 @@
 //
 
 import SwiftUI
-import Photos
-import UserNotifications
 
-struct Notification {
-    var id: String
-    var title: String
-}
-
-class LocalNotificationManager {
-    var notifications = [Notification]()
-    
-    func addNotification(title: String) -> Void {
-        notifications.append(Notification(id : UUID().uuidString, title: title))
-    }
-}
-
-class PermissionManager : ObservableObject {
-    @Published var permissionGranted = false
-    
-    func requestAlbumPermission() {
-        PHPhotoLibrary.requestAuthorization(for: .readWrite, handler: { status in
-            switch status{
-            case .authorized:
-                print("Album: 권한 허용")
-            case .denied:
-                print("Album: 권한 거부")
-            case .restricted, .notDetermined:
-                print("Album: 선택하지 않음")
-            default:
-                break
-            }
-        })
-    }
-    
-    func requestAlramPermission() {
-        UNUserNotificationCenter
-            .current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { status, error in
-                if status == true && error == nil {
-                    print("Alram: 권한 허용")
-                }
-                else{
-                    print("Alram: 권한 거부")
-                }
-            }
-    }
-}
-
-struct Post : Identifiable, Codable {
+struct PostModel : Identifiable, Codable {
     var id = UUID()
     var type: String
     var title: String
@@ -106,52 +59,120 @@ struct Post : Identifiable, Codable {
 }
 
 struct ContentView: View {
-    @StateObject var permissionManager = PermissionManager()
-    @StateObject var userData = UserData()
-    @ObservedObject var appLock  = BiometricLock()
     
-    @State private var selectedTab = 2
-    @State var isOnBoarding: Bool = true
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @StateObject var permissionManager = PermissionManager()
+    @ObservedObject var appLock  = BiometricLock()
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
+    @AppStorage("userName") var userName: String = ""
+    
+    @State var isSeletedTab: Int = 1
+    
+    @FetchRequest(sortDescriptors: [])
+    private var challenges: FetchedResults<Challenge>
+    
+    init() {
+        getCSVData()
+    }
     
     var body: some View {
-        if userData.isOnBoarding {
+        if isOnBoarding {
             OnBoardingScreen()
-                .environmentObject(userData)
-        } else {
-            GeometryReader { geo in
-                TabView (selection: $selectedTab){
-                    RecordCollectionView(width: geo.size.width, height: geo.size.height)
-                        .tabItem {
-                            Image(systemName: "magazine.fill")
-                            Text("기록모음")
-                        }
-                        .tag(1)
-                        .environmentObject(userData)
-                    ChallengeScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName, width: geo.size.width, height: geo.size.height)
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("챌린지")
-                        }
-                        .tag(2)
-                        .environmentObject(userData)
-                    
-                    ProfileScreen(tappedImageName: $userData.selectedImageName, username: $userData.userName)
-                        .tabItem {
-                            Image(systemName: "person.crop.circle.fill")
-                            Text("프로필")
-                        }
-                        .tag(3)
-                        .environmentObject(userData)
-                        .environmentObject(appLock)
-                } .onAppear {
-                    makeTabBarTransparent()
-                    permissionManager.requestAlbumPermission()
-                    permissionManager.requestAlramPermission()
+                .onAppear{
+                    loadData()
                 }
+        } else {
+            TabView(selection: $isSeletedTab) {
+                RecordCollectionView()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("기록모음")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                    .tag(0)
+                ChallengeScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("챌린지")
+                    }
+                    .environment(\.managedObjectContext, viewContext)
+                    .tag(1)
+                ProfileScreen()
+                    .tabItem {
+                        Image(systemName: "star")
+                        Text("프로필")
+                    }
+                    .environmentObject(appLock)
+                    .tag(2)
+            } .onAppear {
+                makeTabBarTransparent()
+                permissionManager.requestAlbumPermission()
+                permissionManager.requestAlramPermission()
             }
         }
     }
-       
+    
+    func addChallenges(category: String, difficulty: Int16, isSuccess: Bool = false, question: String){
+        let challenge = Challenge(context: viewContext)
+        challenge.category = category
+        challenge.difficulty = difficulty
+        challenge.isSuccess = isSuccess
+        challenge.question = question
+        saveContext()
+    }
+    
+    
+    func saveContext() {
+      do {
+          try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func loadData() {
+        if challenges.count == 0 {
+            print("CoreData : Initialize challenges")
+            getCSVData()
+            print("CoreData : \(challenges.count) challenges added")
+        }
+        else {
+            print("CoreData : Already \(challenges.count) challenges in CoreData")
+        }
+    }
+    
+    func getCSVData() {
+        guard let filepath = Bundle.main.path(forResource: "Challenges", ofType: "csv") else {
+            print("Error: Could not find CSV file")
+            return
+        }
+        var data = ""
+        do {
+            data = try String(contentsOfFile: filepath)
+        } catch {
+            print(error)
+            return
+        }
+        var rows = data.components(separatedBy: "\r\n")
+        //rows.removeFirst()
+
+        //now loop around each row, and split it into each of its columns
+        for row in rows {
+            let columns = row.components(separatedBy: ",")
+            
+            //check that we have enough columns
+            if columns.count == 5 {
+                let category = columns[0]
+                let subdivision = columns[1]
+                let keyword = columns[2]
+                let question = columns[3]
+                let difficulty = Int16(columns[4]) ?? 0
+                print(columns)
+                addChallenges(category: category, difficulty: difficulty, question: question)
+            }
+        }
+    }
 }
 
 

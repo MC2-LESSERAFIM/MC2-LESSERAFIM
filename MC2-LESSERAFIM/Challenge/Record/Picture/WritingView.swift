@@ -40,12 +40,17 @@ struct ImagePicker: UIViewControllerRepresentable {
 }
 
 struct WritingView: View {
+    @Environment(\.managedObjectContext) private var viewContext
+    @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
+    
     enum FocusField: Hashable {
         case title
         case content
     }
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @EnvironmentObject var postData: UserData
+    @Environment(\.dismiss) private var dismiss // 화면 이탈
+    
+    @FetchRequest(entity: Post.entity(), sortDescriptors: [])
+    private var posts: FetchedResults<Post>
     
     @State private var imagePickerPresented = false
     @State private var selectedImage: UIImage?
@@ -54,14 +59,14 @@ struct WritingView: View {
     @State private var showingAlert = false
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
-    var type: String
+    var challenge: Challenge
     
     @FocusState private var focusedField: FocusField?
-
-    func loadImage() {
-        guard let selectedImage = selectedImage else { return }
-        profileImage = Image(uiImage: selectedImage)
-    }
+    
+    @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
+    @AppStorage("progressDay") var progressDay: Int = 0
+    @AppStorage("isDayChanging") var isDayChanging: Bool = false
+    
     
     var body: some View {
         GeometryReader { geo in
@@ -128,21 +133,66 @@ struct WritingView: View {
                         .foregroundColor(.mainPink)
                         .onTapGesture {
                             if (selectedImage != nil) {
-                                let newPost =  Post(type: type,
-                                                    imageData: selectedImage?.jpegData(compressionQuality: 1.0),
-                                                    title: titleRecord,
-                                                    content: contentRecord,
-                                                    category: Category.random())
-                                postData.posts.append(newPost)
-                                self.presentationMode.wrappedValue.dismiss()
+                                if isDayChanging == false{
+                                    isDayChanging = true
+                                }
+                                addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                changeBackgroundOpacity()
+                                dismiss()
                             }
                             else{
                                 self.showingAlert = true
                             }
-                        }.foregroundColor(.blue)
+                        }.foregroundColor(.mainPink)
                 }
                 
             }
+        }
+    }
+    
+    func loadImage() {
+        guard let selectedImage = selectedImage else { return }
+        profileImage = Image(uiImage: selectedImage)
+    }
+    
+    func saveContext() {
+      do {
+        try viewContext.save()
+      } catch {
+        print("Error saving managed object context: \(error)")
+      }
+    }
+    
+    func addPost(title: String, content: String, createdAt: Date, day: Int16, isFirstPost: Bool, imageData: Data) {
+        let post = Post(context: viewContext)
+        post.title = title
+        post.content = content
+        post.day = day
+        post.isFirstPost = isFirstPost
+        post.imageData = imageData
+        post.createdAt = createdAt
+        post.challenge = self.challenge
+        saveContext()
+    }
+
+    func changeBackgroundOpacity() {
+        switch(challenge.category){
+        case "Favorites":
+            opacities[0] = min(opacities[0] + 0.4, 1.0)
+        case "Dislikes":
+            opacities[1] = min(opacities[1] + 0.4, 1.0)
+        case "Strengths":
+            opacities[2] = min(opacities[2] + 0.4, 1.0)
+        case "Weaknesses":
+            opacities[3] = min(opacities[3] + 0.4, 1.0)
+        case "ComfortZone":
+            opacities[4] = min(opacities[4] + 0.4, 1.0)
+        case "Values":
+            opacities[5] = min(opacities[5] + 0.4, 1.0)
+        case .none:
+            break
+        case .some(_):
+            break
         }
     }
 }
@@ -151,11 +201,5 @@ struct WritingView: View {
 extension View {
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-
-struct WritingView_Previews: PreviewProvider {
-    static var previews: some View {
-        WritingView(type: "글+사진")
     }
 }

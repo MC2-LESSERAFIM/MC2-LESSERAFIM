@@ -22,8 +22,10 @@
 		A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E622A02562100A56E4C /* Assets.xcassets */; };
 		A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EF9E652A02562100A56E4C /* Preview Assets.xcassets */; };
 		BE5590C82A08821600D765F6 /* landmarkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BE5590C72A08821600D765F6 /* landmarkData.json */; };
-		BF81D5702A0E270000A08360 /* backgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D56F2A0E270000A08360 /* backgroundView.swift */; };
-		BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF464E2A078C9500BBDFDB /* RecordView.swift */; };
+		BF81D5702A0E270000A08360 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF81D56F2A0E270000A08360 /* BackgroundView.swift */; };
+		BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */; };
+		BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */; };
+		BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */ = {isa = PBXBuildFile; fileRef = BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */; };
 		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
@@ -79,8 +81,10 @@
 		A1EF9E6B2A02562100A56E4C /* MC2-LESSERAFIMTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EF9E752A02562100A56E4C /* MC2-LESSERAFIMUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MC2-LESSERAFIMUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5590C72A08821600D765F6 /* landmarkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = landmarkData.json; sourceTree = "<group>"; };
-		BF81D56F2A0E270000A08360 /* backgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = backgroundView.swift; sourceTree = "<group>"; };
-		BFCF464E2A078C9500BBDFDB /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		BF81D56F2A0E270000A08360 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSetting.swift; sourceTree = "<group>"; };
+		BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Challenges.csv; sourceTree = "<group>"; };
 		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				A1A17E702A0CC26D009D4136 /* AppLockView.swift */,
+				BFCC385D2A0F500F00CC9CA7 /* CoreData */,
 				BF75204D2A09DBB600BF81DC /* Utils */,
 				A1EF9E5D2A02562000A56E4C /* MC2-LESSERAFIM */,
 				A1EF9E5C2A02562000A56E4C /* Products */,
@@ -153,9 +158,10 @@
 				BFCF46582A08A10500BBDFDB /* Info.plist */,
 				A1EF9E5E2A02562000A56E4C /* MC2_LESSERAFIM_App.swift */,
 				A1EF9E602A02562000A56E4C /* ContentView.swift */,
-				BF81D56F2A0E270000A08360 /* backgroundView.swift */,
+				BF81D56F2A0E270000A08360 /* BackgroundView.swift */,
 				A1EF9E622A02562100A56E4C /* Assets.xcassets */,
 				BE5590C72A08821600D765F6 /* landmarkData.json */,
+				BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */,
 				A1EF9E642A02562100A56E4C /* Preview Content */,
 				BF7520532A09DD2300BF81DC /* Model */,
 				BF7520522A09DD1D00BF81DC /* Profile */,
@@ -182,6 +188,7 @@
 				A15ED6DB2A04D8390039EFC7 /* CanvusColorPickerView.swift */,
 				A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */,
 				A1A17E6E2A0C7F88009D4136 /* BiometricLock.swift */,
+				BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -214,7 +221,6 @@
 			children = (
 				D22690122A06A50B00BCF668 /* ChallengeScreen.swift */,
 				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
-				BFCF464E2A078C9500BBDFDB /* RecordView.swift */,
 				BF7520542A09DD6200BF81DC /* Record */,
 			);
 			path = Challenge;
@@ -277,6 +283,14 @@
 				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
 			);
 			path = Picture;
+			sourceTree = "<group>";
+		};
+		BFCC385D2A0F500F00CC9CA7 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		D24371D72A0DFC92007DC1A6 /* Modal */ = {
@@ -412,6 +426,7 @@
 			files = (
 				A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */,
 				A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */,
+				BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */,
 				BE5590C82A08821600D765F6 /* landmarkData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF81D5702A0E270000A08360 /* backgroundView.swift in Sources */,
+				BF81D5702A0E270000A08360 /* BackgroundView.swift in Sources */,
 				A1A17E712A0CC26D009D4136 /* AppLockView.swift in Sources */,
 				D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */,
 				D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */,
@@ -454,11 +469,12 @@
 				D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */,
 				D24371DE2A0E9CD1007DC1A6 /* CustomTextField.swift in Sources */,
 				8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */,
+				BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */,
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */,
+				BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
-				BFCF464F2A078C9500BBDFDB /* RecordView.swift in Sources */,
 				BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */,
 				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
@@ -631,7 +647,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -665,7 +681,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "앨범 내놔";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -800,6 +816,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */,
+			);
+			currentVersion = BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A1EF9E532A02562000A56E4C /* Project object */;
 }
