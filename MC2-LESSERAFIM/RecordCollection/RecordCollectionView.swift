@@ -266,20 +266,7 @@ struct PostDetailView: View {
     }
         
 }
-/*
-struct PostDetailView_Preview: PreviewProvider {
-    @StateObject static var userData = UserDataModel()
-    
-    static var previews: some View {
-        PostDetailView(post: userData.posts.last
-                       ?? PostModel(type: "글 + 사진",
-                               imageData: nil,
-                               title: "행복로",
-                               content: "사랑시",
-                               category: .comfortZone))
-    }
-}
-*/
+
 extension Image {
     static func fromData(_ data: Data) -> Image? {
         guard let uiImage = UIImage(data: data) else {

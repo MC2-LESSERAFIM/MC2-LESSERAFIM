@@ -92,10 +92,3 @@ struct RecordSelectionView: View {
             .navigationTitle("")
         }
 }
-/*
-struct RecordSelectionView_Previews: PreviewProvider {
-    static var previews: some View {
-        RecordSelectionView()
-    }
-}
-*/
