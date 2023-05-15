@@ -111,10 +111,10 @@ struct ChallengeScreen: View {
                             Text("오늘의 챌린지 뽑기")
                                 .foregroundColor(.white)
                                 .font(.system(.headline))
+                                .frame(width: UIScreen.main.bounds.width - 48, height: 50)
+                                .background(Color.mainPink)
+                                .cornerRadius(12)
                         }
-                        .frame(width: UIScreen.main.bounds.width - 48, height: 50)
-                        .background(Color.mainPink)
-                        .cornerRadius(12)
                         .padding(.bottom, 120)
                     }
                 }
