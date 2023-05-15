@@ -23,6 +23,8 @@ struct CheckInScreen: View {
     
     var body: some View {
 //        NavigationView{
+        ZStack{
+            BackgroundView()
             VStack(alignment: .leading, spacing: 0){
                 PageTitle(titlePage: "우리가 당신을 어떻게 부르면 좋을까요?")
                 
@@ -51,6 +53,7 @@ struct CheckInScreen: View {
             .padding(.top, 100)
             .ignoresSafeArea()
             .navigationTitle("")
+        }
     }
 }
 

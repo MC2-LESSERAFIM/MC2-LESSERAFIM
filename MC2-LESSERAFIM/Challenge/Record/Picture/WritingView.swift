@@ -69,83 +69,86 @@ struct WritingView: View {
     
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
-                VStack(spacing: 10) {
-                    
-                    Button(action: {
-                        imagePickerPresented.toggle()
-                    }, label: {
-                        if profileImage == nil {
-                            ZStack {
-                                Text("이미지를 업로드 해주세요.")
-                                
-                                Rectangle()
-                                    .foregroundColor(.mainGray)
-                                    .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
-                            }
-                        }
-                        else{
-                            profileImage!
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
-                                .clipped()
-                        }
-                    })
-                    
-                    TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
-                        .submitLabel(.return)
-                    
-                    //                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
-                    OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
-                        .lineLimit(3)
-                        .submitLabel(.return)
-                        .toolbar {
-                            ToolbarItemGroup(placement: .keyboard) {
-                                Button("완료") {
-                                    hideKeyboard()
+        ZStack {
+            BackgroundView()
+            GeometryReader { geo in
+                ScrollView {
+                    VStack(spacing: 10) {
+                        
+                        Button(action: {
+                            imagePickerPresented.toggle()
+                        }, label: {
+                            if profileImage == nil {
+                                ZStack {
+                                    Text("이미지를 업로드 해주세요.")
+                                    
+                                    Rectangle()
+                                        .foregroundColor(.mainGray)
+                                        .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
                                 }
-                            }
-                        }
-                }
-            }
-            .onSubmit {
-                switch focusedField {
-                case .title:
-                    focusedField = .content
-                default:
-                    hideKeyboard()
-                }
-            }
-            .padding(EdgeInsets(top: 47-30, leading: 20, bottom: 34, trailing: 20))
-            .alert("이미지를 업로드 해주세요", isPresented: $showingAlert) {
-                Button("OK", role: .cancel) {
-                    self.showingAlert = false
-                }
-            }
-            .sheet(isPresented: $imagePickerPresented,
-                   onDismiss: loadImage,
-                   content: { ImagePicker(image: $selectedImage) })
-            .toolbar {
-                ToolbarItem {
-                    Image(systemName: "checkmark.circle")
-                        .foregroundColor(.mainPink)
-                        .onTapGesture {
-                            if (selectedImage != nil) {
-                                if isDayChanging == false{
-                                    isDayChanging = true
-                                }
-                                addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
-                                changeBackgroundOpacity()
-                                dismiss()
                             }
                             else{
-                                self.showingAlert = true
+                                profileImage!
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
+                                    .clipped()
                             }
-                        }.foregroundColor(.mainPink)
+                        })
+                        
+                        TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
+                            .submitLabel(.return)
+                        
+                        //                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
+                        OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
+                            .lineLimit(3)
+                            .submitLabel(.return)
+                            .toolbar {
+                                ToolbarItemGroup(placement: .keyboard) {
+                                    Button("완료") {
+                                        hideKeyboard()
+                                    }
+                                }
+                            }
+                    }
                 }
-                
+                .onSubmit {
+                    switch focusedField {
+                    case .title:
+                        focusedField = .content
+                    default:
+                        hideKeyboard()
+                    }
+                }
+                .padding(EdgeInsets(top: 47-30, leading: 20, bottom: 34, trailing: 20))
+                .alert("이미지를 업로드 해주세요", isPresented: $showingAlert) {
+                    Button("OK", role: .cancel) {
+                        self.showingAlert = false
+                    }
+                }
+                .sheet(isPresented: $imagePickerPresented,
+                       onDismiss: loadImage,
+                       content: { ImagePicker(image: $selectedImage) })
+                .toolbar {
+                    ToolbarItem {
+                        Image(systemName: "checkmark.circle")
+                            .foregroundColor(.mainPink)
+                            .onTapGesture {
+                                if (selectedImage != nil) {
+                                    if isDayChanging == false{
+                                        isDayChanging = true
+                                    }
+                                    addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                    changeBackgroundOpacity()
+                                    dismiss()
+                                }
+                                else{
+                                    self.showingAlert = true
+                                }
+                            }.foregroundColor(.mainPink)
+                    }
+                    
+                }
             }
         }
     }

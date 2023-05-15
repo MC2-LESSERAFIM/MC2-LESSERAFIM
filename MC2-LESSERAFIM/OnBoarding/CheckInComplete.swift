@@ -15,7 +15,9 @@ struct CheckInComplete: View {
     @AppStorage("selectedImageName") var selectedImageName: String!
     
     var body: some View {
-        VStack(spacing: 0){
+        ZStack{
+            BackgroundView()
+            VStack(spacing: 0){
                 PageTitle(titlePage: "이제부터 당신의 짝꿍은")
                 HStack {
                     Text(userName)
@@ -24,35 +26,36 @@ struct CheckInComplete: View {
                     PageTitle(titlePage: "입니다.")
                     Spacer()
                 }
-
-            Spacer()
-            Image(tappedImageName)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 470)
-                .padding(.top, 48)
-            
-            Spacer()
-            Spacer()
-            
-            NavigationLink(
-                destination: ChallengeScreen(),
-                isActive: $isStartButtonEnabled,
-                label: {
-                    Button("시작하기", action: finishOnboarding)
-                        .font(.system(size: 17, weight: .bold))
-                        .foregroundColor(.white)
-                        .frame(width: 345,height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.mainPink)
-                        )
-                }
-            )
-            Spacer()
+                
+                Spacer()
+                Image(tappedImageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 470)
+                    .padding(.top, 48)
+                
+                Spacer()
+                Spacer()
+                
+                NavigationLink(
+                    destination: ChallengeScreen(),
+                    isActive: $isStartButtonEnabled,
+                    label: {
+                        Button("시작하기", action: finishOnboarding)
+                            .font(.system(size: 17, weight: .bold))
+                            .foregroundColor(.white)
+                            .frame(width: 345,height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .foregroundColor(.mainPink)
+                            )
+                    }
+                )
+                Spacer()
+            }
+            .padding(.horizontal, 24)
+            //        .padding(.top, 48)
         }
-        .padding(.horizontal, 24)
-//        .padding(.top, 48)
     }
 }
 struct CheckInComplete_Previews: PreviewProvider {

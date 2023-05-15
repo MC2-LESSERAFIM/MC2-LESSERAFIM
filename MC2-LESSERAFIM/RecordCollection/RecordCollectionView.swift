@@ -35,7 +35,7 @@ struct RecordCollectionView: View {
     
     var body: some View {
         NavigationView {
-            ZStack(alignment: .topTrailing) {
+            ZStack {
                 BackgroundView()
                 VStack {
                     HStack(alignment: .bottom) {

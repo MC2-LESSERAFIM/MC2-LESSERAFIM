@@ -72,10 +72,6 @@ struct ContentView: View {
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
     
-    init() {
-        getCSVData()
-    }
-    
     var body: some View {
         if isOnBoarding {
             OnBoardingScreen()
