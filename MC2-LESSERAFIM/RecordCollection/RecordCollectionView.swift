@@ -214,15 +214,7 @@ struct GalleryView: View {
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minHeight: 172)
-                            .background(
-                                LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
-                                               startPoint: .top, endPoint: .bottom)
-                            )
-                            .clipped()
+                        ThumbnailView(post: post)
                     }
                 }
             }
