@@ -34,7 +34,8 @@ struct ProfileScreen: View {
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.mainPinkOpacity, lineWidth: 3)
                                 .frame(width: 345, height: 345)
-                                .background(.clear)
+                                .background(Color.opacityWhiteChallenge)
+                                .cornerRadius(12)
                             
                         }
                         VStack{
@@ -56,15 +57,18 @@ struct ProfileScreen: View {
                                     .sheet(isPresented: $showImageModal) {
                                         ImageModalScreen()
                                     }
-                            }.padding(.horizontal, 24)
+                            }.padding(.horizontal, 36)
                             Spacer()
-                                .frame(height: 320)
+                                .frame(height: 308)
                         }
-                    
+                        
                         
                     }
                     
                     HStack {
+                        Image(systemName: "pencil.circle")
+                            .foregroundColor(Color.clear)
+
                         Text(userName)
                             .font(.system(size: 26, weight: .bold))
                         
