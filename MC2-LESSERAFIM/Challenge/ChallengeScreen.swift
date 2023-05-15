@@ -19,7 +19,7 @@ struct ChallengeScreen: View {
     @AppStorage("numberOfTimeLeft") var numberOfTimeLeft: Int = 3
     @State private var showingAlert: Bool = false
     @State var nextView = false
-    @AppStorage("selectedImageName") var selectedImageName: String = ""
+    @AppStorage("selectedImageName") var selectedImageName: String!
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
