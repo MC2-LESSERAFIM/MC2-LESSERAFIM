@@ -132,23 +132,6 @@ struct CanvusView: View {
                             OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
                                 .padding(.horizontal, 24)
                                 .submitLabel(.return)
-                        }
-                        .toolbar{
-                            //Tool bar 상단에 체크 버튼 생성
-                            Button {
-                                //체크 버튼 엑션
-                                print("Button Clicked")
-                                let canvusImage = ImageRenderer(content: canvus)
-                                
-                                if let image = canvusImage.uiImage{
-                                    //이미지 처리
-                                    renImage = Image(uiImage: image)
-                                    //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
-                                    //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-                                    
-                                    //텍스트 처리
-                                    //                                $challengeTitle
-                                    //                                $challegeContent
                                 .toolbar {
                                     ToolbarItemGroup(placement: .keyboard) {
                                         Button("완료") {
@@ -156,11 +139,6 @@ struct CanvusView: View {
                                         }
                                     }
                                 }
-                                
-                                
-                            } label: {
-                                Image(systemName: "checkmark.circle")
-                            }
                         }
                         
                         //필요시 나타나는 View
@@ -207,6 +185,29 @@ struct CanvusView: View {
                         }
                     }
                 }
+            }
+        } //geo
+        .toolbar{
+            //Tool bar 상단에 체크 버튼 생성
+            Button {
+                //체크 버튼 엑션
+                print("Button Clicked")
+                let canvusImage = ImageRenderer(content: canvus)
+                
+                if let image = canvusImage.uiImage{
+                    //이미지 처리
+                    renImage = Image(uiImage: image)
+                    //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
+                    //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+                    
+                    //텍스트 처리
+                    //                                $challengeTitle
+                    //                                $challegeContent
+                }
+                
+                
+            } label: {
+                Image(systemName: "checkmark.circle")
             }
         }
     }
