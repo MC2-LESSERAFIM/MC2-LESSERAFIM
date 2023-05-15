@@ -91,7 +91,7 @@ struct ChallengeScreen: View {
                                     }
                                 }
                                 .listStyle(.inset)
-                                .listRowBackground(Color.opacityWhite)
+                                .listRowBackground(Color.opacityWhiteChallenge)
                             }
                             .scrollContentBackground(.hidden)
                         }
