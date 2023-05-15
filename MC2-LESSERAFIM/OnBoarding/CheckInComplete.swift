@@ -22,7 +22,7 @@ struct CheckInComplete: View {
                 HStack {
                     Text(userName)
                         .foregroundColor(.mainPink)
-                        .font(.system(size: 32, weight: .bold))
+                        .font(.system(size: 26, weight: .bold))
                     PageTitle(titlePage: "입니다.")
                     Spacer()
                 }
