@@ -83,7 +83,7 @@ struct ContentView: View {
                 TabView(selection: $isSeletedTab) {
                     RecordCollectionView()
                         .tabItem {
-                            Image(systemName: "star")
+                            Image(systemName: "magazine.fill")
                             Text("기록모음")
                         }
                         .environment(\.managedObjectContext, viewContext)
@@ -97,7 +97,7 @@ struct ContentView: View {
                         .tag(1)
                     ProfileScreen()
                         .tabItem {
-                            Image(systemName: "star")
+                            Image(systemName: "person.crop.circle.fill")
                             Text("프로필")
                         }
                         .environmentObject(appLock)
