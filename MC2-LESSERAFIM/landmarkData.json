@@ -7,6 +7,7 @@
         "id": 1001,
         "isFeatured": true,
         "isFavorite": true,
+        "postedAt": "2023-05-14",
         "park": "Joshua Tree National Park",
         "coordinates": {
             "longitude": -116.166868,
@@ -23,6 +24,7 @@
         "id": 1002,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-13",
         "park": "Lake Clark National Park and Preserve",
         "coordinates": {
             "longitude": -152.665167,
@@ -39,6 +41,7 @@
         "id": 1003,
         "isFeatured": false,
         "isFavorite": true,
+        "postedAt": "2023-05-13",
         "park": "Klondike Gold Rush National Historical Park",
         "coordinates": {
             "longitude": -135.334571,
@@ -55,6 +58,7 @@
         "id": 1004,
         "isFeatured": true,
         "isFavorite": true,
+        "postedAt": "2023-05-12",
         "park": "Glacier National Park",
         "coordinates": {
             "longitude": -113.536248,
@@ -71,6 +75,7 @@
         "id": 1005,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-12",
         "park": "Lake Clark National Park and Preserve",
         "coordinates": {
             "longitude": -153.849883,
@@ -87,6 +92,7 @@
         "id": 1006,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-11",
         "park": "Glacier National Park",
         "coordinates": {
             "longitude": -113.934831,
@@ -103,6 +109,7 @@
         "id": 1007,
         "isFeatured": true,
         "isFavorite": false,
+        "postedAt": "2023-05-11",
         "park": "Charley Rivers National Preserve",
         "coordinates": {
             "longitude": -143.122586,
@@ -119,6 +126,7 @@
         "id": 1008,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-11",
         "park": "Wrangell-St. Elias National Park and Preserve",
         "coordinates": {
             "longitude": -141.518167,
@@ -135,6 +143,7 @@
         "id": 1009,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-10",
         "park": "State Recreation Area",
         "coordinates": {
             "longitude": -150.086103,
@@ -151,6 +160,7 @@
         "id": 1010,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-10",
         "park": "North Cascades National Park",
         "coordinates": {
             "longitude": -121.17799,
@@ -167,6 +177,7 @@
         "id": 1011,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-10",
         "park": "Chincoteague National Wildlife Refuge",
         "coordinates": {
             "longitude": -75.383212,
@@ -183,6 +194,7 @@
         "id": 1012,
         "isFeatured": false,
         "isFavorite": false,
+        "postedAt": "2023-05-09",
         "park": "Umbagog National Wildlife Refuge",
         "coordinates": {
             "longitude": -71.056816,
