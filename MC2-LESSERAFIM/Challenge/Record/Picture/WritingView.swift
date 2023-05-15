@@ -137,7 +137,7 @@ struct WritingView: View {
                                 if isDayChanging == false{
                                     isDayChanging = true
                                 }
-                                addPost(title: $titleRecord, content: $contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
                                 changeBackgroundOpacity()
                                 dismiss()
                             }

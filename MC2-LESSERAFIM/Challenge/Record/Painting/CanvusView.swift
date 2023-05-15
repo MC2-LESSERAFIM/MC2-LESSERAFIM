@@ -147,7 +147,7 @@ struct CanvusView: View {
                                     //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
                                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                                     
-                                    addPost(title: $titleRecord, content: $contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                                    addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                                     changeBackgroundOpacity()
                                     dismiss()
                                 }

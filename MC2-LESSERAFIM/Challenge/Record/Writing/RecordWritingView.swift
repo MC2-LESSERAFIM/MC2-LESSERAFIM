@@ -69,7 +69,7 @@ struct RecordWritingView: View {
                             if isDayChanging == false {
                                 isDayChanging = true
                             }
-                            addPost(title: titleRecordWriting, content: storyRecordWriting, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
+                            addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                             changeBackgroundOpacity()
                             dismiss()
                         }
