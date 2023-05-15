@@ -35,14 +35,28 @@ struct RecordWritingView: View {
                     // 챌린지 제목
                     TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지에 제목을 붙여볼까요?")
                         .submitLabel(.return)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Button("완료") {
+                                    hideKeyboard()
+                                }
+                            }
+                        }
                     
                     // 챌린지 내용
                     OnlyWritingContentTextField(contentRecord: $contentRecord, onStory: false, placeholder: "어떤 이야기가 담겨있나요?")
                         .submitLabel(.return)
-                        .frame(height: onStory ? geo.size.height - 100 : 620)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
+                        .frame(height: onStory ? geo.size.height - 100 : 580)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
                         .onTapGesture {
                             onStory = true
                             print(geo.size.height)
+                        }
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Button("완료") {
+                                    hideKeyboard()
+                                }
+                            }
                         }
                     
                     // 위로 밀기

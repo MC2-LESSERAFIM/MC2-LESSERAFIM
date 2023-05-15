@@ -27,14 +27,12 @@ struct CheckInComplete: View {
                     Spacer()
                 }
                 
-                Spacer()
                 Image(tappedImageName)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 470)
                     .padding(.top, 48)
                 
-                Spacer()
                 Spacer()
                 
                 NavigationLink(
@@ -44,17 +42,20 @@ struct CheckInComplete: View {
                         Button("시작하기", action: finishOnboarding)
                             .font(.system(size: 17, weight: .bold))
                             .foregroundColor(.white)
-                            .frame(width: 345,height: 50)
+                            .frame(width: 345, height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
                                     .foregroundColor(.mainPink)
                             )
+                            .padding(.vertical, 28)
+//                            .padding(.)
                     }
                 )
-                Spacer()
             }
             .padding(.horizontal, 24)
-            //        .padding(.top, 48)
+//            .padding(.top, 100)
+//            .padding(.bottom, 66)
+//            .ignoresSafeArea()
         }
     }
 }

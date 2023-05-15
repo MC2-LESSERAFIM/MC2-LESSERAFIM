@@ -24,12 +24,18 @@ struct ProfileScreen: View {
             BackgroundView()
             VStack(spacing: 0) {
                 VStack {
+                    PageTitle(titlePage: "나의 짝꿍")
+                }
+                .padding(.horizontal, 24)
+                
+                VStack {
                     ZStack {
                         VStack{
                             RoundedRectangle(cornerRadius: 12)
                                 .stroke(Color.mainPinkOpacity, lineWidth: 3)
                                 .frame(width: 345, height: 345)
-                                .background(.clear)
+                                .background(Color.opacityWhiteChallenge)
+                                .cornerRadius(12)
                             
                         }
                         VStack{
@@ -51,15 +57,18 @@ struct ProfileScreen: View {
                                     .sheet(isPresented: $showImageModal) {
                                         ImageModalScreen()
                                     }
-                            }.padding(.horizontal, 24)
+                            }.padding(.horizontal, 36)
                             Spacer()
-                                .frame(height: 320)
+                                .frame(height: 308)
                         }
-                    
+                        
                         
                     }
                     
                     HStack {
+                        Image(systemName: "pencil.circle")
+                            .foregroundColor(Color.clear)
+
                         Text(userName)
                             .font(.system(size: 26, weight: .bold))
                         
@@ -91,37 +100,6 @@ struct ProfileScreen: View {
                 }
                 .padding(.horizontal, 36)
                 .padding(.top, 48)
-                
-                
-                //                HStack(alignment: .center) {
-                //                        Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
-                //                            .font(.system(size: 20))
-                //                            .foregroundColor(.black)
-                //                            .frame(width: 30, height: 30)
-                //                            .background(.ultraThinMaterial)
-                //                            .cornerRadius(15)
-                //                            .padding(.trailing, 24)
-                //                            .onTapGesture {
-                //                                isNotificationEnabled.toggle()
-                //                            }
-                //
-                //                        Image(systemName: isLockEnabled ? "lock" : "lock.slash")
-                //                            .font(.system(size: 20))
-                //                            .foregroundColor(.black)
-                //                            .frame(width: 30, height: 30)
-                //                            .background(.ultraThinMaterial)
-                //                            .cornerRadius(15)
-                //                            .onTapGesture {
-                //                                isLockEnabled.toggle()
-                //                                if isLockEnabled {
-                //                                    appLock.isAppLockEnabled = true
-                //                                }else {
-                //                                    appLock.isAppLockEnabled = false
-                //                                }
-                //                            }
-                //
-                //                }
-                //                .padding(.top, 12)
                 
                 Spacer()
                 
