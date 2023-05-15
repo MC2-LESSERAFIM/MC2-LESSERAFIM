@@ -13,9 +13,9 @@ struct RecordCollectionView: View {
     
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
-    
-    @FetchRequest(sortDescriptors: [])
-    private var posts: FetchedResults<Post>
+
+    @State var posts: [Post] = []
+    @State var postsByCategory: [String: [Post]] = [:]
     
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
@@ -25,12 +25,18 @@ struct RecordCollectionView: View {
     
     @State private var selectedSort: SortBy = .day
     
+    //MARK: - 이렇게 하면 Post 추가될 떄마다 수정사항 반영되지 않음
+    init() {
+        self.posts = PersistenceController.shared.getAllPosts()
+        self.postsByCategory = PersistenceController.shared.getPostsByCategory()
+    }
+    
     func saveContext() {
-      do {
-        try viewContext.save()
-      } catch {
-        print("Error saving managed object context: \(error)")
-      }
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
     }
     
     var body: some View {
@@ -70,14 +76,12 @@ struct RecordCollectionView: View {
                     }
                     .padding(.horizontal, 24)
                     
-                    ScrollView(showsIndicators: false) {                            
+                    ScrollView(showsIndicators: false) {
                         if selectedSort == .day {
-                            GalleryView()
-                                .environment(\.managedObjectContext, viewContext)
+                            GalleryView(posts: posts)
                         }
                         else if selectedSort == .category {
-                            CategoryView(categories: userData.categories)
-                                .environment(\.managedObjectContext, viewContext)
+                            CategoryView(categories: postsByCategory)
                         }
                     }
                     .toolbar(.visible, for: .tabBar)
@@ -88,11 +92,6 @@ struct RecordCollectionView: View {
     }
 }
 
-struct RecordCollectionView_Preview: PreviewProvider {
-    static var previews: some View {
-        RecordCollectionView()
-    }
-}
 
 enum Category: String, CaseIterable, Codable, Identifiable {
     case favorites = "좋아하는 것"
@@ -182,10 +181,7 @@ func load<T: Decodable>(_ filename: String) -> T {
 }
 
 struct GalleryView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @FetchRequest(sortDescriptors: [])
-    private var posts: FetchedResults<Post>
+    let posts: [Post]
     
     private var items: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
@@ -218,7 +214,7 @@ struct GalleryView: View {
 
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
-    let categories: [String: [PostModel]]
+    let categories: [String: [Post]]
     
     private let numberColumns = [
         GridItem(.adaptive(minimum: 164)),
@@ -232,12 +228,15 @@ struct CategoryView: View {
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
-                    GalleryView()
+                    GalleryView(posts: posts)
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
-                        if let first = posts.first {
-                            first.image
+                        if let first = posts.first,
+                           let data = first.imageData,
+                           let image = Image.fromData(data) {
+                            
+                            image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 170, height: 170, alignment: .center)
@@ -263,7 +262,7 @@ struct CategoryView: View {
 
 struct PostDetailView: View {
     @Environment(\.dismiss) var dismiss
-        
+    
     let post: Post
     
     @State var isTabBarVisible = false
@@ -287,7 +286,7 @@ struct PostDetailView: View {
             .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
             .navigationBarBackButtonHidden()
     }
-        
+    
 }
 
 extension Image {
