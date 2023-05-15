@@ -85,7 +85,7 @@ struct OnlyWritingContentTextField: View {
                             .font(.system(size: 15, weight: .regular))
                             .foregroundColor(.mainGray)
                     })
-                    .frame(height: onStory ? geo.size.height - 100 : 620, alignment: .top)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
+                    .frame(height: onStory ? geo.size.height - 100 : 580, alignment: .top)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
                     .lineLimit(1...)
                     .padding(.horizontal, 12)
                     .padding(.top, 15)
