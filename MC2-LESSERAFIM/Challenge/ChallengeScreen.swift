@@ -30,7 +30,8 @@ struct ChallengeScreen: View {
     @AppStorage("isPickedChallenge") var isPickedChallenge: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
-    
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
+
     @State var isTutorial = true
     @State var currentIndex = 0
     let xPosition: [CGFloat] = [10, 100]
@@ -130,7 +131,7 @@ struct ChallengeScreen: View {
                         return lastLaunchDate != today
                     }
                     // 오늘 앱 첫 실행
-                    if hasPassedDay() {
+                    if (hasPassedDay() && todayPostsCount != 0) || todayPostsCount >= 3 {
                         // 1. 오늘 날짜로 UserDefaults Update
                         UserDefaults.standard.setValue(NSDate().formatted, forKey:Constants.FIRSTLAUNCH)
                         // 2. 챌린지 뽑기를 초기화
@@ -145,6 +146,7 @@ struct ChallengeScreen: View {
                             isDayChanging = false
                         }
                         
+                        todayPostsCount = 0
                         numberOfTimeLeft = 3
                         todayRemovedChallenges = []
                         todayChallenges = []

@@ -28,7 +28,7 @@ struct RecordWritingView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
     var body: some View {
         
         ZStack {
@@ -95,6 +95,7 @@ struct RecordWritingView: View {
                                 changeBackgroundOpacity()
                                 backToCollection = true
                                 updateFirstUse()
+                                todayPostsCount += 1
                                 dismiss()
                             }
                         }
