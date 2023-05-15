@@ -268,6 +268,25 @@ struct ThumbnailView: View {
         }
     }
 }
+
+struct DayLabel: View {
+    let isFirstPost: Bool
+    let day: Int
+    
+    var body: some View {
+        Capsule()
+            .frame(maxWidth: 70, maxHeight: 30)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .overlay {
+                Text("Day+\(day)")
+                    .foregroundColor(.black)
+                    .font(.body.bold())
+            }
+            .opacity(isFirstPost ? 1 : 0)
+    }
+}
+
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
