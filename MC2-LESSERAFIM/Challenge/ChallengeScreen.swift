@@ -31,6 +31,12 @@ struct ChallengeScreen: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
     
+    @State var isTutorial = true
+    @State var currentIndex = 0
+    let xPosition: [CGFloat] = [10, 100]
+    let yPosition: [CGFloat] = [100, 300]
+    let prompts = ["1번 도움말", "2번 도움말"]
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -118,16 +124,24 @@ struct ChallengeScreen: View {
                     }
                 }
                 .onAppear(perform: {
-                    // DateFormatter 사용한 '오늘의 챌린지 뽑기'로 리프레시
-                    let today = NSDate().formatted  // 오늘 날짜
-                    let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
-                    if lastLaunchDate != today   // 오늘 앱 첫 실행
-                    {
-                        UserDefaults.standard.setValue(today, forKey:Constants.FIRSTLAUNCH)
+                    func hasPassedDay() -> Bool {
+                        let today = NSDate().formatted  // 오늘 날짜
+                        let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
+                        return lastLaunchDate != today
+                    }
+                    // 오늘 앱 첫 실행
+                    if hasPassedDay() {
+                        // 1. 오늘 날짜로 UserDefaults Update
+                        UserDefaults.standard.setValue(NSDate().formatted, forKey:Constants.FIRSTLAUNCH)
+                        // 2. 챌린지 뽑기를 초기화
                         isPickedChallenge = false   // '오늘의 챌린지' 아직 뽑지 않은 상태로 변경
+                        // 3. 오늘 첫 사용 true
                         dailyFirstUse = true
+                        // 4. 만약 날짜가 바뀌었다면
                         if isDayChanging {
+                            // 5. 진행일을 추가
                             progressDay += 1
+                            // 6. isDayChanging 초기화
                             isDayChanging = false
                         }
                         
@@ -140,6 +154,16 @@ struct ChallengeScreen: View {
                 .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
                     Button("알겠어요", role: .cancel){
                         self.showingAlert = false
+                    }
+                }
+                .overlay {
+                    if isTutorial {
+                        Text(prompts[currentIndex])
+                            .position(x: xPosition[currentIndex], y: yPosition[currentIndex])
+                            .onTapGesture {
+                                currentIndex += 1
+                                currentIndex = prompts.count == currentIndex ? 0 : currentIndex
+                            }
                     }
                 }
             }
