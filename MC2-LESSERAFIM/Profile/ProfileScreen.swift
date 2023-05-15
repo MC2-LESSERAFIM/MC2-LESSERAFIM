@@ -97,37 +97,6 @@ struct ProfileScreen: View {
                 .padding(.horizontal, 36)
                 .padding(.top, 48)
                 
-                
-                //                HStack(alignment: .center) {
-                //                        Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
-                //                            .font(.system(size: 20))
-                //                            .foregroundColor(.black)
-                //                            .frame(width: 30, height: 30)
-                //                            .background(.ultraThinMaterial)
-                //                            .cornerRadius(15)
-                //                            .padding(.trailing, 24)
-                //                            .onTapGesture {
-                //                                isNotificationEnabled.toggle()
-                //                            }
-                //
-                //                        Image(systemName: isLockEnabled ? "lock" : "lock.slash")
-                //                            .font(.system(size: 20))
-                //                            .foregroundColor(.black)
-                //                            .frame(width: 30, height: 30)
-                //                            .background(.ultraThinMaterial)
-                //                            .cornerRadius(15)
-                //                            .onTapGesture {
-                //                                isLockEnabled.toggle()
-                //                                if isLockEnabled {
-                //                                    appLock.isAppLockEnabled = true
-                //                                }else {
-                //                                    appLock.isAppLockEnabled = false
-                //                                }
-                //                            }
-                //
-                //                }
-                //                .padding(.top, 12)
-                
                 Spacer()
                 
             }
