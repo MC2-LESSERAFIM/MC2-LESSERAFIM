@@ -39,22 +39,19 @@ struct ChallengeScreen: View {
                     .padding(.horizontal, 24)
                     
                     VStack {
-                        VStack {
-                            Image(tappedImageName)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: 320)
-                            
-                            Text(username)
-                                .font(.system(size: 20, weight: .semibold))
-                                .padding(.bottom, 15)
-                        }
-                        .padding(.top, 24)
-                        .frame(width: UIScreen.main.bounds.width - 48, height: 346)
-                        .frame(alignment: .bottom)
+                        Image(tappedImageName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 320)
+                        
+                        Text(username)
+                            .font(.system(size: 20, weight: .semibold))
+                            .padding(.bottom, 15)
+                        
                     }
-                    .padding(.top, 24)
-                    .padding(.bottom, 24)
+                    .frame(width: UIScreen.main.bounds.width - 48, height: 346)
+                    .frame(alignment: .bottom)
+                    .padding(.bottom, 12)
                     
                     Spacer()
                     
@@ -114,7 +111,7 @@ struct ChallengeScreen: View {
                         .frame(width: UIScreen.main.bounds.width - 48, height: 50)
                         .background(Color.mainPink)
                         .cornerRadius(12)
-                        .padding(.bottom, 66)
+                        .padding(.bottom, 120)
                     }
                 }
                 .onAppear(perform: {
