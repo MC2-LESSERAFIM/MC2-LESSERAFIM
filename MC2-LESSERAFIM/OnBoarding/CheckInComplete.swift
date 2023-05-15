@@ -16,12 +16,12 @@ struct CheckInComplete: View {
         ZStack{
             BackgroundView()
             VStack(spacing: 0){
-                PageTitle(titlePage: "이제부터 당신의 짝꿍은")
-                HStack {
+                PageTitle(titlePage: "지금부터 당신의 짝꿍은")
+                HStack(alignment: .bottom, spacing: 0) {
                     Text(userName)
                         .foregroundColor(.mainPink)
                         .font(.system(size: 26, weight: .bold))
-                    PageTitle(titlePage: "입니다.")
+                    PageTitle(titlePage: "입니다")
                     Spacer()
                 }
                 

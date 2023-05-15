@@ -26,6 +26,7 @@ struct CanvusView: View {
     //투명도는 여기서 필요없음
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
+    @State var backToChallenge: Bool = false   // 챌린지 내용
 
     //지우개 초기 위치
     @State private var eraserCenter : CGPoint = .zero
@@ -49,9 +50,10 @@ struct CanvusView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
+    @State var canvusHeight: CGFloat = 430
     
     //View에 사용될 Canvus 정의
-    var canvus : some View{
+    var canvus: some View{
         Canvas { context, size in
             for line in lines {
                 var path = Path()
@@ -59,7 +61,9 @@ struct CanvusView: View {
                 context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
             }
         }
-        .frame(width: 345, height: 430)
+        .background(.white)
+        .cornerRadius(12)
+        .frame(width: 345, height: canvusHeight)
         .overlay(RoundedRectangle(cornerRadius: 12) //테두리 Radius
             .stroke(Color.mainPinkOpacity, lineWidth: 2))
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
@@ -76,8 +80,6 @@ struct CanvusView: View {
                     eraserVisable.toggle()
                 })
         )
-        .background(.white)
-        .cornerRadius(12)
     }
     
     //View에 사용될 drawingTools View 정의
@@ -117,10 +119,11 @@ struct CanvusView: View {
     
     var body: some View {
         GeometryReader { geo in
-            //화면 시작ddd
+            //화면 시작
             ZStack {
                 BackgroundView()
-                ZStack {
+                ZStack(alignment: .top) {
+                    NavigationLink(destination: ChallengeScreen(), isActive: $backToChallenge, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -128,7 +131,13 @@ struct CanvusView: View {
                         //툴바 호출
                         drawingTools
                         
-                        TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
+                        Spacer()
+                    }.offset(y: geo.size.height - 672)
+                    .frame(alignment: .top)
+                    VStack{
+                        Spacer()
+                            .frame(width: 10 , height: geo.size.height - 180)
+                        TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 그림에 제목을 붙여볼까요?")
                             .padding(.horizontal, 24)
                             .submitLabel(.return)
                             .toolbar {
@@ -210,14 +219,15 @@ struct CanvusView: View {
                     
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     changeBackgroundOpacity()
-                    dismiss()
+                    backToChallenge = true
+                    //dismiss()
                 }
                 
                 
             } label: {
                 Image(systemName: "checkmark.circle")
             }
-        }
+        }.navigationBarTitleDisplayMode(.inline)
     }
     
     func saveContext() {
