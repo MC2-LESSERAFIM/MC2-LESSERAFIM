@@ -22,6 +22,13 @@ struct RecordWritingView: View {
                 // 챌린지 제목
                 TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지에 제목을 붙여볼까요?")
                     .submitLabel(.return)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("완료") {
+                                hideKeyboard()
+                            }
+                        }
+                    }
                 
                 // 챌린지 내용
                 OnlyWritingContentTextField(contentRecord: $contentRecord, onStory: false, placeholder: "어떤 이야기가 담겨있나요?")
@@ -30,6 +37,13 @@ struct RecordWritingView: View {
                     .onTapGesture {
                         onStory = true
                         print(geo.size.height)
+                    }
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button("완료") {
+                                hideKeyboard()
+                            }
+                        }
                     }
                 
                 // 위로 밀기

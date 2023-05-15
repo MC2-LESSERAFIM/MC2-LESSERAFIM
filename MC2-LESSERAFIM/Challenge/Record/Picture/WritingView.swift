@@ -91,6 +91,13 @@ struct WritingView: View {
                     
                     TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
                         .submitLabel(.return)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Button("완료") {
+                                    hideKeyboard()
+                                }
+                            }
+                        }
                     
                     //                TextField("어떤 이야기가 담겨있나요?\n", text: $content, axis: .vertical)
                     OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")

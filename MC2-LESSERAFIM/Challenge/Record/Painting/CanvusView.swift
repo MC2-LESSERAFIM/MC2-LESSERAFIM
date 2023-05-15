@@ -121,6 +121,13 @@ struct CanvusView: View {
                             TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
                                 .padding(.horizontal, 24)
                                 .submitLabel(.return)
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Button("완료") {
+                                            hideKeyboard()
+                                        }
+                                    }
+                                }
                             
                             OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
                                 .padding(.horizontal, 24)
@@ -142,6 +149,12 @@ struct CanvusView: View {
                                     //텍스트 처리
                                     //                                $challengeTitle
                                     //                                $challegeContent
+                                .toolbar {
+                                    ToolbarItemGroup(placement: .keyboard) {
+                                        Button("완료") {
+                                            hideKeyboard()
+                                        }
+                                    }
                                 }
                                 
                                 
