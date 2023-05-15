@@ -59,7 +59,6 @@ struct WritingView: View {
     @State private var showingAlert = false
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
-    var type: String
     var challenge: Challenge
     
     @FocusState private var focusedField: FocusField?
