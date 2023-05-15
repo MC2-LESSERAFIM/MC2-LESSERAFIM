@@ -64,6 +64,8 @@ struct RecordSelectionView: View {
                         EmptyView()
                     }
                     
+                    Spacer()
+                    
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
                                     RecordWritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
@@ -73,8 +75,10 @@ struct RecordSelectionView: View {
                             labelImage: "square.and.pencil",
                             colorButton: colorDefaultButton
                         )
-                        .padding(.horizontal, 12)   // 버튼 간의 갭
+//                        .padding(.horizontal, 12)   // 버튼 간의 갭
                     }
+                    
+                    Spacer()
                     
                     // 기록/그림 화면 이동 버튼
                     NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)) {
@@ -85,7 +89,7 @@ struct RecordSelectionView: View {
                         )
                     }
                 }
-                .padding(.top, 48)  // 타이틀과의 갭 영역
+                .padding(.top, 36)  // 타이틀과의 갭 영역
                 
                 // 위로 밀기
                 Spacer()
