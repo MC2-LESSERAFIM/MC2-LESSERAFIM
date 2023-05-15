@@ -25,7 +25,6 @@ struct RecordCollectionView: View {
     
     @State private var selectedSort: SortBy = .day
     
-    //MARK: - 이렇게 하면 Post 추가될 떄마다 수정사항 반영되지 않음
     init() {
         self.posts = PersistenceController.shared.getAllPosts()
         self.postsByCategory = PersistenceController.shared.getPostsByCategory()
