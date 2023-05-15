@@ -11,7 +11,7 @@ import SwiftUI
 struct PaintingLine {
     var point = [CGPoint]()
     var color : Color = .black
-    var lineWidth : Double = 1.0
+    var lineWidth : Double = 5.0
 }
 
 struct CanvusView: View {
@@ -26,6 +26,7 @@ struct CanvusView: View {
     //투명도는 여기서 필요없음
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
+    @State private var eraserThickness : Double = 5.0 //기본 지우개 굵기
     @State var backToChallenge: Bool = false   // 챌린지 내용
 
     //지우개 초기 위치
@@ -138,6 +139,9 @@ struct CanvusView: View {
                         Spacer()
                             .frame(width: 10 , height: geo.size.height - 180)
                         TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 그림에 제목을 붙여볼까요?")
+                            .onTapGesture {
+                                toolClicked = false
+                            }
                             .padding(.horizontal, 24)
                             .submitLabel(.return)
                             .toolbar {
@@ -149,6 +153,9 @@ struct CanvusView: View {
                             }
                         
                         OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
+                            .onTapGesture {
+                                toolClicked = false
+                            }
                             .padding(.horizontal, 24)
                             .submitLabel(.return)
                             .toolbar {
@@ -162,7 +169,7 @@ struct CanvusView: View {
                     //필요시 나타나는 View
                     VStack{ //case문 좀 치겠는데?
                         Spacer()
-                            .frame(width: 325, height: 160)
+                            .frame(width: 325, height: 375)
                         
                         if toolClicked {
                             switch whatTool {
