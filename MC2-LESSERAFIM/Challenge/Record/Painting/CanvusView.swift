@@ -59,6 +59,7 @@ struct CanvusView: View {
                 context.stroke(path, with: .color(line.color), lineWidth: line.lineWidth)
             }
         }
+        .frame(width: 345, height: 430)
         .overlay(RoundedRectangle(cornerRadius: 12) //테두리 Radius
             .stroke(Color.mainPinkOpacity, lineWidth: 2))
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
@@ -76,6 +77,7 @@ struct CanvusView: View {
                 })
         )
         .background(.white)
+        .cornerRadius(12)
     }
     
     //View에 사용될 drawingTools View 정의
@@ -129,7 +131,6 @@ struct CanvusView: View {
                                 //툴바 호출
                                 drawingTools
                                 
-                                TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 사진에 제목을 붙여볼까요?")
                                     .padding(.horizontal, 24)
                                     .submitLabel(.return)
                                 
