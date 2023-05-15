@@ -13,6 +13,7 @@ struct SelectedUserCharacterScreen: View {
     @State var tappedImageName: String = ""
     @State var selectedOption: String = ""
     @State var isNextButtonEnabled: Bool = false
+    @AppStorage("selectedImageName") var selectedImageName: String = ""
     
     var body: some View {
         ZStack{
@@ -67,6 +68,9 @@ struct SelectedUserCharacterScreen: View {
             .padding(.bottom, 66)
             .ignoresSafeArea()
             .navigationTitle("")
+            .onDisappear {
+                selectedImageName = tappedImageName
+            }
         }
     }
 }

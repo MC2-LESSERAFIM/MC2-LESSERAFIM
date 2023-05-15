@@ -9,10 +9,8 @@ import SwiftUI
 
 struct CheckInComplete: View {
     @State var tappedImageName: String
-    @State var isStartButtonEnabled: Bool = false
     @AppStorage("isOnBoarding") var isOnBoarding: Bool!
     @AppStorage("userName") var userName: String!
-    @AppStorage("selectedImageName") var selectedImageName: String!
     
     var body: some View {
         ZStack{
@@ -35,22 +33,18 @@ struct CheckInComplete: View {
                 
                 Spacer()
                 
-                NavigationLink(
-                    destination: ChallengeScreen(),
-                    isActive: $isStartButtonEnabled,
-                    label: {
-                        Button("시작하기", action: finishOnboarding)
-                            .font(.system(size: 17, weight: .bold))
-                            .foregroundColor(.white)
-                            .frame(width: 345, height: 50)
-                            .background(
-                                RoundedRectangle(cornerRadius: 12)
-                                    .foregroundColor(.mainPink)
-                            )
-                            .padding(.vertical, 28)
-//                            .padding(.)
-                    }
+                Button("시작하기", action: {
+                    isOnBoarding = false
+                })
+                .font(.system(size: 17, weight: .bold))
+                .foregroundColor(.white)
+                .frame(width: 345, height: 50)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .foregroundColor(.mainPink)
                 )
+                .padding(.vertical, 28)
+//                            .padding(.)
             }
             .padding(.horizontal, 24)
 //            .padding(.top, 100)
@@ -67,8 +61,6 @@ struct CheckInComplete_Previews: PreviewProvider {
 
 fileprivate extension CheckInComplete {
     func finishOnboarding() {
-        isStartButtonEnabled = true
         isOnBoarding = false
-        selectedImageName = tappedImageName
     }
 }
