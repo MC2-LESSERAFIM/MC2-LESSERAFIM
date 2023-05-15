@@ -108,6 +108,23 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     static func random() -> Self {
         return Category.allCases.randomElement() ?? .comfortZone
     }
+    
+    var textFromCSV: String {
+        switch self {
+        case .favorites:
+            return "Favorites"
+        case .dislikes:
+            return "Dislikes"
+        case .strengths:
+            return "Strengths"
+        case .weaknesses:
+            return "Weaknesses"
+        case .comfortZone:
+            return "ComfortZone"
+        case .valuesAndAim:
+            return "Values"
+        }
+    }
 }
 
 struct Record: Hashable, Codable {
@@ -226,7 +243,7 @@ struct CategoryView: View {
     var body: some View {
         LazyVGrid(columns: numberColumns, spacing: 20) {
             ForEach(categoryKeys, id: \.self) { category in
-                let category = category.rawValue
+                let category = category.textFromCSV
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
