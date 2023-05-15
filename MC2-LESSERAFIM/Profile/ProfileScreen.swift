@@ -23,8 +23,25 @@ struct ProfileScreen: View {
         ZStack {
             BackgroundView()
             VStack(spacing: 0) {
-                VStack {
-                    PageTitle(titlePage: "나의 짝꿍")
+                HStack {
+                    Text("나의 짝꿍")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.mainBlack)
+                    
+                    Text(userName)
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.mainPink)
+                    
+                    Image(systemName: "pencil.circle")
+                        .foregroundColor(Color.mainPink)
+                        .onTapGesture {
+                            showNameModal = true
+                        }
+                        .sheet(isPresented: $showNameModal) {
+                            NameModalScreen()
+                        }
+                    
+                    Spacer()
                 }
                 .padding(.horizontal, 24)
                 
