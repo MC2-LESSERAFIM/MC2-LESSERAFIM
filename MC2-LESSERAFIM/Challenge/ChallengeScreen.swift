@@ -38,6 +38,12 @@ struct ChallengeScreen: View {
     let yPosition: [CGFloat] = [100, 300]
     let prompts = ["1번 도움말", "2번 도움말"]
     
+    private var hasPassedDay: Bool {
+        let today = NSDate().formatted  // 오늘 날짜
+        let lastLaunchDate = UserDefaults.standard.string(forKey: Constants.FIRSTLAUNCH)    // 최근 사용 기록 날짜
+        return lastLaunchDate != today
+    }
+
     var body: some View {
         NavigationView {
             ZStack {
