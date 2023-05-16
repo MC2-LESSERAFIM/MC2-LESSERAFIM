@@ -53,7 +53,7 @@ struct RecordSelectionView: View {
                     
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
-                                    RecordWritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
                     ) {
                         RecordButton(
                             labelTitle: "글",
