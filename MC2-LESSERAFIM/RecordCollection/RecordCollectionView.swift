@@ -187,7 +187,7 @@ struct ThumbnailView: View {
             // MARK: - 사진 or 그림 Post
             image
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 129, height: 172)
                 .clipped()
                 .background(
