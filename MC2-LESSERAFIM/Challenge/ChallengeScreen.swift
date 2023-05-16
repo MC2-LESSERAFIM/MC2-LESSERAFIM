@@ -76,8 +76,7 @@ struct ChallengeScreen: View {
                             List {
                                 ForEach(0..<3) { i in
                                     NavigationLink {
-                                        RecordSelectionView(challenge: challenges[todayChallenges[i]])
-                                            .environment(\.managedObjectContext, viewContext)
+                                        ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[i]])
                                     } label: {
                                         Text(challenges[todayChallenges[i]].question!)
                                             .swipeActions(edge: .leading) {
