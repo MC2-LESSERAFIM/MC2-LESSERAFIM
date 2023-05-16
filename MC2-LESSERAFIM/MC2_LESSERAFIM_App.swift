@@ -38,7 +38,7 @@ struct PersistenceController {
     
     func getAllPosts() -> [Post] {
         let fetchRequest: NSFetchRequest<Post> = Post.fetchRequest()
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {
             return try container.viewContext.fetch(fetchRequest)

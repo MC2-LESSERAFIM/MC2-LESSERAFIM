@@ -10,7 +10,7 @@
 		8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */; };
 		8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */; };
 		8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CC2A087F67003C7D3F /* RecordButton.swift */; };
-		8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */; };
+		8E15E4D12A08910F003C7D3F /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4D02A08910F003C7D3F /* WritingView.swift */; };
 		A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */; };
 		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
 		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
@@ -25,7 +25,7 @@
 		BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */; };
 		BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */; };
 		BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */ = {isa = PBXBuildFile; fileRef = BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */; };
-		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
+		BFCF46532A0797CD00BBDFDB /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
@@ -68,7 +68,7 @@
 		8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordSelectionView.swift; sourceTree = "<group>"; };
 		8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitle.swift; sourceTree = "<group>"; };
 		8E15E4CC2A087F67003C7D3F /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
-		8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWritingView.swift; sourceTree = "<group>"; };
+		8E15E4D02A08910F003C7D3F /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
 		A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusThicknessSlider.swift; sourceTree = "<group>"; };
 		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
 		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSetting.swift; sourceTree = "<group>"; };
 		BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Challenges.csv; sourceTree = "<group>"; };
-		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
+		BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		BF7520552A09DDE700BF81DC /* Writing */ = {
 			isa = PBXGroup;
 			children = (
-				8E15E4D02A08910F003C7D3F /* RecordWritingView.swift */,
+				8E15E4D02A08910F003C7D3F /* WritingView.swift */,
 			);
 			path = Writing;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 		BF7520572A09DE0700BF81DC /* Picture */ = {
 			isa = PBXGroup;
 			children = (
-				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
+				BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */,
 			);
 			path = Picture;
 			sourceTree = "<group>";
@@ -458,7 +458,7 @@
 				D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */,
 				F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */,
 				F41534D32A08754F0006AAA7 /* OnBoardingData.swift in Sources */,
-				8E15E4D12A08910F003C7D3F /* RecordWritingView.swift in Sources */,
+				8E15E4D12A08910F003C7D3F /* WritingView.swift in Sources */,
 				A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */,
 				A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */,
 				D24371DA2A0E9776007DC1A6 /* ColorExtension.swift in Sources */,
@@ -476,7 +476,7 @@
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */,
-				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
+				BFCF46532A0797CD00BBDFDB /* PhotoUploadView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
 				D24371DC2A0E9CA7007DC1A6 /* ViewExtension.swift in Sources */,

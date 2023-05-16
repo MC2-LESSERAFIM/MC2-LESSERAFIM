@@ -1,5 +1,5 @@
 //
-//  RecordWritingView.swift
+//  WritingView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by OhSuhyun on 2023/05/08.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RecordWritingView: View {
+struct WritingView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
