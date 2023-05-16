@@ -173,6 +173,10 @@ struct ChallengeScreen: View {
                     }
                 }
             }
+            .onTapGesture {
+                goToNextPrompt()
+                offTutorialWhenLastIndex()
+            }
             .navigationTitle("")
         }
         .navigationViewStyle(.stack)
