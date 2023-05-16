@@ -93,7 +93,7 @@ struct ProfileScreen: View {
                                             showNameModal = true
                                         }
                                         .sheet(isPresented: $showNameModal) {
-                                            NameModalScreen()
+                                            ImageModalScreen()
                                         }
                                 }
                                 .padding(.horizontal, 12)
