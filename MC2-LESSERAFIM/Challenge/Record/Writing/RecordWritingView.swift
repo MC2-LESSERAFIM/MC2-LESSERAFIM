@@ -12,6 +12,8 @@ struct RecordWritingView: View {
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
     var challenge: Challenge
+    let challengeIndex: Int
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     
@@ -95,6 +97,7 @@ struct RecordWritingView: View {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
+                                todayPostsCount += 1
                                 changeBackgroundOpacity()
                                 if isFirstPosting {
                                     firstCompleteScreen = true
@@ -103,7 +106,8 @@ struct RecordWritingView: View {
                                     backToCollection = true
                                 }
                                 updateFirstUse()
-                                todayPostsCount += 1
+                                postedChallenges[challengeIndex] = true
+                                print(postedChallenges)
                             }
                         }
                 }

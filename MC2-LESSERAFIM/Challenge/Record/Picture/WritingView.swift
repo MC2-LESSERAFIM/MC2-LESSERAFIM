@@ -63,6 +63,8 @@ struct WritingView: View {
     @State var contentRecord: String = ""   // 챌린지 내용
     @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     var challenge: Challenge
+    let challengeIndex: Int
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     @FocusState private var focusedField: FocusField?
     
@@ -165,6 +167,8 @@ struct WritingView: View {
                                         backToCollection = true
                                     }
                                     updateFirstUse()
+                                    postedChallenges[challengeIndex] = true
+                                    print(postedChallenges)
                                 }
                                 else{
                                     self.showingAlert = true

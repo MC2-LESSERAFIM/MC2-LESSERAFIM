@@ -23,6 +23,8 @@ struct ChallengeScreen: View {
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
+    @AppStorage("currentChallenge") var currentChallenge: Int = 0
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     private let challengeNumber: Int = 3
     
@@ -93,7 +95,8 @@ struct ChallengeScreen: View {
                             List {
                                 ForEach(0..<3) { i in
                                     NavigationLink {
-                                        ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[i]]).environment(\.managedObjectContext, viewContext)
+                                        ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[i]], challengeIndex: i)
+                                            .environment(\.managedObjectContext, viewContext)
                                     } label: {
                                         Text(challenges[todayChallenges[i]].question!)
                                             .swipeActions(edge: .leading) {
@@ -109,7 +112,7 @@ struct ChallengeScreen: View {
                                                 }
                                                 .tint(.mainPink)
                                             }
-                                    }
+                                    }.disabled(postedChallenges[i])
                                 }
                                 .listStyle(.inset)
                                 .listRowBackground(Color.opacityWhiteChallenge)

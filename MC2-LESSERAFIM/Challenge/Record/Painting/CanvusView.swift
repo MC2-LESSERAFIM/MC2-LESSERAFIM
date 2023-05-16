@@ -17,6 +17,8 @@ struct PaintingLine {
 struct CanvusView: View {
     @Environment(\.managedObjectContext) private var viewContext
     var challenge: Challenge
+    let challengeIndex: Int
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
@@ -230,6 +232,9 @@ struct CanvusView: View {
                     //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     
+                    if isDayChanging == false{
+                        isDayChanging = true
+                    }
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     todayPostsCount += 1
                     changeBackgroundOpacity()
@@ -240,6 +245,7 @@ struct CanvusView: View {
                         backToCollection = true
                     }
                     updateFirstUse()
+                    postedChallenges[challengeIndex] = true
                 }
                 
                 
