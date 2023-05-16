@@ -67,7 +67,8 @@ struct RecordSelectionView: View {
                     Spacer()
                     
                     // 기록/그림 화면 이동 버튼
-                    NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)) {
+                    NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                    ) {
                         RecordButton(
                             labelTitle: "그림",
                             labelImage: "paintpalette.fill",

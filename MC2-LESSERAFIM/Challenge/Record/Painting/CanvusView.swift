@@ -52,7 +52,6 @@ struct CanvusView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
     @State var firstCompleteScreen: Bool = false
@@ -222,7 +221,6 @@ struct CanvusView: View {
             //Tool bar 상단에 체크 버튼 생성
             Button {
                 //체크 버튼 엑션
-                print("Button Clicked")
                 let canvusImage = ImageRenderer(content: canvus)
                 
                 if let image = canvusImage.uiImage{
@@ -236,7 +234,6 @@ struct CanvusView: View {
                     }
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     postedChallenges[currentChallenge] = true
-                    todayPostsCount += 1
                     changeBackgroundOpacity()
                     if isFirstPosting {
                         firstCompleteScreen = true
@@ -278,6 +275,7 @@ struct CanvusView: View {
         post.imageData = imageData
         post.createdAt = createdAt
         post.challenge = self.challenge
+        self.challenge.isSuccess = true
         saveContext()
     }
     

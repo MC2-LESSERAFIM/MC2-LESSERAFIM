@@ -10,7 +10,7 @@ import SwiftUI
 struct ChallengeScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @FetchRequest(sortDescriptors: [])
+    @FetchRequest(sortDescriptors: [NSSortDescriptor(keyPath: \Challenge.question, ascending: true)])
     private var challenges: FetchedResults<Challenge>
     
     // tables swipe action
@@ -23,8 +23,8 @@ struct ChallengeScreen: View {
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
-    @AppStorage("currentChallenge") var currentChallenge: Int = 0
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("currentChallenge") var currentChallenge: Int = 0
     
     private let challengeNumber: Int = 3
     
@@ -32,13 +32,14 @@ struct ChallengeScreen: View {
     @AppStorage("isPickedChallenge") var isPickedChallenge: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
-    @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isFirstPosting") var isFirstPosting: Bool!
     @AppStorage("postChallenge") var postChallenge: Bool = false
-    
+    @AppStorage("difficulty") var difficulty: Int = 0
     @AppStorage("isTutorial") var isTutorial = UserDefaults.standard.bool(forKey: "isTutorial")
     @Binding var currentTutorialIndex: Int
     
+    @State var timeNowByMinute = ""
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     private var hasPassedDay: Bool {
         let today = NSDate().formatted  // 오늘 날짜
@@ -165,14 +166,17 @@ struct ChallengeScreen: View {
                         self.showingAlert = false
                     }
                 }
-                .onAppear {
-                    passdedDayOperation()
-                }
             }
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
+            .onAppear {
+                passedDayOperation()
+            }
         }
         .navigationViewStyle(.stack)
+        .onReceive(timer) { _ in
+            passedDayOperation()
+        }
     }
 }
 
@@ -188,10 +192,17 @@ private extension ChallengeScreen {
     func initChallenges(number: Int) {
         
         func addChallenge() {
-            var num = Int.random(in: 0 ..< challenges.count)
-            while (todayRemovedChallenges.contains(num)) {
+            var count = challenges.count
+            var num = 0 // 초기화
+            repeat {
+                if(count == 0) {
+                    // 더이상 뽑을 퀘스쳔이 없을 때
+                    num = 0
+                    break
+                }
+                count -= 1
                 num = Int.random(in: 0 ..< challenges.count)
-            }
+            } while (todayRemovedChallenges.contains(num) || challenges[num].isSuccess == true || Int(challenges[num].difficulty) > difficulty)
             todayRemovedChallenges.append(num)
             todayChallenges.append(num)
         }
@@ -202,10 +213,17 @@ private extension ChallengeScreen {
     }
     
     func modifyChallenge(index: Int) {
-        var num = Int.random(in: 0 ..< challenges.count)
-        while (todayRemovedChallenges.contains(num)) {
+        var count = challenges.count
+        var num = 0 // 초기화
+        repeat {
+            if(count == 0) {
+                // 더이상 뽑을 퀘스쳔이 없을 때
+                num = 0
+                break
+            }
+            count -= 1
             num = Int.random(in: 0 ..< challenges.count)
-        }
+        } while (todayRemovedChallenges.contains(num) || challenges[num].isSuccess == true || Int(challenges[num].difficulty) > difficulty)
         todayRemovedChallenges.append(num)
         todayChallenges[index] = num
     }
@@ -215,12 +233,11 @@ private extension ChallengeScreen {
     /// 2. dailyFirstUse - Post가 오늘 첫 포스트인지 확인하는 변수
     /// 3. isDayChanging - 오늘 날짜가 바뀌었는지 확인하는 변수, 어디서 쓰기작업이 발생하는지 모르겠음
     /// 4. progressDay - 진행일 기록 변수
-    /// 5. todayPostsCount - 오늘 포스팅한 개수 확인 변수
-    /// 6. todayRemovedChallenges - 다시 뽑기로 제거된 인덱스가 포함된 배열
-    /// 7. todayChallenges - 현재 표시중인 챌린지의 인덱스가 포함된 배열
+    /// 5. todayRemovedChallenges - 다시 뽑기로 제거된 인덱스가 포함된 배열
+    /// 6. todayChallenges - 현재 표시중인 챌린지의 인덱스가 포함된 배열
     //MARK: - Day가 물리적인 시간으로 지나갔는지 혹은 오늘 올린 포스트의 개수가 3개 이상이면 뷰 및 각종 변수 초기화
-    func passdedDayOperation() {
-        if hasPassedDay ||  todayPostsCount >= 3 {
+    func passedDayOperation() {
+        if hasPassedDay {
             // 1. 오늘 날짜로 UserDefaults Update
             UserDefaults.standard.setValue(NSDate().formatted, forKey:Constants.FIRSTLAUNCH)
             // 2. 챌린지 뽑기를 초기화
@@ -232,14 +249,26 @@ private extension ChallengeScreen {
                 // 5. 진행일을 추가
                 progressDay += 1
                 // 6. isDayChanging 초기화
+                changeDifficulty(day : progressDay)
                 isDayChanging = false
             }
-            
-            todayPostsCount = 0
             numberOfTimeLeft = 3
             todayRemovedChallenges = []
             todayChallenges = []
+            postedChallenges = [false, false, false]
             initChallenges(number: challengeNumber)
+        }
+    }
+    
+    func changeDifficulty(day: Int) {
+        if day <= 10 {
+            difficulty = 1
+        } else if day <= 30 {
+            difficulty = 2
+        } else if day <= 60 {
+            difficulty = 3
+        } else {
+            difficulty = 4
         }
     }
 }
