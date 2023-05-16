@@ -184,6 +184,11 @@ struct ChallengeScreen: View {
                     }
                 }
             }
+            .onTapGesture {
+                goToNextPrompt()
+                offTutorialWhenLastIndex()
+            }
+            .navigationTitle("")
         }
         .navigationBarBackButtonHidden(true)
         .navigationViewStyle(.stack)
