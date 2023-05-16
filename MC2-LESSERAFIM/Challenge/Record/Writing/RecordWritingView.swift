@@ -29,11 +29,13 @@ struct RecordWritingView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    
     var body: some View {
         
         ZStack {
             BackgroundView()
-            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -96,7 +98,7 @@ struct RecordWritingView: View {
                                 backToCollection = true
                                 updateFirstUse()
                                 todayPostsCount += 1
-                                dismiss()
+                                isSelectedTab = 0
                             }
                         }
                 }
