@@ -31,12 +31,19 @@ struct ChallengeCheckScreen: View {
             VStack(alignment: .leading, spacing: 0){
                 PageTitle(titlePage: "챌린지를 시도해봤나요?")
                 
-                Text("\(userName)의 챌린지는\n\(challengeStatement)이에요.")
-                    .font(.system(size: 17))
-                    .lineSpacing(4)
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(.subText)
-                    .padding(.top, 12)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("\(userName)의 챌린지는")
+                    
+                    Text("\"\(challengeStatement)\"")
+                        .fontWeight(.bold)
+                    
+                    + Text(" 이에요")
+                }
+                .font(.system(size: 17))
+                .lineSpacing(4)
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.subText)
+                .padding(.top, 12)
                 
                 HStack(spacing: 18) {
                     SelectableButton(
