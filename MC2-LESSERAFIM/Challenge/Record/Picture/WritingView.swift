@@ -59,6 +59,7 @@ struct WritingView: View {
     @State private var showingAlert = false
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     var challenge: Challenge
     
     @FocusState private var focusedField: FocusField?
@@ -71,11 +72,12 @@ struct WritingView: View {
     var body: some View {
         ZStack {
             BackgroundView()
+            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 10) {
                         
-                        Button(action: {
+                        Button(action: {backToCollection
                             imagePickerPresented.toggle()
                         }, label: {
                             if profileImage == nil {
@@ -148,7 +150,8 @@ struct WritingView: View {
                                     }
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
                                     changeBackgroundOpacity()
-                                    dismiss()
+                                    backToCollection = true
+//                                    dismiss()
                                 }
                                 else{
                                     self.showingAlert = true
