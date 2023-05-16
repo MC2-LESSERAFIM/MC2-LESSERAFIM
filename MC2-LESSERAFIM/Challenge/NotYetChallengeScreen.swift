@@ -40,6 +40,7 @@ struct NotYetChallengeScreen: View {
             .padding(.bottom, 100)
             .ignoresSafeArea()
         }
+        .navigationTitle("")
     }
 }
 
