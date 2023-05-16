@@ -33,17 +33,19 @@ struct CheckInComplete: View {
                 
                 Spacer()
                 
-                Button("시작하기", action: {
+                Button(action: {
                     isOnBoarding = false
+                },label: {
+                    Text("시작하기")
+                        .font(.system(size: 17, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 345, height: 50)
+                        .background(
+                            RoundedRectangle(cornerRadius: 12)
+                                .foregroundColor(.mainPink)
+                        )
+                        .padding(.vertical, 28)
                 })
-                .font(.system(size: 17, weight: .bold))
-                .foregroundColor(.white)
-                .frame(width: 345, height: 50)
-                .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .foregroundColor(.mainPink)
-                )
-                .padding(.vertical, 28)
 //                            .padding(.)
             }
             .padding(.horizontal, 24)
