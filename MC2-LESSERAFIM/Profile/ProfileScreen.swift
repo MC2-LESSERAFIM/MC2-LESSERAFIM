@@ -92,6 +92,11 @@ struct ProfileScreen: View {
                         Toggle("잠금", isOn: $isLockEnabled)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isLockEnabled, perform: { value in
+                                appLock.appLockStateChange(appLockState: value)
+                                appLock.isAppLockEnabled = value
+                            })
+                           
                     }
                     .padding(.top, 24)
                 }
