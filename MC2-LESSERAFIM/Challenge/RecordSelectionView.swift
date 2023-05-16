@@ -13,7 +13,6 @@ struct RecordSelectionView: View {
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
     
     let challenge: Challenge
-    let challengeIndex: Int
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
     
@@ -42,7 +41,7 @@ struct RecordSelectionView: View {
                 HStack {
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
-                                    WritingView(challenge: challenge, challengeIndex: challengeIndex).environment(\.managedObjectContext, viewContext)
+                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
                     ) {
                         RecordButton(
                             labelTitle: "사진 + 글",
@@ -55,7 +54,7 @@ struct RecordSelectionView: View {
                     
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
-                                    RecordWritingView(challenge: challenge, challengeIndex: challengeIndex).environment(\.managedObjectContext, viewContext)
+                                    RecordWritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
                     ) {
                         RecordButton(
                             labelTitle: "글",
@@ -68,7 +67,7 @@ struct RecordSelectionView: View {
                     Spacer()
                     
                     // 기록/그림 화면 이동 버튼
-                    NavigationLink(destination: CanvusView(challenge: challenge, challengeIndex: challengeIndex).environment(\.managedObjectContext, viewContext)) {
+                    NavigationLink(destination: CanvusView(challenge: challenge).environment(\.managedObjectContext, viewContext)) {
                         RecordButton(
                             labelTitle: "그림",
                             labelImage: "paintpalette.fill",

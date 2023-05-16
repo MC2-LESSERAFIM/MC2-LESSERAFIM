@@ -21,7 +21,6 @@ struct ChallengeCheckScreen: View {
     @State var selectButton: SelectedButtonType = .none
     @State private var navigationIsActive: Bool = false
     let currentChallenge: Challenge
-    let challengeIndex: Int
     
     private var challengeStatement: String {
         currentChallenge.question ?? ""
@@ -61,7 +60,7 @@ struct ChallengeCheckScreen: View {
                 
                 NavigationLink {
                     if selectButton == .didChallenge {
-                        RecordSelectionView(challenge: currentChallenge, challengeIndex: challengeIndex).environment(\.managedObjectContext, viewContext)
+                        RecordSelectionView(challenge: currentChallenge).environment(\.managedObjectContext, viewContext)
                     } else if selectButton == .notYetChallenge {
                         NotYetChallengeScreen().environment(\.managedObjectContext, viewContext)
                     }
@@ -83,6 +82,6 @@ struct ChallengeCheckScreen: View {
 
 struct ChallengeCheckScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ChallengeCheckScreen(currentChallenge: Challenge(), challengeIndex: 0)
+        ChallengeCheckScreen(currentChallenge: Challenge())
     }
 }

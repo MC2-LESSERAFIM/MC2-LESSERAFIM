@@ -17,8 +17,9 @@ struct PaintingLine {
 struct CanvusView: View {
     @Environment(\.managedObjectContext) private var viewContext
     var challenge: Challenge
-    let challengeIndex: Int
+    @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
@@ -28,7 +29,6 @@ struct CanvusView: View {
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
     @State private var eraserThickness : Double = 5.0 //기본 지우개 굵기
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
 
     //지우개 초기 위치
     @State private var eraserCenter : CGPoint = .zero
@@ -132,7 +132,6 @@ struct CanvusView: View {
                 BackgroundView()
                 ZStack(alignment: .top) {
                     NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
-                    NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -236,16 +235,16 @@ struct CanvusView: View {
                         isDayChanging = true
                     }
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                    postedChallenges[currentChallenge] = true
                     todayPostsCount += 1
                     changeBackgroundOpacity()
                     if isFirstPosting {
                         firstCompleteScreen = true
                     } else {
                         isSelectedTab = 0
-                        backToCollection = true
+                        postChallenge = false
                     }
                     updateFirstUse()
-                    postedChallenges[challengeIndex] = true
                 }
                 
                 

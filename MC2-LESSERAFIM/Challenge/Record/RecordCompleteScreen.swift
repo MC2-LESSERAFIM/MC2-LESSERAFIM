@@ -11,15 +11,14 @@ struct RecordCompleteScreen: View {
     @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("userName") var userName: String = ""
     
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     @State private var navigationIsActive: Bool = false
     @AppStorage("isSelectedTab") var isSelectedTab: Int = UserDefaults.standard.integer(forKey: "isSelectedTab")
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     var body: some View {
         ZStack {
             BackgroundView()
-            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             VStack {
                 
                 VStack(alignment: .leading, spacing: 0){
@@ -40,8 +39,8 @@ struct RecordCompleteScreen: View {
                 Spacer()
                 
                 Button(action: {
-                    backToCollection = true
                     isFirstPosting = false
+                    postChallenge = false
                     isSelectedTab = 0
                 }, label: {Text("좋아요!")
                         .frame(maxWidth: .infinity)
@@ -53,6 +52,7 @@ struct RecordCompleteScreen: View {
             .ignoresSafeArea()
         }
         .navigationTitle("")
+        .navigationBarBackButtonHidden(true)
     }
 }
 
