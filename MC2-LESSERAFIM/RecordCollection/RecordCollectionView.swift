@@ -290,11 +290,7 @@ struct DayLabel: View {
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
-    
-    private let numberColumns = [
-        GridItem(.adaptive(minimum: 164)),
-        GridItem(.adaptive(minimum: 164))
-    ]
+    private let numberColumns = Array(repeating: GridItem(.fixed(160), spacing: 25), count: 2)
     
     var body: some View {
         LazyVGrid(columns: numberColumns, spacing: 20) {
