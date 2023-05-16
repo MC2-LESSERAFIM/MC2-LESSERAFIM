@@ -287,23 +287,25 @@ struct PostDetailView: View {
     @State var isTabBarVisible = false
     
     var body: some View {
-        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .ignoresSafeArea()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        isTabBarVisible = true
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.mainPink)
+        ZStack {
+            BackgroundView()
+            (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            isTabBarVisible = true
+                            dismiss()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.mainPink)
+                        }
                     }
                 }
-            }
-            .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-            .navigationBarBackButtonHidden()
+                .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                .navigationBarBackButtonHidden()
+        }
     }
     
 }
