@@ -15,7 +15,7 @@ struct RecordSelectionView: View {
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
-    @State var isWritingView: Bool = false
+//    @State var isWritingView: Bool = false
     
     var body: some View {
         ZStack {
@@ -28,40 +28,15 @@ struct RecordSelectionView: View {
                 
                 // 기록선택버튼(RecordButton)
                 HStack {
-                    // 기록/사진 화면 이동 버튼 및 액션시트
-                    Button(action: {
-                        self.showActionSheet = true // 버튼 선택 시 액션시트 표출
-                    }) {
+                    // 기록/글 화면 이동 버튼
+                    NavigationLink(destination:
+                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                    ) {
                         RecordButton(
                             labelTitle: "사진 + 글",
                             labelImage: "camera.fill",
-                            colorButton: self.showActionSheet ? colorSelectedButton : colorDefaultButton,    // 액션 시트 표출 여부에 따른 버튼 배경색 변경
-                            colorButtonIcon: self.showActionSheet ? Color.white : Color.mainBlack
+                            colorButton: colorDefaultButton
                         )
-                    }
-                    // 기록/사진 화면의 액션시트
-                    .actionSheet(isPresented: $showActionSheet) {
-                        ActionSheet(
-                            title: Text("기록할 사진은 어떻게 가져오시겠어요?"),
-                            // 액션시트 리스트
-                            buttons: [
-                                .default(Text("사진 첨부"), action: {
-                                    isWritingView = true
-                                    // 항목 1 선택 시 처리
-                                }),
-                                .default(Text("사진 촬영"), action: {
-                                    // 항목 2 선택 시 처리
-                                }),
-                                .cancel(Text("취소"))
-                            ]
-                        )
-                    }
-                    
-                    NavigationLink(destination:
-                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
-                                   , isActive: $isWritingView
-                    ) {
-                        EmptyView()
                     }
                     
                     Spacer()
