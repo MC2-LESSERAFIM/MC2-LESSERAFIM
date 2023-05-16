@@ -90,9 +90,9 @@ struct ProfileScreen: View {
                                         .frame(height: 12)
                                         .foregroundColor(Color.mainPink)
                                         .onTapGesture {
-                                            showNameModal = true
+                                            showImageModal = true
                                         }
-                                        .sheet(isPresented: $showNameModal) {
+                                        .sheet(isPresented: $showImageModal) {
                                             ImageModalScreen()
                                         }
                                 }
