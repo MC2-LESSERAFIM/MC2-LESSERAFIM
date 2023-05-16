@@ -10,6 +10,8 @@ import SwiftUI
 struct RecordSelectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
+    @AppStorage("userName") var userName: String = ""
+    
     var challenge: Challenge
     
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
@@ -23,8 +25,17 @@ struct RecordSelectionView: View {
             VStack {    // 내비게이션 백버튼 - 타이틀 - 기록선택버튼
                 // 내비게이션 백버튼
                 
-                // 화면 타이틀(PageTitle)
-                PageTitle(titlePage: "챌린지를 기록해보아요")
+                VStack(alignment: .leading, spacing: 0){
+                    // 화면 타이틀(PageTitle)
+                    PageTitle(titlePage: "챌린지를 기록해보아요")
+                    
+                    Text("\(userName)의 챌린지는\n[챌린지 이름]이에요.") // [챌린지 이름]에 준이 데이터 받아와주세요.
+                        .font(.system(size: 17))
+                        .lineSpacing(4)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.gray)
+                        .padding(.top, 12)
+                }
                 
                 // 기록선택버튼(RecordButton)
                 HStack {
