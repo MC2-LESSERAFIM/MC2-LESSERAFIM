@@ -28,7 +28,7 @@ struct RecordWritingView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
     var body: some View {
         
         ZStack {
@@ -87,19 +87,28 @@ struct RecordWritingView: View {
                                 print("no story")
                                 self.showingAlert = true
                             } else {    // 내용 입력 누락이 없을 경우 제출 가능
+                                // 데이가 바뀐적이 없다면 데이가 바뀐다..?
                                 if isDayChanging == false {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 changeBackgroundOpacity()
                                 backToCollection = true
-//                                dismiss()
+                                updateFirstUse()
+                                todayPostsCount += 1
+                                dismiss()
                             }
                         }
                 }
             }
         }
     }   // body
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
+        }
+    }
     
     func saveContext() {
       do {

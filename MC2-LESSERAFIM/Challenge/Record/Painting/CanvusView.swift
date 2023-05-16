@@ -51,6 +51,8 @@ struct CanvusView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
+
     @State var canvusHeight: CGFloat = 430
     
     //View에 사용될 Canvus 정의
@@ -226,9 +228,9 @@ struct CanvusView: View {
                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                    todayPostsCount += 1
                     changeBackgroundOpacity()
-                    backToCollection = true
-                    //dismiss()
+                    updateFirstUse()
                 }
                 
                 
@@ -236,6 +238,12 @@ struct CanvusView: View {
                 Image(systemName: "checkmark.circle")
             }
         }.navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
+        }
     }
     
     func saveContext() {
