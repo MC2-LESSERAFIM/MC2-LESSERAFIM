@@ -275,3 +275,22 @@ extension NSDate {
 struct Constants {
     static let FIRSTLAUNCH = "first_launch"
 }
+
+struct PopoverView: View {
+    let message: String
+    let point: CGPoint
+    
+    init(_ message: String, _ point: CGPoint) {
+        self.message = message
+        self.point = point
+    }
+    
+    var body: some View {
+        Text(message)
+            .padding()
+            .foregroundColor(Color.white)
+            .background(Color.mainPink)
+            .cornerRadius(12)
+            .position(x: point.x, y: point.y)
+    }
+}
