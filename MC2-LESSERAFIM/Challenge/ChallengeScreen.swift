@@ -58,7 +58,24 @@ struct ChallengeScreen: View {
                 BackgroundView()
                 VStack {
                     VStack {
-                        PageTitle(titlePage: "Day \(progressDay)")
+                        HStack {
+                            PageTitle(titlePage: "Day \(progressDay)")
+                            
+                            Spacer()
+                            
+                            //MARK: - 우상단 도움 버튼
+                            Button {
+                                withAnimation {
+                                    isTutorial = true
+                                    currentIndex = 1
+                                }
+                            } label: {
+                                Image(systemName: "questionmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                            }
+                        }
+
                     }
                     .padding(.top, 48)
                     .padding(.horizontal, 24)
