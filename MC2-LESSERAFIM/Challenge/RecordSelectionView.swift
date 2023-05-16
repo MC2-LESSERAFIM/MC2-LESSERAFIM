@@ -9,15 +9,12 @@ import SwiftUI
 
 struct RecordSelectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
     @AppStorage("userName") var userName: String = ""
-    
-    var challenge: Challenge
-    
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
+    
+    let challenge: Challenge
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
-//    @State var isWritingView: Bool = false
     
     var body: some View {
         ZStack {
