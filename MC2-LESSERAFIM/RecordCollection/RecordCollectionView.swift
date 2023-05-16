@@ -293,7 +293,7 @@ struct CategoryView: View {
     private let numberColumns = Array(repeating: GridItem(.fixed(160), spacing: 25), count: 2)
     
     var body: some View {
-        LazyVGrid(columns: numberColumns, spacing: 20) {
+        LazyVGrid(columns: numberColumns, spacing: 24) {
             ForEach(categoryKeys, id: \.self) { category in
                 let category = category.textFromCSV
                 let posts = categories[category] ?? []
