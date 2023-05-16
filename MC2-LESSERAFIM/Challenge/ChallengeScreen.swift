@@ -175,17 +175,10 @@ struct ChallengeScreen: View {
                     }
                 }
                 .overlay {
-                    
-                    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
                     if isTutorial {
-                        Text(prompts[currentIndex])
-                            .position(x: xPosition[currentIndex], y: yPosition[currentIndex])
-                            .onTapGesture {
-                                currentIndex += 1
-                                currentIndex = prompts.count == currentIndex ? 0 : currentIndex
-                            }
+                        let point = CGPoint(x: xPosition[currentIndex], y: yPosition[currentIndex])
+                        PopoverView(prompts[currentIndex], point)
                     }
-                     */
                 }
             }
         }
