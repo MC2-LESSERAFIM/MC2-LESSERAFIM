@@ -125,11 +125,16 @@ struct ContentView: View {
 func makeTabBarTransparent() -> Void {
     let appearance = UITabBarAppearance()
     
-    appearance.configureWithTransparentBackground()
-    appearance.backgroundEffect = UIBlurEffect(style: .regular)
+    appearance.configureWithTransparentBackground() // 배경 투명
+    appearance.backgroundEffect = UIBlurEffect(style: .regular)   // 블러 효과 적용 -> tabItem 색상 변경 불가
+    appearance.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0) // 탭바 배경색
+    
+    appearance.stackedLayoutAppearance.normal.titleTextAttributes = [   // 선택되지 않은 tabItem 색상 변경
+        .foregroundColor: UIColor(red: 157/255, green: 157/255, blue: 157/255, alpha: 1)    // mainGray 색상
+    ]
     
     UITabBar.appearance().standardAppearance = appearance
-    UITabBar.appearance().scrollEdgeAppearance = appearance
+    UITabBar.appearance().scrollEdgeAppearance = appearance // 항상 스크롤엣지 효과를 보임
 }
 
 struct ContentView_Previews: PreviewProvider {
