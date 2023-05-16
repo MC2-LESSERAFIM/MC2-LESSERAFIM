@@ -223,10 +223,10 @@
 			isa = PBXGroup;
 			children = (
 				D22690122A06A50B00BCF668 /* ChallengeScreen.swift */,
-				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
-				BF7520542A09DD6200BF81DC /* Record */,
 				D25C13FB2A12B10E007FC37C /* ChallengeCheckScreen.swift */,
 				D25C13FF2A12C36B007FC37C /* NotYetChallengeScreen.swift */,
+				8E15E4C82A087BC7003C7D3F /* RecordSelectionView.swift */,
+				BF7520542A09DD6200BF81DC /* Record */,
 			);
 			path = Challenge;
 			sourceTree = "<group>";
