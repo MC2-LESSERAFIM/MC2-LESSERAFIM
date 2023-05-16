@@ -27,7 +27,7 @@ struct CanvusView: View {
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
     @State private var eraserThickness : Double = 5.0 //기본 지우개 굵기
-    @State var backToChallenge: Bool = false   // 챌린지 내용
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
 
     //지우개 초기 위치
     @State private var eraserCenter : CGPoint = .zero
@@ -125,7 +125,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
-                    NavigationLink(destination: ChallengeScreen(), isActive: $backToChallenge, label: {EmptyView()})
+                    NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -227,7 +227,7 @@ struct CanvusView: View {
                     
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     changeBackgroundOpacity()
-                    backToChallenge = true
+                    backToCollection = true
                     //dismiss()
                 }
                 

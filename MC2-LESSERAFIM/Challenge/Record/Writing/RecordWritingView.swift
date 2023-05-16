@@ -13,7 +13,10 @@ struct RecordWritingView: View {
     @State var contentRecord: String = ""   // 챌린지 내용
     var challenge: Challenge
     
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
+    
     @State private var showingAlert = false // 경고 출력 여부
+    
     @Environment(\.dismiss) private var dismiss // 화면 이탈
     
     @State var onStory = false   // 챌린지 내용 입력 중 여부
@@ -30,6 +33,7 @@ struct RecordWritingView: View {
         
         ZStack {
             BackgroundView()
+            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -88,7 +92,8 @@ struct RecordWritingView: View {
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 changeBackgroundOpacity()
-                                dismiss()
+                                backToCollection = true
+//                                dismiss()
                             }
                         }
                 }
