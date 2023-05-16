@@ -14,13 +14,15 @@ enum SelectedButtonType {
 }
 
 struct ChallengeCheckScreen: View {
-    let currentChallenge: Challenge
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
-    
     @State private var isLinkActive = false
     @State var selectButton: SelectedButtonType = .none
     @State private var navigationIsActive: Bool = false
+    let currentChallenge: Challenge
+    private var challengeStatement: String {
+        currentChallenge.question ?? ""
+    }
     
     var body: some View {
         ZStack{
