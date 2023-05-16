@@ -65,8 +65,7 @@ struct ContentView: View {
     @ObservedObject var appLock  = BiometricLock()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     @AppStorage("userName") var userName: String = ""
-    
-    @State var isSeletedTab: Int = 1
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
@@ -79,7 +78,7 @@ struct ContentView: View {
                         loadData()
                     }
             } else {
-                TabView(selection: $isSeletedTab) {
+                TabView(selection: $isSelectedTab) {
                     RecordCollectionView()
                         .tabItem {
                             Image(systemName: "magazine.fill")

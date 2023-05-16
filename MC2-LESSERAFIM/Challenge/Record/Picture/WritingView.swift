@@ -71,11 +71,12 @@ struct WritingView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     
     var body: some View {
         ZStack {
             BackgroundView()
-            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 10) {
@@ -156,7 +157,7 @@ struct WritingView: View {
                                     changeBackgroundOpacity()
                                     backToCollection = true
                                     updateFirstUse()
-                                    dismiss()
+                                    isSelectedTab = 0
                                 }
                                 else{
                                     self.showingAlert = true

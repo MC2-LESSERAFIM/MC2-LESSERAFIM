@@ -52,6 +52,7 @@ struct CanvusView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
 
     @State var canvusHeight: CGFloat = 430
     
@@ -127,7 +128,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
-                    NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+                    NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -231,6 +232,7 @@ struct CanvusView: View {
                     todayPostsCount += 1
                     changeBackgroundOpacity()
                     updateFirstUse()
+                    isSelectedTab = 0
                 }
                 
                 
