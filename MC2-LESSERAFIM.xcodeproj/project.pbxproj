@@ -38,6 +38,7 @@
 		D25C13FC2A12B10E007FC37C /* ChallengeCheckScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25C13FB2A12B10E007FC37C /* ChallengeCheckScreen.swift */; };
 		D25C13FE2A12B415007FC37C /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25C13FD2A12B415007FC37C /* CustomButton.swift */; };
 		D25C14002A12C36B007FC37C /* NotYetChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25C13FF2A12C36B007FC37C /* NotYetChallengeScreen.swift */; };
+		D25C14022A13272B007FC37C /* RecordCompleteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25C14012A13272B007FC37C /* RecordCompleteScreen.swift */; };
 		D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */; };
 		D2A4776E2A0890EE0055B95E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A4776D2A0890EE0055B95E /* DataModel.swift */; };
 		D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */; };
@@ -101,6 +102,7 @@
 		D25C13FB2A12B10E007FC37C /* ChallengeCheckScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeCheckScreen.swift; sourceTree = "<group>"; };
 		D25C13FD2A12B415007FC37C /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		D25C13FF2A12C36B007FC37C /* NotYetChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotYetChallengeScreen.swift; sourceTree = "<group>"; };
+		D25C14012A13272B007FC37C /* RecordCompleteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCompleteScreen.swift; sourceTree = "<group>"; };
 		D294526B2A0C7F7C0053F42F /* SmallOnBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallOnBoarding.swift; sourceTree = "<group>"; };
 		D2A4776D2A0890EE0055B95E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		D2D82FDD2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUserCharacterScreen.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				BF7520552A09DDE700BF81DC /* Writing */,
 				BF7520572A09DE0700BF81DC /* Picture */,
 				BF7520562A09DDF700BF81DC /* Painting */,
+				D25C14012A13272B007FC37C /* RecordCompleteScreen.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				8E15E4C92A087BC7003C7D3F /* RecordSelectionView.swift in Sources */,
 				A1A17E6F2A0C7F88009D4136 /* BiometricLock.swift in Sources */,
 				D25C13FC2A12B10E007FC37C /* ChallengeCheckScreen.swift in Sources */,
+				D25C14022A13272B007FC37C /* RecordCompleteScreen.swift in Sources */,
 				BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */,
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,

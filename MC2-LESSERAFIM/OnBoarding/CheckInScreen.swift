@@ -32,7 +32,7 @@ struct CheckInScreen: View {
                     .font(.system(size: 17))
                     .lineSpacing(4)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.subText)
                     .padding(.top, 12)
                 
                 UserNameTextField(username: $userName, placeholder: "호칭을 적어주세요")

@@ -40,7 +40,7 @@ struct SelectableButton: View {
             .cornerRadius(12)
             .overlay {
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(isSelected ? Color.mainPink : Color.mainPinkOpacity, lineWidth: 2)
+                    .stroke(isSelected ? Color.mainPink : Color.mainPinkOpacity, lineWidth: 1)
             }
         }
     }

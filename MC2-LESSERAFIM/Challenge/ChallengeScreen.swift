@@ -85,7 +85,7 @@ struct ChallengeScreen: View {
                                 
                                 Text("다시 뽑기 \(numberOfTimeLeft)회")
                                     .font(.system(size: 14, weight: .regular))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.subText)
                             }
                             .padding(.horizontal, 24)
                             
