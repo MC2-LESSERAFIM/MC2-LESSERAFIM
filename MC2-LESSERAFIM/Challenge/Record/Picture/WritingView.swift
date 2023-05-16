@@ -50,7 +50,6 @@ struct WritingView: View {
         case title
         case content
     }
-    @Environment(\.dismiss) private var dismiss // 화면 이탈
     
     @FetchRequest(entity: Post.entity(), sortDescriptors: [])
     private var posts: FetchedResults<Post>
@@ -72,16 +71,19 @@ struct WritingView: View {
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @State var firstCompleteScreen: Bool = false
     
     var body: some View {
         ZStack {
             BackgroundView()
-            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
+            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 10) {
                         
-                        Button(action: {backToCollection
+                        Button(action: {
                             imagePickerPresented.toggle()
                         }, label: {
                             if profileImage == nil {
@@ -148,6 +150,7 @@ struct WritingView: View {
                         Image(systemName: "checkmark.circle")
                             .foregroundColor(.mainPink)
                             .onTapGesture {
+                                print(isFirstPosting)
                                 if (selectedImage != nil) {
                                     if isDayChanging == false{
                                         isDayChanging = true
@@ -155,9 +158,13 @@ struct WritingView: View {
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
                                     todayPostsCount += 1
                                     changeBackgroundOpacity()
-                                    backToCollection = true
+                                    if isFirstPosting {
+                                        firstCompleteScreen = true
+                                    } else {
+                                        isSelectedTab = 0
+                                        backToCollection = true
+                                    }
                                     updateFirstUse()
-                                    isSelectedTab = 0
                                 }
                                 else{
                                     self.showingAlert = true

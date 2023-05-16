@@ -31,6 +31,7 @@ struct ChallengeScreen: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool!
     
     /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
      @State var isTutorial = true

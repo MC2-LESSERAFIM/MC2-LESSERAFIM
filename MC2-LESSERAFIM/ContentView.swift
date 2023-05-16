@@ -15,6 +15,7 @@ struct ContentView: View {
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     @AppStorage("userName") var userName: String = ""
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = true
     
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
@@ -25,6 +26,7 @@ struct ContentView: View {
                 OnBoardingScreen()
                     .onAppear{
                         loadData()
+                        isFirstPosting = true
                     }
             } else {
                 TabView(selection: $isSelectedTab) {

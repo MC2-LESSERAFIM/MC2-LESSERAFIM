@@ -16,7 +16,6 @@ struct PaintingLine {
 
 struct CanvusView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.dismiss) private var dismiss // 화면 이탈
     var challenge: Challenge
     
     //전역 변수 설정
@@ -53,6 +52,8 @@ struct CanvusView: View {
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @State var firstCompleteScreen: Bool = false
 
     @State var canvusHeight: CGFloat = 430
     
@@ -128,6 +129,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
+                    NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
                     NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
@@ -231,8 +233,13 @@ struct CanvusView: View {
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     todayPostsCount += 1
                     changeBackgroundOpacity()
+                    if isFirstPosting {
+                        firstCompleteScreen = true
+                    } else {
+                        isSelectedTab = 0
+                        backToCollection = true
+                    }
                     updateFirstUse()
-                    isSelectedTab = 0
                 }
                 
                 

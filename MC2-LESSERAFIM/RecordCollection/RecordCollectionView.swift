@@ -9,8 +9,6 @@ import SwiftUI
 struct RecordCollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @EnvironmentObject var userData: UserDataModel
-    
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
 
