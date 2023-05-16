@@ -201,6 +201,11 @@ struct ChallengeScreen_Previews: PreviewProvider {
 }
 
 private extension ChallengeScreen {
+    func goToNextPrompt() {
+        withAnimation {
+            currentIndex += 1
+        }
+    }
     func initChallenges(number: Int) {
         
         func addChallenge() {
