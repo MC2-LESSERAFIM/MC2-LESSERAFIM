@@ -33,13 +33,17 @@ struct ChallengeScreen: View {
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isFirstPosting") var isFirstPosting: Bool!
     
-    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
-     @State var isTutorial = true
-     @State var currentIndex = 0
-     let xPosition: [CGFloat] = [10, 100]
-     let yPosition: [CGFloat] = [100, 300]
-     let prompts = ["1번 도움말", "2번 도움말"]
-     */
+    @AppStorage("isTutorial") var isTutorial = true
+    @State var currentIndex = 0
+    let xPosition: [CGFloat] = [200, 200, 175, 210]
+    let yPosition: [CGFloat] = [450, 475, 475, 475]
+    let prompts = [
+        "나와의 관계를 돈독하게 만들어줄 \n오늘의 챌린지를 만나볼까요?\n아래의 버튼을 눌러주세요.",
+        "매일 최대 3개의 챌린지를 시도할 수 있어요.\n 원하는 만큼 자유롭게 도전해보세요.",
+        "오늘 도전하기 어려운 도전은 \n옆으로 스와이프해서 새롭게 뽑을 수 있어요.",
+        "챌린지를 시도했다면 나의 새로운 모습을 \n발견하면서 느낀 감정과 생각을 남겨보세요."
+    ]
+
     
     
     private var hasPassedDay: Bool {
