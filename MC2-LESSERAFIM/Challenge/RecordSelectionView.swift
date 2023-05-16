@@ -28,7 +28,7 @@ struct RecordSelectionView: View {
                     // 화면 타이틀(PageTitle)
                     PageTitle(titlePage: "챌린지를 기록해보아요")
                     
-                    Text("\(userName)의 챌린지는\n[챌린지 이름]이에요.") // [챌린지 이름]에 준이 데이터 받아와주세요.
+                    Text("\(userName)의 챌린지는 \n\(challengeStatement)이에요.")
                         .font(.system(size: 17))
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
