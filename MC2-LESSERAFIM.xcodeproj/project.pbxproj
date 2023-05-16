@@ -25,7 +25,7 @@
 		BFCC38462A0EC59900CC9CA7 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFCC38442A0EC59900CC9CA7 /* Model.xcdatamodeld */; };
 		BFCC385C2A0F4F0100CC9CA7 /* AuthSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */; };
 		BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */ = {isa = PBXBuildFile; fileRef = BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */; };
-		BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* WritingView.swift */; };
+		BFCF46532A0797CD00BBDFDB /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
@@ -86,7 +86,7 @@
 		BFCC38452A0EC59900CC9CA7 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		BFCC385B2A0F4F0100CC9CA7 /* AuthSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSetting.swift; sourceTree = "<group>"; };
 		BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Challenges.csv; sourceTree = "<group>"; };
-		BFCF46522A0797CD00BBDFDB /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
+		BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
@@ -278,7 +278,7 @@
 		BF7520572A09DE0700BF81DC /* Picture */ = {
 			isa = PBXGroup;
 			children = (
-				BFCF46522A0797CD00BBDFDB /* WritingView.swift */,
+				BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */,
 			);
 			path = Picture;
 			sourceTree = "<group>";
@@ -476,7 +476,7 @@
 				A15ED6DC2A04D8390039EFC7 /* CanvusColorPickerView.swift in Sources */,
 				A1EF9E612A02562000A56E4C /* ContentView.swift in Sources */,
 				BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */,
-				BFCF46532A0797CD00BBDFDB /* WritingView.swift in Sources */,
+				BFCF46532A0797CD00BBDFDB /* PhotoUploadView.swift in Sources */,
 				A1EF9E5F2A02562000A56E4C /* MC2_LESSERAFIM_App.swift in Sources */,
 				D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */,
 				D24371DC2A0E9CA7007DC1A6 /* ViewExtension.swift in Sources */,
