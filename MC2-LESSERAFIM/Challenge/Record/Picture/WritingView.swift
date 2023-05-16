@@ -93,7 +93,7 @@ struct WritingView: View {
                             else{
                                 profileImage!
                                     .resizable()
-                                    .scaledToFill()
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
                                     .clipped()
                             }
