@@ -21,6 +21,7 @@ struct ChallengeCheckScreen: View {
     @State var selectButton: SelectedButtonType = .none
     @State private var navigationIsActive: Bool = false
     let currentChallenge: Challenge
+    
     private var challengeStatement: String {
         currentChallenge.question ?? ""
     }

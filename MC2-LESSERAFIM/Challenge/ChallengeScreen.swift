@@ -23,6 +23,8 @@ struct ChallengeScreen: View {
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
+    @AppStorage("currentChallenge") var currentChallenge: Int = 0
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     private let challengeNumber: Int = 3
     
@@ -32,6 +34,7 @@ struct ChallengeScreen: View {
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isFirstPosting") var isFirstPosting: Bool!
+    @AppStorage("postChallenge") var postChallenge: Bool = false
     
     /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
      @State var isTutorial = true
@@ -51,6 +54,12 @@ struct ChallengeScreen: View {
     var body: some View {
         NavigationView {
             ZStack {
+                if postChallenge {
+                    NavigationLink(destination: ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[currentChallenge]]),
+                                   isActive: $postChallenge, label: {EmptyView()})
+                    .navigationTitle("")
+                    .environment(\.managedObjectContext, viewContext)
+                }
                 BackgroundView()
                 VStack {
                     VStack {
@@ -92,8 +101,9 @@ struct ChallengeScreen: View {
                             
                             List {
                                 ForEach(0..<3) { i in
-                                    NavigationLink {
-                                        ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[i]]).environment(\.managedObjectContext, viewContext)
+                                    Button {
+                                        currentChallenge = i
+                                        postChallenge = true
                                     } label: {
                                         Text(challenges[todayChallenges[i]].question!)
                                             .swipeActions(edge: .leading) {
@@ -109,7 +119,8 @@ struct ChallengeScreen: View {
                                                 }
                                                 .tint(.mainPink)
                                             }
-                                    }
+                                    }.buttonStyle(.plain)
+                                    .disabled(postedChallenges[i])
                                 }
                                 .listStyle(.inset)
                                 .listRowBackground(Color.opacityWhiteChallenge)
@@ -156,8 +167,8 @@ struct ChallengeScreen: View {
                      */
                 }
             }
-            .navigationTitle("")
         }
+        .navigationBarBackButtonHidden(true)
         .navigationViewStyle(.stack)
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.visible, for: .tabBar)
