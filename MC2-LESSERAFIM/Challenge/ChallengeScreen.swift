@@ -155,6 +155,9 @@ struct ChallengeScreen: View {
                         Button {
                             isPickedChallenge = true
                             dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
+                            withAnimation {
+                                currentIndex = 1
+                            }
                         } label: {
                             Text("오늘의 챌린지 뽑기")
                                 .foregroundColor(.white)
