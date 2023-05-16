@@ -62,7 +62,6 @@ struct ContentView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
-    @StateObject var permissionManager = PermissionManager()
     @ObservedObject var appLock  = BiometricLock()
     @AppStorage("isOnBoarding") var isOnBoarding: Bool = true
     @AppStorage("userName") var userName: String = ""
@@ -106,8 +105,6 @@ struct ContentView: View {
                 .frame(height: geo.size.height)
                 .onAppear {
                     makeTabBarTransparent()
-                    permissionManager.requestAlbumPermission()
-                    permissionManager.requestAlramPermission()
                 }
             }
         }

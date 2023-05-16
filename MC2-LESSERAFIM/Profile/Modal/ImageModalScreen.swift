@@ -25,7 +25,7 @@ struct ImageModalScreen: View {
                     .multilineTextAlignment(.leading)
                     .padding(.top, 48)
                 
-                Text("마음에 드는 캐릭터의 배를 간지럽혀주세요.")
+                Text("스와이프하여 마음에 드는 캐릭터의 배를 콕 찌른 뒤 다음 버튼을 눌러주세요.")
                     .font(.system(size: 17))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.mainGray)

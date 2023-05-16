@@ -11,6 +11,8 @@ import LocalAuthentication
 struct ProfileScreen: View {
     @EnvironmentObject var appLock : BiometricLock
     
+    @StateObject var permissionManager = PermissionManager()
+    
     @State var showImageModal: Bool = false
     @State var showNameModal: Bool = false
     
@@ -31,15 +33,28 @@ struct ProfileScreen: View {
                     Text(userName)
                         .font(.system(size: 26, weight: .bold))
                         .foregroundColor(.mainPink)
-                    
-                    Image(systemName: "pencil.circle")
-                        .foregroundColor(Color.mainPink)
-                        .onTapGesture {
-                            showNameModal = true
-                        }
-                        .sheet(isPresented: $showNameModal) {
-                            NameModalScreen()
-                        }
+
+                    HStack{
+                        Image(systemName: "pencil.circle")
+                            .font(.system(size: 12))
+                            .frame(width: 8, height: 8)
+                            .foregroundColor(Color.mainPink)
+                        
+                        Text("수정")
+                            .font(.system(size: 12))
+                            .frame(height: 12)
+                            .foregroundColor(Color.mainPink)
+                            .onTapGesture {
+                                showNameModal = true
+                            }
+                            .sheet(isPresented: $showNameModal) {
+                                NameModalScreen()
+                            }
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.mainPink.opacity(0.2))
+                    .cornerRadius(9)
                     
                     Spacer()
                 }
@@ -66,17 +81,32 @@ struct ProfileScreen: View {
                             HStack(alignment: .bottom){
                                 Spacer()
                                 
-                                Image(systemName: "pencil.circle")
-                                    .foregroundColor(Color.mainPink)
-                                    .onTapGesture {
-                                        showImageModal = true
-                                    }
-                                    .sheet(isPresented: $showImageModal) {
-                                        ImageModalScreen()
-                                    }
-                            }.padding(.horizontal, 36)
+                                HStack{
+                                    Image(systemName: "pencil.circle")
+                                        .font(.system(size: 12))
+                                        .frame(width: 8, height: 8)
+                                        .foregroundColor(Color.mainPink)
+                                    
+                                    Text("수정")
+                                        .font(.system(size: 12))
+                                        .frame(height: 12)
+                                        .foregroundColor(Color.mainPink)
+                                        .onTapGesture {
+                                            showImageModal = true
+                                        }
+                                        .sheet(isPresented: $showImageModal) {
+                                            ImageModalScreen()
+                                        }
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(Color.mainPink.opacity(0.2))
+                                .cornerRadius(9)
+                            }
+                            .padding(.horizontal, 36)
+                            
                             Spacer()
-                                .frame(height: 308)
+                                .frame(height: 290)
                         }
                     }
                 }
@@ -87,11 +117,24 @@ struct ProfileScreen: View {
                         Toggle("알림", isOn: $isNotificationEnabled)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isNotificationEnabled, perform: {value in
+                                if value{
+                                    permissionManager.requestAlramPermission()
+                                }
+                            })
+                            
+                       
+                            
                     }
                     HStack {
                         Toggle("잠금", isOn: $isLockEnabled)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isLockEnabled, perform: { value in
+                                appLock.appLockStateChange(appLockState: value)
+                                appLock.isAppLockEnabled = value
+                            })
+                           
                     }
                     .padding(.top, 24)
                 }

@@ -290,14 +290,10 @@ struct DayLabel: View {
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
-    
-    private let numberColumns = [
-        GridItem(.adaptive(minimum: 164)),
-        GridItem(.adaptive(minimum: 164))
-    ]
+    private let numberColumns = Array(repeating: GridItem(.fixed(160), spacing: 25), count: 2)
     
     var body: some View {
-        LazyVGrid(columns: numberColumns, spacing: 20) {
+        LazyVGrid(columns: numberColumns, spacing: 24) {
             ForEach(categoryKeys, id: \.self) { category in
                 let category = category.textFromCSV
                 let posts = categories[category] ?? []
@@ -343,23 +339,25 @@ struct PostDetailView: View {
     @State var isTabBarVisible = false
     
     var body: some View {
-        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        isTabBarVisible = true
-                        dismiss()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.mainPink)
+        ZStack {
+            BackgroundView()
+            (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            isTabBarVisible = true
+                            dismiss()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.mainPink)
+                        }
                     }
                 }
-            }
-            .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-            .navigationBarBackButtonHidden()
+                .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                .navigationBarBackButtonHidden()
+        }
     }
     
 }

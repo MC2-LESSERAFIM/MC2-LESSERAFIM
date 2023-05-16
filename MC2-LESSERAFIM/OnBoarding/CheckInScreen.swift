@@ -42,6 +42,7 @@ struct CheckInScreen: View {
                             self.isLinkActive = true
                         }
                     }
+                    .submitLabel(.done)
                 
                 NavigationLink(destination: SelectedUserCharacterScreen(), isActive: $isLinkActive) {
                     EmptyView()

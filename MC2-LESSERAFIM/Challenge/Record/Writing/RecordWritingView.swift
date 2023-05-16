@@ -13,7 +13,10 @@ struct RecordWritingView: View {
     @State var contentRecord: String = ""   // 챌린지 내용
     var challenge: Challenge
     
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
+    
     @State private var showingAlert = false // 경고 출력 여부
+    
     @Environment(\.dismiss) private var dismiss // 화면 이탈
     
     @State var onStory = false   // 챌린지 내용 입력 중 여부
@@ -25,11 +28,12 @@ struct RecordWritingView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
     var body: some View {
         
         ZStack {
             BackgroundView()
+            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -83,11 +87,15 @@ struct RecordWritingView: View {
                                 print("no story")
                                 self.showingAlert = true
                             } else {    // 내용 입력 누락이 없을 경우 제출 가능
+                                // 데이가 바뀐적이 없다면 데이가 바뀐다..?
                                 if isDayChanging == false {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 changeBackgroundOpacity()
+                                backToCollection = true
+                                updateFirstUse()
+                                todayPostsCount += 1
                                 dismiss()
                             }
                         }
@@ -95,6 +103,12 @@ struct RecordWritingView: View {
             }
         }
     }   // body
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
+        }
+    }
     
     func saveContext() {
       do {
