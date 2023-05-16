@@ -241,7 +241,7 @@ struct ThumbnailView: View {
                 )
                 .overlay {
                     DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
-                        .frame(alignment: .topLeading)
+                        .position(x: 36, y: 17)
                         .padding([.leading, .top], 4)
                 }
         } else {
