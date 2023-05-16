@@ -31,12 +31,15 @@ struct ChallengeScreen: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
     @AppStorage("todayPostsCount") var todayPostsCount = 0
-
-    @State var isTutorial = true
-    @State var currentIndex = 0
-    let xPosition: [CGFloat] = [10, 100]
-    let yPosition: [CGFloat] = [100, 300]
-    let prompts = ["1번 도움말", "2번 도움말"]
+    
+    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
+     @State var isTutorial = true
+     @State var currentIndex = 0
+     let xPosition: [CGFloat] = [10, 100]
+     let yPosition: [CGFloat] = [100, 300]
+     let prompts = ["1번 도움말", "2번 도움말"]
+     */
+    
     
     private var hasPassedDay: Bool {
         let today = NSDate().formatted  // 오늘 날짜
@@ -139,6 +142,8 @@ struct ChallengeScreen: View {
                     }
                 }
                 .overlay {
+                    
+                    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
                     if isTutorial {
                         Text(prompts[currentIndex])
                             .position(x: xPosition[currentIndex], y: yPosition[currentIndex])
@@ -147,6 +152,7 @@ struct ChallengeScreen: View {
                                 currentIndex = prompts.count == currentIndex ? 0 : currentIndex
                             }
                     }
+                     */
                 }
             }
             .navigationTitle("")
