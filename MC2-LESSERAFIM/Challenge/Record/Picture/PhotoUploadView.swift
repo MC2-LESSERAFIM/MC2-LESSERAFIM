@@ -1,5 +1,5 @@
 //
-//  WritingView.swift
+//  PhotoUploadView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by Jun on 2023/05/07.
@@ -39,7 +39,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
-struct WritingView: View {
+struct PhotoUploadView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @StateObject var permissionManager = PermissionManager()

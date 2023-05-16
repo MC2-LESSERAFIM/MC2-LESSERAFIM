@@ -41,7 +41,7 @@ struct RecordSelectionView: View {
                 HStack {
                     // 기록/글 화면 이동 버튼
                     NavigationLink(destination:
-                                    WritingView(challenge: challenge).environment(\.managedObjectContext, viewContext)
+                                    PhotoUploadView(challenge: challenge).environment(\.managedObjectContext, viewContext)
                     ) {
                         RecordButton(
                             labelTitle: "사진 + 글",
