@@ -33,7 +33,7 @@ struct RecordSelectionView: View {
                         .font(.system(size: 17))
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.subText)
                         .padding(.top, 12)
                 }
                 
