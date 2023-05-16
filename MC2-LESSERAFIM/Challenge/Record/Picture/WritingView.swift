@@ -41,6 +41,9 @@ struct ImagePicker: UIViewControllerRepresentable {
 
 struct WritingView: View {
     @Environment(\.managedObjectContext) private var viewContext
+    
+    @StateObject var permissionManager = PermissionManager()
+    
     @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
     
     enum FocusField: Hashable {
@@ -161,6 +164,9 @@ struct WritingView: View {
                     
                 }
             }
+        }
+        .onAppear{
+            permissionManager.requestAlbumPermission()
         }
     }
     
