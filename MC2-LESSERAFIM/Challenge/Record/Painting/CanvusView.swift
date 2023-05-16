@@ -231,7 +231,6 @@ struct CanvusView: View {
                     todayPostsCount += 1
                     changeBackgroundOpacity()
                     updateFirstUse()
-                    backToChallenge = true
                 }
                 
                 
