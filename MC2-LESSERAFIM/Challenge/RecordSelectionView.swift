@@ -9,16 +9,15 @@ import SwiftUI
 
 struct RecordSelectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    
     @AppStorage("userName") var userName: String = ""
-    
-    var challenge: Challenge
-    
     @State private var showActionSheet = false  // 사진+글 버튼 선택 여부 == 액션시트 표출 여부
+    
+    let challenge: Challenge
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
-//    @State var isWritingView: Bool = false
-    
+    private var challengeStatement: String {
+        challenge.question ?? ""
+    }
     var body: some View {
         ZStack {
             BackgroundView()
@@ -29,7 +28,7 @@ struct RecordSelectionView: View {
                     // 화면 타이틀(PageTitle)
                     PageTitle(titlePage: "챌린지를 기록해보아요")
                     
-                    Text("\(userName)의 챌린지는\n[챌린지 이름]이에요.") // [챌린지 이름]에 준이 데이터 받아와주세요.
+                    Text("\(userName)의 챌린지는 \n\(challengeStatement)이에요.")
                         .font(.system(size: 17))
                         .lineSpacing(4)
                         .multilineTextAlignment(.leading)

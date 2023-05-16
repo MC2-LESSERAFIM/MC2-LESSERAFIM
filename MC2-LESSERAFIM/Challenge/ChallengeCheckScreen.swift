@@ -14,13 +14,15 @@ enum SelectedButtonType {
 }
 
 struct ChallengeCheckScreen: View {
-    let currentChallenge: Challenge
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
-    
     @State private var isLinkActive = false
     @State var selectButton: SelectedButtonType = .none
     @State private var navigationIsActive: Bool = false
+    let currentChallenge: Challenge
+    private var challengeStatement: String {
+        currentChallenge.question ?? ""
+    }
     
     var body: some View {
         ZStack{
@@ -28,7 +30,7 @@ struct ChallengeCheckScreen: View {
             VStack(alignment: .leading, spacing: 0){
                 PageTitle(titlePage: "챌린지를 시도해봤나요?")
                 
-                Text("\(userName)의 챌린지는\n[챌린지 이름]이에요.") // [챌린지 이름]에 준이 데이터 받아와주세요.
+                Text("\(userName)의 챌린지는\n\(challengeStatement)이에요.")
                     .font(.system(size: 17))
                     .lineSpacing(4)
                     .multilineTextAlignment(.leading)
