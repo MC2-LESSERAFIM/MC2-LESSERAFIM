@@ -15,7 +15,9 @@ struct RecordSelectionView: View {
     let challenge: Challenge
     let colorDefaultButton = Color.opacityWhiteChallenge // 버튼 색상
     let colorSelectedButton = Color.mainPink
-    
+    private var challengeStatement: String {
+        challenge.question ?? ""
+    }
     var body: some View {
         ZStack {
             BackgroundView()
