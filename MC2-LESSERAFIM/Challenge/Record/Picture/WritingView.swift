@@ -70,7 +70,7 @@ struct WritingView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
     
     var body: some View {
         ZStack {
@@ -96,7 +96,7 @@ struct WritingView: View {
                             else{
                                 profileImage!
                                     .resizable()
-                                    .scaledToFill()
+                                    .aspectRatio(contentMode: .fit)
                                     .frame(width: geo.size.width - 40, height: geo.size.height - 239, alignment: .center)
                                     .clipped()
                             }
@@ -152,9 +152,11 @@ struct WritingView: View {
                                         isDayChanging = true
                                     }
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                    todayPostsCount += 1
                                     changeBackgroundOpacity()
                                     backToCollection = true
-//                                    dismiss()
+                                    updateFirstUse()
+                                    dismiss()
                                 }
                                 else{
                                     self.showingAlert = true
@@ -167,6 +169,12 @@ struct WritingView: View {
         }
         .onAppear{
             permissionManager.requestAlbumPermission()
+        }
+    }
+    
+    private func updateFirstUse() {
+        if dailyFirstUse {
+            self.dailyFirstUse = false
         }
     }
     

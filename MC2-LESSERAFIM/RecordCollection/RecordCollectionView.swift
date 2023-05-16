@@ -214,15 +214,7 @@ struct GalleryView: View {
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)    // 프레임 내에 이미지 가득 채우기
-                            .frame(width: 129, height: 172)
-                            .background(
-                                LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
-                                               startPoint: .top, endPoint: .bottom)
-                            )
-                            .clipped()
+                        ThumbnailView(post: post)
                     }
                 }
             }
@@ -231,17 +223,77 @@ struct GalleryView: View {
     }
 }
 
+struct ThumbnailView: View {
+    let post: Post
+    
+    var body: some View {
+        if let imageData = post.imageData,
+           let image = Image.fromData(imageData) {
+            // MARK: - 사진 or 그림 Post
+            image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 129, height: 172)
+                .clipped()
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
+                                   startPoint: .top, endPoint: .bottom)
+                )
+                .overlay {
+                    DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                        .position(x: 36, y: 17)
+                        .padding([.leading, .top], 4)
+                }
+        } else {
+            // MARK: - 글 Post
+            VStack(spacing: 30) {
+                Text(post.title ?? "")
+                    .padding([.leading, .top], 4)
+                    .font(.title3)
+                    .lineLimit(1)
+                
+                Text(post.content ?? "")
+                    .padding([.leading], 4)
+                    .foregroundColor(.black)
+                    .font(.body)
+                    .lineLimit(5)
+            }
+            .frame(width: 129, height: 172, alignment: .topLeading)
+            .background(.white)
+            .overlay {
+                DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                    .position(x: 36, y: 17)
+                    .padding([.leading, .top], 4)
+            }
+        }
+    }
+}
+
+struct DayLabel: View {
+    let isFirstPost: Bool
+    let day: Int
+    
+    var body: some View {
+        Capsule()
+            .frame(maxWidth: 70, maxHeight: 30)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .overlay {
+                Text("Day+\(day)")
+                    .foregroundColor(.black)
+                    .font(.body.bold())
+            }
+            .opacity(isFirstPost ? 1 : 0)
+    }
+}
+
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
-    
-    private let numberColumns = [
-        GridItem(.adaptive(minimum: 164)),
-        GridItem(.adaptive(minimum: 164))
-    ]
+    private let numberColumns = Array(repeating: GridItem(.fixed(160), spacing: 25), count: 2)
     
     var body: some View {
-        LazyVGrid(columns: numberColumns, spacing: 20) {
+        LazyVGrid(columns: numberColumns, spacing: 24) {
             ForEach(categoryKeys, id: \.self) { category in
                 let category = category.textFromCSV
                 let posts = categories[category] ?? []
