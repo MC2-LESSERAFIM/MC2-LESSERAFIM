@@ -17,8 +17,6 @@ struct RecordWritingView: View {
     
     @State private var showingAlert = false // 경고 출력 여부
     
-    @Environment(\.dismiss) private var dismiss // 화면 이탈
-    
     @State var onStory = false   // 챌린지 내용 입력 중 여부
     @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
     
@@ -30,12 +28,15 @@ struct RecordWritingView: View {
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @State var firstCompleteScreen: Bool = false
     
     var body: some View {
         
         ZStack {
             BackgroundView()
-            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
+            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -95,10 +96,14 @@ struct RecordWritingView: View {
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 changeBackgroundOpacity()
-                                backToCollection = true
+                                if isFirstPosting {
+                                    firstCompleteScreen = true
+                                } else {
+                                    isSelectedTab = 0
+                                    backToCollection = true
+                                }
                                 updateFirstUse()
                                 todayPostsCount += 1
-                                isSelectedTab = 0
                             }
                         }
                 }

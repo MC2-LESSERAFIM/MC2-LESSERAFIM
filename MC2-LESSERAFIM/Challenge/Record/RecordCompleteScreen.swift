@@ -8,13 +8,18 @@
 import SwiftUI
 
 struct RecordCompleteScreen: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("userName") var userName: String = ""
     
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     @State private var navigationIsActive: Bool = false
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = UserDefaults.standard.integer(forKey: "isSelectedTab")
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
     
     var body: some View {
         ZStack {
             BackgroundView()
+            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             VStack {
                 
                 VStack(alignment: .leading, spacing: 0){
@@ -34,13 +39,13 @@ struct RecordCompleteScreen: View {
                 }
                 Spacer()
                 
-                NavigationLink {
-                    ChallengeScreen()
-                } label: {
-                    Text("좋아요!")
+                Button(action: {
+                    backToCollection = true
+                    isFirstPosting = false
+                    isSelectedTab = 0
+                }, label: {Text("좋아요!")
                         .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(NextButtonStyle(isAbled: true))
+                }).buttonStyle(NextButtonStyle(isAbled: true))
             }
             .padding(.horizontal, 24)
             .padding(.top, 100)
