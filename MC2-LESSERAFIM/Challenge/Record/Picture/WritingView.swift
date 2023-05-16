@@ -71,6 +71,7 @@ struct WritingView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     
     var body: some View {
         ZStack {
@@ -156,6 +157,7 @@ struct WritingView: View {
                                     changeBackgroundOpacity()
                                     backToCollection = true
                                     updateFirstUse()
+                                    isSelectedTab = 0
                                 }
                                 else{
                                     self.showingAlert = true

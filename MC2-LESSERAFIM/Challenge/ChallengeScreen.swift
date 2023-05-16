@@ -157,6 +157,7 @@ struct ChallengeScreen: View {
             }
             .navigationTitle("")
         }
+        .navigationViewStyle(.stack)
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.visible, for: .tabBar)
     }
