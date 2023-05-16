@@ -11,6 +11,8 @@ import LocalAuthentication
 struct ProfileScreen: View {
     @EnvironmentObject var appLock : BiometricLock
     
+    @StateObject var permissionManager = PermissionManager()
+    
     @State var showImageModal: Bool = false
     @State var showNameModal: Bool = false
     
@@ -115,6 +117,14 @@ struct ProfileScreen: View {
                         Toggle("알림", isOn: $isNotificationEnabled)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isNotificationEnabled, perform: {value in
+                                if value{
+                                    permissionManager.requestAlramPermission()
+                                }
+                            })
+                            
+                       
+                            
                     }
                     HStack {
                         Toggle("잠금", isOn: $isLockEnabled)
