@@ -289,7 +289,7 @@ struct PostDetailView: View {
     var body: some View {
         (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
             .resizable()
-            .scaledToFill()
+            .aspectRatio(contentMode: .fit)
             .ignoresSafeArea()
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
