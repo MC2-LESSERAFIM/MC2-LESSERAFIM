@@ -190,7 +190,7 @@ struct ChallengeScreen_Previews: PreviewProvider {
     }
 }
 
-fileprivate extension ChallengeScreen {
+private extension ChallengeScreen {
     func initChallenges(number: Int) {
         
         func addChallenge() {
