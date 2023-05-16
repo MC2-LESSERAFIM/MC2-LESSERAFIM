@@ -17,8 +17,28 @@ struct ContentView: View {
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = true
     
+    @AppStorage("isTutorial") var isTutorial = true
+    @State var currentTutorialIndex: Int
+
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
+    let prompts = [
+        "나와의 관계를 돈독하게 만들어줄 \n오늘의 챌린지를 만나볼까요?\n아래의 버튼을 눌러주세요.",
+        "매일 최대 3개의 챌린지를 시도할 수 있어요.\n 원하는 만큼 자유롭게 도전해보세요.",
+        "오늘 도전하기 어려운 도전은 \n옆으로 스와이프해서 새롭게 뽑을 수 있어요.",
+        "챌린지를 시도했다면 나의 새로운 모습을 \n발견하면서 느낀 감정과 생각을 남겨보세요."
+    ]
+    
+    let point: CGPoint
+    let xPosition: [CGFloat]
+    let yPosition: [CGFloat]
+    
+    init() {
+        self._currentTutorialIndex = State(initialValue: 0)
+        self.xPosition = [200, 200, 175, 210]
+        self.yPosition = [450, 475, 475, 475]
+        self.point = CGPoint(x: xPosition[self._currentTutorialIndex.wrappedValue], y: yPosition[self._currentTutorialIndex.wrappedValue])
+    }
     
     var body: some View {
         GeometryReader { geo in
@@ -29,32 +49,47 @@ struct ContentView: View {
                         isFirstPosting = true
                     }
             } else {
-                TabView(selection: $isSelectedTab) {
-                    RecordCollectionView()
-                        .tabItem {
-                            Image(systemName: "magazine.fill")
-                            Text("기록모음")
-                        }
-                        .environment(\.managedObjectContext, viewContext)
-                        .tag(0)
-                    ChallengeScreen()
-                        .tabItem {
-                            Image(systemName: "star")
-                            Text("챌린지")
-                        }
-                        .environment(\.managedObjectContext, viewContext)
-                        .tag(1)
-                    ProfileScreen()
-                        .tabItem {
-                            Image(systemName: "person.crop.circle.fill")
-                            Text("프로필")
-                        }
-                        .environmentObject(appLock)
-                        .tag(2)
-                }
-                .frame(height: geo.size.height)
-                .onAppear {
-                    makeTabBarTransparent()
+                ZStack {
+                    TabView(selection: $isSelectedTab) {
+                        RecordCollectionView()
+                            .tabItem {
+                                Image(systemName: "magazine.fill")
+                                Text("기록모음")
+                            }
+                            .environment(\.managedObjectContext, viewContext)
+                            .tag(0)
+                        ChallengeScreen(currentTutorialIndex: $currentTutorialIndex)
+                            .tabItem {
+                                Image(systemName: "star")
+                                Text("챌린지")
+                            }
+                            .environment(\.managedObjectContext, viewContext)
+                            .tag(1)
+                            .allowsHitTesting(!isTutorial)
+                        
+                        ProfileScreen()
+                            .tabItem {
+                                Image(systemName: "person.crop.circle.fill")
+                                Text("프로필")
+                            }
+                            .environmentObject(appLock)
+                            .tag(2)
+                    }
+                    .onAppear {
+                        makeTabBarTransparent()
+                    }
+                    
+                    if isTutorial {
+                        PopoverView(prompts[currentTutorialIndex], point)
+                        
+                        Color.clear
+                            .ignoresSafeArea()
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                goToNextPrompt()
+                            }
+                    }
+                    
                 }
             }
         }
@@ -135,6 +170,19 @@ func makeTabBarTransparent() -> Void {
     
     UITabBar.appearance().standardAppearance = appearance
     UITabBar.appearance().scrollEdgeAppearance = appearance // 항상 스크롤엣지 효과를 보임
+}
+
+private extension ContentView {
+    func goToNextPrompt() {
+        if currentTutorialIndex == prompts.count - 1 {
+            isTutorial = false
+        }
+        else {
+            withAnimation() {
+                currentTutorialIndex += 1
+            }
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

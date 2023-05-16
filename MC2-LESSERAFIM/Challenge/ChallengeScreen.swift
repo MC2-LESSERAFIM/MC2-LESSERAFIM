@@ -36,17 +36,8 @@ struct ChallengeScreen: View {
     @AppStorage("isFirstPosting") var isFirstPosting: Bool!
     @AppStorage("postChallenge") var postChallenge: Bool = false
     
-    @AppStorage("isTutorial") var isTutorial = true
-    @State var currentIndex = 0
-    let xPosition: [CGFloat] = [200, 200, 175, 210]
-    let yPosition: [CGFloat] = [450, 475, 475, 475]
-    let prompts = [
-        "나와의 관계를 돈독하게 만들어줄 \n오늘의 챌린지를 만나볼까요?\n아래의 버튼을 눌러주세요.",
-        "매일 최대 3개의 챌린지를 시도할 수 있어요.\n 원하는 만큼 자유롭게 도전해보세요.",
-        "오늘 도전하기 어려운 도전은 \n옆으로 스와이프해서 새롭게 뽑을 수 있어요.",
-        "챌린지를 시도했다면 나의 새로운 모습을 \n발견하면서 느낀 감정과 생각을 남겨보세요."
-    ]
-
+    @AppStorage("isTutorial") var isTutorial = UserDefaults.standard.bool(forKey: "isTutorial")
+    @Binding var currentTutorialIndex: Int
     
     
     private var hasPassedDay: Bool {
@@ -59,10 +50,10 @@ struct ChallengeScreen: View {
         NavigationView {
             ZStack {
                 if postChallenge {
-                    NavigationLink(destination: ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[currentChallenge]]),
+                    NavigationLink(destination: ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[currentChallenge]])
+                                                    .environment(\.managedObjectContext, viewContext)
+                                   ,
                                    isActive: $postChallenge, label: {EmptyView()})
-                    .navigationTitle("")
-                    .environment(\.managedObjectContext, viewContext)
                 }
                 BackgroundView()
                 VStack {
@@ -76,7 +67,7 @@ struct ChallengeScreen: View {
                             Button {
                                 withAnimation {
                                     isTutorial = true
-                                    currentIndex = 1
+                                    currentTutorialIndex = 1
                                 }
                             } label: {
                                 Image(systemName: "questionmark.circle.fill")
@@ -156,7 +147,7 @@ struct ChallengeScreen: View {
                             isPickedChallenge = true
                             dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
                             withAnimation {
-                                currentIndex = 1
+                                currentTutorialIndex = 1
                             }
                         } label: {
                             Text("오늘의 챌린지 뽑기")
@@ -169,55 +160,31 @@ struct ChallengeScreen: View {
                         .padding(.bottom, 120)
                     }
                 }
-                .onAppear {
-                    passdedDayOperation()
-                }
                 .alert("오늘 다시 뽑기 도전 횟수가 부족해요.\n내일 다시 도전해주세요.", isPresented: $showingAlert) {
                     Button("알겠어요", role: .cancel){
                         self.showingAlert = false
                     }
                 }
-                .overlay {
-                    if isTutorial {
-                        let point = CGPoint(x: xPosition[currentIndex], y: yPosition[currentIndex])
-                        PopoverView(prompts[currentIndex], point)
-                    }
+                .onAppear {
+                    passdedDayOperation()
                 }
             }
-            .onTapGesture {
-                goToNextPrompt()
-                offTutorialWhenLastIndex()
-            }
-            .navigationTitle("")
+            .navigationBarTitle("", displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
         }
-        .navigationBarBackButtonHidden(true)
         .navigationViewStyle(.stack)
-        .toolbar(.hidden, for: .navigationBar)
-        .toolbar(.visible, for: .tabBar)
     }
 }
 
 struct ChallengeScreen_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            ChallengeScreen()
+            ChallengeScreen(currentTutorialIndex: .constant(0))
         }
     }
 }
 
 private extension ChallengeScreen {
-    func goToNextPrompt() {
-        withAnimation {
-            currentIndex += 1
-        }
-    }
-    
-    func offTutorialWhenLastIndex() {
-        if currentIndex == prompts.count {
-            isTutorial = false
-        }
-    }
-    
     func initChallenges(number: Int) {
         
         func addChallenge() {
