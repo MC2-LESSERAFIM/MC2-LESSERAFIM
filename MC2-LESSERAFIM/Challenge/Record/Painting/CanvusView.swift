@@ -251,7 +251,8 @@ struct CanvusView: View {
             } label: {
                 Image(systemName: "checkmark.circle")
             }
-        }.navigationBarTitleDisplayMode(.inline)
+        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func updateFirstUse() {
