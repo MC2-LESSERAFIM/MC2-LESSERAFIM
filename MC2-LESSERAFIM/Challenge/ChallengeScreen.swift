@@ -195,6 +195,13 @@ private extension ChallengeScreen {
             currentIndex += 1
         }
     }
+    
+    func offTutorialWhenLastIndex() {
+        if currentIndex == prompts.count {
+            isTutorial = false
+        }
+    }
+    
     func initChallenges(number: Int) {
         
         func addChallenge() {
