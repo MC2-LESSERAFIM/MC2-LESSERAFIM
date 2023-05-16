@@ -127,7 +127,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
-                    NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+                    NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus

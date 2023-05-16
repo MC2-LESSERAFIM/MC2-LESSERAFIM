@@ -14,6 +14,7 @@ enum SelectedButtonType {
 }
 
 struct ChallengeCheckScreen: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @State private var isLinkActive = false
@@ -58,9 +59,9 @@ struct ChallengeCheckScreen: View {
                 
                 NavigationLink {
                     if selectButton == .didChallenge {
-                        RecordSelectionView(challenge: currentChallenge)
+                        RecordSelectionView(challenge: currentChallenge).environment(\.managedObjectContext, viewContext)
                     } else if selectButton == .notYetChallenge {
-                        NotYetChallengeScreen()
+                        NotYetChallengeScreen().environment(\.managedObjectContext, viewContext)
                     }
                 } label: {
                     Text("다음")

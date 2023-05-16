@@ -33,7 +33,7 @@ struct RecordWritingView: View {
         
         ZStack {
             BackgroundView()
-            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -96,7 +96,6 @@ struct RecordWritingView: View {
                                 backToCollection = true
                                 updateFirstUse()
                                 todayPostsCount += 1
-                                dismiss()
                             }
                         }
                 }

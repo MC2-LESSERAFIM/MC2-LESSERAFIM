@@ -75,7 +75,7 @@ struct WritingView: View {
     var body: some View {
         ZStack {
             BackgroundView()
-            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination:  ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 10) {
@@ -156,7 +156,6 @@ struct WritingView: View {
                                     changeBackgroundOpacity()
                                     backToCollection = true
                                     updateFirstUse()
-                                    dismiss()
                                 }
                                 else{
                                     self.showingAlert = true
