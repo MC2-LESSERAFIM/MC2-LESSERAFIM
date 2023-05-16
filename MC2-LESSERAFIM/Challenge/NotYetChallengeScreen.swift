@@ -22,7 +22,7 @@ struct NotYetChallengeScreen: View {
                     .font(.system(size: 17))
                     .lineSpacing(4)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.subText)
                     .padding(.top, 12)
                 
                 Spacer()
@@ -41,6 +41,7 @@ struct NotYetChallengeScreen: View {
             .ignoresSafeArea()
         }
         .navigationTitle("")
+        .navigationBarBackButtonHidden(true)
     }
 }
 

@@ -14,12 +14,14 @@ enum SelectedButtonType {
 }
 
 struct ChallengeCheckScreen: View {
+    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @State private var isLinkActive = false
     @State var selectButton: SelectedButtonType = .none
     @State private var navigationIsActive: Bool = false
     let currentChallenge: Challenge
+    
     private var challengeStatement: String {
         currentChallenge.question ?? ""
     }
@@ -34,7 +36,7 @@ struct ChallengeCheckScreen: View {
                     .font(.system(size: 17))
                     .lineSpacing(4)
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(.gray)
+                    .foregroundColor(.subText)
                     .padding(.top, 12)
                 
                 HStack(spacing: 18) {
@@ -58,9 +60,9 @@ struct ChallengeCheckScreen: View {
                 
                 NavigationLink {
                     if selectButton == .didChallenge {
-                        RecordSelectionView(challenge: currentChallenge)
+                        RecordSelectionView(challenge: currentChallenge).environment(\.managedObjectContext, viewContext)
                     } else if selectButton == .notYetChallenge {
-                        NotYetChallengeScreen()
+                        NotYetChallengeScreen().environment(\.managedObjectContext, viewContext)
                     }
                 } label: {
                     Text("다음")

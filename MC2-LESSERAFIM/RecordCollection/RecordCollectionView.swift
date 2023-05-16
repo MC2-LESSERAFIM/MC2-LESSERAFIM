@@ -9,8 +9,6 @@ import SwiftUI
 struct RecordCollectionView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
-    @EnvironmentObject var userData: UserDataModel
-    
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
 
@@ -127,53 +125,10 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     }
 }
 
-struct Record: Hashable, Codable {
-    var id: Int
-    var category: Category
-    var imageName: String
-    var postedAt: String
-    var image: Image {
-        Image(imageName)
-    }
-    var beforeDay: Int {
-        //MARK: - 0 == today, 1 == yesterday, 2 == the day before yesterday(two days ago)
-        let yearMonthDay = postedAt.split(separator: "-").compactMap({ Int($0) })
-        let year = yearMonthDay[0]
-        let month = yearMonthDay[1]
-        let day = yearMonthDay[2]
-        let postedDateComponent = DateComponents(year: year, month: month, day: day)
-        let postedDate = Calendar.current.date(from: postedDateComponent) ?? Date()
-        let gap = abs(postedDate - Date())
-        return Int(gap / 86400) // 86400 == 1 day
-    }
-    init(id: Int, category: Category, imageName: String, postedAt: String) {
-        self.id = id
-        self.category = category
-        self.imageName = imageName
-        self.postedAt = postedAt
-    }
-    
-    enum CodingKeys : String, CodingKey {
-        case imageName
-        case category
-        case id
-        case postedAt
-    }
-}
 
 fileprivate extension Date {
     static func - (lhs: Date, rhs: Date) -> TimeInterval {
         return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-    }
-}
-class ModelData: ObservableObject {
-    @Published var records: [Record] = load("landmarkData.json")
-    
-    var categories: [String: [Record]] {
-        Dictionary(
-            grouping: records,
-            by: { $0.category.rawValue }
-        )
     }
 }
 
@@ -232,7 +187,7 @@ struct ThumbnailView: View {
             // MARK: - 사진 or 그림 Post
             image
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 129, height: 172)
                 .clipped()
                 .background(

@@ -1,5 +1,5 @@
 //
-//  RecordWritingView.swift
+//  WritingView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by OhSuhyun on 2023/05/08.
@@ -7,17 +7,16 @@
 
 import SwiftUI
 
-struct RecordWritingView: View {
+struct WritingView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
     var challenge: Challenge
-    
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
+    @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     @State private var showingAlert = false // 경고 출력 여부
-    
-    @Environment(\.dismiss) private var dismiss // 화면 이탈
     
     @State var onStory = false   // 챌린지 내용 입력 중 여부
     @AppStorage("opacities") var opacities: [Double] = UserDefaults.standard.array(forKey: "opacities") as? [Double] ?? [0.2, 0.2, 0.2, 0.2, 0.2, 0.2]
@@ -29,11 +28,15 @@ struct RecordWritingView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @State var firstCompleteScreen: Bool = false
+    
     var body: some View {
         
         ZStack {
             BackgroundView()
-            NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+            NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -92,11 +95,16 @@ struct RecordWritingView: View {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
-                                changeBackgroundOpacity()
-                                backToCollection = true
-                                updateFirstUse()
+                                postedChallenges[currentChallenge] = true
                                 todayPostsCount += 1
-                                dismiss()
+                                changeBackgroundOpacity()
+                                if isFirstPosting {
+                                    firstCompleteScreen = true
+                                } else {
+                                    isSelectedTab = 0
+                                    postChallenge = false
+                                }
+                                updateFirstUse()
                             }
                         }
                 }

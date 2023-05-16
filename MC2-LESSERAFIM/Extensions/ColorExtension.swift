@@ -26,4 +26,5 @@ extension Color {
         .opacity(0.7)
     static let opacityWhiteChallenge = Color(hex: "FFFFFF") //버튼
         .opacity(0.3)
+    static let subText = Color(hex: "757575")
 }

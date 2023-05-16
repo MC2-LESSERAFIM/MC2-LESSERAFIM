@@ -23,6 +23,8 @@ struct ChallengeScreen: View {
     @AppStorage("userName") var userName: String = ""
     @AppStorage("todayChallenges") var todayChallenges: [Int] = []
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
+    @AppStorage("currentChallenge") var currentChallenge: Int = 0
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     private let challengeNumber: Int = 3
     
@@ -31,14 +33,20 @@ struct ChallengeScreen: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = true
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool!
+    @AppStorage("postChallenge") var postChallenge: Bool = false
     
-    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
-     @State var isTutorial = true
-     @State var currentIndex = 0
-     let xPosition: [CGFloat] = [10, 100]
-     let yPosition: [CGFloat] = [100, 300]
-     let prompts = ["1번 도움말", "2번 도움말"]
-     */
+    @AppStorage("isTutorial") var isTutorial = true
+    @State var currentIndex = 0
+    let xPosition: [CGFloat] = [200, 200, 175, 210]
+    let yPosition: [CGFloat] = [450, 475, 475, 475]
+    let prompts = [
+        "나와의 관계를 돈독하게 만들어줄 \n오늘의 챌린지를 만나볼까요?\n아래의 버튼을 눌러주세요.",
+        "매일 최대 3개의 챌린지를 시도할 수 있어요.\n 원하는 만큼 자유롭게 도전해보세요.",
+        "오늘 도전하기 어려운 도전은 \n옆으로 스와이프해서 새롭게 뽑을 수 있어요.",
+        "챌린지를 시도했다면 나의 새로운 모습을 \n발견하면서 느낀 감정과 생각을 남겨보세요."
+    ]
+
     
     
     private var hasPassedDay: Bool {
@@ -50,10 +58,33 @@ struct ChallengeScreen: View {
     var body: some View {
         NavigationView {
             ZStack {
+                if postChallenge {
+                    NavigationLink(destination: ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[currentChallenge]]),
+                                   isActive: $postChallenge, label: {EmptyView()})
+                    .navigationTitle("")
+                    .environment(\.managedObjectContext, viewContext)
+                }
                 BackgroundView()
                 VStack {
                     VStack {
-                        PageTitle(titlePage: "Day \(progressDay)")
+                        HStack {
+                            PageTitle(titlePage: "Day \(progressDay)")
+                            
+                            Spacer()
+                            
+                            //MARK: - 우상단 도움 버튼
+                            Button {
+                                withAnimation {
+                                    isTutorial = true
+                                    currentIndex = 1
+                                }
+                            } label: {
+                                Image(systemName: "questionmark.circle.fill")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                            }
+                        }
+
                     }
                     .padding(.top, 48)
                     .padding(.horizontal, 24)
@@ -85,14 +116,15 @@ struct ChallengeScreen: View {
                                 
                                 Text("다시 뽑기 \(numberOfTimeLeft)회")
                                     .font(.system(size: 14, weight: .regular))
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(.subText)
                             }
                             .padding(.horizontal, 24)
                             
                             List {
                                 ForEach(0..<3) { i in
-                                    NavigationLink {
-                                        ChallengeCheckScreen(currentChallenge: challenges[todayChallenges[i]])
+                                    Button {
+                                        currentChallenge = i
+                                        postChallenge = true
                                     } label: {
                                         Text(challenges[todayChallenges[i]].question!)
                                             .swipeActions(edge: .leading) {
@@ -108,7 +140,8 @@ struct ChallengeScreen: View {
                                                 }
                                                 .tint(.mainPink)
                                             }
-                                    }
+                                    }.buttonStyle(.plain)
+                                    .disabled(postedChallenges[i])
                                 }
                                 .listStyle(.inset)
                                 .listRowBackground(Color.opacityWhiteChallenge)
@@ -122,6 +155,9 @@ struct ChallengeScreen: View {
                         Button {
                             isPickedChallenge = true
                             dailyFirstUse = true  // 당일 챌린지 도전 0인 상태로 변경
+                            withAnimation {
+                                currentIndex = 1
+                            }
                         } label: {
                             Text("오늘의 챌린지 뽑기")
                                 .foregroundColor(.white)
@@ -142,21 +178,20 @@ struct ChallengeScreen: View {
                     }
                 }
                 .overlay {
-                    
-                    /* MARK: - Tutorial Prompt 로직 코드, 추후 이용 or 삭제 by Gucci
                     if isTutorial {
-                        Text(prompts[currentIndex])
-                            .position(x: xPosition[currentIndex], y: yPosition[currentIndex])
-                            .onTapGesture {
-                                currentIndex += 1
-                                currentIndex = prompts.count == currentIndex ? 0 : currentIndex
-                            }
+                        let point = CGPoint(x: xPosition[currentIndex], y: yPosition[currentIndex])
+                        PopoverView(prompts[currentIndex], point)
                     }
-                     */
                 }
+            }
+            .onTapGesture {
+                goToNextPrompt()
+                offTutorialWhenLastIndex()
             }
             .navigationTitle("")
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationViewStyle(.stack)
         .toolbar(.hidden, for: .navigationBar)
         .toolbar(.visible, for: .tabBar)
     }
@@ -171,6 +206,18 @@ struct ChallengeScreen_Previews: PreviewProvider {
 }
 
 private extension ChallengeScreen {
+    func goToNextPrompt() {
+        withAnimation {
+            currentIndex += 1
+        }
+    }
+    
+    func offTutorialWhenLastIndex() {
+        if currentIndex == prompts.count {
+            isTutorial = false
+        }
+    }
+    
     func initChallenges(number: Int) {
         
         func addChallenge() {
@@ -240,4 +287,23 @@ extension NSDate {
 
 struct Constants {
     static let FIRSTLAUNCH = "first_launch"
+}
+
+struct PopoverView: View {
+    let message: String
+    let point: CGPoint
+    
+    init(_ message: String, _ point: CGPoint) {
+        self.message = message
+        self.point = point
+    }
+    
+    var body: some View {
+        Text(message)
+            .padding()
+            .foregroundColor(Color.white)
+            .background(Color.mainPink)
+            .cornerRadius(12)
+            .position(x: point.x, y: point.y)
+    }
 }

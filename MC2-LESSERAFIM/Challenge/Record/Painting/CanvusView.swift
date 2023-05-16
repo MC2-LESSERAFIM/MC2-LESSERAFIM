@@ -16,8 +16,10 @@ struct PaintingLine {
 
 struct CanvusView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @Environment(\.dismiss) private var dismiss // 화면 이탈
     var challenge: Challenge
+    @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
@@ -27,7 +29,6 @@ struct CanvusView: View {
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
     @State private var eraserThickness : Double = 5.0 //기본 지우개 굵기
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
 
     //지우개 초기 위치
     @State private var eraserCenter : CGPoint = .zero
@@ -52,6 +53,9 @@ struct CanvusView: View {
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
     @AppStorage("todayPostsCount") var todayPostsCount = 0
+    @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
+    @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @State var firstCompleteScreen: Bool = false
 
     @State var canvusHeight: CGFloat = 430
     
@@ -127,7 +131,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
-                    NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
+                    NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -227,9 +231,19 @@ struct CanvusView: View {
                     //만약 앨범에 추가하고 싶다면 이거 사용하면 됩니다.
                     //                                UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
                     
+                    if isDayChanging == false{
+                        isDayChanging = true
+                    }
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                    postedChallenges[currentChallenge] = true
                     todayPostsCount += 1
                     changeBackgroundOpacity()
+                    if isFirstPosting {
+                        firstCompleteScreen = true
+                    } else {
+                        isSelectedTab = 0
+                        postChallenge = false
+                    }
                     updateFirstUse()
                 }
                 
