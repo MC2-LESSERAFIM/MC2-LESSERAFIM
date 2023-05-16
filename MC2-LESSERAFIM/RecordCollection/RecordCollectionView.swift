@@ -296,6 +296,9 @@ struct PostDetailView: View {
     var body: some View {
         ZStack {
             BackgroundView()
+            
+            CardView(post:post)
+            /*
             (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -312,6 +315,7 @@ struct PostDetailView: View {
                 }
                 .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 .navigationBarBackButtonHidden()
+             */
         }
     }
     
