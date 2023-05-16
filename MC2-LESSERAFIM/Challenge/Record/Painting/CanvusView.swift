@@ -11,7 +11,7 @@ import SwiftUI
 struct PaintingLine {
     var point = [CGPoint]()
     var color : Color = .black
-    var lineWidth : Double = 1.0
+    var lineWidth : Double = 5.0
 }
 
 struct CanvusView: View {
@@ -26,7 +26,8 @@ struct CanvusView: View {
     //투명도는 여기서 필요없음
     //@State private var colorOpacity : Double = 1.0
     @State private var thickness : Double = 5.0 //기본 팬 굵기
-    @State var backToChallenge: Bool = false   // 챌린지 내용
+    @State private var eraserThickness : Double = 5.0 //기본 지우개 굵기
+    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
 
     //지우개 초기 위치
     @State private var eraserCenter : CGPoint = .zero
@@ -68,6 +69,7 @@ struct CanvusView: View {
             .stroke(Color.mainPinkOpacity, lineWidth: 2))
         .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
             .onChanged({ value in
+                toolClicked = false
                 currentLine.color = selectedColor
                 let newPoint = value.location
                 currentLine.point.append(newPoint) //라인 1개 생성
@@ -123,7 +125,7 @@ struct CanvusView: View {
             ZStack {
                 BackgroundView()
                 ZStack(alignment: .top) {
-                    NavigationLink(destination: ChallengeScreen(), isActive: $backToChallenge, label: {EmptyView()})
+                    NavigationLink(destination: RecordCollectionView(), isActive: $backToCollection, label: {EmptyView()})
                     VStack{
                         //캔버스 호출
                         canvus
@@ -138,6 +140,9 @@ struct CanvusView: View {
                         Spacer()
                             .frame(width: 10 , height: geo.size.height - 180)
                         TitleTextField(titleRecord: $titleRecord, placeholder: "이번 챌린지 그림에 제목을 붙여볼까요?")
+                            .onTapGesture {
+                                toolClicked = false
+                            }
                             .padding(.horizontal, 24)
                             .submitLabel(.return)
                             .toolbar {
@@ -149,6 +154,9 @@ struct CanvusView: View {
                             }
                         
                         OtherContentTextField(contentRecord: $contentRecord, placeholder: "어떤 이야기가 담겨있나요?")
+                            .onTapGesture {
+                                toolClicked = false
+                            }
                             .padding(.horizontal, 24)
                             .submitLabel(.return)
                             .toolbar {
@@ -162,7 +170,7 @@ struct CanvusView: View {
                     //필요시 나타나는 View
                     VStack{ //case문 좀 치겠는데?
                         Spacer()
-                            .frame(width: 325, height: 160)
+                            .frame(width: 325, height: 375)
                         
                         if toolClicked {
                             switch whatTool {
@@ -219,7 +227,7 @@ struct CanvusView: View {
                     
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
                     changeBackgroundOpacity()
-                    backToChallenge = true
+                    backToCollection = true
                     //dismiss()
                 }
                 
