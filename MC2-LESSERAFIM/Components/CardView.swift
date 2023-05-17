@@ -65,6 +65,6 @@ struct CardView: View {
         }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
         .rotation3DEffect(.degrees(degrees), axis: (x: 0, y: 1, z: 0), perspective: 0.2)
-        .foregroundColor(.black)
+        .foregroundColor(.mainBlack)
     }
 }

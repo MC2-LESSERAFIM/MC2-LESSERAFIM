@@ -59,7 +59,7 @@ struct RecordCollectionView: View {
                         } label: {
                             Label(title: {
                                 Text("\(selectedSort.rawValue)")
-                                    .font(.system(size: 12, weight: .regular))
+                                    .font(.system(size: 12, weight: .semibold))
                             }, icon: {
                                 Image(systemName: "arrowtriangle.down.fill")
                                     .font(.system(size: 12))
