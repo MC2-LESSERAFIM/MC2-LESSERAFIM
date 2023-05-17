@@ -231,7 +231,7 @@ struct DayLabel: View {
     
     var body: some View {
         Capsule()
-            .frame(maxWidth: 70, maxHeight: 30)
+            .frame(maxWidth: 50, maxHeight: 25)
             .foregroundColor(.white)
             .cornerRadius(12)
             .overlay {
