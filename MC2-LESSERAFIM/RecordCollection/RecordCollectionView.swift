@@ -280,7 +280,7 @@ struct CategoryView: View {
                         }
                         
                         Text(category)
-                            .foregroundColor(.black)
+                            .foregroundColor(.mainBlack)
                             .font(.system(size: 17, weight: .medium, design: .rounded))
                             .padding(.leading)
                     }
