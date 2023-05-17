@@ -168,15 +168,18 @@ struct GalleryView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(posts, id: \.self) { post in
-                    NavigationLink {
-                        PostDetailView(post: post)
-                    } label: {
-                        ThumbnailView(post: post, width: width, height: height)
+        ZStack {
             if isBackground{
                 BackgroundView()
+            }
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(posts, id: \.self) { post in
+                        NavigationLink {
+                            PostDetailView(post: post)
+                        } label: {
+                            ThumbnailView(post: post, width: width, height: height)
+                        }
                     }
                 }
             }
