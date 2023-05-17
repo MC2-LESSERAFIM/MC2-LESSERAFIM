@@ -301,11 +301,20 @@ struct PopoverView: View {
     }
     
     var body: some View {
-        Text(prompts[index])
-            .padding()
-            .foregroundColor(Color.white)
-            .background(Color.mainPink)
-            .cornerRadius(12)
-            .position(x: xPosition[index], y: yPosition[index])
+        VStack{
+            Spacer()
+                .frame(height: 220)
+            
+            HStack(alignment: .center){
+                Text(prompts[index])
+                    .multilineTextAlignment(.center)
+                    .padding()
+                    .foregroundColor(Color.mainPink)
+                    .background(Color.white)
+                    .cornerRadius(12)
+                    .overlay(RoundedRectangle(cornerRadius: 12)
+                        .stroke(Color.mainPink, lineWidth: 1))
+            }
+        }
     }
 }
