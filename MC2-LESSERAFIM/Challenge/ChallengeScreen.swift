@@ -74,6 +74,8 @@ struct ChallengeScreen: View {
                                 Image(systemName: "questionmark.circle.fill")
                                     .resizable()
                                     .frame(width: 25, height: 25)
+                                    .foregroundColor(.mainGray)
+                                    .opacity(0.3)
                             }
                         }
 
