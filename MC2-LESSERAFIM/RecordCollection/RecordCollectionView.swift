@@ -199,8 +199,8 @@ struct ThumbnailView: View {
                 // MARK: - 사진 or 그림 Post
                 image
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: width, height: height)
-                    .aspectRatio(contentMode: .fit)
             } else {
                 // MARK: - 글 Post
                 VStack(alignment: .leading, spacing: 4) {
