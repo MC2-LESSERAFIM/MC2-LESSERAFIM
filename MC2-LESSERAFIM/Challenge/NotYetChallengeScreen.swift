@@ -41,6 +41,7 @@ struct NotYetChallengeScreen: View {
             .ignoresSafeArea()
         }
         .navigationTitle("")
+        .navigationBarBackButtonHidden(true)
     }
 }
 

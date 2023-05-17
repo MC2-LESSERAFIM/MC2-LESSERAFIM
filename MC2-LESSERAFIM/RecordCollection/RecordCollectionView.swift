@@ -187,7 +187,7 @@ struct ThumbnailView: View {
             // MARK: - 사진 or 그림 Post
             image
                 .resizable()
-                .scaledToFit()
+                .aspectRatio(contentMode: .fill)
                 .frame(width: 129, height: 172)
                 .clipped()
                 .background(
@@ -196,7 +196,7 @@ struct ThumbnailView: View {
                 )
                 .overlay {
                     DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
-                        .position(x: 36, y: 17)
+                        .frame(alignment: .topLeading)
                         .padding([.leading, .top], 4)
                 }
         } else {
@@ -217,7 +217,7 @@ struct ThumbnailView: View {
             .background(.white)
             .overlay {
                 DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
-                    .position(x: 36, y: 17)
+                    .frame(alignment: .topLeading)
                     .padding([.leading, .top], 4)
             }
         }

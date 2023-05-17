@@ -1,5 +1,5 @@
 //
-//  WritingView.swift
+//  PhotoUploadView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by Jun on 2023/05/07.
@@ -39,7 +39,7 @@ struct ImagePicker: UIViewControllerRepresentable {
     }
 }
 
-struct WritingView: View {
+struct PhotoUploadView: View {
     @Environment(\.managedObjectContext) private var viewContext
     
     @StateObject var permissionManager = PermissionManager()
@@ -61,8 +61,10 @@ struct WritingView: View {
     @State private var showingAlert = false
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
     var challenge: Challenge
+    
+    @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     
     @FocusState private var focusedField: FocusField?
     
@@ -72,13 +74,13 @@ struct WritingView: View {
     @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     @State var firstCompleteScreen: Bool = false
     
     var body: some View {
         ZStack {
             BackgroundView()
             NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
-            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader { geo in
                 ScrollView {
                     VStack(spacing: 10) {
@@ -150,19 +152,19 @@ struct WritingView: View {
                         Image(systemName: "checkmark.circle")
                             .foregroundColor(.mainPink)
                             .onTapGesture {
-                                print(isFirstPosting)
                                 if (selectedImage != nil) {
                                     if isDayChanging == false{
                                         isDayChanging = true
                                     }
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                    postedChallenges[currentChallenge] = true
                                     todayPostsCount += 1
                                     changeBackgroundOpacity()
                                     if isFirstPosting {
                                         firstCompleteScreen = true
                                     } else {
                                         isSelectedTab = 0
-                                        backToCollection = true
+                                        postChallenge = false
                                     }
                                     updateFirstUse()
                                 }

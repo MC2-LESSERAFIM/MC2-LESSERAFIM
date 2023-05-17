@@ -1,5 +1,5 @@
 //
-//  RecordWritingView.swift
+//  WritingView.swift
 //  MC2-LESSERAFIM
 //
 //  Created by OhSuhyun on 2023/05/08.
@@ -7,13 +7,14 @@
 
 import SwiftUI
 
-struct RecordWritingView: View {
+struct WritingView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @State var titleRecord: String = ""   // 챌린지 타이틀
     @State var contentRecord: String = ""   // 챌린지 내용
     var challenge: Challenge
-    
-    @State var backToCollection: Bool = false   // 기록 컬랙숀 이동
+    @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
+    @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     @State private var showingAlert = false // 경고 출력 여부
     
@@ -36,7 +37,6 @@ struct RecordWritingView: View {
         ZStack {
             BackgroundView()
             NavigationLink(destination: RecordCompleteScreen().environment(\.managedObjectContext, viewContext), isActive: $firstCompleteScreen, label: {EmptyView()})
-            NavigationLink(destination: ChallengeScreen().environment(\.managedObjectContext, viewContext), isActive: $backToCollection, label: {EmptyView()})
             GeometryReader() { geo in   // 화면 크기 이용을 위해 사용
                 VStack() {
                     // 챌린지 제목
@@ -95,15 +95,16 @@ struct RecordWritingView: View {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
+                                postedChallenges[currentChallenge] = true
+                                todayPostsCount += 1
                                 changeBackgroundOpacity()
                                 if isFirstPosting {
                                     firstCompleteScreen = true
                                 } else {
                                     isSelectedTab = 0
-                                    backToCollection = true
+                                    postChallenge = false
                                 }
                                 updateFirstUse()
-                                todayPostsCount += 1
                             }
                         }
                 }
