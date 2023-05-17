@@ -74,9 +74,9 @@ struct ChallengeCheckScreen: View {
             .padding(.horizontal, 24)
             .padding(.top, 100)
             .padding(.bottom, 100)
-            .ignoresSafeArea()
         }
-        .navigationTitle("")
+        .navigationBarTitle("", displayMode: .inline)
+        .ignoresSafeArea()
     }
 }
 

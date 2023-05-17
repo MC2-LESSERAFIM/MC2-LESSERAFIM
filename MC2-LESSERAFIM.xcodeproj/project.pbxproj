@@ -27,6 +27,7 @@
 		BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */ = {isa = PBXBuildFile; fileRef = BFCC385E2A11A66D00CC9CA7 /* Challenges.csv */; };
 		BFCF46532A0797CD00BBDFDB /* PhotoUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */; };
 		BFCF46552A07D40600BBDFDB /* RecordCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */; };
+		BFE3B3FC2A14052D00B3E55D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE3B3FB2A14052D00B3E55D /* CardView.swift */; };
 		D22690132A06A50B00BCF668 /* ChallengeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690122A06A50B00BCF668 /* ChallengeScreen.swift */; };
 		D22690152A06A51800BCF668 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22690142A06A51800BCF668 /* ProfileScreen.swift */; };
 		D22AEBF72A0DC646000FCAED /* ImageModalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */; };
@@ -89,6 +90,7 @@
 		BFCF46522A0797CD00BBDFDB /* PhotoUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoUploadView.swift; sourceTree = "<group>"; };
 		BFCF46542A07D40600BBDFDB /* RecordCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordCollectionView.swift; sourceTree = "<group>"; };
 		BFCF46582A08A10500BBDFDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BFE3B3FB2A14052D00B3E55D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		D22690122A06A50B00BCF668 /* ChallengeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeScreen.swift; sourceTree = "<group>"; };
 		D22690142A06A51800BCF668 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		D22AEBF62A0DC646000FCAED /* ImageModalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModalScreen.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */,
 				D24371DD2A0E9CD1007DC1A6 /* CustomTextField.swift */,
 				D25C13FD2A12B415007FC37C /* CustomButton.swift */,
+				BFE3B3FB2A14052D00B3E55D /* CardView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				A1A17E712A0CC26D009D4136 /* AppLockView.swift in Sources */,
 				D294526C2A0C7F7C0053F42F /* SmallOnBoarding.swift in Sources */,
 				F41534CF2A08748A0006AAA7 /* OnBoardingScreen.swift in Sources */,
+				BFE3B3FC2A14052D00B3E55D /* CardView.swift in Sources */,
 				D2D82FDE2A0CE00D004D91B7 /* SelectedUserCharacterScreen.swift in Sources */,
 				D22AEBF92A0DC654000FCAED /* NameModalScreen.swift in Sources */,
 				F41534D52A08759D0006AAA7 /* CheckInScreen.swift in Sources */,
