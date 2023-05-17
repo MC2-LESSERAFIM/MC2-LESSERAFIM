@@ -40,6 +40,30 @@ struct ProfileScreen: View {
             }
         }
     
+    func scheduleNotification() { //알림 내용 설정
+            let content = UNMutableNotificationContent()
+            content.title = "DeMi"
+            content.body = "자기야 나 잊었어?"
+            content.sound = UNNotificationSound.default
+
+            // 특정 시간을 설정하려면 Calendar, DateComponents를 사용합니다.
+            var dateComponents = DateComponents()
+            dateComponents.hour = 18
+            dateComponents.minute = 0
+
+            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+
+            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+            UNUserNotificationCenter.current().add(request) { error in
+                if let error = error {
+                    print("Failed to schedule notification: \(error.localizedDescription)")
+                } else {
+                    print("Notification scheduled successfully.")
+                }
+            }
+        }
+    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -139,6 +163,7 @@ struct ProfileScreen: View {
                             .onChange(of: isNotificationEnabled) {value in
                                 if value{
                                     permissionManager.requestAlramPermission()
+                                    scheduleNotification()
                                     print("\(isNotificationEnabled)")
                                 }else {
                                     openAppSettings()
