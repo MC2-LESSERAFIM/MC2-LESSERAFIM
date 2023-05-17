@@ -235,7 +235,7 @@ struct DayLabel: View {
             .foregroundColor(.white)
             .cornerRadius(12)
             .overlay {
-                Text("Day+\(day)")
+                Text("D+\(day)")
                     .foregroundColor(.black)
                     .font(.body.bold())
             }
