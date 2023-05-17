@@ -196,17 +196,21 @@ struct ThumbnailView: View {
                     .aspectRatio(contentMode: .fit)
             } else {
                 // MARK: - 글 Post
-                VStack(spacing: 30) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(post.title ?? "")
-                        .padding([.leading, .top], 4)
-                        .font(.title3)
-                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 12)
+                        .padding(.top, 40)
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(3)
                     
                     Text(post.content ?? "")
-                        .padding([.leading], 4)
-                        .foregroundColor(.black)
-                        .font(.body)
-                        .lineLimit(5)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
+                        .foregroundColor(.mainBlack)
+                        .font(.system(size: 14, weight: .regular))
+                        .lineLimit(4)
                 }
                 .frame(width: width, height: height, alignment: .topLeading)
                 .background(.white)
@@ -216,7 +220,7 @@ struct ThumbnailView: View {
                     DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
                     Spacer()
                 }
-                .padding([.leading, .top], 4)
+                .padding([.leading, .top], 8)
                 Spacer()
             }
             
