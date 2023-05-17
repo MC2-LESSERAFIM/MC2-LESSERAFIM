@@ -16,8 +16,8 @@ struct CardView: View {
         ZStack{
         
             RoundedRectangle(cornerRadius: 24)
-                .inset(by: -3)
-                .stroke(.white.opacity(0.5), lineWidth: 5)
+                .inset(by: -1)
+                .stroke(Color.opacityWhiteChallenge, lineWidth: 2)
                 .frame(width: 343, height: 610)
             
             BackgroundView()
