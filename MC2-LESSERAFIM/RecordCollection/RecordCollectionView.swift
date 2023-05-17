@@ -156,71 +156,72 @@ func load<T: Decodable>(_ filename: String) -> T {
 
 struct GalleryView: View {
     let posts: [Post]
+    private let width: CGFloat = 129
+    private let height: CGFloat = 172
     
-    private var items: [GridItem] {
-        Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
-              count: 3)
-    }
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        VStack {
-            LazyVGrid(columns: items, spacing: 3) {
-                ForEach(posts, id: \.self.id) { post in
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(posts, id: \.self) { post in
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        ThumbnailView(post: post)
+                        ThumbnailView(post: post, width: width, height: height)
                     }
                 }
             }
-            Spacer()
         }
     }
 }
 
 struct ThumbnailView: View {
     let post: Post
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
-        if let imageData = post.imageData,
-           let image = Image.fromData(imageData) {
-            // MARK: - 사진 or 그림 Post
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 129, height: 172)
-                .clipped()
-                .background(
-                    LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
-                                   startPoint: .top, endPoint: .bottom)
-                )
-                .overlay {
-                    DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
-                        .frame(alignment: .topLeading)
+        ZStack {
+            if let imageData = post.imageData,
+               let image = Image.fromData(imageData) {
+                // MARK: - 사진 or 그림 Post
+                image
+                    .resizable()
+                    .frame(width: width, height: height)
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                // MARK: - 글 Post
+                VStack(spacing: 30) {
+                    Text(post.title ?? "")
                         .padding([.leading, .top], 4)
+                        .font(.title3)
+                        .lineLimit(1)
+                    
+                    Text(post.content ?? "")
+                        .padding([.leading], 4)
+                        .foregroundColor(.black)
+                        .font(.body)
+                        .lineLimit(5)
                 }
-        } else {
-            // MARK: - 글 Post
-            VStack(spacing: 30) {
-                Text(post.title ?? "")
-                    .padding([.leading, .top], 4)
-                    .font(.title3)
-                    .lineLimit(1)
-                
-                Text(post.content ?? "")
-                    .padding([.leading], 4)
-                    .foregroundColor(.black)
-                    .font(.body)
-                    .lineLimit(5)
+                .frame(width: width, height: height, alignment: .topLeading)
+                .background(.white)
             }
-            .frame(width: 129, height: 172, alignment: .topLeading)
-            .background(.white)
-            .overlay {
-                DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
-                    .frame(alignment: .topLeading)
-                    .padding([.leading, .top], 4)
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                    Spacer()
+                }
+                .padding([.leading, .top], 4)
+                Spacer()
             }
+            
         }
+        .clipped()
     }
 }
 
@@ -230,11 +231,11 @@ struct DayLabel: View {
     
     var body: some View {
         Capsule()
-            .frame(maxWidth: 70, maxHeight: 30)
+            .frame(maxWidth: 50, maxHeight: 25)
             .foregroundColor(.white)
             .cornerRadius(12)
             .overlay {
-                Text("Day+\(day)")
+                Text("D+\(day)")
                     .foregroundColor(.black)
                     .font(.body.bold())
             }
