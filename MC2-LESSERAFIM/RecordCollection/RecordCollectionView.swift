@@ -59,7 +59,7 @@ struct RecordCollectionView: View {
                         } label: {
                             Label(title: {
                                 Text("\(selectedSort.rawValue)")
-                                    .font(.system(size: 12, weight: .regular))
+                                    .font(.system(size: 12, weight: .semibold))
                             }, icon: {
                                 Image(systemName: "arrowtriangle.down.fill")
                                     .font(.system(size: 12))
@@ -196,17 +196,21 @@ struct ThumbnailView: View {
                     .aspectRatio(contentMode: .fit)
             } else {
                 // MARK: - 글 Post
-                VStack(spacing: 30) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(post.title ?? "")
-                        .padding([.leading, .top], 4)
-                        .font(.title3)
-                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 12)
+                        .padding(.top, 40)
+                        .font(.system(size: 14, weight: .semibold))
+                        .lineLimit(3)
                     
                     Text(post.content ?? "")
-                        .padding([.leading], 4)
-                        .foregroundColor(.black)
-                        .font(.body)
-                        .lineLimit(5)
+                        .multilineTextAlignment(.leading)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 12)
+                        .foregroundColor(.mainBlack)
+                        .font(.system(size: 14, weight: .regular))
+                        .lineLimit(4)
                 }
                 .frame(width: width, height: height, alignment: .topLeading)
                 .background(.white)
@@ -216,7 +220,7 @@ struct ThumbnailView: View {
                     DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
                     Spacer()
                 }
-                .padding([.leading, .top], 4)
+                .padding([.leading, .top], 8)
                 Spacer()
             }
             
@@ -230,14 +234,14 @@ struct DayLabel: View {
     let day: Int
     
     var body: some View {
-        Capsule()
+        Rectangle()
             .frame(maxWidth: 50, maxHeight: 25)
-            .foregroundColor(.white)
-            .cornerRadius(12)
+            .foregroundColor(.mainPink)
+            .cornerRadius(6)
             .overlay {
                 Text("D+\(day)")
-                    .foregroundColor(.black)
-                    .font(.body.bold())
+                    .foregroundColor(.white)
+                    .font(.system(size: 16, weight: .bold))
             }
             .opacity(isFirstPost ? 1 : 0)
     }
@@ -278,7 +282,7 @@ struct CategoryView: View {
                         }
                         
                         Text(category)
-                            .foregroundColor(.black)
+                            .foregroundColor(.mainBlack)
                             .font(.system(size: 17, weight: .medium, design: .rounded))
                             .padding(.leading)
                     }
