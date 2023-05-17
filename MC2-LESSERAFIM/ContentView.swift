@@ -18,27 +18,10 @@ struct ContentView: View {
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = true
     
     @AppStorage("isTutorial") var isTutorial = true
-    @State var currentTutorialIndex: Int
+    @State var currentTutorialIndex: Int = 0
 
     @FetchRequest(sortDescriptors: [])
     private var challenges: FetchedResults<Challenge>
-    let prompts = [
-        "나와의 관계를 돈독하게 만들어줄 \n오늘의 챌린지를 만나볼까요?\n아래의 버튼을 눌러주세요.",
-        "매일 최대 3개의 챌린지를 시도할 수 있어요.\n 원하는 만큼 자유롭게 도전해보세요.",
-        "오늘 도전하기 어려운 도전은 \n옆으로 스와이프해서 새롭게 뽑을 수 있어요.",
-        "챌린지를 시도했다면 나의 새로운 모습을 \n발견하면서 느낀 감정과 생각을 남겨보세요."
-    ]
-    
-    let point: CGPoint
-    let xPosition: [CGFloat]
-    let yPosition: [CGFloat]
-    
-    init() {
-        self._currentTutorialIndex = State(initialValue: 0)
-        self.xPosition = [200, 200, 175, 210]
-        self.yPosition = [450, 475, 475, 475]
-        self.point = CGPoint(x: xPosition[self._currentTutorialIndex.wrappedValue], y: yPosition[self._currentTutorialIndex.wrappedValue])
-    }
     
     var body: some View {
         GeometryReader { geo in
@@ -80,7 +63,7 @@ struct ContentView: View {
                     }
                     
                     if isTutorial {
-                        PopoverView(prompts[currentTutorialIndex], point)
+                        PopoverView(currentTutorialIndex)
                         
                         Color.clear
                             .ignoresSafeArea()
@@ -174,7 +157,7 @@ func makeTabBarTransparent() -> Void {
 
 private extension ContentView {
     func goToNextPrompt() {
-        if currentTutorialIndex == prompts.count - 1 {
+        if currentTutorialIndex == 3 {
             isTutorial = false
         }
         else {
