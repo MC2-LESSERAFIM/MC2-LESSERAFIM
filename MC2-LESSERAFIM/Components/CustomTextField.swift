@@ -54,7 +54,7 @@ struct TitleTextField: View {
                 .lineLimit(1...)
                 .padding(.horizontal, 12)
                 .foregroundColor(.mainBlack)
-                .font(.system(size: 15, weight: .regular))
+                .font(.system(size: 15, weight: .semibold))
                 .accentColor(.mainPink)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
