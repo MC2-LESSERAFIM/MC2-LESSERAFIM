@@ -47,8 +47,9 @@ struct CardView: View {
                             VStack(alignment: .leading) {
                                 Text("Day \(post.day.description)")
                                     .fontWeight(.bold)
-                                    .font(.system(size:17))
-                                    .padding(5)
+                                    .font(.system(size: 20))
+                                    .foregroundColor(.mainPink)
+                                    .padding([.leading, .bottom], 5)
                                 
                                 TitleTextField(titleRecord: .constant(post.title!), placeholder: post.title!)
                                     .disabled(true)
