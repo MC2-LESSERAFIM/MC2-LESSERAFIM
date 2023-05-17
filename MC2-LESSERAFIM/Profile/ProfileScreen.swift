@@ -136,14 +136,16 @@ struct ProfileScreen: View {
                         Toggle("알림", isOn: $notificationStatus)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
-                            .onChange(of: notificationStatus, perform: {value in
+                            .onChange(of: notificationStatus) {value in
                                 if value{
                                     permissionManager.requestAlramPermission()
+                                    checkNotificationSettings()
                                 }else {
+                                    permissionManager.requestAlramPermission()
 //                                    checkNotificationSettings()
 //                                    openAppSettings()
                                 }
-                            })
+                            }
                             
                        
                             
