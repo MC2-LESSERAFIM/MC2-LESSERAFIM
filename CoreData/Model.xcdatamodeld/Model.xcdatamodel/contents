@@ -4,6 +4,7 @@
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="difficulty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isSuccess" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="keyword" optional="YES" attributeType="String"/>
         <attribute name="question" optional="YES" attributeType="String"/>
     </entity>
     <entity name="Post" representedClassName="Post" syncable="YES" codeGenerationType="class">

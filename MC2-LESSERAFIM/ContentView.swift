@@ -78,9 +78,10 @@ struct ContentView: View {
         }
     }
     
-    func addChallenges(category: String, difficulty: Int16, isSuccess: Bool = false, question: String){
+    func addChallenges(category: String, keyword: String, difficulty: Int16, isSuccess: Bool = false, question: String){
         let challenge = Challenge(context: viewContext)
         challenge.category = category
+        challenge.keyword = keyword
         challenge.difficulty = difficulty
         challenge.isSuccess = isSuccess
         challenge.question = question
@@ -133,7 +134,7 @@ struct ContentView: View {
                 let keyword = columns[2]
                 let question = columns[3]
                 let difficulty = Int16(columns[4]) ?? 0
-                addChallenges(category: category, difficulty: difficulty, question: question)
+                addChallenges(category: category, keyword: keyword, difficulty: difficulty, question: question)
             }
         }
     }

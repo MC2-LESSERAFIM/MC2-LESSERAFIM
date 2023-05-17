@@ -312,7 +312,7 @@ struct PostDetailView: View {
             BackgroundView()
             
             CardView(post:post)
-                .navigationTitle(post.challenge!.question!)
+                .navigationTitle(post.challenge!.keyword!)
             /*
             (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
                 .resizable()
