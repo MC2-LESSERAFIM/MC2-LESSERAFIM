@@ -133,18 +133,15 @@ struct ProfileScreen: View {
                 
                 VStack {
                     HStack {
-                        Toggle("알림", isOn: $isNotificationEnabled)
+                        Toggle("알림", isOn: $notificationStatus)
                             .font(.system(size: 18, weight: .medium))
                             .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
-                            .onChange(of: isNotificationEnabled, perform: {value in
+                            .onChange(of: notificationStatus, perform: {value in
                                 if value{
                                     permissionManager.requestAlramPermission()
                                 }else {
 //                                    checkNotificationSettings()
 //                                    openAppSettings()
-//                                    if !notificationStatus {
-//                                        isNotificationEnabled = notificationStatus
-//                                    }
                                 }
                             })
                             
