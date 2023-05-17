@@ -157,10 +157,11 @@ func load<T: Decodable>(_ filename: String) -> T {
 struct GalleryView: View {
     let posts: [Post]
     
-    private var items: [GridItem] {
-        Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
-              count: 3)
-    }
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
         VStack {
