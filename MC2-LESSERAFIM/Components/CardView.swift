@@ -19,16 +19,20 @@ struct CardView: View {
                 .mask{
                     RoundedRectangle(cornerRadius: 24)
                         .foregroundColor(.white)
-                        .frame(width: 343, height: 463)
+                        .frame(width: 343, height: 610) // 기존 크기 343, 463, 현재 비율 약 16:9
                 }
                 .shadow(color: .white.opacity(0.5), radius: 17, x: 0, y: 4)
             if isFront{
-                VStack{
-                    (Image.fromData(post.imageData ?? Data()) ?? Image("niko"))
-                        .resizable()
-                        .frame(width:343, height: 232)
-                        .scaledToFit()
-                }
+                (Image.fromData(post.imageData ?? Data()) ?? Image("boy1"))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width:343, height: 610)
+                    .mask{
+                        RoundedRectangle(cornerRadius: 24)
+                            .foregroundColor(.white)
+                            .frame(width: 343, height: 610)
+                    }
+                    .opacity(isFront ? 1 : 0)
             }
             else {
                 VStack{
@@ -36,14 +40,12 @@ struct CardView: View {
                     Text("Content : \(post.content!)")
                     if post.imageData != nil {
                         Text("Image here")
-                        Image.fromData(post.imageData!)!
-                            .resizable()
-                            .frame(width:343, height: 232)
-                            .scaledToFit()
+                        
                     }
                     Text("Day : \(post.day.description)")
                     Text("isFirst? : \(post.isFirstPost.description)")
                 }
+                .opacity(isFront ? 0 : 1)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
             }
         }
@@ -57,7 +59,7 @@ struct CardView: View {
                     degrees = 0
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25) {
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
                 isFront.toggle()
             }
         }
