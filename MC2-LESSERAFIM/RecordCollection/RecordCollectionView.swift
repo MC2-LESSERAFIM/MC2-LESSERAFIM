@@ -76,6 +76,7 @@ struct RecordCollectionView: View {
                     ScrollView(showsIndicators: false) {
                         if selectedSort == .day {
                             GalleryView(posts: posts)
+                                .navigationBarTitle("", displayMode: .inline)
                         }
                         else if selectedSort == .category {
                             CategoryView(categories: postsByCategory)
@@ -301,6 +302,7 @@ struct PostDetailView: View {
             BackgroundView()
             
             CardView(post:post)
+                .navigationTitle(post.challenge!.question!)
             /*
             (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
                 .resizable()

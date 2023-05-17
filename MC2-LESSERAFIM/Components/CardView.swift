@@ -14,6 +14,11 @@ struct CardView: View {
     
     var body: some View {
         ZStack{
+        
+            RoundedRectangle(cornerRadius: 24)
+                .inset(by: -3)
+                .stroke(.white.opacity(0.5), lineWidth: 5)
+                .frame(width: 343, height: 610)
             
             BackgroundView()
                 .mask{
@@ -21,46 +26,62 @@ struct CardView: View {
                         .foregroundColor(.white)
                         .frame(width: 343, height: 610) // 기존 크기 343, 463, 현재 비율 약 16:9
                 }
+                .frame(width: 343, height: 610)
                 .shadow(color: .white.opacity(0.5), radius: 17, x: 0, y: 4)
-            if isFront{
-                (Image.fromData(post.imageData ?? Data()) ?? Image("boy1"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:343, height: 610)
-                    .mask{
-                        RoundedRectangle(cornerRadius: 24)
-                            .foregroundColor(.white)
-                            .frame(width: 343, height: 610)
+                .overlay{
+                        if isFront{
+                            if post.imageData != nil {
+                                Image.fromData(post.imageData!)!
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width:343, height: 610)
+                                    .mask{
+                                        RoundedRectangle(cornerRadius: 24)
+                                            .foregroundColor(.white)
+                                            .frame(width: 343, height: 610)
+                                    }
+                                    .opacity(isFront ? 1 : 0)
+                            }
+                        }
+                        else {
+                            VStack(alignment: .leading) {
+                                Text("Day \(post.day.description)")
+                                    .fontWeight(.bold)
+                                    .font(.system(size:17))
+                                    .padding(5)
+                                
+                                TitleTextField(titleRecord: .constant(post.title!), placeholder: post.title!)
+                                    .disabled(true)
+                                
+                                cardContentTextField(contentRecord: post.content!)
+                            }
+                            .padding(20)
+                            .frame(width:343, height: 610, alignment: .top)
+                            .opacity(isFront ? 0 : 1)
+                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                     }
-                    .opacity(isFront ? 1 : 0)
-            }
-            else {
-                VStack{
-                    Text("Title : \(post.title!)")
-                    Text("Content : \(post.content!)")
-                    if post.imageData != nil {
-                        Text("Image here")
-                        
-                    }
-                    Text("Day : \(post.day.description)")
-                    Text("isFirst? : \(post.isFirstPost.description)")
                 }
-                .opacity(isFront ? 0 : 1)
-                .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
-            }
         }
         .onTapGesture {
-            withAnimation(.linear(duration: 0.2)) {
-                print(degrees)
-                if(degrees<180){
-                    degrees = 180
+            if post.imageData != nil {
+                withAnimation(.linear(duration: 0.2)) {
+                    print(degrees)
+                    if(degrees<180){
+                        degrees = 180
+                    }
+                    else{
+                        degrees = 0
+                    }
                 }
-                else{
-                    degrees = 0
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
+                    isFront.toggle()
                 }
             }
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.1) {
-                isFront.toggle()
+        }
+        .onAppear {
+            if post.imageData == nil {
+                isFront = false
+                degrees += 180
             }
         }
         .padding(EdgeInsets(top: 0, leading: 0, bottom: 30, trailing: 0))
