@@ -156,6 +156,8 @@ func load<T: Decodable>(_ filename: String) -> T {
 
 struct GalleryView: View {
     let posts: [Post]
+    private let width: CGFloat = 129
+    private let height: CGFloat = 172
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -164,23 +166,24 @@ struct GalleryView: View {
     ]
     
     var body: some View {
-        VStack {
-            LazyVGrid(columns: items, spacing: 3) {
-                ForEach(posts, id: \.self.id) { post in
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(posts, id: \.self) { post in
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        ThumbnailView(post: post)
+                        ThumbnailView(post: post, width: width, height: height)
                     }
                 }
             }
-            Spacer()
         }
     }
 }
 
 struct ThumbnailView: View {
     let post: Post
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         if let imageData = post.imageData,
