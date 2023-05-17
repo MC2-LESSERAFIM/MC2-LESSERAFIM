@@ -11,6 +11,7 @@
 		8E15E4CB2A087C1E003C7D3F /* PageTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */; };
 		8E15E4CD2A087F67003C7D3F /* RecordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4CC2A087F67003C7D3F /* RecordButton.swift */; };
 		8E15E4D12A08910F003C7D3F /* WritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15E4D02A08910F003C7D3F /* WritingView.swift */; };
+		8E952A3C2A14676C00BCFE72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E952A3B2A14676C00BCFE72 /* LaunchScreen.storyboard */; };
 		A114185E2A087747004C03E5 /* CanvusThicknessSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */; };
 		A15ED6D82A04D69C0039EFC7 /* CanvusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */; };
 		A15ED6DA2A04D7810039EFC7 /* CanvusColorConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */; };
@@ -70,6 +71,7 @@
 		8E15E4CA2A087C1E003C7D3F /* PageTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTitle.swift; sourceTree = "<group>"; };
 		8E15E4CC2A087F67003C7D3F /* RecordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordButton.swift; sourceTree = "<group>"; };
 		8E15E4D02A08910F003C7D3F /* WritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritingView.swift; sourceTree = "<group>"; };
+		8E952A3B2A14676C00BCFE72 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A114185D2A087747004C03E5 /* CanvusThicknessSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusThicknessSlider.swift; sourceTree = "<group>"; };
 		A15ED6D72A04D69C0039EFC7 /* CanvusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusView.swift; sourceTree = "<group>"; };
 		A15ED6D92A04D7810039EFC7 /* CanvusColorConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvusColorConstant.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 		A1EF9E522A02562000A56E4C = {
 			isa = PBXGroup;
 			children = (
+				8E952A3B2A14676C00BCFE72 /* LaunchScreen.storyboard */,
 				A1A17E702A0CC26D009D4136 /* AppLockView.swift */,
 				BFCC385D2A0F500F00CC9CA7 /* CoreData */,
 				BF75204D2A09DBB600BF81DC /* Utils */,
@@ -426,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1EF9E662A02562100A56E4C /* Preview Assets.xcassets in Resources */,
+				8E952A3C2A14676C00BCFE72 /* LaunchScreen.storyboard in Resources */,
 				A1EF9E632A02562100A56E4C /* Assets.xcassets in Resources */,
 				BFCC385F2A11A66D00CC9CA7 /* Challenges.csv in Resources */,
 			);
@@ -654,6 +658,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -688,6 +693,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
