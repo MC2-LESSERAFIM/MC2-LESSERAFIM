@@ -7,7 +7,13 @@
 import SwiftUI
 
 struct RecordCollectionView: View {
-    @EnvironmentObject var postData: UserData
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    @FetchRequest(sortDescriptors: [])
+    private var challenges: FetchedResults<Challenge>
+
+    @State var posts: [Post] = []
+    @State var postsByCategory: [String: [Post]] = [:]
     
     enum SortBy: String, CaseIterable, Identifiable {
         case day = "날짜"
@@ -17,43 +23,75 @@ struct RecordCollectionView: View {
     
     @State private var selectedSort: SortBy = .day
     
+    init() {
+        self.posts = PersistenceController.shared.getAllPosts()
+        self.postsByCategory = PersistenceController.shared.getPostsByCategory()
+    }
+    
+    func saveContext() {
+        do {
+            try viewContext.save()
+        } catch {
+            print("Error saving managed object context: \(error)")
+        }
+    }
+    
     var body: some View {
-        GeometryReader { geo in
-            NavigationView {
-                ScrollView(showsIndicators: false) {
-                    // MARK: - sorting by .day
-                    if selectedSort == .day {
-                        GalleryView(posts: postData.posts)
-                    }
-                    // MARK: - sorting by .category
-                    else if selectedSort == .category {
-                        CategoryView(categories: postData.categories)
-                    }
-                }
-                .navigationTitle("나의 기록")
-                .navigationBarTitleDisplayMode(.large)
-                .toolbar {
-                    Picker("", selection: $selectedSort) {
-                        ForEach(SortBy.allCases) { sort in
-                            Label(sort.rawValue, systemImage: "arrowtriangle.down.fill")
-                                .labelStyle(.titleAndIcon)
+        NavigationView {
+            ZStack {
+                BackgroundView()
+                VStack {
+                    HStack(alignment: .bottom) {
+                        PageTitle(titlePage: "나의 기록")
+                            .padding(.top, 48)
+                        
+                        Menu {
+                            Button(action: {
+                                selectedSort = SortBy.day
+                            }, label: {
+                                Text("날짜")
+                            })
+                            Button(action: {
+                                selectedSort = SortBy.category
+                            }, label: {
+                                Text("주제")
+                            })
+                        } label: {
+                            Label(title: {
+                                Text("\(selectedSort.rawValue)")
+                                    .font(.system(size: 12, weight: .regular))
+                            }, icon: {
+                                Image(systemName: "arrowtriangle.down.fill")
+                                    .font(.system(size: 12))
+                                    .frame(width: 12, height: 12)
+                            })
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.mainPink.opacity(0.2))
+                            .cornerRadius(9)
                         }
                     }
+                    .padding(.horizontal, 24)
+                    
+                    ScrollView(showsIndicators: false) {
+                        if selectedSort == .day {
+                            GalleryView(posts: posts)
+                        }
+                        else if selectedSort == .category {
+                            CategoryView(categories: postsByCategory)
+                        }
+                    }
+                    .toolbar(.visible, for: .tabBar)
                 }
-                .toolbar(.visible, for: .tabBar)
+            }
+            .onAppear {
+                self.posts = PersistenceController.shared.getAllPosts()
+                self.postsByCategory = PersistenceController.shared.getPostsByCategory()
             }
         }
     }
 }
 
-struct RecordCollectionView_Preview: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            RecordCollectionView()
-                .environmentObject(ModelData())
-        }
-    }
-}
 
 enum Category: String, CaseIterable, Codable, Identifiable {
     case favorites = "좋아하는 것"
@@ -68,37 +106,29 @@ enum Category: String, CaseIterable, Codable, Identifiable {
     static func random() -> Self {
         return Category.allCases.randomElement() ?? .comfortZone
     }
-}
-
-struct Record: Hashable, Codable {
-    var id: Int
-    var category: Category
-    var imageName: String
-    var image: Image {
-        Image(imageName)
-    }
     
-    init(id: Int, category: Category, imageName: String) {
-        self.id = id
-        self.category = category
-        self.imageName = imageName
-    }
-    
-    enum CodingKeys : String, CodingKey {
-        case imageName
-        case category
-        case id
+    var textFromCSV: String {
+        switch self {
+        case .favorites:
+            return "Favorites"
+        case .dislikes:
+            return "Dislikes"
+        case .strengths:
+            return "Strengths"
+        case .weaknesses:
+            return "Weaknesses"
+        case .comfortZone:
+            return "ComfortZone"
+        case .valuesAndAim:
+            return "Values"
+        }
     }
 }
 
-class ModelData: ObservableObject {
-    @Published var records: [Record] = load("landmarkData.json")
-    
-    var categories: [String: [Record]] {
-        Dictionary(
-            grouping: records,
-            by: { $0.category.rawValue }
-        )
+
+fileprivate extension Date {
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
     }
 }
 
@@ -126,49 +156,102 @@ func load<T: Decodable>(_ filename: String) -> T {
 
 struct GalleryView: View {
     let posts: [Post]
+    private let width: CGFloat = 129
+    private let height: CGFloat = 172
     
-    private var items: [GridItem] {
-        Array(repeating: .init(.adaptive(minimum: 129),spacing: 3),
-              count: 3)
-    }
+    let columns: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     
     var body: some View {
-        VStack {
-            LazyVGrid(columns: items, spacing: 3) {
-                ForEach(posts, id: \.self.id) { post in
+        ScrollView {
+            LazyVGrid(columns: columns) {
+                ForEach(posts, id: \.self) { post in
                     NavigationLink {
                         PostDetailView(post: post)
                     } label: {
-                        post.image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(minHeight: 172)
-                            .background(
-                                LinearGradient(gradient: Gradient(colors: [Color(.systemGray5), Color(.systemGray2)]),
-                                               startPoint: .top, endPoint: .bottom)
-                            )
-                            .clipped()
+                        ThumbnailView(post: post, width: width, height: height)
                     }
                 }
             }
-            Spacer()
         }
+    }
+}
+
+struct ThumbnailView: View {
+    let post: Post
+    let width: CGFloat
+    let height: CGFloat
+    
+    var body: some View {
+        ZStack {
+            if let imageData = post.imageData,
+               let image = Image.fromData(imageData) {
+                // MARK: - 사진 or 그림 Post
+                image
+                    .resizable()
+                    .frame(width: width, height: height)
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                // MARK: - 글 Post
+                VStack(spacing: 30) {
+                    Text(post.title ?? "")
+                        .padding([.leading, .top], 4)
+                        .font(.title3)
+                        .lineLimit(1)
+                    
+                    Text(post.content ?? "")
+                        .padding([.leading], 4)
+                        .foregroundColor(.black)
+                        .font(.body)
+                        .lineLimit(5)
+                }
+                .frame(width: width, height: height, alignment: .topLeading)
+                .background(.white)
+            }
+            VStack(alignment: .leading) {
+                HStack(alignment: .top) {
+                    DayLabel(isFirstPost: post.isFirstPost, day: Int(post.day))
+                    Spacer()
+                }
+                .padding([.leading, .top], 4)
+                Spacer()
+            }
+            
+        }
+        .clipped()
+    }
+}
+
+struct DayLabel: View {
+    let isFirstPost: Bool
+    let day: Int
+    
+    var body: some View {
+        Capsule()
+            .frame(maxWidth: 50, maxHeight: 25)
+            .foregroundColor(.white)
+            .cornerRadius(12)
+            .overlay {
+                Text("D+\(day)")
+                    .foregroundColor(.black)
+                    .font(.body.bold())
+            }
+            .opacity(isFirstPost ? 1 : 0)
     }
 }
 
 struct CategoryView: View {
     let categoryKeys: [Category] = Category.allCases
     let categories: [String: [Post]]
-    
-    private let numberColumns = [
-        GridItem(.adaptive(minimum: 164)),
-        GridItem(.adaptive(minimum: 164))
-    ]
+    private let numberColumns = Array(repeating: GridItem(.fixed(160), spacing: 25), count: 2)
     
     var body: some View {
-        LazyVGrid(columns: numberColumns, spacing: 20) {
+        LazyVGrid(columns: numberColumns, spacing: 24) {
             ForEach(categoryKeys, id: \.self) { category in
-                let category = category.rawValue
+                let category = category.textFromCSV
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
@@ -176,10 +259,23 @@ struct CategoryView: View {
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
-                        posts.first?.image
-                            .frame(width: 170, height: 170)
-                            .foregroundColor(Color(.systemGray5))
-                            .cornerRadius(12)
+                        if let first = posts.first,
+                           let data = first.imageData,
+                           let image = Image.fromData(data) {
+                            
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 170, height: 170, alignment: .center)
+                                .cornerRadius(12)
+                                .clipped()
+                        } else  {
+                            Image(category)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 170, height: 170)
+                                .cornerRadius(12)
+                        }
                         
                         Text(category)
                             .foregroundColor(.black)
@@ -195,44 +291,37 @@ struct CategoryView: View {
 
 struct PostDetailView: View {
     @Environment(\.dismiss) var dismiss
-        
+    
     let post: Post
     
+    @State var isTabBarVisible = false
+    
     var body: some View {
-        post.image
-            .resizable()
-            .scaledToFill()
-            .ignoresSafeArea()
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "x.circle")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 36)
-                            .foregroundColor(.black)
+        ZStack {
+            BackgroundView()
+            
+            CardView(post:post)
+            /*
+            (Image.fromData(post.imageData ?? Data())  ?? Image(systemName: "x.circle"))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button {
+                            isTabBarVisible = true
+                            dismiss()
+                        } label: {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.mainPink)
+                        }
                     }
                 }
-            }
-            .toolbar(.hidden, for: .tabBar)
-            .navigationBarBackButtonHidden()
-        
+                .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                .navigationBarBackButtonHidden()
+             */
+        }
     }
-}
-
-struct PostDetailView_Preview: PreviewProvider {
-    @StateObject static var userData = UserData()
     
-    static var previews: some View {
-        PostDetailView(post: userData.posts.last
-                       ?? Post(type: "글 + 사진",
-                               imageData: nil,
-                               title: "행복로",
-                               content: "사랑시",
-                               category: .comfortZone))
-    }
 }
 
 extension Image {

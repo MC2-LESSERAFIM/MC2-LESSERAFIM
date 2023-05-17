@@ -8,59 +8,55 @@
 import SwiftUI
 
 struct CheckInComplete: View {
-    @EnvironmentObject var userData: UserData
     @State var tappedImageName: String
-    @State var isStartButtonEnabled: Bool = false
-    @Binding var username: String
+    @AppStorage("isOnBoarding") var isOnBoarding: Bool!
+    @AppStorage("userName") var userName: String!
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0){
-            PageTitle(titlePage: "이제부터 당신의 짝꿍은")
-            HStack {
-                Text(username)
-                    .foregroundColor(.blue)
-                    .font(.system(size: 32, weight: .bold))
-                PageTitle(titlePage: "입니다.")
+        ZStack{
+            BackgroundView()
+            VStack(spacing: 0){
+                PageTitle(titlePage: "지금부터 당신의 짝꿍은")
+                HStack(alignment: .bottom, spacing: 0) {
+                    Text(userName)
+                        .foregroundColor(.mainPink)
+                        .font(.system(size: 26, weight: .bold))
+                    PageTitle(titlePage: "입니다")
+                    Spacer()
+                }
+                
+                Image(tappedImageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 470)
+                    .padding(.top, 48)
+                
                 Spacer()
-            }
-            
-            Image(tappedImageName)
-                .resizable()
-                .scaledToFit()
-                .frame(height: 400)
-                .padding(.top, 48)
-            //                    .padding(.bottom, 164)
-            
-            NavigationLink(
-                destination: ChallengeScreen(tappedImageName: $tappedImageName, username: $username)
-                    .environmentObject(userData),
-                isActive: $isStartButtonEnabled,
-                label: {
-                    Button("시작하기", action: finishOnboarding)
-                        .font(.custom("ButtonStyle", size: 18))
+                
+                Button(action: {
+                    isOnBoarding = false
+                },label: {
+                    Text("시작하기")
+                        .font(.system(size: 17, weight: .bold))
                         .foregroundColor(.white)
-                        .frame(width: 345,height: 50)
+                        .frame(width: 345, height: 50)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .foregroundColor(.blue)
+                                .foregroundColor(.mainPink)
                         )
-                }
-            )
+                        .padding(.vertical, 28)
+                })
+//                            .padding(.)
+            }
+            .padding(.horizontal, 24)
+//            .padding(.top, 100)
+//            .padding(.bottom, 66)
+//            .ignoresSafeArea()
         }
     }
 }
 struct CheckInComplete_Previews: PreviewProvider {
     static var previews: some View {
         CheckInScreen()
-            .environmentObject(UserData())
-    }
-}
-
-fileprivate extension CheckInComplete {
-    func finishOnboarding() {
-        isStartButtonEnabled = true
-        userData.isOnBoarding = false
-        userData.userName = username
-        userData.selectedImageName = tappedImageName
     }
 }

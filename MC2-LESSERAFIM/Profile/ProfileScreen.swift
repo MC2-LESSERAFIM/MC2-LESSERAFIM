@@ -7,123 +7,170 @@
 
 import SwiftUI
 import LocalAuthentication
+import UserNotifications
 
 struct ProfileScreen: View {
-    @EnvironmentObject var userData: UserData
-    @EnvironmentObject var postData: UserData
     @EnvironmentObject var appLock : BiometricLock
     
-    @State private var isNotificationEnabled: Bool = true
-    @State private var isLockEnabled: Bool = true
+    @StateObject var permissionManager = PermissionManager()
+    
     @State var showImageModal: Bool = false
     @State var showNameModal: Bool = false
-    @Binding var tappedImageName: String
-    @Binding var username: String
+    
+    @State private var notificationStatus = false//알림 상태 가져오기
+    
+    @AppStorage("isLockEnabled") var isLockEnabled: Bool = false
+    @AppStorage("isNotificationEnabled") var isNotificationEnabled: Bool = false
+    @AppStorage("userName") var userName: String!
+    @AppStorage("selectedImageName") var selectedImageName: String!
+    
+    func openAppSettings() { //알람을 끄기 위해서 알람 창을 호출
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }
+    
+    func checkNotificationSettings() {//알림이 꺼졌는지 확인합니다.
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                DispatchQueue.main.async {
+                    notificationStatus = (settings.authorizationStatus == .authorized)
+                }
+            }
+        }
     
     var body: some View {
-        VStack(spacing: 0) {
-            VStack {
-                ZStack {
-                    VStack{
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.pink, lineWidth: 3)
-                            .frame(width: 345, height: 345)
-                            .background(.clear)
+        ZStack {
+            BackgroundView()
+            VStack(spacing: 0) {
+                HStack {
+                    Text("나의 짝꿍")
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.mainBlack)
+                    
+                    Text(userName)
+                        .font(.system(size: 26, weight: .bold))
+                        .foregroundColor(.mainPink)
+
+                    HStack{
+                        Image(systemName: "pencil.circle")
+                            .font(.system(size: 12))
+                            .frame(width: 8, height: 8)
+                            .foregroundColor(Color.mainPink)
                         
+                        Text("수정")
+                            .font(.system(size: 12))
+                            .frame(height: 12)
+                            .foregroundColor(Color.mainPink)
+                            .onTapGesture {
+                                showNameModal = true
+                            }
+                            .sheet(isPresented: $showNameModal) {
+                                NameModalScreen()
+                            }
                     }
-                    VStack{
-                        Image(tappedImageName)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 320)
-                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(Color.mainPink.opacity(0.2))
+                    .cornerRadius(9)
                     
-                    VStack{
-                        HStack(alignment: .bottom){
-                            Spacer()
-                            
-                            Image(systemName: "pencil.circle")
-                                .onTapGesture {
-                                    showImageModal = true
-                                }
-                                .sheet(isPresented: $showImageModal) {
-                                    ImageModalScreen(selectedImageName: $tappedImageName)
-                                }
-                        }.padding(.horizontal, 24)
-                        Spacer()
-                            .frame(height: 320)
-                    }
-                    
-                    
+                    Spacer()
                 }
+                .padding(.horizontal, 24)
                 
-                HStack {
-                    Text(username)
-                        .font(.system(size: 32, weight: .bold))
-                    
-                    Image(systemName: "pencil.circle")
-                        .onTapGesture {
-                            showNameModal = true
+                VStack {
+                    ZStack {
+                        VStack{
+                            RoundedRectangle(cornerRadius: 12)
+                                .stroke(Color.mainPinkOpacity, lineWidth: 3)
+                                .frame(width: 345, height: 345)
+                                .background(Color.opacityWhiteChallenge)
+                                .cornerRadius(12)
+                            
                         }
-                        .sheet(isPresented: $showNameModal) {
-                            NameModalScreen(userName: $username)
+                        VStack{
+                            Image(selectedImageName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 320)
                         }
+                        
+                        VStack{
+                            HStack(alignment: .bottom){
+                                Spacer()
+                                
+                                HStack{
+                                    Image(systemName: "pencil.circle")
+                                        .font(.system(size: 12))
+                                        .frame(width: 8, height: 8)
+                                        .foregroundColor(Color.mainPink)
+                                    
+                                    Text("수정")
+                                        .font(.system(size: 12))
+                                        .frame(height: 12)
+                                        .foregroundColor(Color.mainPink)
+                                        .onTapGesture {
+                                            showImageModal = true
+                                        }
+                                        .sheet(isPresented: $showImageModal) {
+                                            ImageModalScreen()
+                                        }
+                                }
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 8)
+                                .background(Color.mainPink.opacity(0.2))
+                                .cornerRadius(9)
+                            }
+                            .padding(.horizontal, 36)
+                            
+                            Spacer()
+                                .frame(height: 290)
+                        }
+                    }
                 }
-                .padding(.top, 12)
+                .padding(.top, 48)
+                
+                VStack {
+                    HStack {
+                        Toggle("알림", isOn: $isNotificationEnabled)
+                            .font(.system(size: 18, weight: .medium))
+                            .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isNotificationEnabled) {value in
+                                if value{
+                                    permissionManager.requestAlramPermission()
+                                    print("\(isNotificationEnabled)")
+                                }else {
+                                    openAppSettings()
+                                    checkNotificationSettings()
+                                    isNotificationEnabled = !notificationStatus
+                                    print("\(isNotificationEnabled)")
+                                }
+                            }
+                            
+                       
+                            
+                    }
+                    HStack {
+                        Toggle("잠금", isOn: $isLockEnabled)
+                            .font(.system(size: 18, weight: .medium))
+                            .toggleStyle(SwitchToggleStyle(tint: Color.mainPink))
+                            .onChange(of: isLockEnabled, perform: { value in
+                                appLock.appLockStateChange(appLockState: value)
+                                appLock.isAppLockEnabled = value
+                            })
+                           
+                    }
+                    .padding(.top, 24)
+                }
+                .padding(.horizontal, 36)
+                .padding(.top, 48)
+                
+                Spacer()
+                
             }
             .padding(.top, 48)
-            
-            VStack {
-                HStack {
-                    Toggle("알림", isOn: $isNotificationEnabled)
-                        .font(.system(size: 18, weight: .medium))
-                        .toggleStyle(SwitchToggleStyle(tint: Color.pink))
-                }
-                HStack {
-                    Toggle("잠금", isOn: $isLockEnabled)
-                        .font(.system(size: 18, weight: .medium))
-                        .toggleStyle(SwitchToggleStyle(tint: Color.pink))
-                }
-                .padding(.top, 24)
-            }
-            .padding(.horizontal, 36)
-            .padding(.top, 48)
-            
-            
-            //                HStack(alignment: .center) {
-            //                        Image(systemName: isNotificationEnabled ? "bell" : "bell.slash")
-            //                            .font(.system(size: 20))
-            //                            .foregroundColor(.black)
-            //                            .frame(width: 30, height: 30)
-            //                            .background(.ultraThinMaterial)
-            //                            .cornerRadius(15)
-            //                            .padding(.trailing, 24)
-            //                            .onTapGesture {
-            //                                isNotificationEnabled.toggle()
-            //                            }
-            //
-            //                        Image(systemName: isLockEnabled ? "lock" : "lock.slash")
-            //                            .font(.system(size: 20))
-            //                            .foregroundColor(.black)
-            //                            .frame(width: 30, height: 30)
-            //                            .background(.ultraThinMaterial)
-            //                            .cornerRadius(15)
-            //                            .onTapGesture {
-            //                                isLockEnabled.toggle()
-            //                                if isLockEnabled {
-            //                                    appLock.isAppLockEnabled = true
-            //                                }else {
-            //                                    appLock.isAppLockEnabled = false
-            //                                }
-            //                            }
-            //
-            //                }
-            //                .padding(.top, 12)
-            
-            Spacer()
-            
         }
-        .padding(.top, 48)
     }
 }
 
