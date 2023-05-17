@@ -270,7 +270,9 @@ struct CategoryView: View {
                                 .cornerRadius(12)
                                 .clipped()
                         } else  {
-                            Image("niko")
+                            Image(category)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
                                 .frame(width: 170, height: 170)
                                 .cornerRadius(12)
                         }
