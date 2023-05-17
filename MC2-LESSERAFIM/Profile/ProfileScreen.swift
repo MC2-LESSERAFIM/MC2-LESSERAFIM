@@ -7,6 +7,7 @@
 
 import SwiftUI
 import LocalAuthentication
+import UserNotifications
 
 struct ProfileScreen: View {
     @EnvironmentObject var appLock : BiometricLock
@@ -16,10 +17,28 @@ struct ProfileScreen: View {
     @State var showImageModal: Bool = false
     @State var showNameModal: Bool = false
     
+    @State private var notificationStatus = false//알림 상태 가져오기
+    
     @AppStorage("isLockEnabled") var isLockEnabled: Bool = false
     @AppStorage("isNotificationEnabled") var isNotificationEnabled: Bool = false
     @AppStorage("userName") var userName: String!
     @AppStorage("selectedImageName") var selectedImageName: String!
+    
+    func openAppSettings() { //알람을 끄기 위해서 알람 창을 호출
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            }
+        }
+    
+    func checkNotificationSettings() {//알림이 꺼졌는지 확인합니다.
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                DispatchQueue.main.async {
+                    notificationStatus = (settings.authorizationStatus == .authorized)
+                }
+            }
+        }
     
     var body: some View {
         ZStack {
@@ -120,6 +139,12 @@ struct ProfileScreen: View {
                             .onChange(of: isNotificationEnabled, perform: {value in
                                 if value{
                                     permissionManager.requestAlramPermission()
+                                }else {
+//                                    checkNotificationSettings()
+//                                    openAppSettings()
+//                                    if !notificationStatus {
+//                                        isNotificationEnabled = notificationStatus
+//                                    }
                                 }
                             })
                             
