@@ -234,14 +234,14 @@ struct DayLabel: View {
     let day: Int
     
     var body: some View {
-        Capsule()
+        Rectangle()
             .frame(maxWidth: 50, maxHeight: 25)
-            .foregroundColor(.white)
-            .cornerRadius(12)
+            .foregroundColor(.mainPink)
+            .cornerRadius(6)
             .overlay {
                 Text("D+\(day)")
-                    .foregroundColor(.black)
-                    .font(.body.bold())
+                    .foregroundColor(.white)
+                    .font(.system(size: 16, weight: .bold))
             }
             .opacity(isFirstPost ? 1 : 0)
     }
