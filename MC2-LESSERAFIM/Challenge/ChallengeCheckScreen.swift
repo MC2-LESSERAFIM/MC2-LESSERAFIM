@@ -38,7 +38,7 @@ struct ChallengeCheckScreen: View {
                     Text("\"\(challengeStatement)\"")
                         .fontWeight(.bold)
                     
-                    + Text(" 이에요")
+                    + Text(" 이에요.")
                 }
                 .font(.system(size: 17))
                 .lineSpacing(4)
