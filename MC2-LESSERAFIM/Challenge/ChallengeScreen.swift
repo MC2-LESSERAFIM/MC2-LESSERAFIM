@@ -308,6 +308,7 @@ struct PopoverView: View {
             HStack(alignment: .center){
                 Text(prompts[index])
                     .multilineTextAlignment(.center)
+                    .font(.system(size: 16, weight: .medium))
                     .padding()
                     .foregroundColor(Color.mainPink)
                     .background(Color.white)

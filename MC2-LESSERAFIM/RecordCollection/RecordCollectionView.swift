@@ -75,7 +75,7 @@ struct RecordCollectionView: View {
                     
                     ScrollView(showsIndicators: false) {
                         if selectedSort == .day {
-                            GalleryView(posts: posts)
+                            GalleryView(posts: posts, isBackground: false)
                                 .navigationBarTitle("", displayMode: .inline)
                         }
                         else if selectedSort == .category {
@@ -159,6 +159,7 @@ struct GalleryView: View {
     let posts: [Post]
     private let width: CGFloat = 129
     private let height: CGFloat = 172
+    let isBackground: Bool
     
     let columns: [GridItem] = [
         GridItem(.flexible()),
@@ -167,13 +168,18 @@ struct GalleryView: View {
     ]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: columns) {
-                ForEach(posts, id: \.self) { post in
-                    NavigationLink {
-                        PostDetailView(post: post)
-                    } label: {
-                        ThumbnailView(post: post, width: width, height: height)
+        ZStack {
+            if isBackground{
+                BackgroundView()
+            }
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(posts, id: \.self) { post in
+                        NavigationLink {
+                            PostDetailView(post: post)
+                        } label: {
+                            ThumbnailView(post: post, width: width, height: height)
+                        }
                     }
                 }
             }
@@ -260,7 +266,7 @@ struct CategoryView: View {
                 let posts = categories[category] ?? []
                 
                 NavigationLink {
-                    GalleryView(posts: posts)
+                    GalleryView(posts: posts, isBackground: true)
                         .navigationTitle(category)
                 } label: {
                     VStack(alignment: .leading) {
