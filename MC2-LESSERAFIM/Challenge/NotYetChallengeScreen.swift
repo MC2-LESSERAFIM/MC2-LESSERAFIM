@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NotYetChallengeScreen: View {
     @AppStorage("userName") var userName: String = ""
+    @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
     
     @State private var navigationIsActive: Bool = false
     
@@ -27,8 +28,8 @@ struct NotYetChallengeScreen: View {
                 
                 Spacer()
                 
-                NavigationLink {
-                    ChallengeScreen()
+                Button {
+                    postChallenge = false
                 } label: {
                     Text("다시 도전해볼게요!")
                         .frame(maxWidth: .infinity)
@@ -40,8 +41,9 @@ struct NotYetChallengeScreen: View {
             .padding(.bottom, 100)
             .ignoresSafeArea()
         }
-        .navigationTitle("")
+        .navigationBarTitle("", displayMode: .inline)
         .navigationBarBackButtonHidden(true)
+        .ignoresSafeArea()
     }
 }
 

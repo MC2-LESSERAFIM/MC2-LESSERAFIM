@@ -27,7 +27,6 @@ struct WritingView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
     @State var firstCompleteScreen: Bool = false
@@ -56,7 +55,6 @@ struct WritingView: View {
                         .frame(height: onStory ? geo.size.height - 100 : 580)   // 챌린지 내용 입력 중이면 키보드에 가리지 않게 크기 유동적으로 수정
                         .onTapGesture {
                             onStory = true
-                            print(geo.size.height)
                         }
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
@@ -96,7 +94,6 @@ struct WritingView: View {
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
                                 postedChallenges[currentChallenge] = true
-                                todayPostsCount += 1
                                 changeBackgroundOpacity()
                                 if isFirstPosting {
                                     firstCompleteScreen = true
@@ -134,6 +131,7 @@ struct WritingView: View {
         post.isFirstPost = isFirstPost
         post.createdAt = createdAt
         post.challenge = self.challenge
+        self.challenge.isSuccess = true
         saveContext()
     }
 

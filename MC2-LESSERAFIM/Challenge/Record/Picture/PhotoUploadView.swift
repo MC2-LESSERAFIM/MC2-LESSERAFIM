@@ -71,7 +71,6 @@ struct PhotoUploadView: View {
     @AppStorage("dailyFirstUse") var dailyFirstUse: Bool = false
     @AppStorage("progressDay") var progressDay: Int = 0
     @AppStorage("isDayChanging") var isDayChanging: Bool = false
-    @AppStorage("todayPostsCount") var todayPostsCount = 0
     @AppStorage("isSelectedTab") var isSelectedTab: Int = 1
     @AppStorage("isFirstPosting") var isFirstPosting: Bool = UserDefaults.standard.bool(forKey: "isFirstPosting")
     @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
@@ -158,7 +157,6 @@ struct PhotoUploadView: View {
                                     }
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
                                     postedChallenges[currentChallenge] = true
-                                    todayPostsCount += 1
                                     changeBackgroundOpacity()
                                     if isFirstPosting {
                                         firstCompleteScreen = true
@@ -210,6 +208,7 @@ struct PhotoUploadView: View {
         post.imageData = imageData
         post.createdAt = createdAt
         post.challenge = self.challenge
+        self.challenge.isSuccess = true
         saveContext()
     }
 
