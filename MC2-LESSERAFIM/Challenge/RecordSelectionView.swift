@@ -29,12 +29,19 @@ struct RecordSelectionView: View {
                     // 화면 타이틀(PageTitle)
                     PageTitle(titlePage: "챌린지를 기록해보아요")
                     
-                    Text("\(userName)의 챌린지는 \n\(challengeStatement)이에요.")
-                        .font(.system(size: 17))
-                        .lineSpacing(4)
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.subText)
-                        .padding(.top, 12)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("\(userName)의 챌린지는")
+                        
+                        Text("\"\(challengeStatement)\"")
+                            .fontWeight(.bold)
+                        
+                        + Text(" 이에요.")
+                    }
+                    .font(.system(size: 17))
+                    .lineSpacing(4)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.subText)
+                    .padding(.top, 12)
                 }
                 
                 // 기록선택버튼(RecordButton)
