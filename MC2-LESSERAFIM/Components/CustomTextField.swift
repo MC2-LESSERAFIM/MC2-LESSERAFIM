@@ -137,3 +137,28 @@ struct OtherContentTextField: View {
         .cornerRadius(5)
     }
 }
+
+
+struct cardContentTextField: View {
+    let contentRecord: String   // 챌린지 내용
+    
+    var body: some View {
+        ScrollView {
+            Text(contentRecord)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .lineLimit(1...)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 16)
+                .foregroundColor(.mainBlack)
+                .font(.system(size: 15, weight: .regular))
+                .accentColor(.mainPink)
+        }
+        .padding(.horizontal, 6)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color.white, lineWidth: 1)
+                .background(Color.opacityWhite)
+        )
+        .cornerRadius(5)
+    }
+}
