@@ -261,10 +261,10 @@ struct CategoryView: View {
     
     var body: some View {
         LazyVGrid(columns: numberColumns, spacing: 24) {
-            ForEach(categoryKeys, id: \.self) { category in
-                let category = category.textFromCSV
+            ForEach(categoryKeys, id: \.self) { categoryEnum in
+                let category = categoryEnum.textFromCSV
                 let posts = categories[category] ?? []
-                
+                let koreanText = categoryEnum.rawValue
                 NavigationLink {
                     GalleryView(posts: posts, isBackground: true)
                         .navigationTitle(category)
@@ -288,7 +288,7 @@ struct CategoryView: View {
                                 .cornerRadius(12)
                         }
                         
-                        Text(category)
+                        Text(koreanText)
                             .foregroundColor(.mainBlack)
                             .font(.system(size: 17, weight: .medium, design: .rounded))
                             .padding(.leading)
