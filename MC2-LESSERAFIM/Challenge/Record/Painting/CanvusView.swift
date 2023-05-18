@@ -20,6 +20,7 @@ struct CanvusView: View {
     @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
+    @AppStorage("todayPostsCount") var todayPostsCount = UserDefaults.standard.integer(forKey: "todayPostsCount")
     
     //전역 변수 설정
     @State private var currentLine = PaintingLine()
@@ -233,6 +234,7 @@ struct CanvusView: View {
                         isDayChanging = true
                     }
                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (image.jpegData(compressionQuality: 1.0))!)
+                    todayPostsCount += 1
                     postedChallenges[currentChallenge] = true
                     changeBackgroundOpacity()
                     if isFirstPosting {

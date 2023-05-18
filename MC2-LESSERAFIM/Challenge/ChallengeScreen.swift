@@ -25,6 +25,7 @@ struct ChallengeScreen: View {
     @AppStorage("todayRemovedChallenges") var todayRemovedChallenges: [Int] = []
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     @AppStorage("currentChallenge") var currentChallenge: Int = 0
+    @AppStorage("todayPostsCount") var todayPostsCount = 0
     
     private let challengeNumber: Int = 3
     
@@ -239,7 +240,7 @@ private extension ChallengeScreen {
     /// 6. todayChallenges - 현재 표시중인 챌린지의 인덱스가 포함된 배열
     //MARK: - Day가 물리적인 시간으로 지나갔는지 혹은 오늘 올린 포스트의 개수가 3개 이상이면 뷰 및 각종 변수 초기화
     func passedDayOperation() {
-        if hasPassedDay {
+        if hasPassedDay || todayPostsCount >= 3  {
             // 1. 오늘 날짜로 UserDefaults Update
             UserDefaults.standard.setValue(NSDate().formatted, forKey:Constants.FIRSTLAUNCH)
             // 2. 챌린지 뽑기를 초기화
@@ -254,6 +255,7 @@ private extension ChallengeScreen {
                 changeDifficulty(day : progressDay)
                 isDayChanging = false
             }
+            todayPostsCount = 0
             numberOfTimeLeft = 3
             todayRemovedChallenges = []
             todayChallenges = []

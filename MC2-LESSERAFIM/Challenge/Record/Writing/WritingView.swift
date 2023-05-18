@@ -15,6 +15,7 @@ struct WritingView: View {
     @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
     @AppStorage("postChallenge") var postChallenge: Bool = UserDefaults.standard.bool(forKey: "postChallenge")
+    @AppStorage("todayPostsCount") var todayPostsCount = UserDefaults.standard.integer(forKey: "todayPostsCount")
     
     @State private var showingAlert = false // 경고 출력 여부
     
@@ -93,6 +94,7 @@ struct WritingView: View {
                                     isDayChanging = true
                                 }
                                 addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse)
+                                todayPostsCount += 1
                                 postedChallenges[currentChallenge] = true
                                 changeBackgroundOpacity()
                                 if isFirstPosting {

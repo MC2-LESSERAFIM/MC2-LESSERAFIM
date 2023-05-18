@@ -65,6 +65,7 @@ struct PhotoUploadView: View {
     
     @AppStorage("currentChallenge") var currentChallenge: Int = UserDefaults.standard.integer(forKey: "currentChallenge")
     @AppStorage("postedChallenges") var postedChallenges: [Bool] = [false, false, false]
+    @AppStorage("todayPostsCount") var todayPostsCount = UserDefaults.standard.integer(forKey: "todayPostsCount")
     
     @FocusState private var focusedField: FocusField?
     
@@ -156,6 +157,7 @@ struct PhotoUploadView: View {
                                         isDayChanging = true
                                     }
                                     addPost(title: titleRecord, content: contentRecord, createdAt: Date.now, day: Int16(progressDay), isFirstPost: dailyFirstUse, imageData: (selectedImage?.jpegData(compressionQuality: 1.0))!)
+                                    todayPostsCount += 1
                                     postedChallenges[currentChallenge] = true
                                     changeBackgroundOpacity()
                                     if isFirstPosting {
